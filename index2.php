@@ -1,14 +1,27 @@
 <?php
-header('Content-Type: text/html; charset=UTF-8');
 session_start();
 include_once "conection.php";
-function login($user, $password, &$result){
-    if($user=='a' && $password==1){
-        return 1;
-    }else{
-        return 0;
-    }
-}
+header('Content-Type: text/html; charset=UTF-8');
+
+function login($user,$password,&$result) 
+    { 
+        $sql = "SELECT * FROM persona WHERE USUARIO = '$user' and CONTRASEÑA = '$password'";
+        $rec = mysql_query($sql); 
+        $count = 0; 
+        while($row = mysql_fetch_object($rec)) 
+        { 
+            $count++; 
+            $result = $row; 
+        } 
+        if($count == 1) 
+        { 
+            return 1; 
+        } 
+        else 
+        { 
+            return 0; 
+        } 
+    } 
 /*Luego haremos una serie de condicionales que identificaran el momento en el boton de login es presionado y cuando este sea presionado llamaremos a la función verificar_login() pasandole los parámetros ingresados:*/
 
 if(!isset($_SESSION['userid'])) //para saber si existe o no ya la variable de sesión que se va a crear cuando el usuario se logee
