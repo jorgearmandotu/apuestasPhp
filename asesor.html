@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+   <script>
+    <?php
+    if (!$_SESSION['tipo']!='ASESOR') { 
+        header('location: dennyAcces.html');
+    }
+    echo('cuenta asesor');
+    ?>
+</script>
+<html lang="=es">
+   <head>
+       <meta charset="utf-8">
+       <title>asesor</title>
+   </head>
+    <body>
+        <h1>bienbenidos asesores</h1>
+    </body>
+</html>
