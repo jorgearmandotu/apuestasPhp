@@ -56,11 +56,14 @@ if($row=$result->fetch_assoc()){
         session_start();
         $_SESSION['usuario']=$usuario;
         $_SESSION['tipo']=$row[TIPO];
-        $_SESSION['logeado']='si';
+        
+        echo("<script>alert('hola');</script>");
         if($_SESSION['tipo']=='ADMINISTRADOR'){
-            ("location: administrador.php");
+             echo("<script>alert('admin');</script>");
+            header("location: administrador.php");
         }elseif($_SESSION['tipo']=='ASESOR'){
-            header("location: asesor.html");
+             echo("<script>alert('asesor');</script>");
+            header("location: asesor.php");
         }
         
     }else{

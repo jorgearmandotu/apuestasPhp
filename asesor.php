@@ -1,13 +1,9 @@
 <!DOCTYPE HTML>
-   <script>
     <?php
-    if (!$_SESSION['tipo']!='ASESOR') { 
-        header('location: dennyAcces.html');
-    }
-    echo('cuenta asesor');
+    include 'validaciones.php';
+    validarAsesor();
     ?>
-</script>
-<html lang="=es">
+<html lang="es">
    <head>
        <meta charset="utf-8">
        <title>asesor</title>

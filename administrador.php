@@ -1,7 +1,16 @@
-<?php
-    include 'salir.php';
-    if ($_SESSION['tipo']!='ADMINISTRADOR') { 
-        header('location: index2.html');
-    }
-?>
-<h1>Binenbenidos administtradores</h1>
+<!DOCTYPE HTML>
+    <?php
+    include 'validaciones.php';
+    validarAdmin();
+    ?>
+
+
+<html lang="=es">
+   <head>
+       <meta charset="utf-8">
+       <title>administrador</title>
+   </head>
+    <body>
+        <h1>bienbenidos administradores</h1>
+    </body>
+</html>
