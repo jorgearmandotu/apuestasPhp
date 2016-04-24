@@ -26,7 +26,7 @@ function verificarLogin($user,$enl,$pass){
     connectionClose($enl);
     if($row=$result->fetch_assoc()){
     
-        if($row['CONTRASENA']==$pass){
+        if(password_verify($pass, $row['CONTRASENA'])){
             session_start();
             $_SESSION['usuario']=$user;
             $_SESSION['tipo']=$row[TIPO];
