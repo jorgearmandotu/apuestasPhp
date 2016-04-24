@@ -1,9 +1,9 @@
 <!DOCTYPE HTML>
 <?php
-    include 'validaciones.php';
+    require_once 'validaciones.php';
     validarAdmin();
 ?>
-<html lang="es" class="html">
+<html lang="es">
       <head>
           <meta charset = "utf-8">
           <title>agregarAsesores</title>
@@ -49,5 +49,5 @@
           </center>
       </body>
       <script src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
-      <script src="funciones.js"></script>
+      <script src="../js/funciones.js"></script>
 </html>

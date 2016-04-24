@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
     <?php
-    include 'validaciones.php';
+    require_once 'validaciones.php';
     validarAdmin();
     ?>
 

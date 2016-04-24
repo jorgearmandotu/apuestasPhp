@@ -41,11 +41,11 @@ function verificarLogin($user,$enl,$pass){
             }
         
         }else{
-            header("Location: index.html");
+            header("Location: ../index.html");
             exit();
         }
     }else{
-        header("location: index.html");
+        header("location: ../index.html");
         exit();
     }
 }

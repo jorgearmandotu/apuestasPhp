@@ -6,7 +6,7 @@ $usuario = strtoupper($idusuario);
 $pass = $_POST['password'];
 
 if(empty($usuario)||empty($pass)){
-    header("location: index.html");
+    header("location: ../index.html");
     exit();
 }
 $enlace=connectionDB();
