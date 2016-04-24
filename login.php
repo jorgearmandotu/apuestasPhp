@@ -1,7 +1,8 @@
 <?php
 require_once('gestionDB.php');
 
-$usuario = $_POST['usuario'];
+$idusuario = $_POST['usuario'];
+$usuario = strtoupper($idusuario);
 $pass = $_POST['password'];
 
 if(empty($usuario)||empty($pass)){

@@ -1,4 +1,5 @@
 <?php
+require_once('gestionDB.php');
     function validarAdmin(){
         session_start();
     if ($_SESSION['tipo']!='ADMINISTRADOR') { 
@@ -14,9 +15,17 @@
         exit;
     }
     }
-    function validaruser($user){
-        $enlace = mysqli_connect();
-        $sql= "select USUARIO from persona where USUARIO='".$user."'";
+    function validaruser($user, $enlace){
+        if(usuarios($user,$enlace)){
+            return true;
+        }else{
+            return false;
+        }
         
     }
+function validarcedula($cedula,$enlace){
+    if(cedulas($cedula,$enlace)){
+        return true;
+    }else{return false;}
+}
 ?>

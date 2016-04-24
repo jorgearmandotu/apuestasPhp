@@ -3,14 +3,14 @@
     include 'validaciones.php';
     validarAdmin();
 ?>
-<html lang="es">
+<html lang="es" class="html">
       <head>
           <meta charset = "utf-8">
           <title>agregarAsesores</title>
       </head>
       <body>
           <center>
-              <form method="post" action="ingresosUpdates.php">
+              <form method="post" action="ingresosUpdates.php" id="formularioAsesor">
                  <ul>
                     <li>
                         <label>Nombre: </label>
@@ -44,7 +44,7 @@
                          <button type="submit" name="ingresar" id="btnIngAsesor">Ingresar</button>
                      </li>
                  </ul>
-                  
+                  <div id='result'></div>
               </form>
           </center>
       </body>

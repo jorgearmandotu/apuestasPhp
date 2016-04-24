@@ -1,5 +1,6 @@
 <?php
 require_once('gestionDB.php');
+require_once('validaciones.php');
 
 function ingresarAsesor(){
     $nombre=strip_tags($_POST['nombre']);
@@ -7,21 +8,34 @@ function ingresarAsesor(){
     $cedula=strip_tags($_POST['cedula']);
     $telefono=strip_tags($_POST['telefono']);
     $email=strip_tags($_POST['email']);
-    $idUsuario=strip_tags($_POST['usuario']);
+    $usuario=strip_tags($_POST['usuario']);
+    $idUsuario = strtoupper($usuario);
     $password=strip_tags($_POST['password']);
     
     $enlace=connectionDB();
     if($enlace!=null){
-        ingresarPersona($nombre,$apellido,$cedula,$telefono,$email,$idUsuario,$password,$enlace);
-        return true;
-    }
+        if(validaruser($idUsuario,$enlace)){
+             echo (' <script type="text/javascript">alert("usario ya existe elija otro")</script>');
+            return false;
+            connectionClose($enlace);
+            exit();
+        }elseif(validarcedula($cedula,$enlace)){
+            echo (' <script type="text/javascript">alert("cedula de usuario ya existe")</script>');
+            return false;
+            connectionClose($enlace);
+            exit();
+        }
+        else{
+            ingresarPersona($nombre,$apellido,$cedula,$telefono,$email,$idUsuario,$password,$enlace);
+            return true;
+        }
+        
+    }else{echo ' <script type="text/javascript">alert("ocurrio un error buelbe a intentarlo")</script>';}
     
 }
 
 if(ingresarAsesor()){
     echo ' <script type="text/javascript">alert("ingreso exitoso")</script>';
-}else{
-    echo ' <script type="text/javascript">alert("ocurrio un error buebe a intentarlo, si el problema persiste intenta en cerrar sesion e iniciarla de nuevo")</script>';
 }
 
 ?>

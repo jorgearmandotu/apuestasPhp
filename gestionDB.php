@@ -56,8 +56,31 @@ function ingresarPersona($nombre,$apellido,$cedula,$telefono,$email,$usuario,$pa
     $contrasena = password_hash($password, PASSWORD_DEFAULT);
     
     $sql = "INSERT INTO persona VALUES('".$cedula."','".$nombre."','".$apellido."','".$telefono."','".$email."','ASESOR','".$contrasena."','".$usuario."',NULL);";
-    $enl->query($sql) or die("error al ingresar datos en DB");
+    //$enl->query($sql) or die("error al ingresar datos en DB");
+    if(!$enl->query($sql)){
+        echo('<script type="text/javascript">alert("ocurrio un error buebe a intentarlo, si el problema persiste intenta en cerrar sesion e iniciarla de nuevo")</script>');
+        exit();
+    }
     connectionClose($enl);
+}
+
+function usuarios($user,$enl){
+    $sql = "SELECT USUARIO from persona WHERE USUARIO='".$user."'";
+    $result = $enl-> query($sql)or die("error al crear coneccion con DB");
+    if($row=$result->fetch_assoc()){
+        return true;
+    }else{
+        return false;
+    }
+}
+function cedulas($ced,$enl){
+    $sql = "SELECT CC from persona WHERE CC='".$ced."'";
+    $result = $enl->query($sql)or die("error al crear coneccion con DB");
+    if($row=$result->fetch_assoc()){
+        return true;
+    }else{
+        return false;
+    }
 }
 
 ?>
