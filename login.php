@@ -1,4 +1,6 @@
 <?php
+require_once('gestionDB.php');
+
 $usuario = $_POST['usuario'];
 $pass = $_POST['password'];
 
@@ -6,10 +8,12 @@ if(empty($usuario)||empty($pass)){
     header("location: index.html");
     exit();
 }
-define('DB_SERVER','localhost');
-define('DB_NAME','apuestas');
-define('DB_USER','root');
-define('DB_PASS','Jorge1990');
+$enlace=connectionDB();
+if($enlace!=null){
+    verificarLogin($usuario,$enlace,$pass);
+}
+
+
 /*solo funciona en php version anteriorre a 7 ya q fue eliminada*/
 /*mysql_connect(DB_SERVER,DB_USER,DB_PASS)or die("Error al conectar con bd ". mysql_error());
 mysql_connect(DB_SERVER,DB_USER,DB_PASS)or die("Error al conectar con bd ". mysql_error());
@@ -32,47 +36,6 @@ if($row=mysql_fetch_array($result)){
     exit();
 }
 
-/*en versiones de php 7 se usa la siguiente instruccion*/
-$enlace = mysqli_connect(DB_SERVER,DB_USER,DB_PASS,DB_NAME);
-if(!$enlace){
-    echo "Error: No se pudo conectar a MySQL." . PHP_EOL;
-    echo "errno de depuración: " . mysqli_connect_errno() . PHP_EOL;
-    echo "error de depuración: " . mysqli_connect_error() . PHP_EOL;
-    exit;
-}
-
-$sql = "SELECT CONTRASENA,TIPO from persona where USUARIO='".$usuario."'";
-$result = $enlace -> query($sql) or die("error al crear conexíon con DB");
-  
-/*while($row = $result->fetch_assoc()){
-    $datos[] = $row;
-    
-}
-print_r($datos);
-echo $row[CONTRASENA];*/
-if($row=$result->fetch_assoc()){
-    
-    if($row[CONTRASENA]==$pass){
-        session_start();
-        $_SESSION['usuario']=$usuario;
-        $_SESSION['tipo']=$row[TIPO];
-        
-        echo("<script>alert('hola');</script>");
-        if($_SESSION['tipo']=='ADMINISTRADOR'){
-             echo("<script>alert('admin');</script>");
-            header("location: administrador.php");
-        }elseif($_SESSION['tipo']=='ASESOR'){
-             echo("<script>alert('asesor');</script>");
-            header("location: asesor.php");
-        }
-        
-    }else{
-        header("Location: index.html");
-        exit();
-    }
-}else{
-    header("location: index.html");
-    exit();
-}
+/*en versiones de php 7 se usa mysqli*/  
 
 ?>

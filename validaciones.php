@@ -14,4 +14,9 @@
         exit;
     }
     }
+    function validaruser($user){
+        $enlace = mysqli_connect();
+        $sql= "select USUARIO from persona where USUARIO='".$user."'";
+        
+    }
 ?>
