@@ -51,7 +51,11 @@ function verificarLogin($user,$enl,$pass){
 }
 
 function ingresarPersona($nombre,$apellido,$cedula,$telefono,$email,$usuario,$password,$enl){
-    $sql = "INSERT INTO persona VALUES('".$cedula."','".$nombre."','".$apellido."','".$telefono."','".$email."','ASESOR','".$password."','".$usuario."',NULL);";
+    
+   
+    $contrasena = password_hash($password, PASSWORD_DEFAULT);
+    
+    $sql = "INSERT INTO persona VALUES('".$cedula."','".$nombre."','".$apellido."','".$telefono."','".$email."','ASESOR','".$contrasena."','".$usuario."',NULL);";
     $enl->query($sql) or die("error al ingresar datos en DB");
     connectionClose($enl);
 }
