@@ -17,13 +17,13 @@ function connectionDB(){
     return $enlace;
 }
 function connectionClose($enlace){
-    mysqli_close(mysqli $enlace);
+    mysqli_close($enlace);
 }
 
 function verificarLogin($user,$enl,$pass){
     $sql = "SELECT CONTRASENA,TIPO from persona where USUARIO='".$user."'";
     $result = $enl -> query($sql) or die("error al crear conexíon con DB");
-    
+    connectionClose($enl);
     if($row=$result->fetch_assoc()){
     
         if($row['CONTRASENA']==$pass){
@@ -48,6 +48,12 @@ function verificarLogin($user,$enl,$pass){
         header("location: index.html");
         exit();
     }
+}
+
+function ingresarPersona($nombre,$apellido,$cedula,$telefono,$email,$usuario,$password,$enl){
+    $sql = "INSERT INTO persona VALUES('".$cedula."','".$nombre."','".$apellido."','".$telefono."','".$email."','ASESOR','".$password."','".$usuario."',NULL);";
+    $enl->query($sql) or die("error al ingresar datos en DB");
+    connectionClose($enl);
 }
 
 ?>

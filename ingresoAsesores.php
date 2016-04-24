@@ -10,7 +10,7 @@
       </head>
       <body>
           <center>
-              <form method="post" action="ingresos.php">
+              <form method="post" action="ingresosUpdates.php">
                  <ul>
                     <li>
                         <label>Nombre: </label>
@@ -41,11 +41,13 @@
                          <input type="password" name="password" required maxlength="8" placeholder="maximo 8 caracteres">
                      </li>
                      <li>
-                         <button type="submit">Ingresar</button>
+                         <button type="submit" name="ingresar" id="btnIngAsesor">Ingresar</button>
                      </li>
                  </ul>
                   
               </form>
           </center>
       </body>
+      <script src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
+      <script src="funciones.js"></script>
 </html>
