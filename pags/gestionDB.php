@@ -1,5 +1,5 @@
 <?php
-
+//funcion q realiza una coneccion con la bd
 function connectionDB(){
     define('DB_SERVER','localhost');
     define('DB_NAME','apuestas');
@@ -16,10 +16,11 @@ function connectionDB(){
     }
     return $enlace;
 }
+//funcion q termina la coneccion
 function connectionClose($enlace){
     mysqli_close($enlace);
 }
-
+//valida datos de usurio y redirecciona segun si es admin o asesor
 function verificarLogin($user,$enl,$pass){
     $sql = "
     SELECT CONTRASENA,TIPO from persona where USUARIO='".$user."';
@@ -34,7 +35,6 @@ function verificarLogin($user,$enl,$pass){
             $_SESSION['usuario']=$user;
             $_SESSION['tipo']=$row[TIPO];
         
-            echo("<script>alert('hola');</script>");
             if($_SESSION['tipo']=='ADMINISTRADOR'){
                 echo("<script>alert('admin');</script>");
                 header("location: administrador.php");
@@ -53,9 +53,10 @@ function verificarLogin($user,$enl,$pass){
     }
 }
 
+//ingresa nuevo personal
 function ingresarPersona($nombre,$apellido,$cedula,$telefono,$email,$usuario,$password,$enl){
     
-   
+   //encripta la contraseña
     $contrasena = password_hash($password, PASSWORD_DEFAULT);
     
     $sql = "INSERT INTO persona VALUES('".$cedula."','".$nombre."','".$apellido."','".$telefono."','".$email."','ASESOR','".$contrasena."','".$usuario."',NULL);";
@@ -66,7 +67,7 @@ function ingresarPersona($nombre,$apellido,$cedula,$telefono,$email,$usuario,$pa
     }
     connectionClose($enl);
 }
-
+// valida si id de usuario ya existe
 function usuarios($user,$enl){
     $sql = "SELECT USUARIO from persona WHERE USUARIO='".$user."'";
     $result = $enl-> query($sql)or die("error al crear coneccion con DB");
@@ -76,6 +77,7 @@ function usuarios($user,$enl){
         return false;
     }
 }
+// valida la existencia de cedula
 function cedulas($ced,$enl){
     $sql = "SELECT CC from persona WHERE CC='".$ced."'";
     $result = $enl->query($sql)or die("error al crear coneccion con DB");
@@ -85,5 +87,26 @@ function cedulas($ced,$enl){
         return false;
     }
 }
-
+function ligas($enl){
+    $sql = 'SELECT NOMBRE FROM ligas ORDER BY NOMBRE;';
+    $result = $enl->query($sql)or die('error al consutar BD');
+    $arr = array();
+    $i=0;
+    while($row=$result->fetch_assoc()){
+        $arr[$i]=$row['NOMBRE'];
+        $i++;
+    }
+    return $arr;
+}
+function partidos($enl,$fecha){
+    $sql = "SELECT equipos.NOMBRE FROM partidos JOIN equipos JOIN ligas WHERE FECHA='".$fecha."' and ligas.NOMBRE='liga 1'";
+    $result = $enl->query($sql)or die('error al consulta DB');
+    $arr = array();
+    $i=0;
+    while($row=$result->fetch_assoc()){
+        $arr[$i]=$row['NOMBRE'];
+        $i++;
+    }
+    return $arr;
+}
 ?>

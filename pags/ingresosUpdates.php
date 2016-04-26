@@ -2,6 +2,7 @@
 require_once('gestionDB.php');
 require_once('validaciones.php');
 
+//funcion q llama las demas funciones que necesita paa ingresar al personal
 function ingresarAsesor(){
     $nombre=strip_tags($_POST['nombre']);
     $apellido=strip_tags($_POST['apellido']);
