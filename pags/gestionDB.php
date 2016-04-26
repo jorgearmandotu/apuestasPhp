@@ -21,7 +21,10 @@ function connectionClose($enlace){
 }
 
 function verificarLogin($user,$enl,$pass){
-    $sql = "SELECT CONTRASENA,TIPO from persona where USUARIO='".$user."'";
+    $sql = "
+    SELECT CONTRASENA,TIPO from persona where USUARIO='".$user."';
+    
+    ";
     $result = $enl -> query($sql) or die("error al crear conexíon con DB");
     connectionClose($enl);
     if($row=$result->fetch_assoc()){
