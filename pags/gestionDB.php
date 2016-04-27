@@ -87,6 +87,57 @@ function cedulas($ced,$enl){
         return false;
     }
 }
+//busca exixstencia de equipo y retorna id
+
+function equipo($equipo, $enl){
+    $idEquipo = null;
+    $sql = "SELECT ID FROM equipos WHERE NOMBRE like '%".$equipo."%'";
+    $result = $enl->query($sql) or die("error al conectar con DB");
+    if($row=$result->fetch_assoc()){
+        $idEquipo = $row['ID'];
+    }
+    return $idEquipo;
+}
+//ingresar equipos
+function ingresoEquipos($nombre,$enl){
+    $sql = "INSERT INTO equipos VALUES('".$nombre."',NULL);";
+    if(!$enl->query($sql)){
+        echo('<script type="text/javascript">alert("ocurrio un error buebe a intentarlo, si el problema persiste intenta en cerrar sesion e iniciarla de nuevo")</script>');
+        exit();
+    }
+}
+//busca liga si existe retorna id de la liga
+function idliga($liga,$enl){
+    $idliga=null;
+    $sql = "SELECT ID FROM ligas WHERE NOMBRE like '%".$liga."%'";
+    $result = $enl->query($sql) or die ("error al conectar con DB");
+    if($row=$result->fetch_assoc()){
+        $idliga= $row['ID'];
+    }
+    return $idliga;
+}
+//busca un partido y retorna id del mismo
+function idpartido($fechaPartido,$horaP,$idequipoA,$idequipoB,$idliga){
+    $sql = "SELECT ID FROM partidos WHERE FECHA='".$fechaPartido."' AND EQUIPOA='".$idequipoA."'";
+    $id=null;
+    return $id;
+}
+//ingreso de liga nueva recibe nombre
+function ingresoLiga($liga, $enl){
+    $sql = "INSERT INTO ligas VALUES('".$liga."',NULL);";
+    if(!$enl->query($sql)){
+        echo('<script type="text/javascript">alert("ocurrio un error buebe a intentarlo, si el problema persiste intenta en cerrar sesion e iniciarla de nuevo")</script>');
+        exit();
+    }
+}
+//ingreso partido
+function ingresoPartido($fechaPartido,$hora,$idequipoA,$idequipoB,$idliga,$enl){
+    $sql = "INSERT INTO partidos VALUES('".$fechaPartido."','".$fechaPartido." ".$hora."00','".$idequipoA."','".$idequipoB."','".$idliga."',NULL,NULL);";
+    if(!$enl->query($sql)){
+        echo('<script type="text/javascript">alert("ocurrio un error buebe a intentarlo, si el problema persiste intenta en cerrar sesion e iniciarla de nuevo")</script>');
+        exit();
+    }
+}
 function ligas($enl){
     $sql = 'SELECT NOMBRE FROM ligas ORDER BY NOMBRE;';
     $result = $enl->query($sql)or die('error al consutar BD');

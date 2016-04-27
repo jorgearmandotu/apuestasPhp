@@ -12,6 +12,7 @@ $(document).ready(function() {
         var val = $(this).val();
         if(val == '--otro--'){
             $('#divPartidos').addClass('visiblePartido');
+            $('#partidoselecionado').val('--otro--');
         }else{
             $('#divPartidos').removeClass('visiblePartido');
             //alert($('select[id=partidos]').val());

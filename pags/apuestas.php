@@ -50,7 +50,7 @@ require_once('consultas.php');
                              <option value='seleccion'>Seleciona partido</option>
                              <option value='partido1'>partido 1</option>
                              <option value='partido2'>partido 2</option>
-                             <option value=--otro-->--otro--</option>
+                             <option value='--otro--'>--otro--</option>
 
                              <?php
                              $listPartidos = cmbpartidos($fecha);
@@ -65,14 +65,14 @@ require_once('consultas.php');
                                  <li><label>Equipo A: </label>
                                      <input list="equipos" name="equipoA">
                                      <datalist id="equipos">
-                                         <option>equipo 1</option>
+                                         <option value="equipo1">equipo 1</option>
                                      </datalist>
                                  </li>
                              
                                  <li><label>Equipo B: </label>
                                      <input list="equipos" name="equipoB">
                                      <datalist id="equipos">
-                                         <option>equipo2</option>
+                                         <option value="equipo2">equipo2</option>
                                      </datalist>
                                  </li>
                                  <li><label>HORA: </label><input type="time" name="hora"> </li>
@@ -87,13 +87,13 @@ require_once('consultas.php');
                              <option value="equipoB">equipo B</option>
                          </select>
                      </li>
-                     <li>
-                         <input type='text' name='partido' id="partidoselecionado" disabled class="inputs">
-                     <input type="text" name='equipoapuesta' id="equipoapuesta" disabled class="inputs">
-                     </li>
                  </ul>
+                 <div id="inputs">
+                      <input type='text' name='partido' id="partidoselecionado" class="inputs">
 
-                 <button type=submit name="enviar" id="enviar">Aceptar</button>
+                     <input type="text" name='equipoapuesta' id="equipoapuesta" class="inputs">
+                 </div>
+                 <button type=submit name="enviar" id="enviar">Aceppartidosetar</button>
              </form> 
           </center>
       </body>
