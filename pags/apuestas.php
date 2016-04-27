@@ -1,12 +1,15 @@
 <!DOCTYPE HTML>
+
 <?php
 require_once('consultas.php');
 
 ?>
+
 <html lang="es">
       <head>
           <meta charset = "utf-8">
           <title>Apuestas</title>
+          <link rel="stylesheet" href="../css/apuestas.css">
       </head>  
       <body>
           <center>
@@ -18,7 +21,7 @@ require_once('consultas.php');
                          <input type='text' name='cedula' required maxlength="20">
                      </li>
                      <li>
-                       st  <label>Nombre: </label>
+                         <label>Nombre: </label>
                          <input type="text" name='nombre' required maxlength='20'>
                      </li>
                      <li>
@@ -28,11 +31,11 @@ require_once('consultas.php');
                      Datos partido
                      <li>
                          <label>Fecha partido: </label>
-                         <input type="date" name='fecha' required maxlength=""
+                         <input type="date" name='fecha' required>
                      </li>
                      <li>
                          <label>Liga Torneo: </label>
-                         <input list="liga">
+                         <input list="liga" name="liga">
                          <datalist id="liga">
                              <!--<option value="liga1">-->
                              <?php
@@ -43,33 +46,58 @@ require_once('consultas.php');
                      </li>
                      <li>
                          <label>Partido: </label>
-                         <select name="partidos">
-                             <!--<option>partido a</option>-->
+                         <select name="partidos" id="partidos">
+                             <option value='seleccion'>Seleciona partido</option>
+                             <option value='partido1'>partido 1</option>
+                             <option value='partido2'>partido 2</option>
+                             <option value=--otro-->--otro--</option>
+
                              <?php
                              $listPartidos = cmbpartidos($fecha);
                              foreach($listPartidos as $v){
                                  echo('<option>'.$v.'</option>');
                              }
                              ?>
+
                          </select>
-                         
-                         <ul>
-                             <li><label>Equipo A:</label></li>
-                             <li><label>Equipo B:</label></li>
-                             <li><label>HORA: </label><input type="time"> </li>
-                         </ul>
+                         <div id="divPartidos">
+                             <ul>
+                                 <li><label>Equipo A: </label>
+                                     <input list="equipos" name="equipoA">
+                                     <datalist id="equipos">
+                                         <option>equipo 1</option>
+                                     </datalist>
+                                 </li>
+                             
+                                 <li><label>Equipo B: </label>
+                                     <input list="equipos" name="equipoB">
+                                     <datalist id="equipos">
+                                         <option>equipo2</option>
+                                     </datalist>
+                                 </li>
+                                 <li><label>HORA: </label><input type="time" name="hora"> </li>
+                             </ul>
+                         </div>
                      </li>
                      <li>
                          <label>Equipo apuesta: </label>
-                         <select name="equipoApostado">
-                             <option>equipoA
-                             </option>
-                             <option>equipo B</option>
+                         <select name="equipoApostado" id="equipoApostado">
+                            <option value="seleccion">selecciona equipo</option>
+                             <option value="equipoA">equipoA</option>
+                             <option value="equipoB">equipo B</option>
                          </select>
                      </li>
+                     <li>
+                         <input type='text' name='partido' id="partidoselecionado" disabled class="inputs">
+                     <input type="text" name='equipoapuesta' id="equipoapuesta" disabled class="inputs">
+                     </li>
                  </ul>
+
+                 <button type=submit name="enviar" id="enviar">Aceptar</button>
              </form> 
           </center>
       </body>
       <script src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
+      <script src="../js/apuestas.js"></script>
+      
 </html>

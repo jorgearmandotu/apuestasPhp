@@ -1,6 +1,11 @@
 <?php
 require_once('gestionDB.php');
 require_once('validaciones.php');//revisar si es necesaria
+require_once('lib/carbon.php');
+
+use Carbon\Carbon;
+
+printf('Now: %s', Carbon::now());
 
 //retorna array de todas las ligas registradas
 function cmbligas(){
@@ -16,9 +21,10 @@ function cmbpartidos($fecha){
     $enlace = connectionDB();
     $listPartidos = partidos($enlace,$fecha);
     connectionClose($enlace);
-    $partidos=array();
+    //partidos=array();
+    $partido="";
     foreach($listPartidos as $p){
-        $partidos=.$p.' vs ';
+       $partido .=$p.' vs ';
     }
     return $partidos;
 }
