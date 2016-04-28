@@ -28,4 +28,11 @@ function validarcedula($cedula,$enlace){
         return true;
     }else{return false;}
 }
+
+//limíar cadenas no se termino 
+function limpiarcadenas($cadena){
+    $cadena=strip_tags($cadena);
+    $cadena=htmlentities($cadena);
+    return stripslashes($cadena);
+}
 ?>

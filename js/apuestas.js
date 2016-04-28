@@ -25,4 +25,14 @@ $(document).ready(function() {
         $('#equipoapuesta').val($(this).val());
     })
     
+    $('#fecha').change(function(){
+        $.ajax({
+            type: 'POST',
+            url:'consultas.php',
+            data:"idfecha="+$("#fecha").val(),
+            success: function(opciones){
+                $('#partidos').html(opciones)
+            }
+        })
+    })
 })

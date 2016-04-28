@@ -2,7 +2,7 @@
 
 
 require_once('gestionDB.php');
-
+require_once('validaciones.php');
 
 //funcion para ingresar una apuesta
 function ingresarPartido($fechaPartido,$hora,$idequipoA,$idequipoB,$idliga){

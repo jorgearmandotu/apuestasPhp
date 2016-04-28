@@ -2,7 +2,7 @@
 
 <?php
 require_once('consultas.php');
-
+require_once('gestionDB.php');
 ?>
 
 <html lang="es">
@@ -31,7 +31,7 @@ require_once('consultas.php');
                      Datos partido
                      <li>
                          <label>Fecha partido: </label>
-                         <input type="date" name='fecha' required>
+                         <input type="date" name='fecha' required id="fecha">
                      </li>
                      <li>
                          <label>Liga Torneo: </label>
@@ -53,7 +53,8 @@ require_once('consultas.php');
                              <option value='--otro--'>--otro--</option>
 
                              <?php
-                             $listPartidos = cmbpartidos($fecha);
+                             $fecha = 
+                             $listPartidos = cmbpartidos();
                              foreach($listPartidos as $v){
                                  echo('<option>'.$v.'</option>');
                              }

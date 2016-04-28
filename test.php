@@ -11,6 +11,7 @@ while($row=$result->fetch_assoc()){
     echo($arr[$i]);
     $i++;
 }
-echo('consultado');
-echo($arr[3]);
+
+echo('consultado ññññ jajaj ññ');
+//echo($arr[3]);
 ?>
