@@ -1,12 +1,12 @@
 <?php
 //funcion q realiza una coneccion con la bd
 function connectionDB(){
-    define('DB_SERVER','localhost');
-    define('DB_NAME','apuestas');
-    define('DB_USER','root');
-    define('DB_PASS','Jorge1990');
+    $DB_SERVER='localhost';
+    $DB_NAME='apuestas';
+    $DB_USER='root';
+    $DB_PASS='Jorge1990';
     
-    $enlace = mysqli_connect(DB_SERVER,DB_USER,DB_PASS,DB_NAME);
+    $enlace = mysqli_connect($DB_SERVER,$DB_USER,$DB_PASS,$DB_NAME);
     if(!$enlace){
     echo "Error: No se pudo conectar a MySQL." . PHP_EOL;
     echo "errno de depuración: " . mysqli_connect_errno() . PHP_EOL;
@@ -132,7 +132,9 @@ function ingresoLiga($liga, $enl){
 }
 //ingreso partido
 function ingresoPartido($fechaPartido,$hora,$idequipoA,$idequipoB,$idliga,$enl){
-    $sql = "INSERT INTO partidos VALUES('".$fechaPartido."','".$fechaPartido." ".$hora."00','".$idequipoA."','".$idequipoB."','".$idliga."',NULL,NULL);";
+    $horadepartido = $fechaPartido." ".$hora.":00";
+    echo('<script type="text/javascript">alert("'.$horadepartido.'")</script>');
+    $sql = "INSERT INTO partidos VALUES('".$fechaPartido."','".$horadepartido."','".$idequipoA."','".$idequipoB."','".$idliga."',NULL,NULL);";
     if(!$enl->query($sql)){
         echo('<script type="text/javascript">alert("ocurrio un error buebe a intentarlo, si el problema persiste intenta en cerrar sesion e iniciarla de nuevo")</script>');
         exit();
