@@ -1,12 +1,16 @@
 <?php
 //funcion q realiza una coneccion con la bd
 function connectionDB(){
-    define('DB_SERVER','localhost');
-    define('DB_NAME','apuestas');
-    define('DB_USER','root');
-    define('DB_PASS','Jorge1990');
+//    define('DB_SERVER','localhost');
+//    define('DB_NAME','apuestas');
+//    define('DB_USER','root');
+//    define('DB_PASS','Jorge1990');
     
-    $enlace = mysqli_connect(DB_SERVER,DB_USER,DB_PASS,DB_NAME);
+    $DB_SERVER = 'localhost';
+    $DB_NAME = 'apuestas';
+    $DB_USER = 'root';
+    $DB_PASS = 'Jorge1990';
+    $enlace = mysqli_connect($DB_SERVER,$DB_USER,$DB_PASS,$DB_NAME);
     if(!$enlace){
     echo "Error: No se pudo conectar a MySQL." . PHP_EOL;
     echo "errno de depuración: " . mysqli_connect_errno() . PHP_EOL;
@@ -18,7 +22,7 @@ function connectionDB(){
 }
 //funcion q termina la coneccion
 function connectionClose($enlace){
-    mysqli_close($enlace);
+    mysqli_close($enlace);    
 }
 //valida datos de usurio y redirecciona segun si es admin o asesor
 function verificarLogin($user,$enl,$pass){
