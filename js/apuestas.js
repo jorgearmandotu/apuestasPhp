@@ -1,5 +1,6 @@
 
 $(document).ready(function() {
+    
     $().ajaxStart(function() {
         $('#loading').show();
         $('#result').hide();
@@ -26,12 +27,14 @@ $(document).ready(function() {
     })
     
     $('#fecha').change(function(){
-        $.ajax({
+                $.ajax({
             type: 'POST',
             url:'consultas.php',
-            data:"idfecha="+$("#fecha").val(),
-            success: function(opciones){
-                $('#partidos').html(opciones)
+            data:$('#formularioApuesta').serialize(),
+            success: function(data){
+                alert(data);
+                alert(varjs);
+                $('#partidos').html(data);
             }
         })
     })

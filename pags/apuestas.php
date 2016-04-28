@@ -44,23 +44,23 @@ require_once('gestionDB.php');
                              ?>
                          </datalist>
                      </li>
-                     <li>
-                         <label>Partido: </label>
+                     <li><div id="loadingPartido" >
                          <select name="partidos" id="partidos">
-                             <option value='seleccion'>Seleciona partido</option>
-                             <option value='partido1'>partido 1</option>
-                             <option value='partido2'>partido 2</option>
-                             <option value='--otro--'>--otro--</option>
-
-                             <?php
-                             $fecha = 
+                             
+                             <!--<option value='partido1'>partido 1</option>
+                             <option value='partido2'>partido 2</option>-->
+                             
+                             
+                             <!--<?php
+                             /*$fecha = 
                              $listPartidos = cmbpartidos();
                              foreach($listPartidos as $v){
                                  echo('<option>'.$v.'</option>');
-                             }
-                             ?>
+                             }*/
+                             ?>-->
 
                          </select>
+                         </div>
                          <div id="divPartidos">
                              <ul>
                                  <li><label>Equipo A: </label>

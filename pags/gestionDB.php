@@ -101,6 +101,16 @@ function equipo($equipo, $enl){
     }
     return $idEquipo;
 }
+//recibe id de equipo y retorna nombre;
+function nomEquipo($id,$enl){
+    $nom=null;
+    $sql = "SELECT NOMBRE FROM equipos WHERE ID='".$id."'";
+    $result = $enl->query($sql) or die ("error al conectar con DB nomEquip");
+    if($row=$result->fetch_assoc()){
+        $nom = $row['NOMBRE'];
+    }
+    return $nom;
+}
 //ingresar equipos
 function ingresoEquipos($nombre,$enl){
     $sql = "INSERT INTO equipos VALUES('".$nombre."',NULL);";
@@ -118,6 +128,16 @@ function idliga($liga,$enl){
         $idliga= $row['ID'];
     }
     return $idliga;
+}
+//recibe id de liga retorna nombre
+function nomLiga($id,$enl){
+    $nom=null;
+    $sql = "SELECT NOMBRE FROM ligas WHERE ID='".$id."'";
+    $result = $enl->query($sql) or die ("error al conectar con DB nomliga");
+    if($row=$result->fetch_assoc()){
+        $nom = $row['NOMBRE'];
+    }
+    return $nom;
 }
 //busca un partido y retorna id del mismo
 function idpartido($fechaPartido,$horaP,$idequipoA,$idequipoB,$idliga){
@@ -155,14 +175,24 @@ function ligas($enl){
     }
     return $arr;
 }
-function partidos($enl,$fecha,$liga){
-    $sql = "SELECT equipos.NOMBRE FROM partidos JOIN equipos JOIN ligas WHERE FECHA='".$fecha."' and ligas.NOMBRE='liga 1'";
+function partidos($enl,$fecha){
+    $sql = "SELECT ID,EQUIPOA,EQUIPOB,LIGA,DATE_FORMAT(HORA, '%T') AS HORAP FROM partidos WHERE FECHA='$fecha';";
     $result = $enl->query($sql)or die('error al consulta DB');
     $arr = array();
     $i=0;
     while($row=$result->fetch_assoc()){
-        $arr[$i]=$row['NOMBRE'];
+        $l=0;
+        $arr[$i][$l]=$row['ID'];
+        $l++;
+        $arr[$i][$l]=$row['EQUIPOA'];
+        $l++;
+        $arr[$i][$l]=$row['EQUIPOB'];
+        $l++;
+        $arr[$i][$l]=$row['LIGA'];
+        $l++;
+        $arr[$i][$l]=$row['HORAP'];
         $i++;
+        
     }
     return $arr;
 }
