@@ -13,16 +13,27 @@ require_once('gestionDB.php');
       </head>  
       <body>
           <center>
-             <form method="post" action="ingresoApuesta.php" id='formularioApuesta'>
+             <form method="post" action="ingresoApuesta.php" id='formularioApuesta' onsubmit="return confirmar()">
+                <div id="confirmarenvio">
+                     <ul>
+                         <li>
+                             <label><strong>Nombre: </strong></label>
+                             <label id="Nom"></label>
+                         </li>
+                         <li>
+                             <label><strong>CC: </strong></label>
+                         </li>
+                     </ul>
+                </div>
                  <ul>
                     Datos Apostador:
                      <li>
                          <label>CC: </label>
-                         <input type='text' name='cedula' required maxlength="20">
+                         <input type='text' name='cedula' required maxlength="20" id="CC">
                      </li>
                      <li>
                          <label>Nombre: </label>
-                         <input type="text" name='nombre' required maxlength='20'>
+                         <input type="text" name='nombre' required maxlength='20' id="nombre">
                      </li>
                      <li>
                          <label>$ valor: </label>
@@ -88,7 +99,7 @@ require_once('gestionDB.php');
 
                      <input type="text" name='equipoapuesta' id="equipoapuesta" class="inputs">
                  </div>
-                 <button type=submit id="enviar">Enviar Apuesta</button>
+                 <button id="enviar">Enviar Apuesta</button>
              </form> 
           </center>
       </body>

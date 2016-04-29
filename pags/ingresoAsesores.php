@@ -10,7 +10,8 @@
       </head>
       <body>
           <center>
-              <form method="post" action="ingresosUpdates.php" id="formularioAsesor">
+             
+              <form method="post" action="ingresosUpdates.php" id="formularioAsesor" onsubmit="return confirmar()">
                  <ul>
                     <li>
                         <label>Nombre: </label>

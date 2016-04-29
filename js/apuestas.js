@@ -62,8 +62,12 @@ $(document).ready(function() {
              var rival = $('#otroequipo1').val();        
         $('#equipoApostado').html("<option value='seleccion'>selecione equipo</option><option>"+rival+"</option><option>"+$(this).val()+"</option>");
                             })
-    $('#enviar').click(function(){
+    /*$('#enviar').click(function(){//hay otro evento para no validar q los datos estenc pmpletos
         alert("enviar??");
         //capturar todos los datos pedir confirmacion y dependiendo continuar con el ingreso de apuesta
-    })
-})
+    })*/
+});
+function confirmar(){
+        // hacer visivle la venta de donfirmacion
+    $('#nom').html($('#nombre').val());
+}

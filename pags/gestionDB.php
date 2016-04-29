@@ -61,14 +61,25 @@ function ingresarPersona($nombre,$apellido,$cedula,$telefono,$email,$usuario,$pa
     
    //encripta la contraseña
     $contrasena = password_hash($password, PASSWORD_DEFAULT);
-    
-    $sql = "INSERT INTO persona VALUES('".$cedula."','".$nombre."','".$apellido."','".$telefono."','".$email."','ASESOR','".$contrasena."','".$usuario."',NULL);";
+    /*START TRANSACTION;
+INSERT INTO ligas VALUES('liga portuguesa',null);
+ROLLBACK;*/
+    $sql = "
+    INSERT INTO persona VALUES('".$cedula."','".$nombre."','".$apellido."','".$telefono."','".$email."','ASESOR','".$contrasena."','".$usuario."',NULL);";
     //$enl->query($sql) or die("error al ingresar datos en DB");
     if(!$enl->query($sql)){
         echo('<script type="text/javascript">alert("ocurrio un error buebe a intentarlo, si el problema persiste intenta en cerrar sesion e iniciarla de nuevo")</script>');
         exit();
     }
-    connectionClose($enl);
+    $sql = "SELECT ID FROM persona WHERE USUARIO='".$usuario."';";
+    $result = $enl->query($sql)or die("error al crear saldo de usuario");
+    if($row=$result->fetch_assoc()){
+        $idasesor= $row['ID'];
+        //echo('<script type="text/javascript">alert("'.$idasesor.'")</script>');
+        $sql = "INSERT INTO saldos VALUES('".$idasesor."','0')";
+        $enl->query($sql);
+    }
+    
 }
 // valida si id de usuario ya existe
 function usuarios($user,$enl){

@@ -28,6 +28,7 @@ function ingresarAsesor(){
         }
         else{
             ingresarPersona($nombre,$apellido,$cedula,$telefono,$email,$idUsuario,$password,$enlace);
+            ConnectionClose($enlace);
             return true;
         }
         
