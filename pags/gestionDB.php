@@ -196,4 +196,17 @@ function partidos($enl,$fecha){
     }
     return $arr;
 }
+function equiposLigaPartido($enl,$idP){
+    $sql = "SELECT EQUIPOA,EQUIPOB,LIGA,DATE_FORMAT(HORA, '%T') AS HORAP FROM partidos WHERE ID='".$idP."'";
+    $result = $enl->query($sql)or die("error al concetar a DB combosapuestas");
+    $arr = array();
+    if($row=$result->fetch_assoc()){
+        $arr[0]=$row['EQUIPOA'];
+        $arr[1]=$row['EQUIPOB'];
+        $arr[2]=$row['LIGA'];
+        $arr[3]=$row['HORAP'];
+    }
+    return $arr;
+}
+
 ?>

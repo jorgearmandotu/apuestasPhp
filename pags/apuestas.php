@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 
 <?php
-require_once('consultas.php');
+//require_once('consultas.php');
 require_once('gestionDB.php');
 ?>
 
@@ -33,45 +33,23 @@ require_once('gestionDB.php');
                          <label>Fecha partido: </label>
                          <input type="date" name='fecha' required id="fecha">
                      </li>
-                     <li>
-                         <label>Liga Torneo: </label>
-                         <input list="liga" name="liga">
-                         <datalist id="liga">
-                             <!--<option value="liga1">-->
-                             <?php
-                             $listLigas=cmbligas();
-                            foreach($listLigas as $v){ echo('<option>'.$v.'</option>');}
-                             ?>
-                         </datalist>
-                     </li>
+                     
                      <li><div id="loadingPartido" >
                          <select name="partidos" id="partidos">
-                             
-                             <!--<option value='partido1'>partido 1</option>
-                             <option value='partido2'>partido 2</option>-->
-                             
-                             
-                             <!--<?php
-                             /*$fecha = 
-                             $listPartidos = cmbpartidos();
-                             foreach($listPartidos as $v){
-                                 echo('<option>'.$v.'</option>');
-                             }*/
-                             ?>-->
-
+<!--                         se cargaran los option desde php-->
                          </select>
                          </div>
                          <div id="divPartidos">
                              <ul>
                                  <li><label>Equipo A: </label>
-                                     <input list="equipos" name="equipoA">
+                                     <input list="equipos" name="equipoA" id="otroequipo1">
                                      <datalist id="equipos">
                                          <option value="equipo1">equipo 1</option>
                                      </datalist>
                                  </li>
                              
                                  <li><label>Equipo B: </label>
-                                     <input list="equipos" name="equipoB">
+                                     <input list="equipos" name="equipoB" id="otroequipo2">
                                      <datalist id="equipos">
                                          <option value="equipo2">equipo2</option>
                                      </datalist>
@@ -81,11 +59,31 @@ require_once('gestionDB.php');
                          </div>
                      </li>
                      <li>
-                         <label>Equipo apuesta: </label>
+                         <label>Liga Torneo: </label>
+                         <input list="liga" name="liga">
+                         <datalist id="liga">
+                             <!--<option value="liga1">-->
+                             <?php
+                             $enlace = connectionDB();
+                            $listLigas = ligas($enlace);
+                            connectionClose($enlace);
+//                             $listLigas=cmbligas();
+                           foreach($listLigas as $v){ echo('<option>'.$v.'</option>');}
+                             ?>
+                         </datalist>
+                     </li>
+                     <li>
+                         <label id=equipoApuesta>Equipo apuesta: </label>
+<!--                         insertar codigo php desde ajax-->
                          <select name="equipoApostado" id="equipoApostado">
+<!--
                             <option value="seleccion">selecciona equipo</option>
                              <option value="equipoA">equipoA</option>
                              <option value="equipoB">equipo B</option>
+-->
+                        <div id="opciones">
+                            
+                        </div>
                          </select>
                      </li>
                  </ul>

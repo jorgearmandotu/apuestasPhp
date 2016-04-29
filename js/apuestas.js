@@ -1,5 +1,18 @@
 
 $(document).ready(function() {
+    function cargarpartidosnulos(){
+                $.ajax({
+            type: 'POST',
+            url:'consultas.php',
+            data:$('#formularioApuesta').serialize(),
+            success: function(data){
+                
+                $('#partidos').html(data);
+            }
+        })
+                $('#equipoApostado').html("<option value='seleccion'>selecione equipo</option>");
+    }
+    cargarpartidosnulos();
     
     $().ajaxStart(function() {
         $('#loading').show();
@@ -32,10 +45,21 @@ $(document).ready(function() {
             url:'consultas.php',
             data:$('#formularioApuesta').serialize(),
             success: function(data){
-                alert(data);
-                alert(varjs);
+                
                 $('#partidos').html(data);
             }
         })
     })
+    $('#partidos').change(function(){
+        var idP=$(this).val();
+        $("#equipoApostado").load("../pags/lib/llenarcomboapuesta.php",{idpartido:idP});
+    })
+    $('#otroequipo1').change(function(){
+           var rival = $('#otroequipo2').val();                 
+        $('#equipoApostado').html("<option value='seleccion'>selecione equipo</option><option>"+$(this).val()+"</option><option>"+rival+"</option>");
+                            })
+    $('#otroequipo2').change(function(){
+             var rival = $('#otroequipo1').val();        
+        $('#equipoApostado').html("<option value='seleccion'>selecione equipo</option><option>"+rival+"</option><option>"+$(this).val()+"</option>");
+                            })
 })

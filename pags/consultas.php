@@ -1,7 +1,7 @@
 <?php
 require_once('gestionDB.php');
 require_once('validaciones.php');//revisar si es necesaria
-require_once('lib/carbon.php');
+//require_once('lib/carbon.php');
 
 use Carbon\Carbon;
 
@@ -35,9 +35,10 @@ function cmbpartidos(){
         
         $res.="<option value='".$idP."'>".$nomEquiA." VS ".$nomEquiB."-".$hora."</option>";
     }
+    connectionClose($enlace);
     $res.= "<option value='--otro--'>--otro--</option>";
     
-    connectionClose($enlace);
+    
     //partidos=array();
     
 //    foreach($listPartidos as $p){
@@ -47,7 +48,7 @@ function cmbpartidos(){
                              <option value='partido1'>partidote 1</option>
                              <option value='partido2'>partidote 2</option>
                              <option value='--otro--'>--otrosssss--</option>";*/
-    echo( 'var varjs="'.$res.'";');
+    echo( $res);
     //echo($res);
     //echo('<script languaje="JavaScript">var varjs='.$res.';</script>');
 }
