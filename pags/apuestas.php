@@ -67,7 +67,7 @@ require_once('gestionDB.php');
                              $enlace = connectionDB();
                             $listLigas = ligas($enlace);
                             connectionClose($enlace);
-//                             $listLigas=cmbligas();
+
                            foreach($listLigas as $v){ echo('<option>'.$v.'</option>');}
                              ?>
                          </datalist>
@@ -76,11 +76,7 @@ require_once('gestionDB.php');
                          <label id=equipoApuesta>Equipo apuesta: </label>
 <!--                         insertar codigo php desde ajax-->
                          <select name="equipoApostado" id="equipoApostado">
-<!--
-                            <option value="seleccion">selecciona equipo</option>
-                             <option value="equipoA">equipoA</option>
-                             <option value="equipoB">equipo B</option>
--->
+
                         <div id="opciones">
                             
                         </div>
@@ -92,7 +88,7 @@ require_once('gestionDB.php');
 
                      <input type="text" name='equipoapuesta' id="equipoapuesta" class="inputs">
                  </div>
-                 <button type=submit name="enviar" id="enviar">Aceppartidosetar</button>
+                 <button type=submit id="enviar">Enviar Apuesta</button>
              </form> 
           </center>
       </body>

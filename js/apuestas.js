@@ -62,4 +62,8 @@ $(document).ready(function() {
              var rival = $('#otroequipo1').val();        
         $('#equipoApostado').html("<option value='seleccion'>selecione equipo</option><option>"+rival+"</option><option>"+$(this).val()+"</option>");
                             })
+    $('#enviar').click(function(){
+        alert("enviar??");
+        //capturar todos los datos pedir confirmacion y dependiendo continuar con el ingreso de apuesta
+    })
 })
