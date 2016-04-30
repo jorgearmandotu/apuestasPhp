@@ -11,6 +11,7 @@ $(document).ready(function() {
             }
         })
                 $('#equipoApostado').html("<option value='seleccion'>selecione equipo</option>");
+        $('#saldo').val(sal);
     }
     cargarpartidosnulos();
     
@@ -67,8 +68,9 @@ function confirmar(){
     var nombre=$('#nombre').val();
     var cc=$('#CC').val();
     var equipo = $('#equipoApostado').val();
-    var valor=$('#valor').val();
+    var valor=parseFloat($('#valor').val());
     var partido=$('#partidos').val();
+    var saldo = $('#saldo').val();
     if(partido=='seleccion'){
         alert("seleccione partido");
         return false;
@@ -77,12 +79,15 @@ function confirmar(){
         var B=$('otroequipo2').val();
         var H=$('#hora').val();
         if(A==""||B==""||H==""){
-            alert("verifique que todos ls campos esten llenos")
+            alert("verifique que todos los campos esten llenos")
             return false;
         }
     }
     if(equipo=='seleccion'){
         alert('Seleccione equipo a apostar');
+        return false;
+    }if(saldo<valor){
+        alert('Usted no dispone de saldo suficiente para esta apuesta');
         return false;
     }
     if (confirm("desea hacer apuesta por "+valor+" del cliente "+nombre)){

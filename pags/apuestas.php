@@ -3,6 +3,8 @@
 <?php
 //require_once('consultas.php');
 require_once('gestionDB.php');
+require_once 'validaciones.php';
+    validarAsesor();
 ?>
 
 <html lang="es">
@@ -13,8 +15,18 @@ require_once('gestionDB.php');
       </head>  
       <body>
           <center>
+              <label><strong>Saldo Disponible: </strong><stron><?php  
+                  $enlace = connectionDB();
+                  $saldoA = saldo($enlace,$_SESSION['id']);
+                  echo "<strong>$ ".$saldoA."</strong>";
+                  echo "<script>
+                  var sal=".$saldoA.";
+                  </script>";
+                  ?></stron></strong></label>
              <form method="post" action="ingresoApuesta.php" id='formularioApuesta' onsubmit="return confirmar()">
-                
+                <div id="saldos">
+                    <input type="text" id="saldo" name="saldo">
+                </div>
                  <ul>
                     Datos Apostador:
                      <li>

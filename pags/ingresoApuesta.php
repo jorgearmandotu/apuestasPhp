@@ -1,8 +1,7 @@
 <?php
-
-
 require_once('gestionDB.php');
-require_once('validaciones.php');
+require_once 'validaciones.php';
+    validarAsesor();
 
 //funcion para ingresar una apuesta
 function ingresarPartido($fechaPartido,$hora,$idequipoA,$idequipoB,$idliga){
@@ -48,6 +47,8 @@ function ingresarApuesta(){
     $equipoB = strip_tags($_POST['equipoB']);
     $horaP = strip_tags($_POST['hora']);
     $equipoApostado = strip_tags($_POST["equipoapuesta"]);
+    $saldo = strip_tags($_POST['saldo']);
+    $idAsesor = $_SESSION['ID'];
     
     //validar y agregar partido
     if($partido == '--otro--'){
@@ -61,10 +62,23 @@ function ingresarApuesta(){
     }else{
         //se recupera datos de partido existente
         // consulta SELECT ID,EQUIPOA,EQUIPOB,LIGA FROM partidos WHERE FECHA='2016-04-29'
-        
+        $enlace = connectionDB();
+        $partidoData = equiposLigaPartido($enlace,$partido);
+        if ($partidoData!=null){
+            $A=$partidoData[0];
+            $B=$partidoData[1];
+            $horapartido=$partidoData[3];
+        }
+        connectionClose($enlace);
     }
+    $enlace = connectionDB();
+    $idEquipoApostado = equipo($equipoA,$enlace);
+    $idligaApuesta = idliga($liga,$enlace);
+    connectionClose($enlace);
+    if(ingresoApuesta($enlace,$nombreA,$cedulaA,$valorA,$idAsesor,$partido,$idEquipoApostado,$idligaApuesta,$saldo))
     //el id del partido sera el value de los datos del combo
-    
+    $saldodisp=$saldo;
+    $saldodisp-=$valorA;
     echo("datos");
     echo('nombre: '.$nombreA.'<br>'.
      ' cedula: '.$cedulaA.'<br>'.
@@ -75,7 +89,11 @@ function ingresarApuesta(){
     'equipoA: '.$equipoA.'<br>'.
     'equipoB: '.$equipoB.'<br>'.
     '$hora: '.$horaP.'<br>'.
-    'equipo apostado: '.$equipoApostado);
+    'equipo apostado: '.$equipoApostado.'<br>'.
+        'saldo : '.$saldo.'<br>'.
+        'resta: '.$saldodisp).'<br>'.
+        'idequipoapuesta: '.$idEquipoApostado.'<br>'.
+        'id liga apuesta: '.$idligaApuesta;
 }
 
 ingresarApuesta();

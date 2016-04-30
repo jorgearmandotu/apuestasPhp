@@ -26,7 +26,7 @@ function connectionClose($enlace){
 //valida datos de usurio y redirecciona segun si es admin o asesor
 function verificarLogin($user,$enl,$pass){
     $sql = "
-    SELECT CONTRASENA,TIPO from persona where USUARIO='".$user."';
+    SELECT CONTRASENA,TIPO,ID from persona where USUARIO='".$user."';
     
     ";
     $result = $enl -> query($sql) or die("error al crear conexíon con DB");
@@ -36,7 +36,9 @@ function verificarLogin($user,$enl,$pass){
         if(password_verify($pass, $row['CONTRASENA'])){
             session_start();
             $_SESSION['usuario']=$user;
-            $_SESSION['tipo']=$row[TIPO];
+            $_SESSION['tipo']=$row['TIPO'];
+            $_SESSION['id']=$row['ID'];
+            
         
             if($_SESSION['tipo']=='ADMINISTRADOR'){
                 echo("<script>alert('admin');</script>");
@@ -209,7 +211,7 @@ function partidos($enl,$fecha){
 }
 function equiposLigaPartido($enl,$idP){
     $sql = "SELECT EQUIPOA,EQUIPOB,LIGA,DATE_FORMAT(HORA, '%T') AS HORAP FROM partidos WHERE ID='".$idP."'";
-    $result = $enl->query($sql)or die("error al concetar a DB combosapuestas");
+    $result = $enl->query($sql)or die("error al conectar a DB combosapuestas");
     $arr = array();
     if($row=$result->fetch_assoc()){
         $arr[0]=$row['EQUIPOA'];
@@ -219,5 +221,35 @@ function equiposLigaPartido($enl,$idP){
     }
     return $arr;
 }
-
+//obtener saldo asesor
+function saldo($enl,$id){
+    $sql = "SELECT SALDO FROM saldos WHERE IDASESOR='".$id."'";
+    $result = $enl->query($sql)or die("error al conectar a DB saldos");
+    $saldo='100';
+    if($row=$result->fetch_assoc()){
+        $saldo=$row['SALDO'];
+    }
+    return $saldo;
+}
+function ingresoApuesta($enl,$nomApost,$ccApost,$valor,$idAsesor,$idPart,$idEquiApost,$idLiga,$saldoDisp){
+    $enl->autocommit(false);
+    $sql = "INSERT INTO apuestas VALUES('".$nomApost."','".$ccApost."','".$valor."','".$idAsesor."','".$idPart."','".$idEquiApost."','".$idLiga."',null);";
+    $saldoDisp=$saldoDisp-$valor;
+    $sql2 = "UPDATE saldos SET SALDO='".$saldoDisp."' WHERE IDASESOR=".$idAsesor.";";
+    $result = $enl->query($sql);
+    if($enl->errno){
+        $flag = false;
+        echo("Error en transaccion");
+    }
+    $result = $enl->query($sql);
+    if($enl->errno){
+        $flag = false;
+        echo("errpe en transaccion");
+    }
+    if($flag){
+        $enl->commit();
+    }else{
+        $enl->rollBack();
+    }
+}
 ?>

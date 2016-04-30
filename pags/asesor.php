@@ -10,6 +10,6 @@
    </head>
     <body>
         <h1>bienbenidos asesores</h1>
-        <a href='apuestas.php'>Realiozar apuesta</a>
+        <a href='apuestas.php'>Realizar apuesta</a>
     </body>
 </html>
