@@ -62,30 +62,30 @@ $(document).ready(function() {
              var rival = $('#otroequipo1').val();        
         $('#equipoApostado').html("<option value='seleccion'>selecione equipo</option><option>"+rival+"</option><option>"+$(this).val()+"</option>");
                             })
-    $('#enviar').click(function(){
-        alert('enviar');
-        var nombre=$('#nombre').val();
-        var cc=$('#CC').val();
-        var valor=$('#valor').val();
-        var fecha=$('#fecha').val();
-        var liga=$('liga').val();
-        var partido="";
-        alert(nombre+cc+valor+fecha+liga+partido);
-        if($('#partidos').val() == '--otro--'){
-            partido=$('#otroequipo1').val()+" VS "+$('#otroequipo2').val()+" - "+$('#hora').val(); 
-        }else{
-            partido=$('#partidoselecionado').val();
-        }
-        $('#Nom').html(nombre);
-        $('#ced').html(cc);
-        $('#val').html(valor);
-        $('#fech').html(fecha);
-        $('#part').html(partido);
-        $('#lig').html(liga);
-        
-        $("#confirmarenvio").addClass('visible');
-        var htmldata="";
-        
-        //capturar todos los datos pedir confirmacion y dependiendo continuar con el ingreso de apuesta
-    })
 });
+function confirmar(){
+    var nombre=$('#nombre').val();
+    var cc=$('#CC').val();
+    var equipo = $('#equipoApostado').val();
+    var valor=$('#valor').val();
+    var partido=$('#partidos').val();
+    if(partido=='seleccion'){
+        alert("seleccione partido");
+        return false;
+    }else if(partido=='--otro--'){
+        var A=$('otroequipo1').val();
+        var B=$('otroequipo2').val();
+        var H=$('#hora').val();
+        if(A==""||B==""||H==""){
+            alert("verifique que todos ls campos esten llenos")
+            return false;
+        }
+    }
+    if(equipo=='seleccion'){
+        alert('Seleccione equipo a apostar');
+        return false;
+    }
+    if (confirm("desea hacer apuesta por "+valor+" del cliente "+nombre)){
+        return true;
+    }return false;
+}

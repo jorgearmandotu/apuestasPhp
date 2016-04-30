@@ -14,38 +14,7 @@ require_once('gestionDB.php');
       <body>
           <center>
              <form method="post" action="ingresoApuesta.php" id='formularioApuesta' onsubmit="return confirmar()">
-                <div id="confirmarenvio">
-                     <ul>
-                         <li>
-                             <label><strong>Nombre: </strong></label>
-                             <label id="Nom"></label>
-                         </li>
-                         <li>
-                             <label><strong>CC: </strong></label>
-                             <label id="ced"></label>
-                         </li>
-                         <li>
-                             <label><strong>Valor Apostado: </strong></label>
-                             <label id="val"></label>
-                         </li>
-                         <li>
-                             <label><strong>Fecha Partido: </strong></label>
-                             <label id="fech"></label>
-                         </li>
-                         <li>
-                         <label><strong>Partido Y hora: </strong></label>
-                         <label id="part"></label>
-                         </li>
-                         <li>
-                             <label><strong>Liga: </strong></label>
-                             <label id="lig"></label>
-                         </li>
-                         <li>
-                             <button type="submit">Aceptar</button>
-                             <button type="button" id="cancelar">Cancelar</button>
-                         </li>
-                     </ul>
-                </div>
+                
                  <ul>
                     Datos Apostador:
                      <li>
@@ -67,7 +36,8 @@ require_once('gestionDB.php');
                      </li>
                      
                      <li><div id="loadingPartido" >
-                         <select name="partidos" id="partidos">
+                        <label>Partido: </label>
+                         <select name="partidos" id="partidos" required>
 <!--                         se cargaran los option desde php-->
                          </select>
                          </div>
@@ -92,7 +62,7 @@ require_once('gestionDB.php');
                      </li>
                      <li>
                          <label>Liga Torneo: </label>
-                         <input list="liga" name="liga" id="ligaselect">
+                         <input list="liga" name="liga" id="ligaselect" required>
                          <datalist id="liga">
                              <!--<option value="liga1">-->
                              <?php
@@ -107,7 +77,7 @@ require_once('gestionDB.php');
                      <li>
                          <label id=equipoApuesta>Equipo apuesta: </label>
 <!--                         insertar codigo php desde ajax-->
-                         <select name="equipoApostado" id="equipoApostado">
+                         <select name="equipoApostado" id="equipoApostado" required>
 
                         <div id="opciones">
                             
@@ -120,7 +90,7 @@ require_once('gestionDB.php');
 
                      <input type="text" name='equipoapuesta' id="equipoapuesta" class="inputs">
                  </div>
-                 <button id="enviar" type="button">Enviar Apuesta</button>
+                 <button id="enviar" type="submit">Enviar Apuesta</button>
              </form> 
           </center>
       </body>

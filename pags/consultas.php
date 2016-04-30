@@ -33,7 +33,7 @@ function cmbpartidos(){
         $nomEquiB = nomEquipo($nomEquiB,$enlace);
         $nomLiga = nomLiga($nomLiga,$enlace);
         
-        $res.="<option value='".$idP."'>".$nomEquiA." VS ".$nomEquiB."-".$hora."</option>";
+        $res.="<option value='".$idP."'>".$nomEquiA." VS ".$nomEquiB." - ".$hora."</option>";
     }
     connectionClose($enlace);
     $res.= "<option value='--otro--'>--otro--</option>";
