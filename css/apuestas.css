@@ -1,6 +1,6 @@
 #divPartidos{
     display: none;
 }
-.visiblePartido{
+.visible{
     display: inherit !important;
 }

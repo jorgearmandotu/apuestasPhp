@@ -22,6 +22,27 @@ require_once('gestionDB.php');
                          </li>
                          <li>
                              <label><strong>CC: </strong></label>
+                             <label id="ced"></label>
+                         </li>
+                         <li>
+                             <label><strong>Valor Apostado: </strong></label>
+                             <label id="val"></label>
+                         </li>
+                         <li>
+                             <label><strong>Fecha Partido: </strong></label>
+                             <label id="fech"></label>
+                         </li>
+                         <li>
+                         <label><strong>Partido Y hora: </strong></label>
+                         <label id="part"></label>
+                         </li>
+                         <li>
+                             <label><strong>Liga: </strong></label>
+                             <label id="lig"></label>
+                         </li>
+                         <li>
+                             <button type="submit">Aceptar</button>
+                             <button type="button" id="cancelar">Cancelar</button>
                          </li>
                      </ul>
                 </div>
@@ -37,7 +58,7 @@ require_once('gestionDB.php');
                      </li>
                      <li>
                          <label>$ valor: </label>
-                         <input type="number" name="valor" required maxlength='6'>
+                         <input type="number" name="valor" required maxlength='6' id="valor">
                      </li>
                      Datos partido
                      <li>
@@ -65,13 +86,13 @@ require_once('gestionDB.php');
                                          <option value="equipo2">equipo2</option>
                                      </datalist>
                                  </li>
-                                 <li><label>HORA: </label><input type="time" name="hora"> </li>
+                                 <li><label>HORA: </label><input type="time" name="hora" id="hora"> </li>
                              </ul>
                          </div>
                      </li>
                      <li>
                          <label>Liga Torneo: </label>
-                         <input list="liga" name="liga">
+                         <input list="liga" name="liga" id="ligaselect">
                          <datalist id="liga">
                              <!--<option value="liga1">-->
                              <?php
@@ -99,7 +120,7 @@ require_once('gestionDB.php');
 
                      <input type="text" name='equipoapuesta' id="equipoapuesta" class="inputs">
                  </div>
-                 <button id="enviar">Enviar Apuesta</button>
+                 <button id="enviar" type="button">Enviar Apuesta</button>
              </form> 
           </center>
       </body>
