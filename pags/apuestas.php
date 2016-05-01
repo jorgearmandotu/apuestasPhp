@@ -24,7 +24,7 @@ require_once 'validaciones.php';
                   </script>";
                   ?></stron></strong></label>
              <form method="post" action="ingresoApuesta.php" id='formularioApuesta' onsubmit="return confirmar()">
-                <div id="saldos">
+                <div id="saldos"><!--se usa para la validacion en java script-->
                     <input type="text" id="saldo" name="saldo">
                 </div>
                  <ul>

@@ -75,7 +75,10 @@ function ingresarApuesta(){
     $idEquipoApostado = equipo($equipoA,$enlace);
     $idligaApuesta = idliga($liga,$enlace);
     $saldo = saldo($enlace,$_SESSION['id']);
-    ingresoApuesta($enlace,$nombreA,$cedulaA,$valorA,$idAsesor,$partido,$idEquipoApostado,$idligaApuesta,$saldo);
+    // el id de partido debe sacarse desde aqui despues de ser ingresado
+   if(saldo>=$valorA) {ingresoApuesta($enlace,$nombreA,$cedulaA,$valorA,$idAsesor,$partido,$idEquipoApostado,$idligaApuesta,$saldo);}else{
+       echo('<script type="text/javascript">alert("saldo insuficiente")</script>');
+   }
     connectionClose($enlace);
     header('location: asesor.php');
     //el id del partido sera el value de los datos del combo
