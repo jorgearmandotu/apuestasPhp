@@ -34,6 +34,9 @@ function buscarLiga($liga){
     return $id;
 }
 function buscarPartido($fechaPartido,$horaP,$idequipoA,$idequipoB,$idliga){
+    $enlace = connectionDB();
+    $id = idpartido($enlace,$fechaPartido,$horaP,$idequipoA,$idequipoB,$idliga);
+    return $id;
     
 }
 function ingresarApuesta(){
@@ -49,7 +52,7 @@ function ingresarApuesta(){
     $equipoApostado = strip_tags($_POST["equipoapuesta"]);
     //$saldo = strip_tags($_POST['saldo']);
     $idAsesor = $_SESSION['id'];
-    
+    echo($partido);
     //validar y agregar partido
     if($partido == '--otro--'){
         //validar equipos
@@ -81,9 +84,9 @@ function ingresarApuesta(){
        echo('<script type="text/javascript">alert("saldo insuficiente")</script>');
    }
     connectionClose($enlace);
-    header('location: asesor.php');
+    //header('location: asesor.php');
     //el id del partido sera el value de los datos del combo
-    /*$saldodisp=$saldo;
+    $saldodisp=$saldo;
     $saldodisp-=$valorA;
     echo("datos");
     echo('nombre: '.$nombreA.'<br>'.
@@ -100,7 +103,7 @@ function ingresarApuesta(){
         'resta: '.$saldodisp).'<br>'.
         'idequipoapuesta: '.$idEquipoApostado.'<br>'.
         'id liga apuesta: '.$idligaApuesta.'<br>'.
-        'id asesor: '.$idAsesor;*/
+        'id asesor: '.$idAsesor;
 }
 
 ingresarApuesta();

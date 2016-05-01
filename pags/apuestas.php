@@ -58,14 +58,28 @@ require_once 'validaciones.php';
                                  <li><label>Equipo A: </label>
                                      <input list="equipos" name="equipoA" id="otroequipo1">
                                      <datalist id="equipos">
-                                         <option value="equipo1">equipo 1</option>
+                                         
+                                         <?php
+                                         $enlace = connectionDB();
+                                         $listEquipo = equipos($enlace);
+                                         connectionClose($enlace);
+                                         
+                                         foreach($listEquipo as $v){
+                                             echo('<option>'.$v.'</option>');
+                                         }
+                                         
+                                         ?>
                                      </datalist>
                                  </li>
                              
                                  <li><label>Equipo B: </label>
                                      <input list="equipos" name="equipoB" id="otroequipo2">
                                      <datalist id="equipos">
-                                         <option value="equipo2">equipo2</option>
+                                         <?php
+                                         foreach($listEquipo as $v){
+                                             echo('<option>'.$v.'</option>');
+                                         }
+                                         ?>
                                      </datalist>
                                  </li>
                                  <li><label>HORA: </label><input type="time" name="hora" id="hora"> </li>

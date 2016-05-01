@@ -1,5 +1,13 @@
 
 $(document).ready(function() {
+    $().ajaxStart(function() {
+        $('#loading').show();
+        $('#result').hide();
+    }).ajaxStop(function() {
+        $('#loading').hide();
+        $('#result').fadeIn('slow');
+    });
+    
     function cargarpartidosnulos(){
                 $.ajax({
             type: 'POST',
@@ -13,15 +21,10 @@ $(document).ready(function() {
                 $('#equipoApostado').html("<option value='seleccion'>selecione equipo</option>");
         $('#saldo').val(sal);
     }
+    
     cargarpartidosnulos();
     
-    $().ajaxStart(function() {
-        $('#loading').show();
-        $('#result').hide();
-    }).ajaxStop(function() {
-        $('#loading').hide();
-        $('#result').fadeIn('slow');
-    });
+    
     //detecta el cambio ed comobox partidos y asigna valor a input o habilita el ingreso de nuevo partido
     $('select#partidos').on('change',function(){
         var val = $(this).val();

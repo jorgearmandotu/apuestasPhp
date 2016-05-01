@@ -153,9 +153,13 @@ function nomLiga($id,$enl){
     return $nom;
 }
 //busca un partido y retorna id del mismo
-function idpartido($fechaPartido,$horaP,$idequipoA,$idequipoB,$idliga){
-    $sql = "SELECT ID FROM partidos WHERE FECHA='".$fechaPartido."' AND EQUIPOA='".$idequipoA."'";
+function idpartido($enl,$fechaPartido,$horaP,$idequipoA,$idequipoB,$idliga){
+    $sql = "SELECT ID FROM partidos WHERE FECHA='".$fechaPartido."' AND EQUIPOA='".$idequipoA."' AND EQUIPOB = '".$idequipoB."' AND LIGA='".$idliga."';";
     $id=null;
+    $result = $enl->query($sql)or die ("error al conectar con DB idPartidos");
+    if($row=$result->fetch_assoc()){
+        $id=$row['ID'];
+    }
     return $id;
 }
 //ingreso de liga nueva recibe nombre
@@ -177,6 +181,7 @@ function ingresoPartido($fechaPartido,$hora,$idequipoA,$idequipoB,$idliga,$enl){
         exit();
     }
 }
+//retorna un array de todas las ligas registrada
 function ligas($enl){
     $sql = 'SELECT NOMBRE FROM ligas ORDER BY NOMBRE;';
     $result = $enl->query($sql)or die('error al consutar BD');
@@ -188,6 +193,19 @@ function ligas($enl){
     }
     return $arr;
 }
+//retorna listado de equipos
+function equipos($enl){
+    $sql='SELECT NOMBRE FROM equipos ORDER BY NOMBRE';
+    $result = $enl->query($sql)or die("error al cosultar DB");
+    $arr = array();
+    $i=0;
+    while($row=$result->fetch_assoc()){
+        $arr[$i]=$row['NOMBRE'];
+        $i++;
+    }
+    return $arr;
+}
+
 function partidos($enl,$fecha){
     $sql = "SELECT ID,EQUIPOA,EQUIPOB,LIGA,DATE_FORMAT(HORA, '%T') AS HORAP FROM partidos WHERE FECHA='$fecha';";
     $result = $enl->query($sql)or die('error al consulta DB');
