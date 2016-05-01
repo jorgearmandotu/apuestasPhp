@@ -82,7 +82,7 @@ require_once 'validaciones.php';
                                          ?>
                                      </datalist>
                                  </li>
-                                 <li><label>HORA: </label><input type="time" name="hora" id="hora"> </li>
+                                 <li><label>HORA COLOMBIA: </label><input type="time" name="hora" id="hora"> </li>
                              </ul>
                          </div>
                      </li>

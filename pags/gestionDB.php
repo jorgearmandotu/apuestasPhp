@@ -271,4 +271,13 @@ function ingresoApuesta($enl,$nomApost,$ccApost,$valor,$idAsesor,$idPart,$idEqui
         $enl->rollBack();
     }
 }
+function fechahoraPartido($enl,$id){
+    $sql="SELECT HORA FROM partidos WHERE ID='".$id."';";
+    $result= $enl->query($sql)or die("Error al consultar DB");
+    $hora=0;
+    if($row=$result->fetch_assoc()){
+        $hora=$row['HORA'];
+    }
+    return $hora;
+}
 ?>

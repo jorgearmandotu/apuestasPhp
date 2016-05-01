@@ -1,6 +1,8 @@
 <?php
 require_once('gestionDB.php');
-require_once 'validaciones.php';
+require_once('validaciones.php');
+require_once('lib/carbon.php');
+
     validarAsesor();
 
 //funcion para ingresar una apuesta
@@ -53,6 +55,15 @@ function ingresarApuesta(){
     //$saldo = strip_tags($_POST['saldo']);
     $idAsesor = $_SESSION['id'];
     echo($partido);
+    //operando con fecha y hora
+    $timezone = new datetimezone('America/Lima');
+    $carbon = new \Carbon\Carbon();
+    $date = $carbon->now();
+    echo($date.'<br>');
+    $datepermitida = $date->subMinutes(5);
+    echo($date.'<br>'.$datepermitida.'<br>');
+    
+    
     //validar y agregar partido
     if($partido == '--otro--'){
         //validar equipos
@@ -62,6 +73,7 @@ function ingresarApuesta(){
        //ingresar datos de partido
         ingresarPartido($fechaPartido,$horaP,$idequipoA,$idequipoB,$idliga);
         $partido = buscarPartido($fechaPartido,$horaP,$idequipoA,$idequipoB,$idliga);
+        
     }else{
         //se recupera datos de partido existente
         // consulta SELECT ID,EQUIPOA,EQUIPOB,LIGA FROM partidos WHERE FECHA='2016-04-29'
@@ -78,13 +90,17 @@ function ingresarApuesta(){
     $idEquipoApostado = equipo($equipoA,$enlace);
     $idligaApuesta = idliga($ligaP,$enlace);
     $saldo = saldo($enlace,$_SESSION['id']);
+    
+    $horaPartidoDB= fechahoraPartido($enlace,$partido);
+    echo("fecha y hora partido ".$horaPartidoDB.'<br>');
     // el id de partido debe sacarse desde aqui despues de ser ingresado
    if($saldo >= $valorA)
    {ingresoApuesta($enlace,$nombreA,$cedulaA,$valorA,$idAsesor,$partido,$idEquipoApostado,$idligaApuesta,$saldo);}else{
        echo('<script type="text/javascript">alert("saldo insuficiente")</script>');
    }
     connectionClose($enlace);
-    //header('location: asesor.php');
+    
+   // header('location: asesor.php');
     //el id del partido sera el value de los datos del combo
     $saldodisp=$saldo;
     $saldodisp-=$valorA;
