@@ -48,7 +48,7 @@ function ingresarApuesta(){
     $horaP = strip_tags($_POST['hora']);
     $equipoApostado = strip_tags($_POST["equipoapuesta"]);
     //$saldo = strip_tags($_POST['saldo']);
-    $idAsesor = $_SESSION['ID'];
+    $idAsesor = $_SESSION['id'];
     
     //validar y agregar partido
     if($partido == '--otro--'){
@@ -73,10 +73,11 @@ function ingresarApuesta(){
     }
     $enlace = connectionDB();
     $idEquipoApostado = equipo($equipoA,$enlace);
-    $idligaApuesta = idliga($liga,$enlace);
+    $idligaApuesta = idliga($ligaP,$enlace);
     $saldo = saldo($enlace,$_SESSION['id']);
     // el id de partido debe sacarse desde aqui despues de ser ingresado
-   if(saldo>=$valorA) {ingresoApuesta($enlace,$nombreA,$cedulaA,$valorA,$idAsesor,$partido,$idEquipoApostado,$idligaApuesta,$saldo);}else{
+   if($saldo >= $valorA)
+   {ingresoApuesta($enlace,$nombreA,$cedulaA,$valorA,$idAsesor,$partido,$idEquipoApostado,$idligaApuesta,$saldo);}else{
        echo('<script type="text/javascript">alert("saldo insuficiente")</script>');
    }
     connectionClose($enlace);
