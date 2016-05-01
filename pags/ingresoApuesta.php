@@ -47,7 +47,7 @@ function ingresarApuesta(){
     $equipoB = strip_tags($_POST['equipoB']);
     $horaP = strip_tags($_POST['hora']);
     $equipoApostado = strip_tags($_POST["equipoapuesta"]);
-    $saldo = strip_tags($_POST['saldo']);
+    //$saldo = strip_tags($_POST['saldo']);
     $idAsesor = $_SESSION['ID'];
     
     //validar y agregar partido
@@ -74,10 +74,12 @@ function ingresarApuesta(){
     $enlace = connectionDB();
     $idEquipoApostado = equipo($equipoA,$enlace);
     $idligaApuesta = idliga($liga,$enlace);
+    $saldo = saldo($enlace,$_SESSION['id']);
+    ingresoApuesta($enlace,$nombreA,$cedulaA,$valorA,$idAsesor,$partido,$idEquipoApostado,$idligaApuesta,$saldo);
     connectionClose($enlace);
-    if(ingresoApuesta($enlace,$nombreA,$cedulaA,$valorA,$idAsesor,$partido,$idEquipoApostado,$idligaApuesta,$saldo))
+    header('location: asesor.php');
     //el id del partido sera el value de los datos del combo
-    $saldodisp=$saldo;
+    /*$saldodisp=$saldo;
     $saldodisp-=$valorA;
     echo("datos");
     echo('nombre: '.$nombreA.'<br>'.
@@ -93,7 +95,8 @@ function ingresarApuesta(){
         'saldo : '.$saldo.'<br>'.
         'resta: '.$saldodisp).'<br>'.
         'idequipoapuesta: '.$idEquipoApostado.'<br>'.
-        'id liga apuesta: '.$idligaApuesta;
+        'id liga apuesta: '.$idligaApuesta.'<br>'.
+        'id asesor: '.$idAsesor;*/
 }
 
 ingresarApuesta();
