@@ -60,8 +60,9 @@ function ingresarApuesta(){
     $carbon = new \Carbon\Carbon();
     $date = $carbon->now();
     echo($date.'<br>');
-    $datepermitida = $date->subMinutes(5);
-    echo($date.'<br>'.$datepermitida.'<br>');
+    
+    /*$datepermitida = $date->subMinutes(5);
+    echo($date.'<br>'.$datepermitida.'<br>');*/
     
     
     //validar y agregar partido
@@ -93,6 +94,9 @@ function ingresarApuesta(){
     
     $horaPartidoDB= fechahoraPartido($enlace,$partido);
     echo("fecha y hora partido ".$horaPartidoDB.'<br>');
+    $carbon = new \Carbon\Carbon();
+    $horavalida=$horaPartido->subMinutes(5);
+    
     // el id de partido debe sacarse desde aqui despues de ser ingresado
    if($saldo >= $valorA)
    {ingresoApuesta($enlace,$nombreA,$cedulaA,$valorA,$idAsesor,$partido,$idEquipoApostado,$idligaApuesta,$saldo);}else{
