@@ -109,9 +109,11 @@ function ingresarApuesta(){
     // el id de partido debe sacarse desde aqui despues de ser ingresado
    if($saldo >= $valorA){
        if($d>$dActual){
-       if(ingresoApuesta($enlace,$nombreA,$cedulaA,$valorA,$idAsesor,$partido,$idEquipoApostado,$idligaApuesta,$saldo)){
+      $enlace=connectionDB(); if(ingresoApuesta($enlace,$nombreA,$cedulaA,$valorA,$idAsesor,$partido,$idEquipoApostado,$idligaApuesta,$saldo)){
+          connectionClose($enlace);
            header('location: asesor.php');
        }
+           connectionClose($enlace);
         }else{
            echo('<script type="text/javascript">alert("No es posible hacer apuestas a un partido que ha iniciado")</script>');
        }
