@@ -85,7 +85,11 @@ function confirmar(){
             alert("verifique que todos los campos esten llenos")
             return false;
         }
+    }else if(valor<5000 || valor>300000){
+        alert('Las apuestas deben ser de un minimo de $5000 y maximo de $300000');
+        return false;
     }
+    
     if(equipo=='seleccion'){
         alert('Seleccione equipo a apostar');
         return false;

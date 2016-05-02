@@ -1,3 +1,10 @@
+<!DOCTYPE HTML>
+<html lang="es">
+   <head>
+       <meta charset="utf-8">
+       <title>asesor</title>
+   </head>
+    <body>
 <?php
 require_once('gestionDB.php');
 require_once('validaciones.php');
@@ -54,15 +61,8 @@ function ingresarApuesta(){
     $equipoApostado = strip_tags($_POST["equipoapuesta"]);
     //$saldo = strip_tags($_POST['saldo']);
     $idAsesor = $_SESSION['id'];
-    echo($partido);
+
     //operando con fecha y hora
-    $timezone = new datetimezone('America/Lima');
-    $carbon = new \Carbon\Carbon();
-    $date = $carbon->now();
-    echo($date.'<br>');
-    
-    /*$datepermitida = $date->subMinutes(5);
-    echo($date.'<br>'.$datepermitida.'<br>');*/
     
     
     //validar y agregar partido
@@ -93,39 +93,63 @@ function ingresarApuesta(){
     $saldo = saldo($enlace,$_SESSION['id']);
     
     $horaPartidoDB= fechahoraPartido($enlace,$partido);
-    echo("fecha y hora partido ".$horaPartidoDB.'<br>');
-    $carbon = new \Carbon\Carbon();
-    $horavalida=$horaPartido->subMinutes(5);
+    connectionClose($enlace);
+    //echo("fecha y hora partido ".$horaPartidoDB.'<br>');
+    
+    //obtenr fecha y hora partido y se resta 5 minutos 
+    //se establece la zona horaia primeramente
+    date_default_timezone_set('America/Lima');
+    //se comvierte cadena a tipo atetime y se resta 5 minutos
+    $d = new datetime($horaPartidoDB);
+    $d->modify('-5 minutes');
+   // $d = $d->format('Y-m-d H:i:s');//formatea a cadena el date time
+    //captura la fehca y hora actual
+    $dActual= new datetime();
     
     // el id de partido debe sacarse desde aqui despues de ser ingresado
-   if($saldo >= $valorA)
-   {ingresoApuesta($enlace,$nombreA,$cedulaA,$valorA,$idAsesor,$partido,$idEquipoApostado,$idligaApuesta,$saldo);}else{
+   if($saldo >= $valorA){
+       if($d>$dActual){
+       if(ingresoApuesta($enlace,$nombreA,$cedulaA,$valorA,$idAsesor,$partido,$idEquipoApostado,$idligaApuesta,$saldo)){
+           header('location: asesor.php');
+       }
+        }else{
+           echo('<script type="text/javascript">alert("No es posible hacer apuestas a un partido que ha iniciado")</script>');
+       }
+    }
+    else{
        echo('<script type="text/javascript">alert("saldo insuficiente")</script>');
+        exit;
    }
-    connectionClose($enlace);
     
-   // header('location: asesor.php');
+    
+    
     //el id del partido sera el value de los datos del combo
-    $saldodisp=$saldo;
-    $saldodisp-=$valorA;
-    echo("datos");
-    echo('nombre: '.$nombreA.'<br>'.
-     ' cedula: '.$cedulaA.'<br>'.
-    ' valor: '.$valorA.'<br>'.
-    ' fechaP: '.$fechaPartido.'<br>'.
-    'liga: '.$ligaP.'<br>'.
-    'partido: '.$partido.'<br>'.
-    'equipoA: '.$equipoA.'<br>'.
-    'equipoB: '.$equipoB.'<br>'.
-    '$hora: '.$horaP.'<br>'.
-    'equipo apostado: '.$equipoApostado.'<br>'.
-        'saldo : '.$saldo.'<br>'.
-        'resta: '.$saldodisp).'<br>'.
-        'idequipoapuesta: '.$idEquipoApostado.'<br>'.
-        'id liga apuesta: '.$idligaApuesta.'<br>'.
-        'id asesor: '.$idAsesor;
+//    $saldodisp=$saldo;
+//    $saldodisp-=$valorA;
+//    echo("datos");
+//    echo('nombre: '.$nombreA.'<br>'.
+//     ' cedula: '.$cedulaA.'<br>'.
+//    ' valor: '.$valorA.'<br>'.
+//    ' fechaP: '.$fechaPartido.'<br>'.
+//    'liga: '.$ligaP.'<br>'.
+//    'partido: '.$partido.'<br>'.
+//    'equipoA: '.$equipoA.'<br>'.
+//    'equipoB: '.$equipoB.'<br>'.
+//    '$hora: '.$horaP.'<br>'.
+//    'equipo apostado: '.$equipoApostado.'<br>'.
+//        'saldo : '.$saldo.'<br>'.
+//        'resta: '.$saldodisp).'<br>'.
+//        'idequipoapuesta: '.$idEquipoApostado.'<br>'.
+//        'id liga apuesta: '.$idligaApuesta.'<br>'.
+//        'id asesor: '.$idAsesor;
 }
 
 ingresarApuesta();
 
 ?>
+
+<center>
+        <a href="apuestas.php">Realizar apuestas</a>
+    <center>
+    </body>
+</html>
