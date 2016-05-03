@@ -14,7 +14,8 @@ require_once 'validaciones.php';
           <link rel="stylesheet" href="../css/apuestas.css">
       </head>  
       <body>
-          <center>
+          <div>
+             
               <label><strong>Saldo Disponible: </strong><stron><?php  
                   $enlace = connectionDB();
                   $saldoA = saldo($enlace,$_SESSION['id']);
@@ -23,11 +24,14 @@ require_once 'validaciones.php';
                   var sal=".$saldoA.";
                   </script>";
                   ?></stron></strong></label>
-             <form method="post" action="ingresoApuesta.php" id='formularioApuesta' onsubmit="return confirmar()">
+             <form method="post" action="ingresoApuesta.php" id='formularioApuesta' onsubmit="return confirmar2()">
+               <div id="confirm">
+                 <!--venta de confirmacion-->
+                 </div>
                 <div id="saldos"><!--se usa para la validacion en java script-->
                     <input type="text" id="saldo" name="saldo">
                 </div>
-                 <ul>
+                 <ul id="formulario">
                     Datos Apostador:
                      <li>
                          <label>CC: </label>
@@ -110,15 +114,18 @@ require_once 'validaciones.php';
                         </div>
                          </select>
                      </li>
+                     <li>
+                          <button id="enviar" type="button">Enviar Apuesta</button>
+                     </li>
                  </ul>
                  <div id="inputs">
                       <input type='text' name='partido' id="partidoselecionado" class="inputs">
 
                      <input type="text" name='equipoapuesta' id="equipoapuesta" class="inputs">
                  </div>
-                 <button id="enviar" type="submit">Enviar Apuesta</button>
+                
              </form> 
-          </center>
+          </div>
       </body>
       <script src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
       <script src="../js/apuestas.js"></script>

@@ -13,7 +13,7 @@ require_once('lib/carbon.php');
     validarAsesor();
 
 //funcion para ingresar una apuesta
-function ingresarPartido($fechaPartido,$hora,$idequipoA,$idequipoB,$idliga){
+/*function ingresarPartido($fechaPartido,$hora,$idequipoA,$idequipoB,$idliga){
     $enlace = connectionDB();
     ingresoPartido($fechaPartido,$hora,$idequipoA,$idequipoB,$idliga,$enlace);
     connectionClose($enlace);
@@ -41,7 +41,7 @@ function buscarLiga($liga){
     }
     connectionClose($enlace);
     return $id;
-}
+}*/
 function buscarPartido($fechaPartido,$horaP,$idequipoA,$idequipoB,$idliga){
     $enlace = connectionDB();
     $id = idpartido($enlace,$fechaPartido,$horaP,$idequipoA,$idequipoB,$idliga);
@@ -68,11 +68,11 @@ function ingresarApuesta(){
     //validar y agregar partido
     if($partido == '--otro--'){
         //validar equipos
-        $idequipoA = ingresarEquipo($equipoA);
+        /*$idequipoA = ingresarEquipo($equipoA);
         $idequipoB = ingresarEquipo($equipoB);
         $idliga = buscarLiga($ligaP);
        //ingresar datos de partido
-        ingresarPartido($fechaPartido,$horaP,$idequipoA,$idequipoB,$idliga);
+        ingresarPartido($fechaPartido,$horaP,$idequipoA,$idequipoB,$idliga);*/
         $partido = buscarPartido($fechaPartido,$horaP,$idequipoA,$idequipoB,$idliga);
         
     }else{
@@ -101,7 +101,7 @@ function ingresarApuesta(){
     date_default_timezone_set('America/Lima');
     //se comvierte cadena a tipo atetime y se resta 5 minutos
     $d = new datetime($horaPartidoDB);
-    $d->modify('-5 minutes');
+    $d->modify('-1 minutes');
    // $d = $d->format('Y-m-d H:i:s');//formatea a cadena el date time
     //captura la fehca y hora actual
     $dActual= new datetime();
@@ -146,7 +146,6 @@ function ingresarApuesta(){
 }
 
 ingresarApuesta();
-
 ?>
 
 <center>
