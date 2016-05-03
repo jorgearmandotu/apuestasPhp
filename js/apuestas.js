@@ -65,7 +65,7 @@ $(document).ready(function() {
                             })
     $('#otroequipo2').change(function(){
              var rival = $('#otroequipo1').val();        
-        $('#equipoApostado').html("<option value='seleccion'>selecione equipo</option><option>"+rival+"</option><option>"+$(this).val()+"</option>");
+        $('#equipoApostado').html("<option value='seleccion'>selecione equipo</option><option>"+rival+"</option><option>"+$(this).val()+"</option><option value='X'>Enpate</option>");
                             });
     $('#enviar').click(function(){
         if(confirmar()){

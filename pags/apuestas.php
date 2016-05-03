@@ -16,7 +16,7 @@ require_once 'validaciones.php';
       <body>
           <div>
              
-              <label><strong>Saldo Disponible: </strong><stron><?php  
+              <label><strong>Saldo Disponible: </strong><strong><?php  
                   $enlace = connectionDB();
                   $saldoA = saldo($enlace,$_SESSION['id']);
                   echo "<strong>$ ".$saldoA."</strong>";

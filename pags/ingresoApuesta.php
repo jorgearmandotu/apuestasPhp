@@ -17,7 +17,7 @@ require_once('lib/carbon.php');
     $enlace = connectionDB();
     ingresoPartido($fechaPartido,$hora,$idequipoA,$idequipoB,$idliga,$enlace);
     connectionClose($enlace);
-}
+}*/
 //valida existencia o ingresa equipo retorna ID de equipo
 function ingresarEquipo($equipo){
     $enlace = connectionDB();
@@ -41,7 +41,7 @@ function buscarLiga($liga){
     }
     connectionClose($enlace);
     return $id;
-}*/
+}
 function buscarPartido($fechaPartido,$horaP,$idequipoA,$idequipoB,$idliga){
     $enlace = connectionDB();
     $id = idpartido($enlace,$fechaPartido,$horaP,$idequipoA,$idequipoB,$idliga);
@@ -68,11 +68,11 @@ function ingresarApuesta(){
     //validar y agregar partido
     if($partido == '--otro--'){
         //validar equipos
-        /*$idequipoA = ingresarEquipo($equipoA);
+        $idequipoA = ingresarEquipo($equipoA);
         $idequipoB = ingresarEquipo($equipoB);
         $idliga = buscarLiga($ligaP);
        //ingresar datos de partido
-        ingresarPartido($fechaPartido,$horaP,$idequipoA,$idequipoB,$idliga);*/
+        //ingresarPartido($fechaPartido,$horaP,$idequipoA,$idequipoB,$idliga);*/
         $partido = buscarPartido($fechaPartido,$horaP,$idequipoA,$idequipoB,$idliga);
         
     }else{
@@ -88,7 +88,12 @@ function ingresarApuesta(){
         connectionClose($enlace);
     }
     $enlace = connectionDB();
-    $idEquipoApostado = equipo($equipoApostado,$enlace);
+    if($equipoApostado!='X'){
+        $idEquipoApostado = equipo($equipoApostado,$enlace);
+    }else{
+        $idEquipoApostado = $equipoApostado;
+    }
+    
     $idligaApuesta = idliga($ligaP,$enlace);
     $saldo = saldo($enlace,$_SESSION['id']);
     
