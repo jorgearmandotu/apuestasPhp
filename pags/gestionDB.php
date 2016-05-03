@@ -280,4 +280,21 @@ function fechahoraPartido($enl,$id){
     }
     return $hora;
 }
+function listAsesores($enl){
+    $sql= "SELECT NOMBRE,SALDO,IDASESOR FROM saldos JOIN persona WHERE(IDASESOR=ID);";
+    $ase = array();
+    $result = $enl->query($sql)or die('error al consulta DB');
+    $i=0;
+    //0,0 nombre 0,1 saldo
+    while($row=$result->fetch_assoc()){
+        $l=0;
+        $ase[$i][$l] = $row['NOMBRE'];
+        $l++;
+        $ase[$i][$l] = $row['SALDO'];
+        $l++;
+        $ase[$i][$l] = $row['IDASESOR'];
+        $i++;
+    }
+    return $ase;
+}
 ?>
