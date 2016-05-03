@@ -44,6 +44,7 @@ $(document).ready(function() {
     })
     
     $('#fecha').change(function(){
+        $('#divPartidos').removeClass('visible');
                 $.ajax({
             type: 'POST',
             url:'consultas.php',
@@ -75,6 +76,11 @@ $(document).ready(function() {
                 $('#confirm').html(data);
                 $('#formulario').addClass('novisible');
                 $('#confirm').addClass('visible');
+                document.getElementById('partidos').options.selectedIndex = 0;
+                
+                $('#otroequipo1').val("");
+                $('#otroequipo2').val("");
+                $('#divPartidos').removeClass('visible');
             }
         })}
     });
@@ -122,5 +128,9 @@ function confirmar2(){
     }
     $('#confirm').removeClass('visible');
     $('#formulario').removeClass('novisible');
+     document.getElementById('partidos').options.selectedIndex = 0;
+     $('#otroequipo1').val("");
+     $('#otroequipo2').val("");
+     $('#divPartidos').removeClass('visible');
     return false;
 }

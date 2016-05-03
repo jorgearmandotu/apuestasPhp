@@ -24,12 +24,26 @@
             $l=0;
             echo("<tr><td>".$ase[$i][$l]."</td>");
             $l++;
-            echo("<td>".$ase[$i][$l]."</td><td><td><input type='text'><button class='saldo'>Agregar saldo</button>");
-            $l++;
-            echo("<label>".$ase[$i][$l]."</label></tr>");
+            echo("<td>".$ase[$i][$l]."</td></tr>");
+           
         }
         ?>
         
     </table>
+    
+        <form  method="POST" action="lib/ingresoSaldo.php" id="ingresar">
+        <select id='asesores' name='asesores'>
+            <?php
+        echo'<option value="seleccion">Seleccione asesor</option>';
+            for($i=0;$i<count($ase);$i++){
+                echo('<option value="'.$ase[$i][2].'">'.$ase[$i][0].'</option>');
+            }
+            ?>
+    </select>
+        <label>Saldo: </label><input type="text" name="saldo"><button id="agregar">Agregar Saldo</button>
+        </form>
+        
+        <a href="administrador.php">Inicio</a>
+        
     </body>
 </html>

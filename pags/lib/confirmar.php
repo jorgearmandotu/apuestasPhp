@@ -49,7 +49,7 @@ function buscarPartido($fechaPartido,$horaP,$idequipoA,$idequipoB,$idliga){
     
 }
 
-    if($partido == '--otro--'){
+if($partido == '--otro--'){
         //validar equipos
         $idequipoA = ingresarEquipo($equipoA);
         $idequipoB = ingresarEquipo($equipoB);
@@ -72,7 +72,7 @@ function buscarPartido($fechaPartido,$horaP,$idequipoA,$idequipoB,$idliga){
             $B = nomEquipo($B,$enlace);
         }
         connectionClose($enlace);
-    $partido=$A." VS ".$B." - ".$horapartido;
+    $partidotext=$A." VS ".$B." - ".$horapartido;
     
 ?>
 <ul>
@@ -90,7 +90,7 @@ function buscarPartido($fechaPartido,$horaP,$idequipoA,$idequipoB,$idliga){
     </li>
     <li>
         <label><strong>partido: </strong></label>
-        <label><?php echo $partido; ?></label>
+        <label><?php echo $partidotext; ?></label>
     </li>
     <li>
         <label><strong>Apuesta por: </strong></label>

@@ -88,7 +88,7 @@ function ingresarApuesta(){
         connectionClose($enlace);
     }
     $enlace = connectionDB();
-    $idEquipoApostado = equipo($equipoA,$enlace);
+    $idEquipoApostado = equipo($equipoApostado,$enlace);
     $idligaApuesta = idliga($ligaP,$enlace);
     $saldo = saldo($enlace,$_SESSION['id']);
     
