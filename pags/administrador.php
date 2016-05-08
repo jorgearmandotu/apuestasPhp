@@ -22,6 +22,9 @@
             <li>
                 <a href="ingresoPartidos.php">Ingresar Partidos</a>
             </li>
+            <li>
+                <a href="actualizarcuotas.php">actualizar cuotas de partidos</a>
+            </li>
         </ul>
     </body>
 </html>

@@ -205,7 +205,7 @@ function equipos($enl){
 }
 
 function partidos($enl,$fecha){
-    $sql = "SELECT ID,EQUIPOA,EQUIPOB,LIGA,DATE_FORMAT(HORA, '%T') AS HORAP FROM partidos WHERE FECHA='$fecha';";
+    $sql = "SELECT ID,EQUIPOA,EQUIPOB,LIGA,CUOTA1,CUOTAX,CUOTA2, DATE_FORMAT(HORA, '%T') AS HORAP FROM partidos WHERE FECHA='$fecha';";
     $result = $enl->query($sql)or die('error al consulta DB');
     $arr = array();
     $i=0;
@@ -220,6 +220,12 @@ function partidos($enl,$fecha){
         $arr[$i][$l]=$row['LIGA'];
         $l++;
         $arr[$i][$l]=$row['HORAP'];
+        $l++;
+        $arr[$i][$l]=$row['CUOTA1'];
+        $l++;
+        $arr[$i][$l]=$row['CUOTAX'];
+        $l++;
+        $arr[$i][$l]=$row['CUOTA2'];
         $i++;
         
     }
@@ -294,5 +300,14 @@ function listAsesores($enl){
         $i++;
     }
     return $ase;
+}
+//actualizar cuotas
+function actualizarcuotas($enl,$idp,$cuota1,$cuota2,$cuotax){
+    $sql="UPDATE partidos SET CUOTA1='".$cuota1."', CUOTA2='".$cuota2."', CUOTAX='".$cuotax."' WHERE ID='".$idp."'";
+    if($enl->query($sql)){
+        return true;
+    }else{
+        return false;
+    }
 }
 ?>

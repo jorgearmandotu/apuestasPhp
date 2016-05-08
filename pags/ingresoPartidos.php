@@ -60,6 +60,7 @@ require_once 'gestionDB.php';
                 </li>
             </ul>
         </form>
+        <a href="administrador.php">Inicio</a>
     </center>
     
     
