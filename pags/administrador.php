@@ -11,9 +11,17 @@
        <title>administrador</title>
    </head>
     <body>
-        <h1>bienbenidos administradores</h1>
-        <a href="ingresoAsesores.php">agregar asesores</a>
-        <br>
-        <a href="generarSaldo.php">Agregar saldo a asesores</a>
+        <h1>administradores</h1>
+        <ul>
+            <li>
+                <a href="ingresoUsuarios.php">agregar usuarios</a>
+            </li>
+            <li>
+                <a href="generarSaldo.php">Agregar saldo a asesores</a>
+            </li>
+            <li>
+                <a href="ingresoPartidos.php">Ingresar Partidos</a>
+            </li>
+        </ul>
     </body>
 </html>

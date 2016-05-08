@@ -59,15 +59,13 @@ function verificarLogin($user,$enl,$pass){
 }
 
 //ingresa nuevo personal
-function ingresarPersona($nombre,$apellido,$cedula,$telefono,$email,$usuario,$password,$enl){
+function ingresarPersona($nombre,$apellido,$cedula,$telefono,$email,$usuario,$password,$tipo,$enl){
     
    //encripta la contraseña
     $contrasena = password_hash($password, PASSWORD_DEFAULT);
-    /*START TRANSACTION;
-INSERT INTO ligas VALUES('liga portuguesa',null);
-ROLLBACK;*/
+    
     $sql = "
-    INSERT INTO persona VALUES('".$cedula."','".$nombre."','".$apellido."','".$telefono."','".$email."','ASESOR','".$contrasena."','".$usuario."',NULL);";
+    INSERT INTO persona VALUES('".$cedula."','".$nombre."','".$apellido."','".$telefono."','".$email."','".$tipo."','".$contrasena."','".$usuario."',NULL);";
     //$enl->query($sql) or die("error al ingresar datos en DB");
     if(!$enl->query($sql)){
         echo('<script type="text/javascript">alert("ocurrio un error buebe a intentarlo, si el problema persiste intenta en cerrar sesion e iniciarla de nuevo")</script>');
@@ -132,7 +130,7 @@ function ingresoEquipos($nombre,$enl){
         exit();
     }
 }
-//busca liga si existe retorna id de la liga
+//busca liga si existe retorna id de la liga recibe nombre
 function idliga($liga,$enl){
     $idliga=null;
     $sql = "SELECT ID FROM ligas WHERE NOMBRE like '%".$liga."%'";
@@ -172,10 +170,10 @@ function ingresoLiga($liga, $enl){
     }
 }
 //ingreso partido
-function ingresoPartido($fechaPartido,$hora,$idequipoA,$idequipoB,$idliga,$enl){
-    $horadepartido = $fechaPartido." ".$hora.":00";
+function ingresoPartido($fecha,$hora,$local,$visitante,$idliga,$cuota1,$cuota2,$cuotaX,$enl){
+    $horadepartido = $fecha." ".$hora.":00";
 //    echo('<script type="text/javascript">alert("'.$horadepartido.'")</script>');
-    $sql = "INSERT INTO partidos VALUES('".$fechaPartido."','".$horadepartido."','".$idequipoA."','".$idequipoB."','".$idliga."',NULL,NULL);";
+    $sql = "INSERT INTO partidos VALUES('".$fecha."','".$horadepartido."','".$local."','".$visitante."','".$idliga."',NULL,'".$cuota1."','".$cuotaX."','".$cuota2."',NULL);";
     if(!$enl->query($sql)){
         echo('<script type="text/javascript">alert("ocurrio un error buebe a intentarlo, si el problema persiste intenta en cerrar sesion e iniciarla de nuevo")</script>');
         exit();
@@ -281,7 +279,7 @@ function fechahoraPartido($enl,$id){
     return $hora;
 }
 function listAsesores($enl){
-    $sql= "SELECT NOMBRE,SALDO,IDASESOR FROM saldos JOIN persona WHERE(IDASESOR=ID);";
+    $sql= "SELECT NOMBRE,SALDO,IDASESOR FROM saldos JOIN persona WHERE(IDASESOR=ID AND TIPO='ASESOR');";
     $ase = array();
     $result = $enl->query($sql)or die('error al consulta DB');
     $i=0;

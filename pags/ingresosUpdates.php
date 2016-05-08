@@ -3,15 +3,18 @@ require_once('gestionDB.php');
 require_once('validaciones.php');
 
 //funcion q llama las demas funciones que necesita paa ingresar al personal
+
+
 function ingresarAsesor(){
-    $nombre=strip_tags($_POST['nombre']);
-    $apellido=strip_tags($_POST['apellido']);
+    $nombre=limpiarcadenas($_POST['nombre']);
+    $apellido=limpiarcadenas($_POST['apellido']);
     $cedula=strip_tags($_POST['cedula']);
     $telefono=strip_tags($_POST['telefono']);
     $email=strip_tags($_POST['email']);
-    $usuario=strip_tags($_POST['usuario']);
-    $idUsuario = strtoupper($usuario);
+    $idUsuario = limpiarcadenas($_POST['usuario']);
     $password=strip_tags($_POST['password']);
+    $passverificar=strip_tags($_POST['passwordverificacion']);
+    $tipo=strip_tags($_POST['tipo']);
     
     $enlace=connectionDB();
     if($enlace!=null){
@@ -25,9 +28,14 @@ function ingresarAsesor(){
             return false;
             connectionClose($enlace);
             exit();
+        }elseif($password!=$passverificar){
+            echo (' <script type="text/javascript">alert("las contraseñas no coinciden")</script>');
+            return false;
+            connectionClose($enlace);
+            exit();
         }
         else{
-            ingresarPersona($nombre,$apellido,$cedula,$telefono,$email,$idUsuario,$password,$enlace);
+            ingresarPersona($nombre,$apellido,$cedula,$telefono,$email,$idUsuario,$password,$tipo,$enlace);
             ConnectionClose($enlace);
             return true;
         }
