@@ -57,7 +57,28 @@ function verificarLogin($user,$enl,$pass){
         exit();
     }
 }
-
+//verificar password
+function verificarpassword($enl,$id,$pass){
+    $sql="SELECT CONTRASENA from persona WHERE ID='".$id."';";
+    $result = $enl->query($sql) or die('error al acceder a DB');
+    if($row=$result->fetch_assoc()){
+        if(password_verify($pass,$row['CONTRASENA'])){
+            return true;
+        }else{
+            return false;
+        }
+    }
+}
+//cambiar contraseña
+function cambiarpassword($enl,$pass,$id){
+    $pass = password_hash($pass, PASSWORD_DEFAULT);
+    $sql= "UPDATE persona SET CONTRASENA='".$pass."' WHERE ID='".$id."';";
+    if($enl->query($sql)){
+        return true;
+    }else{
+        return false;
+    }
+}
 //ingresa nuevo personal
 function ingresarPersona($nombre,$apellido,$cedula,$telefono,$email,$usuario,$password,$tipo,$enl){
     

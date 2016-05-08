@@ -17,9 +17,8 @@
                   <label>Seleccione una fecha: </label>
                   <input type="date" name="fecha" id="fecha" <?php date_default_timezone_set('America/Lima');
                 $dActual= new datetime();
-                $dActual= date('y-m-d');
+                $dActual= date('Y-m-d');
                 echo 'value = "'.$dActual.'"';
-                echo '<script>alert("'.$dActual.'")</script>'        
                 ?>>
                  
 <!--

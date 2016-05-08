@@ -19,7 +19,7 @@ for($i=0;$i<count($partidos);$i++){
     $nomLiga = nomLiga($nomLiga,$enlace);
         
         $res.="<li><form method='POST' id='miniformulario' action='lib/cuotas.php'>
-        <input type='text' name='id' value='".$idP."' class='ids'><label'>".$nomEquiA." VS ".$nomEquiB." - ".$hora." : </label><label> 1: </label><input type='number' step='any' class='cuotas' value='".$local."' name='cuota1'><label> X: </label><input type='number' step='any' class='cuotas' value='".$empate."' name='cuotax'><label> 2: </label><input type='number' step='any' class='cuotas' value='".$visitante."'  name='cuota2'><button type='input'>ACTUALIZAR</button></form></li>";
+        <input type='text' name='id' value='".$idP."' class='ids'><label'>".$nomEquiA." VS ".$nomEquiB." - ".$hora." : </label><label> 1: </label><input type='number' step='any' class='cuotas' value='".$local."' name='cuota1' min='0'><label> X: </label><input type='number' step='any' class='cuotas' value='".$empate."' name='cuotax' min='0'><label> 2: </label><input type='number' step='any' class='cuotas' value='".$visitante."'  name='cuota2' min='0'><button type='input'>ACTUALIZAR</button></form></li>";
 }
 connectionClose($enlace);
 

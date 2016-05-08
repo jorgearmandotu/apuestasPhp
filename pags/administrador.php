@@ -25,6 +25,12 @@
             <li>
                 <a href="actualizarcuotas.php">actualizar cuotas de partidos</a>
             </li>
+            <li>
+                <a href="cambiarContrasena.php">cambiar contraseña</a>
+            </li>
+            <li>
+                <a href="salir.php">cerrar sesion</a>
+            </li>
         </ul>
     </body>
 </html>

@@ -46,11 +46,11 @@
                     </li>
                      <li>
                          <label>Contraseña: </label>
-                         <input type="password" name="password" required maxlength="8" placeholder="maximo 8 caracteres">
+                         <input type="password" name="password" required maxlength="16" placeholder="maximo 16 caracteres">
                      </li>
                      <li>
                          <label>vuelva a ingresar contraseña: </label>
-                         <input type="password" name="passwordverificacion" required maxlength="8" placeholder="maximo 8 caracteres">
+                         <input type="password" name="passwordverificacion" required maxlength="16" placeholder="maximo 16 caracteres">
                      </li>
                      <li>
                          <button type="submit" name="ingresar" id="btnIngAsesor">Ingresar</button>
