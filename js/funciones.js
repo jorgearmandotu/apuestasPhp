@@ -19,6 +19,19 @@ $(document).ready(function() {
         return false;
     }); 
     
+    $('#formularioPartido').submit(function() {
+        $.ajax({
+            type: 'POST',
+            url: '../pags/lib/ingresarPartido.php',
+            data: $(this).serialize(),
+            success: function(data) {
+                $('#formularioPartido')[0].reset();
+                $('#result').html(data);
+            }
+        })
+        return false;
+    }); 
+    
 });
 
 /*function enviar(){

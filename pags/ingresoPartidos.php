@@ -45,15 +45,15 @@ require_once 'gestionDB.php';
                 CUOTAS:
                 <li>
                     <label>Cuota local (1)</label>
-                    <input type="number" required maxlength="4" name="cuota1">
+                    <input type="number" step="any" required maxlength="4" name="cuota1">
                 </li>
                 <li>
                     <label>Cuota visitante (2)</label>
-                    <input type="number" required max="4" name="cuota2">
+                    <input type="number" step="any" required max="4" name="cuota2">
                 </li>
                 <li>
                     <label>Cuota empate (X)</label>
-                    <input type="number" required maxlength="4" name="cuotaX">
+                    <input type="number" step="any" required maxlength="4" name="cuotaX">
                 </li>
                 <li>
                     <button type="submit" id="enviar">AGREGAR</button> 
@@ -64,4 +64,6 @@ require_once 'gestionDB.php';
     
     
     </body>
+    <script src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
+    <script src="../js/funciones.js"></script>
 </html>

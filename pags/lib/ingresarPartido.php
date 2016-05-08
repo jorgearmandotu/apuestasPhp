@@ -1,6 +1,8 @@
 <?php
-require_once 'gestionDB.php';
-require_once 'validaciones.php';
+require_once '../gestionDB.php';
+require_once '../validaciones.php';
+
+validarAdmin();
 
 function ingresarPartido(){
     $local=limpiarcadenas($_POST['equipoA']);
@@ -16,16 +18,27 @@ function ingresarPartido(){
     if($enlace != null){
         /*buscar id de liga*/
         $idliga=idliga($liga,$enlace);
+        $idpartido=null;
+        if($idliga!=null){
+            $idpartido = idpartido($enlace,$fecha,$hora,$local,$visitante,$idliga);
+        }
         if($idliga==null){
              echo (' <script type="text/javascript">alert("ocurrio un problema en liga seleccionada")</script>');
             return false;
             connectionClose($enlace);
             exit();
+        }else if($idpartido!=null){
+             echo (' <script type="text/javascript">alert("partido ya existe verifique datos")</script>');
+            return false;
+            connectionClose($enlace);
+            exit();
         }else{
-            ingresoPartido($fecha,$hora,$local,$visitante,$idliga,$cuota1,$cuota2,$cuotaX,$enl)
+            ingresoPartido($fecha,$hora,$local,$visitante,$idliga,$cuota1,$cuota2,$cuotaX,$enlace);
+            connectionClose($enlace);
+            echo (' <script type="text/javascript">alert("ingreso exitoso")</script>');
         }
         
-    }
+    } 
 }
-
+ingresarPartido();
 ?>
