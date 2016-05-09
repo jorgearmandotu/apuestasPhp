@@ -11,5 +11,6 @@
     <body>
         <h1>bienbenidos asesores</h1>
         <a href='apuestas.php'>Realizar apuesta</a>
+        <a href='cambiarContrasena.php'>Cambiar contraseña</a>
     </body>
 </html>
