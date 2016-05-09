@@ -6,9 +6,36 @@
 <html lang="es">
       <head>
           <meta charset = "utf-8">
+          <meta name="language" content="ES">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+        <meta name="description" content="apuestas san juan de pasto,bookiesport,apuestas de futbol, nariño colombia apuestas"/>
+        <meta name="keywords" content="sitio para hacer apuestas,bookiesport, apuestas de futbol, san juan de pasto apuestas"/>
+        <meta name="author" content="Reon-Soluciones_Web"/>
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
           <title>agregarClientes</title>
+          <link rel="stylesheet" href="../css/normailze.min.css">
+        <link rel="stylesheet" href="../css/estilos.css">
       </head>
       <body>
+          <div id='contenedor'>
+          <header id="cabecera">
+             <div id="logo">
+                 
+             </div>
+                 <ul>
+                     <li class="logoutico">
+                       <a href="salir.php">
+                           <img src="../images/Bookiesport_Usuario.png" alt="usuario"></a>
+                     </li>
+                     <li class="logout">
+                         <a href="salir.php">Salir</a>
+                     </li>
+                     <li>
+                         <a href="administrador.php">Inicio</a>
+                     </li>
+                 </ul>
+          </header>
+          <div id="contenido">
           <center>
              
               <form method="post" action="ingresosUpdates.php" id="formularioAsesor" onsubmit="return confirmar()">
@@ -59,7 +86,8 @@
                   <div id='result'></div>
               </form>
           </center>
-          <a href="administrador.php">Inicio</a>
+              </div>
+          </div>
       </body>
       <script src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
       <script src="../js/funciones.js"></script>
