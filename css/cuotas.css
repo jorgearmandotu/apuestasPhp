@@ -1,0 +1,35 @@
+#fecha{
+    border-radius: 1em;
+}
+.ids{
+    display: none;
+}
+#selecfecha label{
+    color: #ffbf00;
+}
+table td{
+    padding: 0.3em;
+}
+table label{
+    color: #ffbf00;
+}
+table input{
+    max-width: 50px;
+    text-align: center;
+    border-radius: .5em;
+}
+table button{
+    border-radius: .5em;
+    background: #ffbf00;
+    font-weight: bold;
+    color: #000;
+}
+table, td, tr{
+/*    border: 1px solid #000;*/
+    text-align: center;
+    font-family: sans-serif;
+    margin: 0.5em;
+}
+.tdpartido{
+    text-align: justify;
+}
