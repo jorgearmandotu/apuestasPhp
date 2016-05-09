@@ -9,7 +9,15 @@ require_once 'gestionDB.php';
 <html lang="=es">
    <head>
        <meta charset="utf-8">
+       <meta name="language" content="ES">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+        <meta name="description" content="apuestas san juan de pasto,bookiesport,apuestas de futbol, nariño colombia apuestas"/>
+        <meta name="keywords" content="sitio para hacer apuestas,bookiesport, apuestas de futbol, san juan de pasto apuestas"/>
+        <meta name="author" content="Reon-Soluciones_Web"/>
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
        <title>ingresar partidos</title>
+       <link rel="stylesheet" href="../css/normailze.min.css">
+        <link rel="stylesheet" href="../css/estilosform.css">
    </head>
     <body>
     <center>

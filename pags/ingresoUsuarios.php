@@ -14,7 +14,7 @@
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
           <title>agregarClientes</title>
           <link rel="stylesheet" href="../css/normailze.min.css">
-        <link rel="stylesheet" href="../css/estilos.css">
+        <link rel="stylesheet" href="../css/estilosform.css">
       </head>
       <body>
           <div id='contenedor'>
@@ -22,7 +22,7 @@
              <div id="logo">
                  
              </div>
-                 <ul>
+                 <ul id="cabecera">
                      <li class="logoutico">
                        <a href="salir.php">
                            <img src="../images/Bookiesport_Usuario.png" alt="usuario"></a>
@@ -30,8 +30,8 @@
                      <li class="logout">
                          <a href="salir.php">Salir</a>
                      </li>
-                     <li>
-                         <a href="administrador.php">Inicio</a>
+                     <li id="salirico">
+                         <a href="administrador.php"><img src='../images/Bookiesport_Inicio.png' alt="Inicio"></a>
                      </li>
                  </ul>
           </header>
@@ -87,6 +87,16 @@
               </form>
           </center>
               </div>
+              <footer>
+              <img src="../images/Bookiesport_Logo.png">
+              <p>
+                  BOOKIESPORT<br>
+                  empresa dedicada a las apuestas
+                  visitanos en 
+                  tel:
+                  
+              </p>
+          </footer>
           </div>
       </body>
       <script src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
