@@ -20,6 +20,25 @@ require_once 'gestionDB.php';
         <link rel="stylesheet" href="../css/estilosform.css">
    </head>
     <body>
+    <div id='contenedor'>
+          <header id="cabecera">
+             <div id="logo">
+                 
+             </div>
+                 <ul id="cabecera">
+                     <li class="logoutico">
+                       <a href="salir.php">
+                           <img src="../images/Bookiesport_Usuario.png" alt="usuario"></a>
+                     </li>
+                     <li class="logout">
+                         <a href="salir.php">Salir</a>
+                     </li>
+                     <li id="salirico">
+                         <a href="administrador.php"><img src='../images/Bookiesport_Inicio.png' alt="Inicio"></a>
+                     </li>
+                 </ul>
+          </header>
+          <div id="contenido">
     <center>
         <form method="post" action="lib/ingresarPartido.php" id="formularioPartido">
             <ul>
@@ -68,9 +87,19 @@ require_once 'gestionDB.php';
                 </li>
             </ul>
         </form>
-        <a href="administrador.php">Inicio</a>
     </center>
-    
+        </div>
+        <footer>
+              <img src="../images/Bookiesport_Logo.png">
+              <p>
+                  BOOKIESPORT<br>
+                  empresa dedicada a las apuestas
+                  visitanos en 
+                  tel:
+                  
+              </p>
+          </footer>
+        </div>
     
     </body>
     <script src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
