@@ -1,16 +1,18 @@
 <?php
-<?php
-    require_once 'validaciones.php';
+require_once 'validaciones.php';
 require_once 'gestionDB.php';
+
 validarAsesor();
 $idp=null;
 
 $apuesta=null;
 
-if($_POST['idP']!=null){
+function crrearapuesta(){
+    if($_POST['id']!=null){
     echo 'hola';
-    $idp = $_POST['idP'];
-    $apuesta = $_POST['apuesta'];
+    $idp = $_POST['id'];
+    $cuota = $_POST['cuota'];
+}
 }
     
 ?>
@@ -18,6 +20,8 @@ if($_POST['idP']!=null){
 <html lang="es">
 <head>
           <meta charset = "utf-8">
+          <script src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
+          <script src="../js/realizarapuesta.js"></script>
           </head>
       <body>
       <ul>
@@ -38,6 +42,11 @@ if($_POST['idP']!=null){
         
          
           </div>
-      
+          <?php
+          if ($a!=null){
+              echo '<h1>id partido '.$a[0][0].' cuota '.$a[0][1].'</h1>';
+          }
+          
+          ?>
 </body>
 </html>

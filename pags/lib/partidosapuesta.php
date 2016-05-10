@@ -28,24 +28,35 @@ for($i=0;$i<count($partidos);$i++){
     $visitante=$partidos[$i][7];
     $nomLiga = nomLiga($nomLiga,$enlace);
         
+//    la siguiente cadena crea los botones y el formulario q se reenvia a la misma paguina en viando los datos cuando se ha seleccionado halgo el botn apostar y los inputs con la id del partido y el valor de la cuota seleccionada no deben ser visibles se hace con css
         $res.="<div class='fila'>
-           
-            <form method='POST' id='miniformulario' action='lib/cuotas.php'>
+            <form method='POST' id='miniformulario' action='lib/gestionApuesta.php'>
         <div class='celda1'>
         <input type='text' name='id' value='".$idP."' class='ids'>
-        
-            <label>".$nomEquiA."_vs_".$nomEquiB." - ".$hora." </label>
+        <input type='text' name='cuota' value='".$local."' class='cuota'>
+         <label>".$nomEquiA."_vs_".$nomEquiB." - ".$hora." </label>
         </div>
         <div class='celda2'>
-            <button type='button' class='cuotas' value='".$local."' name='cuota1'>".$local."</button>
-        </div>
+            <button type='submit' class='cuotas' value='".$local."' name='cuota1' id='btn'>".$local."</button>
+            </form>
+       
+       </div>
        <div class='celda3'>
-            <button type='button' class='cuotas' value='".$empate."' name='cuotax'>".$empate."</button>
+       <form method='POST' id='miniformulario' action='lib/gestionApuesta.php'>
+       <input type='text' name='id' value='".$idP."' class='ids'>
+        <input type='text' name='cuota' value='".$empate."' class='cuota'>
+            <button type='submit' class='cuotas' value='".$empate."' name='cuotax'>".$empate."</button>
+            </form>
         </div>
+        
         <div class='celda4'>
-        <<button type='button' class='cuotas' value='".$visitante."'  name='cuota2'>".$visitante."</button>
-        </div>
+         <form method='POST' id='miniformulario' action='lib/gestionApuesta.php'>
+       <input type='text' name='id' value='".$idP."' class='ids'>
+        <input type='text' name='cuota' value='".$visitante."' class='cuota'>
+        <button type='submit' class='cuotas' value='".$visitante."'  name='cuota2'>".$visitante."</button>
         </form>
+        </div>
+        
         
               </div>";
 }
