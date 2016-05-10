@@ -15,6 +15,11 @@ require_once 'gestionDB.php';
         <meta name="keywords" content="sitio para hacer apuestas,bookiesport, apuestas de futbol, san juan de pasto apuestas"/>
         <meta name="author" content="Reon-Soluciones_Web"/>
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <script src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
+        <script src="../js/modernizr-custom.js"></script>
+          <script src="../js/jquery-ui.min.js"></script>
+          <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+          <script src="../js/funciones.js"></script>
        <title>ingresar partidos</title>
        <link rel="stylesheet" href="../css/normailze.min.css">
         <link rel="stylesheet" href="../css/estilosform.css">
@@ -102,6 +107,5 @@ require_once 'gestionDB.php';
         </div>
     
     </body>
-    <script src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
-    <script src="../js/funciones.js"></script>
+    
 </html>

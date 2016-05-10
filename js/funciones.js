@@ -33,23 +33,18 @@ $(document).ready(function() {
     }); 
     
 });
-
-/*function enviar(){
-        $.ajax({
-            type: 'POST',
-            url: 'ingresosUpdates.php',
-            data: $('#formularioAsesor').serialize(),
-            success: function(data) {
-                $('#formularioAsesor')[0].reset();
-                $('#result').html(data);
-            }
-        })
-        return false;
-    }
-function confirmar(){
-        if(confirm("desea enviar esto?")){
-           return true;
-            enviar();
-           }
-        
-    }*/
+var initDatepicker = function() {
+    $('input[type=date]')
+        .each(function() {
+        var $input = $(this);
+        $input.datepicker({
+            minDate: $input.attr('min'),
+            maxDate: $input.attr('max'),
+            dateFormat: 'yy-mm-dd'
+        });
+    });
+};
+ 
+if(!Modernizr.inputtypes.date){
+    $(document).ready(initDatepicker);
+};
