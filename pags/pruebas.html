@@ -39,7 +39,7 @@
                  </ul>
           </header>
           <div id="contenido">
-      <div id='center'>
+      <center>
           <ul>
               <li id="selecfecha">
                   <label>Seleccione una fecha: </label>
@@ -58,14 +58,40 @@
               </li>
           </ul>
           <h2>Listado de partidos</h2>
-          <div id="listpartidos">
-            
-             
-<!--               se inserta desde php cmbpartidos-->
-        
-         
-          </div>
+          <div id="listpartidosss">
+            <div class='fila'>
+                <div class="celda1">
+                    <label>partido - hora </label></div>
+                <div class="celda2">
+                    <label> 1 </label></div>
+                <div class='celda3'>
+                    <label> X </label></div>
+                <div class="celda4">
+                    <label> 2 </label></div>
               </div>
+              <div class="celda5"></div>
+          </div>
+<!--               se inserta desde php cmbpartidos-->
+        <li>
+            <form method='POST' id='miniformulario' action='lib/cuotas.php'>
+        
+        <input type='text' name='id' value='".$idP."' class='ids'>
+        
+            <label>".$nomEquiA."_ vs _ ".$nomEquiB." - ".$hora." </label>
+        
+            <input type='number' step='any' class='cuotas' value='".$local."' name='cuota1' min='0'>
+       
+            <input type='number' step='any' class='cuotas' value='".$empate."' name='cuotax' min='0'>
+       
+        <input type='number' step='any' class='cuotas' value='".$visitante."'  name='cuota2' min='0'>
+        
+            <button type='submit'>ACTUALIZAR</button>
+            
+        </form>
+        </li>
+         
+          </ul>
+      </center>
           </div>
            <footer>
               <img src="../images/Bookiesport_Logo.png">

@@ -2,34 +2,68 @@
     border-radius: 1em;
 }
 .ids{
-    display: none;
+    display: none !important; 
+    width: 10px;
+}
+#center{
+    max-width: 1000px;
+    margin: 0 auto;
 }
 #selecfecha label{
     color: #ffbf00;
 }
-table td{
-    padding: 0.3em;
+
+#center ul{
+    list-style: none;
+    margin: 0 auto;
+    text-align: center;
 }
-table label{
+#center h2{
+    text-align: center;
+    color: #fff;
+}
+#listpartidos{
+    width: 100%;
+    overflow: hidden;
+}
+.fila{
+    width: 1000px;
+    margin: 0 auto;
+}
+.celda1{
+    width: 500px;
+    height: 30px;
+    float: left;
+    margin: 4px;
+    vertical-align: middle;
+}
+.celda1 label{
+    position: relative;
+    top: 30%;
+}
+#encabezado{
+    text-align: center;
+}
+.celda2,.celda3,.celda4,.celda5{
+    float: left;
+    width: 50px;
+    height: 30px;
+    text-align: center;
+    margin: 4px;
+}
+.fila label{
     color: #ffbf00;
-}
-table input{
-    max-width: 50px;
-    text-align: center;
-    border-radius: .5em;
-}
-table button{
-    border-radius: .5em;
-    background: #ffbf00;
     font-weight: bold;
+}
+    
+
+.cuotas{
+    max-width: 40px;
+    border-radius: .5em;
+}
+.btn{
+    border-radius: 1em;
+    background: #ffbf00;
     color: #000;
-}
-table, td, tr{
-/*    border: 1px solid #000;*/
-    text-align: center;
-    font-family: sans-serif;
-    margin: 0.5em;
-}
-.tdpartido{
-    text-align: justify;
+    font-weight: bold;
 }
