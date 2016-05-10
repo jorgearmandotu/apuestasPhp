@@ -1,0 +1,99 @@
+html{
+    background-color: #363333;
+}
+#cabecera{
+    height: 7em;
+    border-bottom: 0.7em solid #000;
+    background: rgba(182,227,245,1);
+    background: -moz-linear-gradient(top, rgba(182,227,245,1) 0%, rgba(20,179,227,1) 17%, rgba(41,184,229,1) 50%, rgba(7,44,230,1) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(182,227,245,1)), color-stop(17%, rgba(20,179,227,1)), color-stop(50%, rgba(41,184,229,1)), color-stop(100%, rgba(7,44,230,1)));
+    background: -webkit-linear-gradient(top, rgba(182,227,245,1) 0%, rgba(20,179,227,1) 17%, rgba(41,184,229,1) 50%, rgba(7,44,230,1) 100%);
+    background: -o-linear-gradient(top, rgba(182,227,245,1) 0%, rgba(20,179,227,1) 17%, rgba(41,184,229,1) 50%, rgba(7,44,230,1) 100%);
+    background: -ms-linear-gradient(top, rgba(182,227,245,1) 0%, rgba(20,179,227,1) 17%, rgba(41,184,229,1) 50%, rgba(7,44,230,1) 100%);
+    background: linear-gradient(to bottom, rgba(182,227,245,1) 0%, rgba(20,179,227,1) 17%, rgba(41,184,229,1) 50%, rgba(7,44,230,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b6e3f5', endColorstr='#072ce6', GradientType=0 );
+}
+#cabecera ul{
+    list-style: none;
+}
+#logo{
+    background-image: url('../images/Bookiesport_Logo.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    width: 200px;
+    height: 100px;
+    float: left;
+    position: absolute;
+    right: 50em;
+    margin: 0.5em;;
+}
+.logout{
+    
+    border border-radius: 1.5em;
+}
+.logoutico{
+    float: right;
+}
+.logoutico img{
+    max-width: 80px;
+    position: absolute;
+    top: 2em;
+    right: 1.5em;
+}
+.logout a{
+    text-decoration: none;
+    width: 80px;
+    position: absolute;
+    top: 6.8em;
+    right: 1.5em;
+    text-align: center;
+    font-size: 11pt;
+    color: #fff;
+}
+footer{
+    max-width: 100%;
+    margin: 0 auto;
+     border-top: 0.7em solid #000;
+    border-bottom: 0.7em solid #000;
+    margin-top: 1em;
+    background: rgba(182,227,245,1);
+    background: -moz-linear-gradient(top, rgba(182,227,245,1) 0%, rgba(20,179,227,1) 17%, rgba(41,184,229,1) 50%, rgba(7,44,230,1) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(182,227,245,1)), color-stop(17%, rgba(20,179,227,1)), color-stop(50%, rgba(41,184,229,1)), color-stop(100%, rgba(7,44,230,1)));
+    background: -webkit-linear-gradient(top, rgba(182,227,245,1) 0%, rgba(20,179,227,1) 17%, rgba(41,184,229,1) 50%, rgba(7,44,230,1) 100%);
+    background: -o-linear-gradient(top, rgba(182,227,245,1) 0%, rgba(20,179,227,1) 17%, rgba(41,184,229,1) 50%, rgba(7,44,230,1) 100%);
+    background: -ms-linear-gradient(top, rgba(182,227,245,1) 0%, rgba(20,179,227,1) 17%, rgba(41,184,229,1) 50%, rgba(7,44,230,1) 100%);
+    background: linear-gradient(to bottom, rgba(182,227,245,1) 0%, rgba(20,179,227,1) 17%, rgba(41,184,229,1) 50%, rgba(7,44,230,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b6e3f5', endColorstr='#072ce6', GradientType=0 );
+}
+footer img{
+    max-width: 200px;
+}
+footer p{
+    float: right;
+    max-width: 300px;
+    color: #fff;
+}
+#contenido h1{
+    text-align: center;
+    color: #fff;
+}
+#contenido ul{
+    list-style: none;
+    font-size: 1.2em;
+    text-decoration: none;
+}
+#contenido ul li{
+    background: #ffbf00;
+    padding: 0.3em;
+    text-align: center;
+    margin: 1em;
+    border-radius: 2em;
+    width: 300px;
+    text-decoration: none;
+}
+#contenido ul li a{
+    text-decoration: none;
+    color: rgb(12, 39, 172);
+    font-weight: bold;
+}

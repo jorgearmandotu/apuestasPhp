@@ -19,24 +19,32 @@ $(document).ready(function() {
         return false;
     }); 
     
-});
-
-/*function enviar(){
+    $('#formularioPartido').submit(function() {
         $.ajax({
             type: 'POST',
-            url: 'ingresosUpdates.php',
-            data: $('#formularioAsesor').serialize(),
+            url: '../pags/lib/ingresarPartido.php',
+            data: $(this).serialize(),
             success: function(data) {
-                $('#formularioAsesor')[0].reset();
+                $('#formularioPartido')[0].reset();
                 $('#result').html(data);
             }
         })
         return false;
-    }
-function confirmar(){
-        if(confirm("desea enviar esto?")){
-           return true;
-            enviar();
-           }
-        
-    }*/
+    }); 
+    
+});
+var initDatepicker = function() {
+    $('input[type=date]')
+        .each(function() {
+        var $input = $(this);
+        $input.datepicker({
+            minDate: $input.attr('min'),
+            maxDate: $input.attr('max'),
+            dateFormat: 'yy-mm-dd'
+        });
+    });
+};
+ 
+if(!Modernizr.inputtypes.date){
+    $(document).ready(initDatepicker);
+};

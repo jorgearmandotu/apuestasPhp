@@ -44,7 +44,7 @@ function verificarLogin($user,$enl,$pass){
             if($_SESSION['tipo']=='ADMINISTRADOR'){
                 echo("<script>alert('admin');</script>");
                 header("location: administrador.php");
-            }elseif($_SESSION['tipo']=='ASESOR'){
+            }elseif($_SESSION['tipo']=='ASESOR' || $_SESSION['tipo']=='CLIENTE'){
                 echo("<script>alert('asesor');</script>");
             header("location: asesor.php");
             }
@@ -58,17 +58,36 @@ function verificarLogin($user,$enl,$pass){
         exit();
     }
 }
-
+//verificar password
+function verificarpassword($enl,$id,$pass){
+    $sql="SELECT CONTRASENA from persona WHERE ID='".$id."';";
+    $result = $enl->query($sql) or die('error al acceder a DB');
+    if($row=$result->fetch_assoc()){
+        if(password_verify($pass,$row['CONTRASENA'])){
+            return true;
+        }else{
+            return false;
+        }
+    }
+}
+//cambiar contraseña
+function cambiarpassword($enl,$pass,$id){
+    $pass = password_hash($pass, PASSWORD_DEFAULT);
+    $sql= "UPDATE persona SET CONTRASENA='".$pass."' WHERE ID='".$id."';";
+    if($enl->query($sql)){
+        return true;
+    }else{
+        return false;
+    }
+}
 //ingresa nuevo personal
-function ingresarPersona($nombre,$apellido,$cedula,$telefono,$email,$usuario,$password,$enl){
+function ingresarPersona($nombre,$apellido,$cedula,$telefono,$email,$usuario,$password,$tipo,$enl){
     
    //encripta la contraseña
     $contrasena = password_hash($password, PASSWORD_DEFAULT);
-    /*START TRANSACTION;
-INSERT INTO ligas VALUES('liga portuguesa',null);
-ROLLBACK;*/
+    
     $sql = "
-    INSERT INTO persona VALUES('".$cedula."','".$nombre."','".$apellido."','".$telefono."','".$email."','ASESOR','".$contrasena."','".$usuario."',NULL);";
+    INSERT INTO persona VALUES('".$cedula."','".$nombre."','".$apellido."','".$telefono."','".$email."','".$tipo."','".$contrasena."','".$usuario."',NULL);";
     //$enl->query($sql) or die("error al ingresar datos en DB");
     if(!$enl->query($sql)){
         echo('<script type="text/javascript">alert("ocurrio un error buebe a intentarlo, si el problema persiste intenta en cerrar sesion e iniciarla de nuevo")</script>');
@@ -133,7 +152,7 @@ function ingresoEquipos($nombre,$enl){
         exit();
     }
 }
-//busca liga si existe retorna id de la liga
+//busca liga si existe retorna id de la liga recibe nombre
 function idliga($liga,$enl){
     $idliga=null;
     $sql = "SELECT ID FROM ligas WHERE NOMBRE like '%".$liga."%'";
@@ -173,10 +192,10 @@ function ingresoLiga($liga, $enl){
     }
 }
 //ingreso partido
-function ingresoPartido($fechaPartido,$hora,$idequipoA,$idequipoB,$idliga,$enl){
-    $horadepartido = $fechaPartido." ".$hora.":00";
+function ingresoPartido($fecha,$hora,$local,$visitante,$idliga,$cuota1,$cuota2,$cuotaX,$enl){
+    $horadepartido = $fecha." ".$hora.":00";
 //    echo('<script type="text/javascript">alert("'.$horadepartido.'")</script>');
-    $sql = "INSERT INTO partidos VALUES('".$fechaPartido."','".$horadepartido."','".$idequipoA."','".$idequipoB."','".$idliga."',NULL,NULL);";
+    $sql = "INSERT INTO partidos VALUES('".$fecha."','".$horadepartido."','".$local."','".$visitante."','".$idliga."',NULL,'".$cuota1."','".$cuotaX."','".$cuota2."',NULL);";
     if(!$enl->query($sql)){
         echo('<script type="text/javascript">alert("ocurrio un error buebe a intentarlo, si el problema persiste intenta en cerrar sesion e iniciarla de nuevo")</script>');
         exit();
@@ -208,7 +227,7 @@ function equipos($enl){
 }
 
 function partidos($enl,$fecha){
-    $sql = "SELECT ID,EQUIPOA,EQUIPOB,LIGA,DATE_FORMAT(HORA, '%T') AS HORAP FROM partidos WHERE FECHA='$fecha';";
+    $sql = "SELECT ID,EQUIPOA,EQUIPOB,LIGA,CUOTA1,CUOTAX,CUOTA2, DATE_FORMAT(HORA, '%T') AS HORAP FROM partidos WHERE FECHA='$fecha';";
     $result = $enl->query($sql)or die('error al consulta DB');
     $arr = array();
     $i=0;
@@ -223,6 +242,12 @@ function partidos($enl,$fecha){
         $arr[$i][$l]=$row['LIGA'];
         $l++;
         $arr[$i][$l]=$row['HORAP'];
+        $l++;
+        $arr[$i][$l]=$row['CUOTA1'];
+        $l++;
+        $arr[$i][$l]=$row['CUOTAX'];
+        $l++;
+        $arr[$i][$l]=$row['CUOTA2'];
         $i++;
         
     }
@@ -280,5 +305,31 @@ function fechahoraPartido($enl,$id){
         $hora=$row['HORA'];
     }
     return $hora;
+}
+function listAsesores($enl){
+    $sql= "SELECT NOMBRE,SALDO,IDASESOR FROM saldos JOIN persona WHERE(IDASESOR=ID AND TIPO='ASESOR');";
+    $ase = array();
+    $result = $enl->query($sql)or die('error al consulta DB');
+    $i=0;
+    //0,0 nombre 0,1 saldo
+    while($row=$result->fetch_assoc()){
+        $l=0;
+        $ase[$i][$l] = $row['NOMBRE'];
+        $l++;
+        $ase[$i][$l] = $row['SALDO'];
+        $l++;
+        $ase[$i][$l] = $row['IDASESOR'];
+        $i++;
+    }
+    return $ase;
+}
+//actualizar cuotas
+function actualizarcuotas($enl,$idp,$cuota1,$cuota2,$cuotax){
+    $sql="UPDATE partidos SET CUOTA1='".$cuota1."', CUOTA2='".$cuota2."', CUOTAX='".$cuotax."' WHERE ID='".$idp."'";
+    if($enl->query($sql)){
+        return true;
+    }else{
+        return false;
+    }
 }
 ?>

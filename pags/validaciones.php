@@ -29,10 +29,10 @@ function validarcedula($cedula,$enlace){
     }else{return false;}
 }
 
-//limíar cadenas no se termino 
+//limíar cadenas y pasar a mayusculas
 function limpiarcadenas($cadena){
     $cadena=strip_tags($cadena);
-    $cadena=htmlentities($cadena);
-    return stripslashes($cadena);
+    $cadena=strtoupper($cadena);
+    return $cadena;
 }
 ?>
