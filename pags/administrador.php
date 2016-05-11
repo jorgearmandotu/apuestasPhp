@@ -59,6 +59,11 @@
                 <a href="aganadasbookie.php">Reporte Apuestas ganadas por  punto</a>
             </li>
             <li>
+
+                <a href="actualizarganador.php">Ingresar ganador de un partido</a>
+            </li>
+            <li>
+
                 <a href="salir.php">cerrar sesion</a>
             </li>
         </ul>
