@@ -26,9 +26,24 @@ $(document).ready(function(){
             url: 'lib/gestionApuesta.php',
             data: $(this).serialize(),
             success: function(data){
-                $("#datosapuesta").html(data);
+                $("#datosapuestas").html(data);
             }
         })
         return false;
     });
 });
+var initDatepicker = function() {
+    $('input[type=date]')
+        .each(function() {
+        var $input = $(this);
+        $input.datepicker({
+            minDate: $input.attr('min'),
+            maxDate: $input.attr('max'),
+            dateFormat: 'yy-mm-dd'
+        });
+    });
+};
+ 
+if(!Modernizr.inputtypes.date){
+    $(document).ready(initDatepicker);
+};

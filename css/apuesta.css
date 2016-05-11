@@ -1,3 +1,10 @@
+#center ul{
+    list-style: none;
+}
+#center label{
+    color: #ffbf00;
+    font-weight: bold;
+}
 #fecha{
     border-radius: 1em;
 }
@@ -30,12 +37,17 @@
     color: #000;
     font-weight: bold;
 }
-#datosapuesta{
+#datosapuestas{
     background-color: yellow;
+    border: 1px solid #fff;
 }
 button{
     border-radius: 1em;
     background: #ffbf00;
     color: #000;
     font-weight: bold;
+}
+#boton{
+    width: 400px;
+    text-align: center;
 }

@@ -21,12 +21,43 @@ function crrearapuesta(){
 <html lang="es">
 <head>
           <meta charset = "utf-8">
+          <meta name="language" content="ES">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+        <meta name="description" content="apuestas san juan de pasto,bookiesport,apuestas de futbol, nariño colombia apuestas"/>
+        <meta name="keywords" content="sitio para hacer apuestas,bookiesport, apuestas de futbol, san juan de pasto apuestas"/>
+        <meta name="author" content="Reon-Soluciones_Web"/>
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+         <title>Realizar apuestas</title>
           <script src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
-          <script src="../js/realizarapuesta.js"></script>
+          <script src="../js/modernizr-custom.js"></script>
+          <script src="../js/jquery-ui.min.js"></script>
+          <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
           <link rel="stylesheet" href="../css/normailze.min.css">
+          <script src="../js/realizarapuesta.js"></script>
+           <link rel="stylesheet" href="../css/estilosform.css">
           <link rel="stylesheet" href="../css/apuesta.css">
           </head>
       <body>
+      <div id='contenedor'>
+          <header id="cabecera">
+             <div id="logo">
+                 
+             </div>
+                 <ul id="cabecera">
+                     <li class="logoutico">
+                       <a href="salir.php">
+                           <img src="../images/Bookiesport_Usuario.png" alt="usuario"></a>
+                     </li>
+                     <li class="logout">
+                         <a href="salir.php">Salir</a>
+                     </li>
+                     <li id="salirico">
+                         <a href="asesor.php"><img src='../images/Bookiesport_Inicio.png' alt="Inicio"></a>
+                     </li>
+                 </ul>
+          </header>
+          <div id="contenido">
+          <div id='center'>
       <ul>
               <li id="selecfecha">
                   <label>Seleccione una fecha: </label>
@@ -38,47 +69,26 @@ function crrearapuesta(){
                  
               </li>
           </ul>
-      
       <div id="listpartidos">
             
-<!--
-             <div class='fila'>
-            <form method='POST' id='miniformulario' action='lib/gestionApuesta.php'>
-        <div class='celda1'>
-        <input type='hidden' name='id' value='".$idP."' class='ids'>
-         <label>".$nomEquiA."_vs_".$nomEquiB." - ".$hora." </label>
-        </div>
-        <div class='celda2'>
-            <input type='checkbox' class='cuotas' value='".$local."' name='cuota1' id='btn'>".$local."</input>
-            </form>
-       
-       </div>
-       <div class='celda3'>
-       <form method='POST' id='miniformulario' action='lib/gestionApuesta.php'>
-       <input type='hidden' name='id' value='".$idP."' class='ids'>
-        <input type='hidden' name='cuota' value='".$empate."' class='cuota'>
-            <input type='checkbox' class='cuotas' value='".$empate."' name='cuotax'>".$empate."</input>
-            </form>
-        </div>
-        
-        <div class='celda4'>
-         <form method='POST' id='miniformulario' action='lib/gestionApuesta.php'>
-       <input type='hidden' name='id' value='".$idP."' class='ids'>
-        <input type='hidden' name='cuota' value='".$visitante."' class='cuota'>
-        <input type='checkbox' class='cuotas' value='".$visitante."'  name='cuota2'>".$visitante."</input>
-        </form>
-        </div>
-        
-        
-              </div>
--->
+
          
           </div>
-          <div >
-              <p id='datosapuesta'>
+          <aside id="datosapuestas">
+              
+              </aside>
+              </div>
+          </div>
+              <footer>
+              <img src="../images/Bookiesport_Logo.png">
+              <p>
+                  BOOKIESPORT<br>
+                  empresa dedicada a las apuestas
+                  visitanos en 
+                  tel:
                   
               </p>
+          </footer>
           </div>
-          
 </body>
 </html>

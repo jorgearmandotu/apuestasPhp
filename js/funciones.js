@@ -48,3 +48,17 @@ var initDatepicker = function() {
 if(!Modernizr.inputtypes.date){
     $(document).ready(initDatepicker);
 };
+var initTimepicker = function() {
+    $('input[type=time')
+        .each(function() {
+        var $input = $(this);
+        $input.timepicker({
+            minDate: $input.attr('min'),
+            maxDate: $input.attr('max'),
+            dateFormat: 'yy-mm-dd'
+        });
+    });
+};
+if(!Modernizr.inputtypes.time){
+    $(document).ready(initTimepicker);
+};

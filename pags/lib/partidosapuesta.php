@@ -52,7 +52,9 @@ for($i=0;$i<count($partidos);$i++){
               </div>";
 }
 connectionClose($enlace);
-$res.="<button type='submit' id='apostar'>apostar</button>
+$res.="<div id='boton'>
+    <button type='submit' id='apostar'>apostar</button>
+    </div>
         </form>";
 echo $res;
 
