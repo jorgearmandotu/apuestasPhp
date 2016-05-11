@@ -7,15 +7,7 @@ $(document).ready(function() {
         $('#result').fadeIn('slow');
     });
     $('#formularioganador').submit(function() {
-        /*$.ajax({
-            type: 'POST',
-            url: 'actualizar.php',
-            data: $(this).serialize(),
-            success: function(data) {
-                $('#formularioganador')[0].reset();
-                $('#result').html(data);
-            }
-        })*/
+
         var $partido=$('#partido').val();
         //llenar equiposmpara apostar
         $("#equipo").load("../pags/actualizar.php",{idpartido:$partido});
