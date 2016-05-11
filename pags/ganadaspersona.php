@@ -42,20 +42,21 @@
     ?>
     <center>
         
-    <h2>Apuestas ganadas y perdidas por cada punto</h2>
-       <form method="post" id="apuesganada" action="aganadasbookie.php">
+    <h2>Mis apuestas ganadas y perdidas</h2>
+       <form method="post" id="apuesganada" action="ganadaspersona.php">
         <label>Fecha de inicio</label>
         <input type="date" name="fecha1" id="fecha1" required>
            <label>Fecha Fin</label>
         <input type="date" name="fecha2" id="fecha2" required>
         <button type="submit" id="button1">Buscar</button>
-        <a class="enlaceboton" href="pdf_aganadasbookie.php" target="_blank" id="pdf2">Exportar a PDF</a>
+        <a class="enlaceboton" href="pdf_ganadaspersona.php" target="_blank" id="pdf2">Exportar a PDF</a>
         <br>
         <br>
         <?php
            $enlace = connectionDB();
            $personaa=tpersona($enlace);
            for($j=0;$j<count($personaa);$j++) {
+               if($personaa[$j][1]==$idusuario){
                echo('<h3>Puesto de control '.$personaa[$j][0].'</h3>');
            
            echo('<table cellspacing="3" CELLPADDING="4" border="3">');
@@ -75,8 +76,8 @@
            $apuesta=apuestass($enlace,$fecha1,$fecha2);
            for($i=0;$i<count($apuesta);$i++) {
                $partido=equiposLigaPartido($enlace,$apuesta[$i][4]);
-               if($apuesta[$i][5]==$partido[4] and $apuesta[$i][3]==$personaa[$j][1]){
-           echo('<tr bgcolor="red">');
+               if($apuesta[$i][5]==$partido[4] and $apuesta[$i][3]==$idusuario){
+           echo('<tr bgcolor="green">');
                echo('<td>'.$apuesta[$i][0].'</th>');
                echo('<td>'.$apuesta[$i][1].'</td>');
                echo('<td>'.$apuesta[$i][2].'</td>');
@@ -94,8 +95,8 @@
                echo('</tr>');
                }
                
-               if($apuesta[$i][5]!=$partido[4] and $apuesta[$i][3]==$personaa[$j][1] and $partido[4]!=NULL){
-           echo('<tr bgcolor="green">');
+               if($apuesta[$i][5]!=$partido[4] and $apuesta[$i][3]==$idusuario and $partido[4]!=NULL){
+           echo('<tr bgcolor="red">');
                echo('<td>'.$apuesta[$i][0].'</th>');
                echo('<td>'.$apuesta[$i][1].'</td>');
                echo('<td>'.$apuesta[$i][2].'</td>');
@@ -114,6 +115,7 @@
                }
            }
                echo('</table>');
+           }
            }
            connectionClose($enlace);
            ?>
