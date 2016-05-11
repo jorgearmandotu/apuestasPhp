@@ -253,6 +253,17 @@ function partidos($enl,$fecha){
     }
     return $arr;
 }
+function nompartido($enl,$idp){
+    $sql = "SELECT ID,EQUIPOA,EQUIPOB,LIGA,CUOTA1,CUOTAX,CUOTA2, DATE_FORMAT(HORA, '%T') AS HORAP FROM partidos WHERE ID='".$idp."';";
+    $result = $enl->query($sql)or die("error al conectar DB");
+    $partido="";
+    while($row=$result->fetch_assoc()){
+        $partido.=$row['EQUIPOA']."_vs_";
+        $partido.=$row['EQUIPOB']." - ";
+        $partido.=$row['HORAP'];
+    }
+    return $partido;
+}
 function equiposLigaPartido($enl,$idP){
     $sql = "SELECT EQUIPOA,EQUIPOB,LIGA,DATE_FORMAT(HORA, '%T') AS HORAP FROM partidos WHERE ID='".$idP."'";
     $result = $enl->query($sql)or die("error al conectar a DB combosapuestas");

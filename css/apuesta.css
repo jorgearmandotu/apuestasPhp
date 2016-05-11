@@ -40,6 +40,8 @@
 #datosapuestas{
     background-color: yellow;
     border: 1px solid #fff;
+    position: fixed;
+    width: 200px;
 }
 button{
     border-radius: 1em;

@@ -20,7 +20,7 @@ $(document).ready(function(){
             }
         })
     });
-    $('#miniformulario').submit(function(){
+/*    $('#miniformulario').submit(function(){
         $.ajax({
             type: 'POST',
             url: 'lib/gestionApuesta.php',
@@ -30,7 +30,7 @@ $(document).ready(function(){
             }
         })
         return false;
-    });
+    });*/
 });
 var initDatepicker = function() {
     $('input[type=date]')

@@ -15,7 +15,7 @@ $partidos = partidos($enlace,$fecha);
                     <label> 2 </label></div>
               </div>
               <div class='celda5'></div>
-              <form method='POST' id='miniformulario' action=''>";
+              <form method='POST' id='miniformulario' action='lib/gestionApuesta.php'>";
 
 
 for($i=0;$i<count($partidos);$i++){
@@ -53,6 +53,7 @@ for($i=0;$i<count($partidos);$i++){
 }
 connectionClose($enlace);
 $res.="<div id='boton'>
+<input tipe='number' step='any' name='valorapuesta'>
     <button type='submit' id='apostar'>apostar</button>
     </div>
         </form>";

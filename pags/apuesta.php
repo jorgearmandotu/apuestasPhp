@@ -1,7 +1,7 @@
 <?php
 require_once 'validaciones.php';
 require_once 'gestionDB.php';
-require_once 'lib/gestionApuesta.php';
+/*require_once 'lib/gestionApuesta.php';*/
 
 validarAsesor();
 $idp=null;
@@ -74,9 +74,6 @@ function crrearapuesta(){
 
          
           </div>
-          <aside id="datosapuestas">
-              
-              </aside>
               </div>
           </div>
               <footer>
