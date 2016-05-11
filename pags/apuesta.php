@@ -23,6 +23,8 @@ function crrearapuesta(){
           <meta charset = "utf-8">
           <script src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
           <script src="../js/realizarapuesta.js"></script>
+          <link rel="stylesheet" href="../css/normailze.min.css">
+          <link rel="stylesheet" href="../css/apuesta.css">
           </head>
       <body>
       <ul>
@@ -72,8 +74,10 @@ function crrearapuesta(){
 -->
          
           </div>
-          <div id='datosapuesta'>
-              
+          <div >
+              <p id='datosapuesta'>
+                  
+              </p>
           </div>
           
 </body>

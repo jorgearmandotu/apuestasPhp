@@ -1,27 +1,6 @@
 #fecha{
     border-radius: 1em;
 }
-.ids{
-    display: none !important; 
-    width: 10px;
-}
-#center{
-    max-width: 1000px;
-    margin: 0 auto;
-}
-#selecfecha label{
-    color: #ffbf00;
-}
-
-#center ul{
-    list-style: none;
-    margin: 0 auto;
-    text-align: center;
-}
-#center h2{
-    text-align: center;
-    color: #fff;
-}
 #listpartidos{
     width: 100%;
     overflow: hidden;
@@ -37,13 +16,6 @@
     margin: 4px;
     vertical-align: middle;
 }
-.celda1 label{
-    position: relative;
-    top: 30%;
-}
-#encabezado{
-    text-align: center;
-}
 .celda2,.celda3,.celda4,.celda5{
     float: left;
     width: 50px;
@@ -52,17 +24,16 @@
     margin: 4px;
     border: 1px solid #000;
 }
-.fila label{
-    color: #ffbf00;
+.btn{
+    border-radius: 1em;
+    background: #ffbf00;
+    color: #000;
     font-weight: bold;
 }
-    
-
-.cuotas{
-    max-width: 40px;
-    border-radius: .5em;
+#datosapuesta{
+    background-color: yellow;
 }
-.btn{
+button{
     border-radius: 1em;
     background: #ffbf00;
     color: #000;
