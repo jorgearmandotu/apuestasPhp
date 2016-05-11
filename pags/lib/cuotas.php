@@ -1,5 +1,5 @@
 <?php
-require_once '../gestionDb.php';
+require_once '../gestionDB.php';
 
 $idp=$_POST['id'];
 $local=$_POST['cuota1'];
