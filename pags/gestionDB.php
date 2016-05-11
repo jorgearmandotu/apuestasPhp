@@ -21,7 +21,8 @@ function connectionDB(){
 }
 //funcion q termina la coneccion
 function connectionClose($enlace){
-    mysqli_close($enlace);    
+    mysqli_close($enlace);  
+     
 }
 //valida datos de usurio y redirecciona segun si es admin o asesor
 function verificarLogin($user,$enl,$pass){
@@ -331,4 +332,55 @@ function actualizarcuotas($enl,$idp,$cuota1,$cuota2,$cuotax){
         return false;
     }
 }
+function apuestass($enl,$fecha1,$fecha2){
+    $sql= "SELECT NOMBREAPOSTA,CC,VALOR,IDASESOR,IDPARTIDO,APUESTA FROM apuestas WHERE(FECHA>='".$fecha1."' AND FECHA<='".$fecha2."');";
+    $ase = array();
+    $result = $enl->query($sql)or die('error al consulta DB');
+    $i=0;
+    //0,0 nombre 0,1 saldo
+    while($row=$result->fetch_assoc()){
+        $l=0;
+        $ase[$i][$l] = $row['NOMBREAPOSTA'];
+        $l++;
+        $ase[$i][$l] = $row['CC'];
+        $l++;
+        $ase[$i][$l] = $row['VALOR'];
+         $l++;
+        $ase[$i][$l] = $row['IDASESOR'];
+         $l++;
+        $ase[$i][$l] = $row['IDPARTIDO'];
+         $l++;
+        $ase[$i][$l] = $row['APUESTA'];
+        $i++;
+    }
+    return $ase;
+}
+
+function asesor($enl,$id){
+    $sql="SELECT NOMBRE FROM persona WHERE ID='".$id."';";
+    $result= $enl->query($sql)or die("Error al consultar DB");
+    $i=0;
+    
+    //0,0 nombre 0,1 saldo
+    while($row=$result->fetch_assoc()){
+        
+        $ase[$i] = $row['NOMBRE'];
+       
+        $i++;
+    }
+    return $ase;
+}
+function acfecha($enl){
+    $sql="SELECT  fechaA, fechaB FROM fecha;";
+    $result= $enl->query($sql)or die("Error al consultar DB");
+    $i=0;
+    $ase = array();
+    while($row=$result->fetch_assoc()){
+        $ase[0] = $row['fechaA'];
+        $ase[1] = $row['fechaB'];
+        
+    }
+    return $ase;
+}
+
 ?>
