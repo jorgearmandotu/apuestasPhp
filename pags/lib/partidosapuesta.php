@@ -14,7 +14,8 @@ $partidos = partidos($enlace,$fecha);
                 <div class='celda4'>
                     <label> 2 </label></div>
               </div>
-              <div class='celda5'></div>";
+              <div class='celda5'></div>
+              <form method='POST' id='miniformulario' action=''>";
 
 
 for($i=0;$i<count($partidos);$i++){
@@ -30,37 +31,29 @@ for($i=0;$i<count($partidos);$i++){
         
 //    la siguiente cadena crea los botones y el formulario q se reenvia a la misma paguina en viando los datos cuando se ha seleccionado halgo el botn apostar y los inputs con la id del partido y el valor de la cuota seleccionada no deben ser visibles se hace con css
         $res.="<div class='fila'>
-            <form method='POST' id='miniformulario' action='lib/gestionApuesta.php'>
+            
         <div class='celda1'>
-        <input type='text' name='id' value='".$idP."' class='ids'>
-        <input type='text' name='cuota' value='".$local."' class='cuota'>
          <label>".$nomEquiA."_vs_".$nomEquiB." - ".$hora." </label>
         </div>
         <div class='celda2'>
-            <button type='submit' class='cuotas' value='".$local."' name='cuota1' id='btn'>".$local."</button>
-            </form>
+            <input type='checkbox' class='cuotas' value='".$local.":".$idP.":L' name='cuota[]' id='btn'>".$local."</input>
        
        </div>
        <div class='celda3'>
-       <form method='POST' id='miniformulario' action='lib/gestionApuesta.php'>
-       <input type='text' name='id' value='".$idP."' class='ids'>
-        <input type='text' name='cuota' value='".$empate."' class='cuota'>
-            <button type='submit' class='cuotas' value='".$empate."' name='cuotax'>".$empate."</button>
-            </form>
+            <input type='checkbox' class='cuotas' value='".$empate.":".$idP.":E' name='cuota[]'>".$empate."</input>
         </div>
         
         <div class='celda4'>
-         <form method='POST' id='miniformulario' action='lib/gestionApuesta.php'>
-       <input type='text' name='id' value='".$idP."' class='ids'>
-        <input type='text' name='cuota' value='".$visitante."' class='cuota'>
-        <button type='submit' class='cuotas' value='".$visitante."'  name='cuota2'>".$visitante."</button>
-        </form>
+        <input type='checkbox' class='cuotas' value='".$visitante.":".$idP.":V'  name='cuota[]'>".$visitante."</input>
+        
         </div>
         
         
               </div>";
 }
 connectionClose($enlace);
+$res.="<button type='submit' id='apostar'>apostar</button>
+        </form>";
 echo $res;
 
 ?>

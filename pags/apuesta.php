@@ -1,6 +1,7 @@
 <?php
 require_once 'validaciones.php';
 require_once 'gestionDB.php';
+require_once 'lib/gestionApuesta.php';
 
 validarAsesor();
 $idp=null;
@@ -38,15 +39,42 @@ function crrearapuesta(){
       
       <div id="listpartidos">
             
-             
+<!--
+             <div class='fila'>
+            <form method='POST' id='miniformulario' action='lib/gestionApuesta.php'>
+        <div class='celda1'>
+        <input type='hidden' name='id' value='".$idP."' class='ids'>
+         <label>".$nomEquiA."_vs_".$nomEquiB." - ".$hora." </label>
+        </div>
+        <div class='celda2'>
+            <input type='checkbox' class='cuotas' value='".$local."' name='cuota1' id='btn'>".$local."</input>
+            </form>
+       
+       </div>
+       <div class='celda3'>
+       <form method='POST' id='miniformulario' action='lib/gestionApuesta.php'>
+       <input type='hidden' name='id' value='".$idP."' class='ids'>
+        <input type='hidden' name='cuota' value='".$empate."' class='cuota'>
+            <input type='checkbox' class='cuotas' value='".$empate."' name='cuotax'>".$empate."</input>
+            </form>
+        </div>
         
+        <div class='celda4'>
+         <form method='POST' id='miniformulario' action='lib/gestionApuesta.php'>
+       <input type='hidden' name='id' value='".$idP."' class='ids'>
+        <input type='hidden' name='cuota' value='".$visitante."' class='cuota'>
+        <input type='checkbox' class='cuotas' value='".$visitante."'  name='cuota2'>".$visitante."</input>
+        </form>
+        </div>
+        
+        
+              </div>
+-->
          
           </div>
-          <?php
-          if ($a!=null){
-              echo '<h1>id partido '.$a[0][0].' cuota '.$a[0][1].'</h1>';
-          }
+          <div id='datosapuesta'>
+              
+          </div>
           
-          ?>
 </body>
 </html>
