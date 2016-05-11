@@ -53,6 +53,9 @@
                 <a href="cambiarContrasena.php">cambiar contraseña</a>
             </li>
             <li>
+                <a href="apuestastotal.php">Reporte Total Apuestas</a>
+            </li>
+            <li>
                 <a href="salir.php">cerrar sesion</a>
             </li>
         </ul>
