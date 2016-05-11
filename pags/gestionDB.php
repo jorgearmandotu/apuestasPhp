@@ -5,7 +5,7 @@ function connectionDB(){
     $DB_SERVER='localhost';
     $DB_NAME='apuestas';
     $DB_USER='root';
-    $DB_PASS='25234767';
+    $DB_PASS='Jorge1990';
     
     $enlace = mysqli_connect($DB_SERVER,$DB_USER,$DB_PASS,$DB_NAME);
     if(!$enlace){
