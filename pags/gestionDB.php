@@ -227,7 +227,7 @@ function equipos($enl){
 }
 
 function partidos($enl,$fecha){
-    $sql = "SELECT ID,EQUIPOA,EQUIPOB,LIGA,CUOTA1,CUOTAX,CUOTA2, DATE_FORMAT(HORA, '%T') AS HORAP FROM partidos WHERE FECHA='$fecha';";
+    $sql = "SELECT ID,EQUIPOA,EQUIPOB,LIGA,CUOTA1,CUOTAX,CUOTA2, DATE_FORMAT(HORA, '%T') AS HORAP FROM partidos WHERE FECHA='$fecha' ORDER BY HORA;";
     $result = $enl->query($sql)or die('error al consulta DB');
     $arr = array();
     $i=0;
