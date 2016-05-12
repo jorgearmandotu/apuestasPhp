@@ -287,10 +287,10 @@ function saldo($enl,$id){
     }
     return $saldo;
 }
-function ingresoApuesta($enl,$nomApost,$ccApost,$valor,$idAsesor,$idPart,$idEquiApost,$idLiga,$saldoDisp){
+function ingresoApuesta($enl,$valor,$idAsesor,$fecha,$idPart,$EquiApost,$idLiga,$cuota,$idapuesta,$saldoDisp){
     $enl->autocommit(false);
     $flag = true;
-    $sql = "INSERT INTO apuestas VALUES('".$nomApost."','".$ccApost."','".$valor."','".$idAsesor."','".$idPart."','".$idEquiApost."','".$idLiga."',null);";
+    $sql = "INSERT INTO apuestas VALUES('".$valor."','".$idAsesor."','".$fecha."','".$idPart."','".$idEquiApost."','".$idLiga."','".$cuota."','".$idapuesta.");";
     $saldoDisp=$saldoDisp-$valor;
     $sql2 = "UPDATE saldos SET SALDO='".$saldoDisp."' WHERE IDASESOR=".$idAsesor.";";
     if(!$enl->query($sql)){

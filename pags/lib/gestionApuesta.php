@@ -52,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             for ($i = 0; $i < $count; $i++) {
 //        echo $cuota[$i];
             $datos = explode(':',$cuota[$i],3);
-            $partidosids.='idp'.$datos[1].'apuesta'.$datos[0];
+            $partidosids.='-idp-'.$datos[1].'-apuesta-'.$datos[2].'-cuota-'.$datos[0];
                 
                 //obtengo nombre de partido
                 $enlace = connectionDB();
@@ -69,13 +69,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </li>
          
           </ul>";
-          ?>
-        <?php
+        
         $cuotatotal=$cuotatotal*floatval($datos[0]);
     }
     $totalganancia=$cuotatotal*floatval($valorapuesta);
     
-    echo "<form method='post' action='' id='formconfirmapuesta'>
+    echo "<form method='post' action='realizarapuesta.php' id='formconfirmapuesta'>
           <ul>
           <input type='hidden' value='".$partidosids."' name='partidosids'>
           <li><label>cuota total: ".$cuotatotal."</label>
