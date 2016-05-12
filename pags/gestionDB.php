@@ -253,8 +253,19 @@ function partidos($enl,$fecha){
     }
     return $arr;
 }
+function nompartido($enl,$idp){
+    $sql = "SELECT ID,EQUIPOA,EQUIPOB,LIGA,CUOTA1,CUOTAX,CUOTA2, DATE_FORMAT(HORA, '%T') AS HORAP FROM partidos WHERE ID='".$idp."';";
+    $result = $enl->query($sql)or die("error al conectar DB");
+    $partido="";
+    while($row=$result->fetch_assoc()){
+        $partido.=$row['EQUIPOA']."_vs_";
+        $partido.=$row['EQUIPOB']." - ";
+        $partido.=$row['HORAP'];
+    }
+    return $partido;
+}
 function equiposLigaPartido($enl,$idP){
-    $sql = "SELECT EQUIPOA,EQUIPOB,LIGA,DATE_FORMAT(HORA, '%T') AS HORAP FROM partidos WHERE ID='".$idP."'";
+    $sql = "SELECT EQUIPOA,EQUIPOB,LIGA,DATE_FORMAT(HORA, '%T') AS HORAP, GANADOR FROM partidos WHERE ID='".$idP."'";
     $result = $enl->query($sql)or die("error al conectar a DB combosapuestas");
     $arr = array();
     if($row=$result->fetch_assoc()){
@@ -262,6 +273,7 @@ function equiposLigaPartido($enl,$idP){
         $arr[1]=$row['EQUIPOB'];
         $arr[2]=$row['LIGA'];
         $arr[3]=$row['HORAP'];
+        $arr[4]=$row['GANADOR'];
     }
     return $arr;
 }
@@ -382,5 +394,21 @@ function acfecha($enl){
     }
     return $ase;
 }
+
+
+function tpersona($enl){
+    $sql="SELECT  NOMBRE, ID FROM persona WHERE TIPO!='ADMINISTRADOR';";
+    $result= $enl->query($sql)or die("Error al consultar DB");
+    $i=0;
+    $ase = array();
+    while($row=$result->fetch_assoc()){
+        $ase[$i][0] = $row['NOMBRE'];
+        $ase[$i][1] = $row['ID'];
+        $i++;
+        
+    }
+    return $ase;
+}
+
 
 ?>

@@ -1,0 +1,55 @@
+#center ul{
+    list-style: none;
+}
+#center label{
+    color: #ffbf00;
+    font-weight: bold;
+}
+#fecha{
+    border-radius: 1em;
+}
+#listpartidos{
+    width: 100%;
+    overflow: hidden;
+}
+.fila{
+    width: 1000px;
+    margin: 0 auto;
+}
+.celda1{
+    width: 500px;
+    height: 30px;
+    float: left;
+    margin: 4px;
+    vertical-align: middle;
+}
+.celda2,.celda3,.celda4,.celda5{
+    float: left;
+    width: 50px;
+    height: 30px;
+    text-align: center;
+    margin: 4px;
+    border: 1px solid #000;
+}
+.btn{
+    border-radius: 1em;
+    background: #ffbf00;
+    color: #000;
+    font-weight: bold;
+}
+#datosapuestas{
+    background-color: yellow;
+    border: 1px solid #fff;
+    position: fixed;
+    width: 200px;
+}
+button{
+    border-radius: 1em;
+    background: #ffbf00;
+    color: #000;
+    font-weight: bold;
+}
+#boton{
+    width: 400px;
+    text-align: center;
+}

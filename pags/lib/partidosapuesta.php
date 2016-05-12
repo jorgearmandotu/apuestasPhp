@@ -14,7 +14,8 @@ $partidos = partidos($enlace,$fecha);
                 <div class='celda4'>
                     <label> 2 </label></div>
               </div>
-              <div class='celda5'></div>";
+              <div class='celda5'></div>
+              <form method='POST' id='miniformulario' action='lib/gestionApuesta.php'>";
 
 
 for($i=0;$i<count($partidos);$i++){
@@ -28,28 +29,34 @@ for($i=0;$i<count($partidos);$i++){
     $visitante=$partidos[$i][7];
     $nomLiga = nomLiga($nomLiga,$enlace);
         
+//    la siguiente cadena crea los botones y el formulario q se reenvia a la misma paguina en viando los datos cuando se ha seleccionado halgo el botn apostar y los inputs con la id del partido y el valor de la cuota seleccionada no deben ser visibles se hace con css
         $res.="<div class='fila'>
-           
-            <form method='POST' id='miniformulario' action='lib/cuotas.php'>
+            
         <div class='celda1'>
-        <input type='text' name='id' value='".$idP."' class='ids'>
-        
-            <label>".$nomEquiA."_vs_".$nomEquiB." - ".$hora." </label>
+         <label>".$nomEquiA."_vs_".$nomEquiB." - ".$hora." </label>
         </div>
         <div class='celda2'>
-            <button type='button' class='cuotas' value='".$local."' name='cuota1'>".$local."</button>
-        </div>
+            <input type='checkbox' class='cuotas' value='".$local.":".$idP.":Local' name='cuota[]' id='btn'>".$local."</input>
+       
+       </div>
        <div class='celda3'>
-            <button type='button' class='cuotas' value='".$empate."' name='cuotax'>".$empate."</button>
+            <input type='checkbox' class='cuotas' value='".$empate.":".$idP.":Enpate' name='cuota[]'>".$empate."</input>
         </div>
+        
         <div class='celda4'>
-        <<button type='button' class='cuotas' value='".$visitante."'  name='cuota2'>".$visitante."</button>
+        <input type='checkbox' class='cuotas' value='".$visitante.":".$idP.":Visitante'  name='cuota[]'>".$visitante."</input>
+        
         </div>
-        </form>
+        
         
               </div>";
 }
 connectionClose($enlace);
+$res.="<div id='boton'>
+<input tipe='number' step='any' name='valorapuesta'>
+    <button type='submit' id='apostar'>apostar</button>
+    </div>
+        </form>";
 echo $res;
 
 ?>
