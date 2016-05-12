@@ -25,6 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
            <script src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
            <link rel="stylesheet" href="../../css/normailze.min.css">
         <link rel="stylesheet" href="../../css/estilosform.css">
+        <link rel="stylesheet" href="../../css/confirmapuesta.css">
            
              </head>
              <body>
@@ -52,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             for ($i = 0; $i < $count; $i++) {
 //        echo $cuota[$i];
             $datos = explode(':',$cuota[$i],3);
-            $partidosids.='idp'.$datos[1].'apuesta'.$datos[0];
+            $partidosids.='-idp-'.$datos[1].'-apuesta-'.$datos[2].'-apuesta-'.$datos[0];
                 
                 //obtengo nombre de partido
                 $enlace = connectionDB();
@@ -64,18 +65,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           <li><label>partido: ".$nompart."
            </label>
         <li>
-            <label>apuesta: ".$datos[2]."</label>
+            <label>apuesta: ".$datos[2]."-</label>
             <label id='cuotaspan'>cuota: ".$datos[0]."</label>
         </li>
          
           </ul>";
-          ?>
-        <?php
+        
         $cuotatotal=$cuotatotal*floatval($datos[0]);
     }
     $totalganancia=$cuotatotal*floatval($valorapuesta);
     
-    echo "<form method='post' action='' id='formconfirmapuesta'>
+    echo "<form method='post' action='realizarapuesta.php' id='formconfirmapuesta'>
           <ul>
           <input type='hidden' value='".$partidosids."' name='partidosids'>
           <li><label>cuota total: ".$cuotatotal."</label>

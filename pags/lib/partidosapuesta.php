@@ -36,15 +36,15 @@ for($i=0;$i<count($partidos);$i++){
          <label>".$nomEquiA."_vs_".$nomEquiB." - ".$hora." </label>
         </div>
         <div class='celda2'>
-            <input type='checkbox' class='cuotas' value='".$local.":".$idP.":Local' name='cuota[]' id='btn'>".$local."</input>
+            <input type='checkbox' class='cuotas' value='".$local.":".$idP.":1' name='cuota[]' id='btn'>".$local."</input>
        
        </div>
        <div class='celda3'>
-            <input type='checkbox' class='cuotas' value='".$empate.":".$idP.":Enpate' name='cuota[]'>".$empate."</input>
+            <input type='checkbox' class='cuotas' value='".$empate.":".$idP.":X' name='cuota[]'>".$empate."</input>
         </div>
         
         <div class='celda4'>
-        <input type='checkbox' class='cuotas' value='".$visitante.":".$idP.":Visitante'  name='cuota[]'>".$visitante."</input>
+        <input type='checkbox' class='cuotas' value='".$visitante.":".$idP.":2'  name='cuota[]'>".$visitante."</input>
         
         </div>
         
@@ -53,7 +53,7 @@ for($i=0;$i<count($partidos);$i++){
 }
 connectionClose($enlace);
 $res.="<div id='boton'>
-<input tipe='number' step='any' name='valorapuesta'>
+<input tipe='number' step='any' name='valorapuesta' id='valor'>
     <button type='submit' id='apostar'>apostar</button>
     </div>
         </form>";

@@ -227,7 +227,7 @@ function equipos($enl){
 }
 
 function partidos($enl,$fecha){
-    $sql = "SELECT ID,EQUIPOA,EQUIPOB,LIGA,CUOTA1,CUOTAX,CUOTA2, DATE_FORMAT(HORA, '%T') AS HORAP FROM partidos WHERE FECHA='$fecha';";
+    $sql = "SELECT ID,EQUIPOA,EQUIPOB,LIGA,CUOTA1,CUOTAX,CUOTA2, DATE_FORMAT(HORA, '%T') AS HORAP FROM partidos WHERE FECHA='$fecha' ORDER BY HORA;";
     $result = $enl->query($sql)or die('error al consulta DB');
     $arr = array();
     $i=0;
@@ -287,26 +287,28 @@ function saldo($enl,$id){
     }
     return $saldo;
 }
-function ingresoApuesta($enl,$nomApost,$ccApost,$valor,$idAsesor,$idPart,$idEquiApost,$idLiga,$saldoDisp){
+function ingresoApuesta($enl,$valor,$idAsesor,$fecha,$idPart,$EquiApost,$idLiga,$cuota,$idapuesta,$saldoDisp){
     $enl->autocommit(false);
     $flag = true;
-    $sql = "INSERT INTO apuestas VALUES('".$nomApost."','".$ccApost."','".$valor."','".$idAsesor."','".$idPart."','".$idEquiApost."','".$idLiga."',null);";
+    $sql = "INSERT INTO apuestas VALUES('".$valor."','".$idAsesor."','".$fecha."','".$idPart."','".$EquiApost."','".$idLiga."','".$cuota."','".$idapuesta."',NULL);";
     $saldoDisp=$saldoDisp-$valor;
     $sql2 = "UPDATE saldos SET SALDO='".$saldoDisp."' WHERE IDASESOR=".$idAsesor.";";
     if(!$enl->query($sql)){
    // if($enl->errno){
         $flag = false;
-        echo("Error en transaccion");
+        echo("Error en transaccion ingreso");
     }
      if(!$enl->query($sql2)){
     //if($enl->errno){
         $flag = false;
-        echo("Error en transaccion");
+        echo("Error en transaccion actualizando");
     }
     if($flag){
         $enl->commit();
+        return true;
     }else{
         $enl->rollBack();
+        return false;
     }
 }
 function fechahoraPartido($enl,$id){

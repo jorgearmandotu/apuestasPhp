@@ -1,0 +1,20 @@
+#center{
+    text-align: left;
+}
+#center ul{
+    list-style: none;
+    color: #ffbf00;
+    font-weight: bold;
+    font-size: 12pt;
+    border-bottom: 2px solid #fff;
+    width: 40em;
+}
+#center li{
+    padding: 0.5em;
+}
+#center button{
+    border-radius: 2em;
+    color: #000;
+    background: #ffbf00;
+    
+}
