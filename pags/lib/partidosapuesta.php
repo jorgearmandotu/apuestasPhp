@@ -53,7 +53,7 @@ for($i=0;$i<count($partidos);$i++){
 }
 connectionClose($enlace);
 $res.="<div id='boton'>
-<input tipe='number' step='any' name='valorapuesta'>
+<input tipe='number' step='any' name='valorapuesta' id='valor'>
     <button type='submit' id='apostar'>apostar</button>
     </div>
         </form>";

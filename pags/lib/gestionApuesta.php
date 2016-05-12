@@ -25,6 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
            <script src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
            <link rel="stylesheet" href="../../css/normailze.min.css">
         <link rel="stylesheet" href="../../css/estilosform.css">
+        <link rel="stylesheet" href="../../css/confirmapuesta.css">
            
              </head>
              <body>
@@ -64,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           <li><label>partido: ".$nompart."
            </label>
         <li>
-            <label>apuesta: ".$datos[2]."</label>
+            <label>apuesta: ".$datos[2]."-</label>
             <label id='cuotaspan'>cuota: ".$datos[0]."</label>
         </li>
          

@@ -31,6 +31,9 @@
     margin: 4px;
     border: 1px solid #000;
 }
+input{
+    border-radius: 1em;
+}
 .btn{
     border-radius: 1em;
     background: #ffbf00;
@@ -52,4 +55,7 @@ button{
 #boton{
     width: 400px;
     text-align: center;
+}
+#valor:focus,#fecha:focus{
+    background: #5edd80;
 }
