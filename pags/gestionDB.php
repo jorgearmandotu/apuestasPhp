@@ -253,6 +253,17 @@ function partidos($enl,$fecha){
     }
     return $arr;
 }
+function nompartido($enl,$idp){
+    $sql = "SELECT ID,EQUIPOA,EQUIPOB,LIGA,CUOTA1,CUOTAX,CUOTA2, DATE_FORMAT(HORA, '%T') AS HORAP FROM partidos WHERE ID='".$idp."';";
+    $result = $enl->query($sql)or die("error al conectar DB");
+    $partido="";
+    while($row=$result->fetch_assoc()){
+        $partido.=$row['EQUIPOA']."_vs_";
+        $partido.=$row['EQUIPOB']." - ";
+        $partido.=$row['HORAP'];
+    }
+    return $partido;
+}
 function equiposLigaPartido($enl,$idP){
     $sql = "SELECT EQUIPOA,EQUIPOB,LIGA,DATE_FORMAT(HORA, '%T') AS HORAP, GANADOR FROM partidos WHERE ID='".$idP."'";
     $result = $enl->query($sql)or die("error al conectar a DB combosapuestas");
@@ -334,16 +345,16 @@ function actualizarcuotas($enl,$idp,$cuota1,$cuota2,$cuotax){
     }
 }
 function apuestass($enl,$fecha1,$fecha2){
-    $sql= "SELECT NOMBREAPOSTA,CC,VALOR,IDASESOR,IDPARTIDO,APUESTA FROM apuestas WHERE(FECHA>='".$fecha1."' AND FECHA<='".$fecha2."');";
+    $sql= "SELECT ID,CUOTA,VALOR,IDASESOR,IDPARTIDO,APUESTA FROM apuestas WHERE(FECHA>='".$fecha1."' AND FECHA<='".$fecha2."');";
     $ase = array();
     $result = $enl->query($sql)or die('error al consulta DB');
     $i=0;
     //0,0 nombre 0,1 saldo
     while($row=$result->fetch_assoc()){
         $l=0;
-        $ase[$i][$l] = $row['NOMBREAPOSTA'];
+        $ase[$i][$l] = $row['ID'];
         $l++;
-        $ase[$i][$l] = $row['CC'];
+        $ase[$i][$l] = $row['CUOTA'];
         $l++;
         $ase[$i][$l] = $row['VALOR'];
          $l++;
@@ -384,6 +395,7 @@ function acfecha($enl){
     return $ase;
 }
 
+
 function tpersona($enl){
     $sql="SELECT  NOMBRE, ID FROM persona WHERE TIPO!='ADMINISTRADOR';";
     $result= $enl->query($sql)or die("Error al consultar DB");
@@ -397,5 +409,6 @@ function tpersona($enl){
     }
     return $ase;
 }
+
 
 ?>

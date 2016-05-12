@@ -6,6 +6,7 @@ $(document).ready(function() {
         $('#loading').hide();
         $('#result').fadeIn('slow');
     });
+
     $('#formularioganador').submit(function() {
 
         var $partido=$('#partido').val();

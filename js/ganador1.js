@@ -6,6 +6,7 @@ $(document).ready(function() {
         $('#loading').hide();
         $('#result').fadeIn('slow');
     });
+
    
         
     $('#fecha').change(function(){
@@ -48,3 +49,4 @@ function confirmar(){
          }
     
 }
+

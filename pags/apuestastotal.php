@@ -8,7 +8,7 @@
         <meta name="keywords" content="sitio para hacer apuestas,bookiesport, apuestas de futbol, san juan de pasto apuestas"/>
         <meta name="author" content="Reon-Soluciones_Web"/>
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-       <title>cambiarContraseña</title>
+       <title>apuestas totales</title>
        <!--<link rel="stylesheet" href="../css/normailze.min.css">-->
         <link rel="stylesheet" href="../css/tablas.css">
         <link rel="stylesheet" href="../css/botton.css">
@@ -56,8 +56,8 @@
            
            echo('<table cellspacing="3" CELLPADDING="4" border="3">');
                echo('<tr>');
-               echo('<th>Nombre Apostador</th>');
-               echo('<th>CC</th>');
+               echo('<th>Numero referencia</th>');
+               echo('<th>Cuota</th>');
                echo('<th>Valor</th>');
                echo('<th>Asesor</th>');
                echo('<th>Partido</th>');
