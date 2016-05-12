@@ -31,6 +31,9 @@
                          <a href="administrador.php"><img src='../images/Bookiesport_Inicio.png' alt="Inicio"></a>
                      </li>
                  </ul>
+              <?php
+              $i=0;
+              ?>
           </header>
           <div id="contenido">
     <?php
@@ -39,56 +42,78 @@
         session_start();
         $idusuario=$_SESSION['id'];
         $user = $_SESSION['usuario'];
+              
     ?>
     <center>
         
     <h2>Apuestas totales de Bookiesport</h2>
-       <form method="post" id="apuestatotal" action="apuestastotal.php">
+       <form method="post" id="apuestatotal" action="apuestastotal.php" method="post">
         <label>Fecha de inicio</label>
         <input type="date" name="fecha1" id="fecha1" required>
            <label>Fecha Fin</label>
-        <input type="date" name="fecha2" id="fecha2" required>
+        <input type="date" name="fecha2" id="fecha2"  required >
         <button type="submit" id="button1">Buscar</button>
         <a class="enlaceboton" href="pdf_apuestastotal.php" target="_blank">Exportar a PDF</a>
         <br>
         <br>
+           <input type="hidden" name="conta">
         <?php
+           if ($_POST){
+//Incrementamos el valor
+               $i++;
+               $conta = $_POST["conta"] + 1;
+           }
+           else{
+//Valor inicial
+            $i=0;   
+               $conta = 1;
+           }
            
+           if($i!=0){
            echo('<table cellspacing="3" CELLPADDING="4" border="3">');
                echo('<tr>');
                echo('<th>Numero referencia</th>');
                echo('<th>Cuota</th>');
-               echo('<th>Valor</th>');
+               echo('<th>Valor Apostado</th>');
                echo('<th>Asesor</th>');
-               echo('<th>Partido</th>');
-               echo('<th>Equipo</th>');
+               echo('<th>Valor a pagar</th>');
                echo('</tr>');
            $enlace = connectionDB();
+           
            $fecha1=strip_tags($_POST['fecha1']);
            $fecha2=strip_tags($_POST['fecha2']);
            mysqli_query($enlace,"UPDATE fecha set fechaA='$fecha1', fechaB='$fecha2' where ID='1'")
     or die("error al actualizar");
-           $apuesta=apuestass($enlace,$fecha1,$fecha2);
+           //$apuestaid = idapuesta(enlace);
+            $apostado =0.0;
+           $apuesta=idapuesta($enlace,$fecha1,$fecha2);
            for($i=0;$i<count($apuesta);$i++) {
+               $cuota = 1.0;
+               
+               $apuesta1=apuestass($enlace,$apuesta[$i][0]);
+               for($j=0;$j<count($apuesta1);$j++) {
+                   $cuota=$apuesta1[$j][1]*$cuota;
+               }
+               $pagar = $cuota*$apuesta[$i][1];
+               $apostado = $apuesta[$i][1]+$apostado;
            echo('<tr>');
                echo('<td>'.$apuesta[$i][0].'</th>');
+               echo('<td>'.$cuota.'</td>');
                echo('<td>'.$apuesta[$i][1].'</td>');
-               echo('<td>'.$apuesta[$i][2].'</td>');
-               $persona = asesor($enlace,$apuesta[$i][3]);
+               $persona = asesor($enlace,$apuesta[$i][2]);
                echo('<td>'.$persona[0].'</td>');
-               $partido=equiposLigaPartido($enlace,$apuesta[$i][4]);
-               echo('<td>'.$partido[0].' VS '.$partido[1].'</td>');
-               if($apuesta[$i][5]=='1'){
-               echo('<td>'.$partido[0].'</td>');}
-               
-               if($apuesta[$i][5]=='2'){
-               echo('<td>'.$partido[1].'</td>');}
-               if($apuesta[$i][5]=='X'){
-               echo('<td>EMPATE</td>');}
+               echo('<td>'.$pagar.'</td>');
                echo('</tr>');
-           }
+           }//cierra for i
+        
                echo('</table>');
-           connectionClose($enlace);
+               echo('<h3>Valor total apostado '.$apostado.'</h3>');
+               
+               connectionClose($enlace);
+           }//cierra if
+           
+           
+           
            ?>
         </form>
         </center>

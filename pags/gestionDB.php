@@ -346,8 +346,8 @@ function actualizarcuotas($enl,$idp,$cuota1,$cuota2,$cuotax){
         return false;
     }
 }
-function apuestass($enl,$fecha1,$fecha2){
-    $sql= "SELECT ID,CUOTA,VALOR,IDASESOR,IDPARTIDO,APUESTA FROM apuestas WHERE(FECHA>='".$fecha1."' AND FECHA<='".$fecha2."');";
+function apuestass($enl,$ida){
+    $sql= "SELECT DISTINCT ID,CUOTA,VALOR,IDASESOR,IDPARTIDO,APUESTA FROM apuestas WHERE(ID='".$ida."');";
     $ase = array();
     $result = $enl->query($sql)or die('error al consulta DB');
     $i=0;
@@ -406,6 +406,21 @@ function tpersona($enl){
     while($row=$result->fetch_assoc()){
         $ase[$i][0] = $row['NOMBRE'];
         $ase[$i][1] = $row['ID'];
+        $i++;
+        
+    }
+    return $ase;
+}
+
+function idapuesta($enl,$fecha1,$fecha2){
+    $sql="SELECT  DISTINCT ID,VALOR,IDASESOR FROM apuestas WHERE(FECHA>='".$fecha1."' AND FECHA<='".$fecha2."');";
+    $result= $enl->query($sql)or die("Error al consultar DB");
+    $i=0;
+    $ase = array();
+    while($row=$result->fetch_assoc()){
+        $ase[$i][0] = $row['ID'];
+        $ase[$i][1] = $row['VALOR'];
+        $ase[$i][2] = $row['IDASESOR'];
         $i++;
         
     }
