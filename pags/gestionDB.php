@@ -290,23 +290,25 @@ function saldo($enl,$id){
 function ingresoApuesta($enl,$valor,$idAsesor,$fecha,$idPart,$EquiApost,$idLiga,$cuota,$idapuesta,$saldoDisp){
     $enl->autocommit(false);
     $flag = true;
-    $sql = "INSERT INTO apuestas VALUES('".$valor."','".$idAsesor."','".$fecha."','".$idPart."','".$idEquiApost."','".$idLiga."','".$cuota."','".$idapuesta.");";
+    $sql = "INSERT INTO apuestas VALUES('".$valor."','".$idAsesor."','".$fecha."','".$idPart."','".$EquiApost."','".$idLiga."','".$cuota."','".$idapuesta."',NULL);";
     $saldoDisp=$saldoDisp-$valor;
     $sql2 = "UPDATE saldos SET SALDO='".$saldoDisp."' WHERE IDASESOR=".$idAsesor.";";
     if(!$enl->query($sql)){
    // if($enl->errno){
         $flag = false;
-        echo("Error en transaccion");
+        echo("Error en transaccion ingreso");
     }
      if(!$enl->query($sql2)){
     //if($enl->errno){
         $flag = false;
-        echo("Error en transaccion");
+        echo("Error en transaccion actualizando");
     }
     if($flag){
         $enl->commit();
+        return true;
     }else{
         $enl->rollBack();
+        return false;
     }
 }
 function fechahoraPartido($enl,$id){

@@ -52,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             for ($i = 0; $i < $count; $i++) {
 //        echo $cuota[$i];
             $datos = explode(':',$cuota[$i],3);
-            $partidosids.='-idp-'.$datos[1].'-apuesta-'.$datos[2].'-cuota-'.$datos[0];
+            $partidosids.='-idp-'.$datos[1].'-apuesta-'.$datos[2].'-apuesta-'.$datos[0];
                 
                 //obtengo nombre de partido
                 $enlace = connectionDB();
