@@ -82,8 +82,15 @@
            
            $fecha1=strip_tags($_POST['fecha1']);
            $fecha2=strip_tags($_POST['fecha2']);
-           mysqli_query($enlace,"UPDATE fecha set fechaA='$fecha1', fechaB='$fecha2' where ID='1'")
-    or die("error al actualizar");
+               
+               $fechat= acfecha($enlace,$idusuario);
+            
+                if($fechat[2]==$idusuario){
+                    mysqli_query($enlace,"UPDATE fecha set fechaA='$fecha1', fechaB='$fecha2' where ID='$idusuario'")
+                    or die("error actualise  la paginaaa");
+                }else{mysqli_query($enlace,"INSERT INTO fecha VALUES ('".$fecha1."','".$fecha2."','".$idusuario."')")
+                    or die("error actualise  la pagina");}
+          
            //$apuestaid = idapuesta(enlace);
             $apostado =0.0;
            $apuesta=idapuesta($enlace,$fecha1,$fecha2);

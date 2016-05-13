@@ -15,36 +15,40 @@
         $fpdf->Cell(10,10,'Todas mis apuestas');
                $fpdf->Ln(20);
                $fpdf->SetFont('Arial','B',10,8);
-               $fpdf->Cell(50,10,'Nombre Apostador',1);
-               $fpdf->Cell(40,10,'CC',1);
-               $fpdf->Cell(40,10,'Valor',1);
+               $fpdf->Cell(50,10,'Numero de referencia',1);
+               $fpdf->Cell(40,10,'Cuota',1);
+               $fpdf->Cell(40,10,'Valor apostado',1);
                $fpdf->Cell(40,10,'Asesor',1);
-               $fpdf->Cell(50,10,'Partido',1);
-               $fpdf->Cell(40,10,'Equipo',1);
+               $fpdf->Cell(50,10,'Valor a pagar',1);
                
+           $apostado = 0.0;   
            $enlace = connectionDB();
-           $fecha = acfecha($enlace);
-           $apuesta=apuestass($enlace,$fecha[0],$fecha[1]);
+           $fecha = acfecha($enlace,$idusuario);
+           $apuesta=idapuesta($enlace,$fecha[0],$fecha[1]);
            for($i=0;$i<count($apuesta);$i++) {
-               if($apuesta[$i][3]==$idusuario){
+               if($apuesta[$i][2]==$idusuario){
+           $cuota = 1.0;
+               
+               $apuesta1=apuestass($enlace,$apuesta[$i][0]);
+               for($j=0;$j<count($apuesta1);$j++) {
+                   $cuota=$apuesta1[$j][1]*$cuota;
+               }
+               $pagar = $cuota*$apuesta[$i][1];
+               $apostado = $apuesta[$i][1]+$apostado;
            $fpdf->Ln();
                $fpdf->Cell(50,10,$apuesta[$i][0],1);
+               $fpdf->Cell(40,10,$cuota,1);
                $fpdf->Cell(40,10,$apuesta[$i][1],1);
-               $fpdf->Cell(40,10,$apuesta[$i][2],1);
-               $persona = asesor($enlace,$apuesta[$i][3]);
+               $persona = asesor($enlace,$apuesta[$i][2]);
                $fpdf->Cell(40,10,$persona[0],1);
-               $partido=equiposLigaPartido($enlace,$apuesta[$i][4]);
-               $fpdf->Cell(50,10,$partido[0].' VS '.$partido[1],1);
-               if($apuesta[$i][5]=='1'){
-               $fpdf->Cell(40,10,$partido[0],1);}
                
-               if($apuesta[$i][5]=='2'){
-               $fpdf->Cell(40,10,$partido[1],1);}
-               if($apuesta[$i][5]=='X'){
-               $fpdf->Cell(40,10,'EMPATE',1);}
+               $fpdf->Cell(50,10,$pagar,1);
                }
                
            }
+            $fpdf->Ln();  
+                $fpdf->SetFont('Arial','B',11,8);
+               $fpdf->Cell(50,10,'Total apostado '.$apostado,0);
                
             $fpdf->Output();
            connectionClose($enlace);

@@ -374,7 +374,7 @@ function asesor($enl,$id){
     $sql="SELECT NOMBRE FROM persona WHERE ID='".$id."';";
     $result= $enl->query($sql)or die("Error al consultar DB");
     $i=0;
-    
+    $ase=array();
     //0,0 nombre 0,1 saldo
     while($row=$result->fetch_assoc()){
         
@@ -384,14 +384,19 @@ function asesor($enl,$id){
     }
     return $ase;
 }
-function acfecha($enl){
-    $sql="SELECT  fechaA, fechaB FROM fecha;";
+function acfecha($enl,$idu){
+    $sql="SELECT  fechaA, fechaB, ID FROM fecha WHERE(ID='".$idu."');";
     $result= $enl->query($sql)or die("Error al consultar DB");
     $i=0;
     $ase = array();
+    
+        $ase[0]=NULL;
+        $ase[1]=NULL;
+        $ase[2]=0;
     while($row=$result->fetch_assoc()){
         $ase[0] = $row['fechaA'];
         $ase[1] = $row['fechaB'];
+        $ase[2] = $row['ID'];
         
     }
     return $ase;

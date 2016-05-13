@@ -11,7 +11,7 @@ $(document).ready(function() {
     $('#apuestatotal').submit(function() {
         $.ajax({
             type: 'POST',
-            url: '../pags/lib/apuestatotal.php',
+            url: '../pags/pdf_aganadasbookie',
             data: $(this).serialize(),
             success: function(data) {
                 $('#tablatotal').html(data);

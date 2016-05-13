@@ -1,6 +1,9 @@
  <?php
         require_once('../fpdf/fpdf.php');
         require_once('gestionDB.php');
+        session_start();
+        $idusuario=$_SESSION['id'];
+        $user = $_SESSION['usuario'];
 
         $fpdf = new FPDF('L');
         $fpdf-> AddPage();
@@ -20,7 +23,7 @@
                
            $apostado = 0.0;   
            $enlace = connectionDB();
-           $fecha = acfecha($enlace);
+           $fecha = acfecha($enlace,$idusuario);
            $apuesta=idapuesta($enlace,$fecha[0],$fecha[1]);
            for($i=0;$i<count($apuesta);$i++) {
             $cuota = 1.0;

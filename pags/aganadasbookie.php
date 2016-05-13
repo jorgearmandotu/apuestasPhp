@@ -1,3 +1,4 @@
+
 <!DOCTYPE HTML>
 <html lang="es">
    <head>
@@ -43,81 +44,132 @@
     <center>
         
     <h2>Apuestas ganadas y perdidas por cada punto</h2>
-       <form method="post" id="apuesganada" action="aganadasbookie.php">
+       <form method="post" id="apuesganada" action="aganadasbookie.php" method="post">
+       
         <label>Fecha de inicio</label>
         <input type="date" name="fecha1" id="fecha1" required>
            <label>Fecha Fin</label>
         <input type="date" name="fecha2" id="fecha2" required>
         <button type="submit" id="button1">Buscar</button>
+          
         <a class="enlaceboton" href="pdf_aganadasbookie.php" target="_blank" id="pdf2">Exportar a PDF</a>
         <br>
         <br>
+        <input type="hidden" name="conta">
+       
         <?php
+            $i=0;
+           if ($_POST){
+//Incrementamos el valor
+               $i++;
+               $conta = $_POST["conta"] + 1;
+           }
+           else{
+//Valor inicial
+            $i=0;   
+               $conta = 1;
+           }
+        
            $enlace = connectionDB();
            $personaa=tpersona($enlace);
+           if($i!=0){
            for($j=0;$j<count($personaa);$j++) {
                echo('<h3>Puesto de control '.$personaa[$j][0].'</h3>');
            
            echo('<table cellspacing="3" CELLPADDING="4" border="3">');
                echo('<tr>');
-               echo('<th>Nombre Apostador</th>');
-               echo('<th>CC</th>');
-               echo('<th>Valor</th>');
+               echo('<th>Numero referencia</th>');
+               echo('<th>Cuota</th>');
+               echo('<th>Valor Apostado</th>');
                echo('<th>Asesor</th>');
-               echo('<th>Partido</th>');
-               echo('<th>Equipo</th>');
+               echo('<th>Valor a pagar</th>');
                echo('</tr>');
            
            $fecha1=strip_tags($_POST['fecha1']);
            $fecha2=strip_tags($_POST['fecha2']);
-           mysqli_query($enlace,"UPDATE fecha set fechaA='$fecha1', fechaB='$fecha2' where ID='1'")
-            or die("error al actualizar");
-           $apuesta=apuestass($enlace,$fecha1,$fecha2);
+            $fechat= acfecha($enlace,$idusuario);
+               
+                if($fechat[2]==$idusuario){
+                    mysqli_query($enlace,"UPDATE fecha set fechaA='$fecha1', fechaB='$fecha2' where ID='$idusuario'")
+                    or die("error actualise  la paginaaa");
+                }else{mysqli_query($enlace,"INSERT INTO fecha VALUES ('".$fecha1."','".$fecha2."','".$idusuario."')")
+                    or die("error actualise  la pagina");}
+            
+           
+           $apuesta=idapuesta($enlace,$fecha1,$fecha2);
+            $apostado=0.0;
+            $ganadot=0.0;
+            $ganado=0.0;
+            
            for($i=0;$i<count($apuesta);$i++) {
-               $partido=equiposLigaPartido($enlace,$apuesta[$i][4]);
-               if($apuesta[$i][5]==$partido[4] and $apuesta[$i][3]==$personaa[$j][1]){
-           echo('<tr bgcolor="red">');
-               echo('<td>'.$apuesta[$i][0].'</th>');
-               echo('<td>'.$apuesta[$i][1].'</td>');
-               echo('<td>'.$apuesta[$i][2].'</td>');
-               $persona = asesor($enlace,$apuesta[$i][3]);
-               echo('<td>'.$persona[0].'</td>');
+               $cuota = 1.0;
+               $band = 0;
+               $bandd = 0;
+               $apuesta1=apuestass($enlace,$apuesta[$i][0]);
+               $bandp = NULL;
+               for($k=0;$k<count($apuesta1);$k++) {
+                   $cuota=$apuesta1[$k][1]*$cuota;
+                   $partido=equiposLigaPartido($enlace,$apuesta1[$k][4]);
+                   $bandp=$apuesta1[$k][3];
+                   if($apuesta1[$k][5]!=$partido[4] and $apuesta1[$k][3]==$personaa[$j][1]){
+                      $band=1;
+                       if($partido[4]==NULL){$bandd=2;}
+                   }
+                   
+               }
+               $pagar = $cuota*$apuesta[$i][1];
                
-               echo('<td>'.$partido[0].' VS '.$partido[1].'</td>');
-               if($apuesta[$i][5]=='1'){
-               echo('<td>'.$partido[0].'</td>');}
                
-               if($apuesta[$i][5]=='2'){
-               echo('<td>'.$partido[1].'</td>');}
-               if($apuesta[$i][5]=='X'){
-               echo('<td>EMPATE</td>');}
-               echo('</tr>');
+               
+               if($band==0 and $bandp==$personaa[$j][1]){
+                   $apostado = $apuesta[$i][1]+$apostado;
+                   $ganadot = $pagar+$ganadot;
+                   echo('<tr bgcolor="red">');
+               
+                   echo('<td>'.$apuesta[$i][0].'</th>');
+                   echo('<td>'.$cuota.'</td>');
+                   echo('<td>'.$apuesta[$i][1].'</td>');
+                   $persona = asesor($enlace,$apuesta[$i][2]);
+                   echo('<td>'.$persona[0].'</td>');
+                   echo('<td>'.$pagar.'</td>');
+                   echo('</tr>');
+               }
+               if($band==1 and $bandp==$personaa[$j][1] and $bandd==0){
+                   $apostado = $apuesta[$i][1]+$apostado;
+                   $ganadot = $pagar+$ganadot;
+                   $ganado = $pagar+$ganado;
+                   echo('<tr bgcolor="green">');
+               
+                   echo('<td>'.$apuesta[$i][0].'</th>');
+                   echo('<td>'.$cuota.'</td>');
+                   echo('<td>'.$apuesta[$i][1].'</td>');
+                   $persona = asesor($enlace,$apuesta[$i][2]);
+                   echo('<td>'.$persona[0].'</td>');
+                   echo('<td>'.$pagar.'</td>');
+                   echo('</tr>');
                }
                
-               if($apuesta[$i][5]!=$partido[4] and $apuesta[$i][3]==$personaa[$j][1] and $partido[4]!=NULL){
-           echo('<tr bgcolor="green">');
-               echo('<td>'.$apuesta[$i][0].'</th>');
-               echo('<td>'.$apuesta[$i][1].'</td>');
-               echo('<td>'.$apuesta[$i][2].'</td>');
-               $persona = asesor($enlace,$apuesta[$i][3]);
-               echo('<td>'.$persona[0].'</td>');
-               
-               echo('<td>'.$partido[0].' VS '.$partido[1].'</td>');
-               if($apuesta[$i][5]=='1'){
-               echo('<td>'.$partido[0].'</td>');}
-               
-               if($apuesta[$i][5]=='2'){
-               echo('<td>'.$partido[1].'</td>');}
-               if($apuesta[$i][5]=='X'){
-               echo('<td>EMPATE</td>');}
-               echo('</tr>');
-               }
            }
+                echo('<tr>');
+                echo('<td>Valor total apostado: </td>');
+                echo('<td colspan="2">'.$apostado.'</td>');
+                echo('</tr>');
+                echo('<tr>');
+                echo('<td>Valor a pagar total: </td>');
+                echo('<td colspan="2">'.$ganadot.'</td>');
+                echo('</tr>');
+                echo('<tr>');
+                echo('<td>Valor a pagar ganado: </td>');
+                echo('<td colspan="2">'.$ganado.'</td>');
+                echo('</tr>');
                echo('</table>');
+              
+           }
            }
            connectionClose($enlace);
            ?>
         </form>
+        
         </center>
          </div>
          <footer>
