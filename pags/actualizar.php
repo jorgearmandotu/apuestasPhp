@@ -2,7 +2,9 @@
 
 require_once('gestionDB.php');
 require_once('validaciones.php');
-
+ if(!validarsession()){
+            header('location: ../index.php');
+        }
 $idp = $_REQUEST['idpartido'];
 
 $arr = array();

@@ -1,21 +1,12 @@
 <?php
 require_once '../gestionDB.php';
+require_once('../validaciones.php');
+              validarAsesor();
 
 $fecha = strip_tags($_POST['fecha']);
 $enlace = connectionDB();
 $partidos = partidos($enlace,$fecha);
- $res="<div class='fila'>
-                <div class='celda1' id='encabezado'>
-                    <label>partido - hora </label></div>
-                <div class='celda2'>
-                    <label> 1 </label></div>
-                <div class='celda3'>
-                    <label> X </label></div>
-                <div class='celda4'>
-                    <label> 2 </label></div>
-              </div>
-              <div class='celda5'></div>
-              <form method='POST' id='miniformulario' action='lib/gestionApuesta.php'>";
+ $res="";
 
 
 for($i=0;$i<count($partidos);$i++){
@@ -52,11 +43,7 @@ for($i=0;$i<count($partidos);$i++){
               </div>";
 }
 connectionClose($enlace);
-$res.="<div id='boton'>
-<input tipe='number' step='any' name='valorapuesta' id='valor'>
-    <button type='submit' id='apostar'>apostar</button>
-    </div>
-        </form>";
+
 echo $res;
 
 ?>

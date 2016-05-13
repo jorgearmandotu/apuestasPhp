@@ -35,4 +35,20 @@ function limpiarcadenas($cadena){
     $cadena=strtoupper($cadena);
     return $cadena;
 }
+function validarlogeo(){
+    session_start();
+    if(isset($_SESSION['tipo'])){
+            if($_SESSION['tipo']=='ADMINISTRADOR'){
+            header('location: pags/administrador.php');
+            }elseif($_SESSION['tipo']=='ASESOR' || $_SESSION['tipo']=='CLIENTE'){
+            header('location: pags/asesor.php');
+            }
+        }
+}
+function validarsession(){
+    session_start();
+    if(isset($_SESSION['tipo'])){
+        return true;
+        }else{return false;}
+}
 ?>

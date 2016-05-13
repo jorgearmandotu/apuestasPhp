@@ -1,5 +1,9 @@
 <?php
 require_once '../gestionDB.php';
+require_once('../validaciones.php');
+        if(!validarsession()){
+            header('location: ../../index.php');
+        }
 
     $passant=strip_tags($_POST['passanterior']);
     $passnueva=strip_tags($_POST['passnueva']);

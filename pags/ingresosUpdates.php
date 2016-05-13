@@ -1,7 +1,7 @@
 <?php
 require_once('gestionDB.php');
 require_once('validaciones.php');
-
+validarAdmin();
 //funcion q llama las demas funciones que necesita paa ingresar al personal
 
 

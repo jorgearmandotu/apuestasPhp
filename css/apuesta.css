@@ -8,9 +8,16 @@
 #fecha{
     border-radius: 1em;
 }
-#listpartidos{
-    width: 100%;
+#listpartidosantes{
     overflow: hidden;
+    text-align: left;
+}
+#cantidadapuesta{
+    max-width: 100%;
+    overflow: hidden;
+    position: relative;
+    left: 2.5em;
+    float: none;
 }
 .fila{
     width: 1000px;
@@ -53,8 +60,10 @@ button{
     font-weight: bold;
 }
 #boton{
-    width: 400px;
+    width: 100%;
     text-align: center;
+    overflow: hidden;
+    padding: 1em;
 }
 #valor:focus,#fecha:focus{
     background: #5edd80;

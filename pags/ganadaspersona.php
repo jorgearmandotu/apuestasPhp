@@ -35,8 +35,10 @@
           <div id="contenido">
     <?php
         require_once('gestionDB.php');
-        
-        session_start();
+        require_once('validaciones.php');
+        if(!validarsession()){
+            header('location: ../index.php');
+        }
         $idusuario=$_SESSION['id'];
         $user = $_SESSION['usuario'];
     ?>

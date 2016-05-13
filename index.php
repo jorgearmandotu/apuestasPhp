@@ -18,6 +18,10 @@
         <script src="banner/archivos/initslider-1.js"></script>
       </head>  
       <body>
+        <?php
+        require_once 'pags/validaciones.php';
+          validarlogeo();
+        ?>
          <div id='contenedor'>
           <nav id="login">
              <div id="logo">

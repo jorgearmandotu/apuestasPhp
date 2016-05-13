@@ -36,8 +36,9 @@
           <div id="contenido">
     <?php
         require_once('gestionDB.php');
+        require_once('validaciones.php');
+        validarAdmin();
         
-        session_start();
         $idusuario=$_SESSION['id'];
         $user = $_SESSION['usuario'];
     ?>

@@ -1,6 +1,9 @@
 <?php
 require_once('gestionDB.php');
 require_once('validaciones.php');
+if(!validarsession()){
+            header('location: ../index.php');
+        }
 use Carbon\Carbon;
 function cmbpartidos(){
 $fecha=strip_tags($_POST['fecha']);
