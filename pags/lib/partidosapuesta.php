@@ -1,5 +1,7 @@
 <?php
 require_once '../gestionDB.php';
+require_once('../validaciones.php');
+              validarAsesor();
 
 $fecha = strip_tags($_POST['fecha']);
 $enlace = connectionDB();

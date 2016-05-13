@@ -1,5 +1,7 @@
 <?php
 require_once('../gestionDB.php');
+require_once('validaciones.php');
+              validarAdmin();
 
 $id = $_POST['asesores'];
 $saldo = $_POST['saldo'];
