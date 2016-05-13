@@ -13,6 +13,9 @@
         <meta name="author" content="Reon-Soluciones_Web"/>
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
           <title>agregarClientes</title>
+          <script src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
+      <script src="../js/ganador1.js"></script>
+      <script src="../js/ganadorr.js"></script>
           <link rel="stylesheet" href="../css/normailze.min.css">
         <link rel="stylesheet" href="../css/estilosform.css">
       </head>
@@ -38,7 +41,7 @@
           <div id="contenido">
           <center>
              
-              <form method="post" action="actualizarganador.php" id="formularioganador" onsubmit="return confirmar()">
+              <form method="post" action="actualizar.php" id="formularioganador" onsubmit="return confirmar()">
                  <ul>
                     <li>
                         <label>Fecha del partido: </label>
@@ -59,24 +62,7 @@
                          <button type="submit" name="Actualizar" id="btnganador">Actualizar</button>
                      </li>
                  </ul>
-                  <?php
-                  $enlace = connectionDB();
-                  $ganador=strip_tags($_POST['equipo']);
-                  $idp = $_REQUEST['partido'] ;
-                  $equ = $_REQUEST['equipo'] ;
-                  $equipos = equiposLigaPartido($enlace,$idp);
-                  if($equipos[0]==$equ){
-                      mysqli_query($enlace,"UPDATE partidos set GANADOR='1' where ID='$idp'")
-                                or die("error al actualizar");
-                  }if($equipos[1]==$equ){
-                      mysqli_query($enlace,"UPDATE partidos set GANADOR='2' where ID='$idp'")
-                                or die("error al actualizar");
-                  }if("Empate"==$equ){
-                      mysqli_query($enlace,"UPDATE partidos set GANADOR='X' where ID='$idp'")
-                                or die("error al actualizar");
-                  }
-                    connectionClose($enlace);
-                  ?>
+                 
               </form>
           </center>
               </div>
@@ -92,7 +78,6 @@
           </footer>
           </div>
       </body>
-      <script src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
-      <script src="../js/ganador1.js"></script>
+      
       
 </html>

@@ -9,10 +9,15 @@ $(document).ready(function() {
 
     $('#formularioganador').submit(function() {
 
-        var $partido=$('#partido').val();
-        //llenar equiposmpara apostar
-        $("#equipo").load("../pags/actualizar.php",{idpartido:$partido});
-       // $('#hola').html("<option>"+$(this).val()+"</option><option>");
+        $.ajax({
+            type: 'POST',
+            url: '../pags/actualizar.php',
+            data: $(this).serialize(),
+            success: function(data) {
+                $('#formularioganador')[0].reset();
+                $('#result').html(data);
+            }
+        })
         return false;
     }); 
     
