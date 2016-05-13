@@ -1,6 +1,6 @@
 <?php
 require_once '../gestionDB.php';
-require_once('validaciones.php');
+require_once('../validaciones.php');
               validarAdmin();
 $idp=$_POST['id'];
 $local=$_POST['cuota1'];

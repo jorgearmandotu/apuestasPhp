@@ -59,6 +59,17 @@ function crrearapuesta(){
           <div id="contenido">
           <div id='center'>
       <ul>
+             <li>
+                 <label>Saldo Actual: </label><?php 
+                  $enlace = connectionDB();
+                  $saldo = saldo($enlace,$_SESSION['id']);
+                  echo'<label>$ '.$saldo.'</label>';
+                 date_default_timezone_set('America/Lima');
+                 $hora = new datetime();
+                 
+                  ?>
+             </li>
+             <input type="hidden" id="saldo" value="<?php echo $saldo; ?>">
               <li id="selecfecha">
                   <label>Seleccione una fecha: </label>
                   <input type="date" name="fecha" id="fecha" <?php date_default_timezone_set('America/Lima');
@@ -69,12 +80,40 @@ function crrearapuesta(){
                  
               </li>
           </ul>
-      <div id="listpartidos">
-            
-
+           <form method='POST' id='miniformulario' action='lib/gestionApuesta.php'>
+           <div id="cantidadapuesta">
+          <label>Cantidad a apostar $: </label>
+             <input tipe='number' step='any' name='valorapuesta' id='valor'>
+              </div>
+          
+      <div id="listpartidosantes">
+            <div class='fila'>
+                <div class='celda1' id='encabezado'>
+                    <label>partido - hora </label></div>
+                <div class='celda2'>
+                    <label> 1 </label></div>
+                <div class='celda3'>
+                    <label> X </label></div>
+                <div class='celda4'>
+                    <label> 2 </label></div>
+              </div>
+              <div class='celda5'></div>
+              
+              
+                <div id="listpartidos">
+                 
+                 
+                  
+                  </div>
+                  
+              <div id='boton'>
+                <button type='button' id='apostar'>apostar</button>
+            </div>
+            </form>
          
           </div>
               </div>
+              
           </div>
               <footer>
               <img src="../images/Bookiesport_Logo.png">

@@ -1,6 +1,6 @@
 <?php
 require_once('../gestionDB.php');
-require_once('validaciones.php');
+require_once('../validaciones.php');
               
     $nombreA=strip_tags($_POST['nombre']);
     $cedulaA=strip_tags($_POST['cedula']);

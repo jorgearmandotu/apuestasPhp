@@ -9,7 +9,7 @@ $(document).ready(function(){
             }
         })
     }
-    cargarptdos();
+    //cargarptdos();
     $('#fecha').change(function(){
         $.ajax({
             type:'POST',
@@ -18,21 +18,33 @@ $(document).ready(function(){
             success: function(data){
                 $('#listpartidos').html(data);
             }
-        })
+        });
+        
     });
-/*    $('#miniformulario').submit(function(){
-        $.ajax({
-            type: 'POST',
-            url: 'lib/gestionApuesta.php',
-            data: $(this).serialize(),
-            success: function(data){
-                $("#datosapuestas").html(data);
-            }
-        })
-        return false;
-    });*/
-});
-var initDatepicker = function() {
+    $('#apostar').click(function(){
+        var valor = $('#valor').val();
+        var saldo = $('#saldo').val();
+        if(valor>300000 || valor<5000){
+            alert('La apuesta minima es de $5000 y la maxima de $300000')
+        }else if(saldo<valor){
+            alert('Usted no posee saldo suficiente para realisar esta apuesta')
+        }
+        else{
+            $('#miniformulario').submit();
+        }
+    });
+//    $('#miniformulario').submit(function(){
+//        $.ajax({
+//            type: 'POST',
+//            url: 'lib/gestionApuesta.php',
+//            data: $(this).serialize(),
+//            success: function(data){
+//                $("#datosapuestas").html(data);
+//            }
+//        })
+//        return false;
+//    });
+    var initDatepicker = function() {
     $('input[type=date]')
         .each(function() {
         var $input = $(this);
@@ -47,3 +59,6 @@ var initDatepicker = function() {
 if(!Modernizr.inputtypes.date){
     $(document).ready(initDatepicker);
 };
+});
+
+
