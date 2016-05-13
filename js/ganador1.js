@@ -32,6 +32,8 @@ $(document).ready(function() {
     
     
 });
+
+
 function confirmar(){
   //var nombre=$('#nombre').val();
    // var cc=$('#CC').val();
@@ -49,4 +51,6 @@ function confirmar(){
          }
     
 }
+
+
 
