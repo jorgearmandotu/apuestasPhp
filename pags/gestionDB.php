@@ -5,7 +5,7 @@ function connectionDB(){
     $DB_SERVER='localhost';
     $DB_NAME='apuestas';
     $DB_USER='root';
-    $DB_PASS='25234767';
+    $DB_PASS='Jorge1990';
     
     $enlace = mysqli_connect($DB_SERVER,$DB_USER,$DB_PASS,$DB_NAME);
     if(!$enlace){
@@ -253,6 +253,7 @@ function partidos($enl,$fecha){
     }
     return $arr;
 }
+//retorna arreglo para armar nombre de partido con hora
 function nompartido($enl,$idp){
     $sql = "SELECT ID,EQUIPOA,EQUIPOB,LIGA,CUOTA1,CUOTAX,CUOTA2, DATE_FORMAT(HORA, '%T') AS HORAP FROM partidos WHERE ID='".$idp."';";
     $result = $enl->query($sql)or die("error al conectar DB");

@@ -9,7 +9,7 @@ $(document).ready(function(){
             }
         })
     }
-    //cargarptdos();
+    cargarptdos();
     $('#fecha').change(function(){
         $.ajax({
             type:'POST',
@@ -21,29 +21,30 @@ $(document).ready(function(){
         });
         
     });
-    $('#apostar').click(function(){
+    $('#apostar').on('click',function(){
         var valor = $('#valor').val();
         var saldo = $('#saldo').val();
+        saldo= parseFloat(saldo);
+        valor = parseFloat(valor);
         if(valor>300000 || valor<5000){
             alert('La apuesta minima es de $5000 y la maxima de $300000')
-        }else if(saldo<valor){
-            alert('Usted no posee saldo suficiente para realisar esta apuesta')
+        }else if(saldo < valor){
+            alert('Usted no posee saldo suficiente para realisar esta apuesta'+saldo+valor)
         }
         else{
             $('#miniformulario').submit();
         }
     });
-//    $('#miniformulario').submit(function(){
-//        $.ajax({
-//            type: 'POST',
-//            url: 'lib/gestionApuesta.php',
-//            data: $(this).serialize(),
-//            success: function(data){
-//                $("#datosapuestas").html(data);
-//            }
-//        })
-//        return false;
-//    });
+    
+    $('#listpartidos').on('click','.cuotas',function(){
+       $('.cuotas:checked').each(function() {
+        alert("El checkbox con valor " + $(this).val() + " está seleccionado");
+           $.post('lib/liveApuesta.php',{datos: $(this).val()},function(data){
+               alert(data);
+           })
+                       });
+    })
+    
     var initDatepicker = function() {
     $('input[type=date]')
         .each(function() {

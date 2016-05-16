@@ -1,3 +1,17 @@
+
+div{
+    border: 1px solid #000;
+}
+#center{
+    overflow: hidden;
+}
+form{
+    
+    width: 800px;
+}
+#contenido{
+    border: 1px solid #f56;
+}
 #center ul{
     list-style: none;
 }
@@ -11,17 +25,23 @@
 #listpartidosantes{
     overflow: hidden;
     text-align: left;
+    border: 1px solid #789;
+    float: left;
+    width: auto;
 }
 #cantidadapuesta{
-    max-width: 100%;
+    max-width: 500px;
     overflow: hidden;
     position: relative;
     left: 2.5em;
     float: none;
+    padding-bottom: 1.5em;
 }
 .fila{
-    width: 1000px;
+    width: auto;
     margin: 0 auto;
+    overflow: hidden;
+    float: left;
 }
 .celda1{
     width: 500px;
@@ -30,14 +50,7 @@
     margin: 4px;
     vertical-align: middle;
 }
-.celda2,.celda3,.celda4,.celda5{
-    float: left;
-    width: 50px;
-    height: 30px;
-    text-align: center;
-    margin: 4px;
-    border: 1px solid #000;
-}
+
 input{
     border-radius: 1em;
 }
@@ -59,12 +72,23 @@ button{
     color: #000;
     font-weight: bold;
 }
-#boton{
-    width: 100%;
+#realizarapuestas{
+    max-width: 500px;
     text-align: center;
-    overflow: hidden;
     padding: 1em;
+    float: left;
+    border: 2px solid #000;
 }
 #valor:focus,#fecha:focus{
     background: #5edd80;
+}
+.celda2,.celda3,.celda4,.celda5{
+    float: left;
+    width: 50px;
+    height: 30px;
+    text-align: center;
+    margin: 4px;
+}
+.celda2{
+    
 }

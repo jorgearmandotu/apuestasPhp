@@ -30,7 +30,6 @@
                  </ul>
           </header>
         <div id="contenido">
-        <h1>bienbenidos asesores</h1>
         <ul>
         <li><a href='cambiarContrasena.php'>Cambiar contraseña</a><br></li>
         <li><a href='apuesta.php'>apuestas</a><br></li>

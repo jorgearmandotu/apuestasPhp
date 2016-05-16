@@ -7,7 +7,7 @@ $idpapuesta=$_POST['partidosids'];
 $cuota =$_POST['cuotatotal'];
 $valorA=$_POST['valorapostado'];
 //crear la id de la pauesta fecha-hora-usuario
-date_default_timezone_set('America/Lima');
+date_default_timezone_set('America/Bogota');
 $dActual= new datetime();
 $dActual= date('Y-m-d_H:i:s');
 $idusuario =$_SESSION['id'];

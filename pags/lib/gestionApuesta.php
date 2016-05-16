@@ -4,13 +4,20 @@ require_once '../gestionDB.php';
 $cuota=null;
 validarAsesor();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {  
-    $cuota=$_POST["cuota"];
+    if(isset($_POST['cuota'])){
+        $cuota=$_POST["cuota"];
+    }
+    else{
+        header('location: ../apuesta.php');
+    }
     $valorapuesta=$_POST["valorapuesta"];
     $idusuario=$_SESSION['id'];
     $count = count($cuota);
     $cuotatotal=1;
     $totalganancia=0;
     $partidosids="";
+    $enlace = connectionDB();
+    $saldo=saldo($enlace,$idusuario);
         ?>
          <html lang="es">
       <head>
@@ -50,31 +57,42 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           <div id="contenido">
           <div id='center'>
              <?php
+            $boton ="<button type='submit'>confirmar apuesta</button>";
             for ($i = 0; $i < $count; $i++) {
 //        echo $cuota[$i];
             $datos = explode(':',$cuota[$i],3);
             $partidosids.='-idp-'.$datos[1].'-apuesta-'.$datos[2].'-apuesta-'.$datos[0];
                 
-                //obtengo nombre de partido
+                //valido hora obtengo nombre de partido
                 $enlace = connectionDB();
+                $horapartido = fechahoraPartido($enlace,$datos[1]);
                 $nompart = nompartido($enlace,$datos[1]);
                 connectionClose($enlace);
                 
+                date_default_timezone_set("America/Bogota");
+                $dActual= new datetime();
+                $d = new datetime($horapartido);
+                $d->modify('-1 minutes');
+               if($dActual>$d){
+                   echo '<label><ul><li>partido iniciado</label></li></ul>';
+                   $boton='';
+               }else{
                 
             echo"<ul>
           <li><label>partido: ".$nompart."
-           </label>
+           </label></li>
         <li>
             <label>apuesta: ".$datos[2]."-</label>
             <label id='cuotaspan'>cuota: ".$datos[0]."</label>
         </li>
          
           </ul>";
-        
+       
         $cuotatotal=$cuotatotal*floatval($datos[0]);
+               }
     }
     $totalganancia=$cuotatotal*floatval($valorapuesta);
-    
+    if(floatval($saldo)>=floatval($valorapuesta) and (floatval($valorapuesta)<300001 and floatval($valorapuesta)>=5000)){
     echo "<form method='post' action='realizarapuesta.php' id='formconfirmapuesta'>
           <ul>
           <input type='hidden' value='".$partidosids."' name='partidosids'>
@@ -85,10 +103,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input type='hidden' value='".$valorapuesta."' name='valorapostado'>
 
         </li>
-         <li><button type='submit'>confirmar apuesta</button></li>
+         <li>".$boton."</li>
+         <li><a href='../apuesta.php'><button type='button'>volver</button></a></li>
           </ul>
           </form>";
-    
+    }else{
+        echo"<ul><li><h1>Usted No puede apostar</h1></li>
+        <li>verifique que disponga de saldo suficiente o que su apuesta no sea mayor a $300000 o menor a $5000</li>
+        <li><a href='../apuesta.php'><button type='button'>volver</button></a></li></ul>";
+    }
 }
 
 ?>
