@@ -8,7 +8,6 @@ $enlace = connectionDB();
 $partidos = partidos($enlace,$fecha);
  $res="";
 
-
 for($i=0;$i<count($partidos);$i++){
     $idP=$partidos[$i][0];
     $nomEquiA=$partidos[$i][1];

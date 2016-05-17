@@ -73,7 +73,8 @@ button{
     font-weight: bold;
 }
 #realizarapuestas{
-    max-width: 500px;
+    background: #fff;
+    width: 500px;
     text-align: center;
     padding: 1em;
     float: left;

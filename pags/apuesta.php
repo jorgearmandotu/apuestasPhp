@@ -109,7 +109,7 @@ function crrearapuesta(){
             </form>
               <div id='realizarapuestas'>
                
-<!--                <button type='button' id='apostar'>apostar</button>-->
+<!--                  <button type='button' id='apostar'>apostar</button>-->
             </div>
           </div>
 
