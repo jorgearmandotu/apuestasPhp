@@ -66,7 +66,6 @@ function crrearapuesta(){
                   echo'<label>$ '.$saldo.'</label>';
                  date_default_timezone_set('America/Bogota');
                  $hora = new datetime();
-                 
                   ?>
              </li>
              <input type="hidden" id="saldo" value="<?php echo $saldo; ?>">
@@ -78,6 +77,19 @@ function crrearapuesta(){
                 echo 'value = "'.$dActual.'"';
                 ?>>
                  
+              </li>
+              <li id="selectliga">
+                  <label>seleccione liga</label>
+                  <select name="liga" id="liga">
+                      <option>Todas</option>
+                      <?php
+                      $ligas=ligas($enlace);
+                      connectionClose($enlace);
+                      for($i=0;$i<count($ligas);$i++){
+                          echo'<option>'.$ligas[$i].'</option>';
+                      }
+                      ?>
+                  </select>
               </li>
           </ul>
            <form method='POST' id='miniformulario' action='lib/gestionApuesta.php'>

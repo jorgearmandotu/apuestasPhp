@@ -4,6 +4,9 @@ $(document).ready(function(){
             type:'POST',
             url:'lib/cmbPartidos.php',
             data:$('#fecha').serialize(),
+            beforeSend: function(){
+                $('#listpartidos').html('<img src="../images/loading.gif" alt="cargando">');
+            },
             success: function(data){
                 $('#listpartidos').html(data);
             }
@@ -15,6 +18,9 @@ $(document).ready(function(){
             type:'POST',
             url:'lib/cmbPartidos.php',
             data: $('#fecha').serialize(),
+            beforeSend: function(){
+                $('#listpartidos').html('<img src="../images/loading.gif" alt="cargando">');
+            },
             success: function(data){
                 $('#listpartidos').html(data);
             }

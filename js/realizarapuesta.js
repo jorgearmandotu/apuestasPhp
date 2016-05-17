@@ -4,6 +4,9 @@ $(document).ready(function(){
             type:'POST',
             url:'lib/partidosapuesta.php',
             data:$('#fecha').serialize(),
+            beforeSend: function(){
+                $('#listpartidos').html('<img src="../images/loading.gif" alt="cargando">');
+            },
             success: function(data){
                 $('#listpartidos').html(data);
             }
@@ -15,11 +18,30 @@ $(document).ready(function(){
             type:'POST',
             url:'lib/partidosapuesta.php',
             data: $('#fecha').serialize(),
+            beforeSend: function(){
+                $('#listpartidos').html('<img src="../images/loading.gif" alt="cargando">');
+            },
             success: function(data){
                 $('#listpartidos').html(data);
             }
         });
         
+    });
+    $('#liga').change(function(){
+        $.ajax({
+            type:'post',
+            url:'lib/partidosapuesta.php',
+            data:{
+                'fecha': $('#fecha').val(),
+                'liga': $('#liga').val()
+            },
+            beforeSend: function(){
+                $('#listpartidos').html('<img src="../images/loading.gif" alt="cargando">');
+            },
+            success: function(data){
+                $('#listpartidos').html(data);
+            }
+        });
     });
     $('#realizarapuestas').on('click','#apostar',function(){
         var valor = $('#valor').val();

@@ -253,6 +253,35 @@ function partidos($enl,$fecha){
     }
     return $arr;
 }
+//sobreescribir metodo
+function partidoslig($enl,$fecha,$liga){
+    $sql = "SELECT ID,EQUIPOA,EQUIPOB,LIGA,CUOTA1,CUOTAX,CUOTA2, DATE_FORMAT(HORA, '%T') AS HORAP FROM partidos WHERE FECHA='$fecha' AND LIGA=".$liga." ORDER BY HORA;";
+    $result = $enl->query($sql)or die('error al consulta DB');
+    $arr = array();
+    $i=0;
+    while($row=$result->fetch_assoc()){
+        $l=0;
+        $arr[$i][$l]=$row['ID'];
+        $l++;
+        $arr[$i][$l]=$row['EQUIPOA'];
+        $l++;
+        $arr[$i][$l]=$row['EQUIPOB'];
+        $l++;
+        $arr[$i][$l]=$row['LIGA'];
+        $l++;
+        $arr[$i][$l]=$row['HORAP'];
+        $l++;
+        $arr[$i][$l]=$row['CUOTA1'];
+        $l++;
+        $arr[$i][$l]=$row['CUOTAX'];
+        $l++;
+        $arr[$i][$l]=$row['CUOTA2'];
+        $i++;
+        
+    }
+    return $arr;
+}
+
 //retorna arreglo para armar nombre de partido con hora
 function nompartido($enl,$idp){
     $sql = "SELECT ID,EQUIPOA,EQUIPOB,LIGA,CUOTA1,CUOTAX,CUOTA2, DATE_FORMAT(HORA, '%T') AS HORAP FROM partidos WHERE ID='".$idp."';";

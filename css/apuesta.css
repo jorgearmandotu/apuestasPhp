@@ -1,7 +1,5 @@
 
-div{
-    border: 1px solid #000;
-}
+
 #center{
     overflow: hidden;
 }
@@ -9,9 +7,7 @@ form{
     
     width: 800px;
 }
-#contenido{
-    border: 1px solid #f56;
-}
+
 #center ul{
     list-style: none;
 }
@@ -21,6 +17,12 @@ form{
 }
 #fecha{
     border-radius: 1em;
+}
+#liga{
+    border-radius: 1em;
+}
+li{
+    padding: 0.5em;
 }
 #listpartidosantes{
     overflow: hidden;
@@ -62,7 +64,6 @@ input{
 }
 #datosapuestas{
     background-color: yellow;
-    border: 1px solid #fff;
     position: fixed;
     width: 200px;
 }
