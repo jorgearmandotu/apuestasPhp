@@ -351,7 +351,7 @@ function fechahoraPartido($enl,$id){
     return $hora;
 }
 function listAsesores($enl){
-    $sql= "SELECT NOMBRE,SALDO,IDASESOR FROM saldos JOIN persona WHERE(IDASESOR=ID AND TIPO='ASESOR');";
+    $sql= "SELECT NOMBRE,SALDO,IDASESOR FROM saldos JOIN persona WHERE(IDASESOR=ID AND (TIPO='ASESOR' OR TIPO='CLIENTE'));";
     $ase = array();
     $result = $enl->query($sql)or die('error al consulta DB');
     $i=0;
