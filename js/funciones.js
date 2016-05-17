@@ -52,11 +52,8 @@ var initTimepicker = function() {
     $('input[type=time')
         .each(function() {
         var $input = $(this);
-        $input.timepicker({
-            minDate: $input.attr('min'),
-            maxDate: $input.attr('max'),
-            dateFormat: 'yy-mm-dd'
-        });
+        $input.timepicker($.timepicker.regional['es']
+        );
     });
 };
 if(!Modernizr.inputtypes.time){

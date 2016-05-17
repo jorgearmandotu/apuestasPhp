@@ -18,7 +18,9 @@ require_once 'gestionDB.php';
         <script src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
         <script src="../js/modernizr-custom.js"></script>
           <script src="../js/jquery-ui.min.js"></script>
+          <script src="../js/timePicker.js"></script>
           <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+          <link rel="stylesheet" href="../css/timePicker.css">
           <script src="../js/funciones.js"></script>
        <title>ingresar partidos</title>
        <link rel="stylesheet" href="../css/normailze.min.css">
@@ -74,7 +76,7 @@ require_once 'gestionDB.php';
                     <label>    Hora: </label>
                     <input type="time" name="hora" required>
                 </li>
-                CUOTAS:
+                <label>CUOTAS:</label>
                 <li>
                     <label>Cuota local (1)</label>
                     <input type="number" step="any" required name="cuota1" min="0">

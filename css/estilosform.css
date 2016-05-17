@@ -87,6 +87,9 @@ footer p{
 center form ul{
     list-style: none;
 }
+center label{
+    color: #ffbf00;
+}
 center form ul li{
     margin: 1em;
     text-align: center;
