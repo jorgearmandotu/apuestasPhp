@@ -28,10 +28,10 @@ for($l=0;$l<count($ids);$l++){
         $nompartido='<label>partido iniciado</label>';
     }
     $valcuota = $valcuota*floatval($cuota[$l]);
-    $res.=$nompartido.'<br>'.'cuota: '.$cuota[$l].' apuesta: '.$apuesta[$l].'<br><hr>';}
+    $res.='<label>'.$nompartido.'</label><br />'.'cuota: '.$cuota[$l].' apuesta: '.$apuesta[$l].'<br><hr>';}
 }
 $total=$valorapuesta*$valcuota;
-$res.='Ganancia: '.$total.'<br><button type="button" id="apostar">apostar</button>';
+$res.='<label>Ganancias: </label>'.$total.'<br><button type="button" id="apostar">apostar</button>';
 echo $res;
-//echo $ids[0].'<button type="button" id="apostar>apostar</button>';
+//echo '<button type="button" id="apostar>apostar</button>';
 ?>

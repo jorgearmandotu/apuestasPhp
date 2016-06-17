@@ -2,16 +2,19 @@
 require_once '../validaciones.php';
 require_once '../gestionDB.php';
 $cuota=null;
+$cuotas=null;
 validarAsesor();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {  
-    if(isset($_POST['cuota'])){
-        $cuota=$_POST["cuota"];
+    if(isset($_POST['strapuesta'])){
+        $cuotas=$_POST["strapuesta"];
     }
     else{
         header('location: ../apuesta.php');
     }
-    $valorapuesta=$_POST["valorapuesta"];
+    $valorapuesta=$_POST["vlrapuesta"];
     $idusuario=$_SESSION['id'];
+    echo $cuotas;
+    $cuota = explode(':',cuotas);
     $count = count($cuota);
     $cuotatotal=1;
     $totalganancia=0;
@@ -60,7 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $boton ="<button type='submit'>confirmar apuesta</button>";
             for ($i = 0; $i < $count; $i++) {
 //        echo $cuota[$i];
-            $datos = explode(':',$cuota[$i],3);
+            $datos = explode(':',cuota);
             $partidosids.='-idp-'.$datos[1].'-apuesta-'.$datos[2].'-apuesta-'.$datos[0];
                 
                 //valido hora obtengo nombre de partido

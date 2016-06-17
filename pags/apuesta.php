@@ -119,6 +119,10 @@ function crrearapuesta(){
                   </div>
                </div>
             </form>
+              <form method="POST" id="strform" action='lib/gestionApuesta.php'>
+                  <input type="hidden" id="strapuesta" name="strapuesta">
+                  <input type="hidden" id="vlrapuesta" name="vlrapuesta">
+              </form>
               <div id='realizarapuestas'>
                
 <!--                  <button type='button' id='apostar'>apostar</button>-->
