@@ -15,5 +15,5 @@ if(actualizarcuotas($enlace,$idp,$local,$visitante,$empate)){
 }else{
     echo '<script type="text/javascript">alert("ocurrio un error buebe a intentarlo, si el problema persiste intenta en cerrar sesion e iniciarla de nuevo")</script>';
 }
-
+conecctionClose($enlace);
 ?>

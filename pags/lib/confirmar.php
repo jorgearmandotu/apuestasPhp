@@ -46,6 +46,7 @@ function buscarLiga($liga){
 function buscarPartido($fechaPartido,$horaP,$idequipoA,$idequipoB,$idliga){
     $enlace = connectionDB();
     $id = idpartido($enlace,$fechaPartido,$horaP,$idequipoA,$idequipoB,$idliga);
+    connectionClose($enlace);
     return $id;
     
 }

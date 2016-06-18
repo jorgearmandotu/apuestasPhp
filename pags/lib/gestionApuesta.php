@@ -50,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                            <img src="../../images/Bookiesport_Usuario.png" alt="usuario"></a>
                      </li>
                      <li class="logout">
-                         <a href="salir.php">Salir</a>
+                         <a href="../salir.php">Salir</a>
                      </li>
                      <li id="salirico">
                          <a href="asesor.php"><img src='../../images/Bookiesport_Inicio.png' alt="Inicio"></a>
