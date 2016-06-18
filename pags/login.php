@@ -6,14 +6,13 @@ $usuario = strtoupper($idusuario);
 $pass = $_POST['password'];
 
 if(empty($usuario)||empty($pass)){
-    header("location: ../index.html");
+    header("location: ../index.php");
     exit();
 }
 $enlace=connectionDB();
 if($enlace!=null){
     verificarLogin($usuario,$enlace,$pass);
 }
-
 
 /*solo funciona en php version anteriorre a 7 ya q fue eliminada*/
 /*mysql_connect(DB_SERVER,DB_USER,DB_PASS)or die("Error al conectar con bd ". mysql_error());
