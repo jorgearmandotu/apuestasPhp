@@ -13,14 +13,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     $valorapuesta=$_POST["vlrapuesta"];
     $idusuario=$_SESSION['id'];
-    echo $cuotas;
-    $cuota = explode(':',cuotas);
+    $cuota = explode('-',$cuotas);
     $count = count($cuota);
     $cuotatotal=1;
     $totalganancia=0;
     $partidosids="";
     $enlace = connectionDB();
     $saldo=saldo($enlace,$idusuario);
+    connectionClose($enlace);
         ?>
          <html lang="es">
       <head>
@@ -61,9 +61,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           <div id='center'>
              <?php
             $boton ="<button type='submit'>confirmar apuesta</button>";
-            for ($i = 0; $i < $count; $i++) {
-//        echo $cuota[$i];
-            $datos = explode(':',cuota);
+            for ($i = 0; $i < $count-1; $i++) {
+            $datos = explode(':',$cuota[$i]);
+                //creo cadena con idp, apuesta para utilicisacion de explode
             $partidosids.='-idp-'.$datos[1].'-apuesta-'.$datos[2].'-apuesta-'.$datos[0];
                 
                 //valido hora obtengo nombre de partido
@@ -93,6 +93,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
        
         $cuotatotal=$cuotatotal*floatval($datos[0]);
                }
+                
     }
     $totalganancia=$cuotatotal*floatval($valorapuesta);
     if(floatval($saldo)>=floatval($valorapuesta) and (floatval($valorapuesta)<300001 and floatval($valorapuesta)>=5000)){

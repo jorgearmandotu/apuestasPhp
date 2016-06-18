@@ -48,11 +48,9 @@ $(document).ready(function(){
         });
     });
     $('#realizarapuestas').on('click','#apostar',function(){
-        alert('evento');
         var valor = $('#valor').val();
         var saldo = $('#saldo').val();
         if(valor==''){valor=0;}
-        alert(valor+'___'+saldo);
         saldo= parseFloat(saldo);
         valor = parseFloat(valor);
         if(valor>300000 || valor<5000){
@@ -63,7 +61,6 @@ $(document).ready(function(){
         else{
             $('#strapuesta').val(datosap);
             $('#vlrapuesta').val(valor);
-            alert($('#strapuesta').val());
             $('#strform').submit();
         }
     });

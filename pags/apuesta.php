@@ -10,7 +10,6 @@ $apuesta=null;
 
 function crrearapuesta(){
     if($_POST['id']!=null){
-    echo 'hola';
     $idp = $_POST['id'];
     $cuota = $_POST['cuota'];
 }
