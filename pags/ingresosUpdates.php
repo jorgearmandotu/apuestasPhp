@@ -7,11 +7,14 @@ validarAdmin();
 
 function ingresarAsesor(){
     $nombre=limpiarcadenas($_POST['nombre']);
+    $nombre=strtoupper($nombre);
     $apellido=limpiarcadenas($_POST['apellido']);
+    $apellido=strtoupper($apellido);
     $cedula=limpiarcadenas($_POST['cedula']);
     $telefono=limpiarcadenas($_POST['telefono']);
     $email=limpiarcadenas($_POST['email']);
     $idUsuario = limpiarcadenas($_POST['usuario']);
+    $idUsuario = strtoupper($idUsuario);
     $password=limpiarcadenas($_POST['password']);
     $passverificar=limpiarcadenas($_POST['passwordverificacion']);
     $tipo=limpiarcadenas($_POST['tipo']);

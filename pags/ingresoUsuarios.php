@@ -41,43 +41,43 @@
               <form method="post" action="ingresosUpdates.php" id="formularioAsesor" onsubmit="return confirmar()">
                  <ul>
                     <li>
-                        <label>Nombre: </label>
-                        <input type="text" name='nombre' required maxlength="20">
+                        <label for="nomb">Nombre: </label>
+                        <input type="text" name='nombre' required maxlength="20" id="nomb">
                     </li>
                     <li>
-                        <label>Apellido: </label>
-                        <input type="text" name="apellido" required maxlength="20">
+                        <label for="ape">Apellido: </label>
+                        <input type="text" name="apellido" required maxlength="20" id="ape">
                     </li>
                     <li>
-                        <label>Cedula: </label>
-                        <input type="text" name="cedula" required maxlength="20">
+                        <label for="ced">Cedula: </label>
+                        <input type="text" name="cedula" required maxlength="20" id="ced">
                     </li>
                     <li>
-                        <label>Telefono: </label>
-                        <input type="tel" name="telefono" required maxlength="15">
+                        <label for="tel">Telefono: </label>
+                        <input type="tel" name="telefono" required maxlength="15" id="tel">
                     </li>
                     <li>
-                        <label>Email: </label>
-                        <input type="email" name="email" required maxlength="40">
+                        <label for="email">Email: </label>
+                        <input type="email" name="email" required maxlength="40" id="email">
                     </li>
                     <li>
-                       <label>Tipo: </label>
-                        <select name="tipo">
+                       <label for="tipo">Tipo: </label>
+                        <select name="tipo" id="tipo">
                             <option>ASESOR</option>
                             <option>CLIENTE</option>
                         </select>
                     </li>
                     <li>
-                        <label>ID Usuario: </label>
-                        <input type="text" name="usuario" required maxlength="10">
+                        <label for="usuario">ID Usuario: </label>
+                        <input type="text" name="usuario" required maxlength="10" id="usuario">
                     </li>
                      <li>
-                         <label>Contraseña: </label>
-                         <input type="password" name="password" required maxlength="16" placeholder="maximo 16 caracteres">
+                         <label for="contrasena">Contraseña: </label>
+                         <input type="password" name="password" required maxlength="16" placeholder="maximo 16 caracteres" id="contrasena">
                      </li>
                      <li>
-                         <label>vuelva a ingresar contraseña: </label>
-                         <input type="password" name="passwordverificacion" required maxlength="16" placeholder="maximo 16 caracteres">
+                         <label for="rpt">vuelva a ingresar contraseña: </label>
+                         <input type="password" name="passwordverificacion" required maxlength="16" placeholder="maximo 16 caracteres" id="rpt">
                      </li>
                      <li>
                          <button type="submit" name="ingresar" id="btnIngAsesor">Ingresar</button>

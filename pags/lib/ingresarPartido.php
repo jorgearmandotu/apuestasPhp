@@ -6,7 +6,9 @@ validarAdmin();
 
 function ingresarPartido(){
     $local=limpiarcadenas($_POST['equipoA']);
+    $local=strtoupper($local);
     $visitante=limpiarcadenas($_POST['equipoB']);
+    $visitante=strtoupper($visitante);
     $liga=limpiarcadenas($_POST['liga']);
     $fecha=limpiarcadenas($_POST['fecha']);
     $hora=limpiarcadenas($_POST['hora']);

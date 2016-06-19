@@ -32,7 +32,7 @@ function validarcedula($cedula,$enlace){
 //limíar cadenas y pasar a mayusculas
 function limpiarcadenas($cadena){
     $cadena=strip_tags($cadena);
-    $cadena=strtoupper($cadena);
+    //$cadena=strtoupper($cadena);
     $cadena=htmlspecialchars($cadena);
     $cadena=addslashes($cadena);
     $cadena=trim($cadena);

@@ -70,7 +70,7 @@
             }
             ?>
     </select>
-        <label>Saldo $: </label><input type="text" name="saldo"><button id="agregar">Agregar Saldo</button>
+        <label for="sldo">Saldo $: </label><input type="number" name="saldo" id="sldo" pattern="[0123456789]{1,15}" title="solo puedes ingresar numeros sin puntos ni comas"><button id="agregar">Agregar Saldo</button>
         </form>
               </center>
         </div>
