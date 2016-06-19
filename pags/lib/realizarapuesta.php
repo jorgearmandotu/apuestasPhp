@@ -26,6 +26,7 @@ for($i=1;$i<count($datos);$i++){
     $enlace = connectionDB();
     $saldo = saldo($enlace,$idusuario);
     echo 'id:'.$idpartido.'--apuesta'.$apuestaselec.'--cuota'.$cuotaapuesta.'<br>';
+   echo '<br>============================<br>'.$valora.'<br>'.$idusuario.'<br>'.$fecha.'<br>'.$idpartido.'<br>'.$apuestaselec.'<br>'.$idliga.'<br>'.$cuotaapuesta.'<br>'.$idApuesta.'<br>'.$saldo;
     if(ingresoApuesta($enlace,$valorA,$idusuario,$fecha,$idpartido,$apuestaselec,$idliga,$cuotaapuesta,$idApuesta,$saldo))
     {
         header('location: ../apuesta.php');
