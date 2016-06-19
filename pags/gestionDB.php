@@ -33,7 +33,7 @@ function verificarLogin($user,$enl,$pass){
         
     $sql->bind_param('s',$user);
     $sql->execute();
-        $sql->bind_result($contrasena,$tp,$idunica);
+    $sql->bind_result($contrasena,$tp,$idunica);
     if($sql->fetch()){
         $sql->fetch();
         if(password_verify($pass, $contrasena)){
@@ -63,25 +63,34 @@ function verificarLogin($user,$enl,$pass){
 }
 //verificar password
 function verificarpassword($enl,$id,$pass){
-    $sql="SELECT CONTRASENA from persona WHERE ID='".$id."';";
-    $result = $enl->query($sql) or die('error al acceder a DB');
-    if($row=$result->fetch_assoc()){
-        if(password_verify($pass,$row['CONTRASENA'])){
+    
+    if($sql= $enl->prepare("SELECT CONTRASENA from persona WHERE ID=?;")){
+    $sql->bind_param('s',$id);
+    $sql->execute();
+    $sql->bind_result($contrasena);
+    
+    if($sql->fetch()){
+        $sql->fetch();
+        if(password_verify($pass,$contrasena)){
             return true;
         }else{
             return false;
         }
     }
 }
+}
 //cambiar contraseña
 function cambiarpassword($enl,$pass,$id){
     $pass = password_hash($pass, PASSWORD_DEFAULT);
-    $sql= "UPDATE persona SET CONTRASENA='".$pass."' WHERE ID='".$id."';";
-    if($enl->query($sql)){
+    
+    if($sql= $enl->prepare("UPDATE persona SET CONTRASENA=? WHERE ID=?;")){
+        $sql->bind_param('ss',$pass,$id);
+    if($sql->execute()){
         return true;
     }else{
         return false;
     }
+}
 }
 //ingresa nuevo personal
 function ingresarPersona($nombre,$apellido,$cedula,$telefono,$email,$usuario,$password,$tipo,$enl){
