@@ -50,16 +50,16 @@
        <form method="post" id="formcontrasena" action="lib/updateContrasena.php">
         <ul>
             <li>
-                <label>Ingrese contraseña anterior: </label>
-                <input type="password" maxlength="16" required name="passanterior">
+                <label for="anterior">Ingrese contraseña anterior: </label>
+                <input type="password" maxlength="16" required name="passanterior" id="anterior">
             </li>
             <li>
-                <label>Ingrese nueva contraseña: </label>
-                <input type="password" maxlength="16" required name="passnueva">
+                <label for="nueva">Ingrese nueva contraseña: </label>
+                <input type="password" maxlength="16" required name="passnueva" id="nueva">
             </li>
             <li>
-                <label>vuelva a escribir la contraseña:</label>
-                <input type="password" maxlength="16" required name="passrept">
+                <label for="reescrita">vuelva a escribir la contraseña:</label>
+                <input type="password" maxlength="16" required name="passrept" id="reescrita">
             </li>
             <li>
                 <button type="submit" id="enviar">Cambiar contraseña</button>

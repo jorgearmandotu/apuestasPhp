@@ -3,8 +3,8 @@ require_once('../gestionDB.php');
 require_once('../validaciones.php');
               validarAdmin();
 
-$id = $_POST['asesores'];
-$saldo = $_POST['saldo'];
+$id = limpiarcadenas($_POST['asesores']);
+$saldo = limpiarcadenas($_POST['saldo']);
 echo '<script type="text/javascript">alert("Saldo agregado ocn exito '.$id.' id '.$saldo.' agregado")</script>';
 
 $saldoactual = 0;

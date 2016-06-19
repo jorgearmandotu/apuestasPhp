@@ -30,12 +30,12 @@
               <form method="post" action="pags/login.php">
                  <ul>
                      <li>
-                        <label>Usuario: </label>
-                         <input type="text" name="usuario">
+                        <label for="usuario">Usuario: </label>
+                         <input type="text" name="usuario" id="usuario">
                      </li>
                      <li>
-                         <label>Contraseña</label>
-                         <input type="password" name="password">
+                         <label for="contrasena">Contraseña</label>
+                         <input type="password" name="password" id="contrasena">
                      </li>
                      <li id="button">
                          <button type="submit">Ingresar</button>

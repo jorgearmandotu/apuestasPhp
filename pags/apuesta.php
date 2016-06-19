@@ -10,7 +10,6 @@ $apuesta=null;
 
 function crrearapuesta(){
     if($_POST['id']!=null){
-    echo 'hola';
     $idp = $_POST['id'];
     $cuota = $_POST['cuota'];
 }
@@ -70,7 +69,7 @@ function crrearapuesta(){
              </li>
              <input type="hidden" id="saldo" value="<?php echo $saldo; ?>">
               <li id="selecfecha">
-                  <label>Seleccione una fecha: </label>
+                  <label for="fecha">Seleccione una fecha: </label>
                   <input type="date" name="fecha" id="fecha" <?php date_default_timezone_set('America/Bogota');
                 $dActual= new datetime();
                 $dActual= date('Y-m-d');
@@ -79,7 +78,7 @@ function crrearapuesta(){
                  
               </li>
               <li id="selectliga">
-                  <label>seleccione liga</label>
+                  <label for="liga">seleccione liga</label>
                   <select name="liga" id="liga">
                       <option>Todas</option>
                       <?php
@@ -94,7 +93,7 @@ function crrearapuesta(){
           </ul>
            <form method='POST' id='miniformulario' action='lib/gestionApuesta.php'>
            <div id="cantidadapuesta">
-          <label>Cantidad a apostar $: </label>
+          <label for="valor">Cantidad a apostar $: </label>
              <input tipe='number' step='any' name='valorapuesta' id='valor'>
               </div>
           
@@ -119,6 +118,10 @@ function crrearapuesta(){
                   </div>
                </div>
             </form>
+              <form method="POST" id="strform" action='lib/gestionApuesta.php'>
+                  <input type="hidden" id="strapuesta" name="strapuesta">
+                  <input type="hidden" id="vlrapuesta" name="vlrapuesta">
+              </form>
               <div id='realizarapuestas'>
                
 <!--                  <button type='button' id='apostar'>apostar</button>-->

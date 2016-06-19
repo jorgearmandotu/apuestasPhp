@@ -17,8 +17,8 @@ function cmbligas(){
 // retorna todos los partidos para esa fecha
 
 function cmbpartidos(){
-    $fecha=strip_tags($_POST['fecha']);
-    $liga=strip_tags($_POST['liga']);
+    $fecha=limpiarcadenas($_POST['fecha']);
+    $liga=limpiarcadenas($_POST['liga']);
     $enlace = connectionDB();
     $res="<option value='seleccion'>selecione partido</option>";
     $partidos = partidos($enlace,$fecha);

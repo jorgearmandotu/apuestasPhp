@@ -87,8 +87,8 @@
                echo('</tr>');
            $enlace = connectionDB();
            
-           $fecha1=strip_tags($_POST['fecha1']);
-           $fecha2=strip_tags($_POST['fecha2']);
+           $fecha1=limpiarcadenas($_POST['fecha1']);
+           $fecha2=limpiarcadenas($_POST['fecha2']);
                
                $fechat= acfecha($enlace,$idusuario);
             

@@ -2,22 +2,25 @@
 require_once '../validaciones.php';
 require_once '../gestionDB.php';
 $cuota=null;
+$cuotas=null;
 validarAsesor();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {  
-    if(isset($_POST['cuota'])){
-        $cuota=$_POST["cuota"];
+    if(isset($_POST['strapuesta'])){
+        $cuotas=limpiarcadenas($_POST["strapuesta"]);
     }
     else{
         header('location: ../apuesta.php');
     }
-    $valorapuesta=$_POST["valorapuesta"];
+    $valorapuesta=limpiarcadenas($_POST["vlrapuesta"]);
     $idusuario=$_SESSION['id'];
+    $cuota = explode('-',$cuotas);
     $count = count($cuota);
     $cuotatotal=1;
     $totalganancia=0;
     $partidosids="";
     $enlace = connectionDB();
     $saldo=saldo($enlace,$idusuario);
+    connectionClose($enlace);
         ?>
          <html lang="es">
       <head>
@@ -30,6 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
           <title>continuar apuesta</title>  
            <script src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
+           <script src="../../js/gestionApuesta.js"></script>
            <link rel="stylesheet" href="../../css/normailze.min.css">
         <link rel="stylesheet" href="../../css/estilosform.css">
         <link rel="stylesheet" href="../../css/confirmapuesta.css">
@@ -47,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                            <img src="../../images/Bookiesport_Usuario.png" alt="usuario"></a>
                      </li>
                      <li class="logout">
-                         <a href="salir.php">Salir</a>
+                         <a href="../salir.php">Salir</a>
                      </li>
                      <li id="salirico">
                          <a href="asesor.php"><img src='../../images/Bookiesport_Inicio.png' alt="Inicio"></a>
@@ -57,10 +61,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           <div id="contenido">
           <div id='center'>
              <?php
-            $boton ="<button type='submit'>confirmar apuesta</button>";
-            for ($i = 0; $i < $count; $i++) {
-//        echo $cuota[$i];
-            $datos = explode(':',$cuota[$i],3);
+            $boton ="<button type='submit' id='submit'>confirmar apuesta</button>";
+            for ($i = 0; $i < $count-1; $i++) {
+            $datos = explode(':',$cuota[$i]);
+                //creo cadena con idp, apuesta para utilicisacion de explode
             $partidosids.='-idp-'.$datos[1].'-apuesta-'.$datos[2].'-apuesta-'.$datos[0];
                 
                 //valido hora obtengo nombre de partido
@@ -90,6 +94,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
        
         $cuotatotal=$cuotatotal*floatval($datos[0]);
                }
+                
     }
     $totalganancia=$cuotatotal*floatval($valorapuesta);
     if(floatval($saldo)>=floatval($valorapuesta) and (floatval($valorapuesta)<300001 and floatval($valorapuesta)>=5000)){

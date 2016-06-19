@@ -3,9 +3,9 @@ require_once '../gestionDB.php';
 require_once('../validaciones.php');
               validarAsesor();
 
-$fecha = strip_tags($_POST['fecha']);
+$fecha = limpiarcadenas($_POST['fecha']);
 if(isset($_POST['liga'])){
-    $liga = strip_tags($_POST['liga']);
+    $liga = limpiarcadenas($_POST['liga']);
 
 $enlace = connectionDB();
     if($liga!='Todas'){

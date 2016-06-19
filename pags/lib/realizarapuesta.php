@@ -34,6 +34,7 @@ for($i=1;$i<count($datos);$i++){
         echo'<h1>OCURRIO UN ERROR AL REALISAR LA APUESTA</h1><BR>
         <a href="../apuesta.php">Volver a intentar</a>';
     }
+    connectionClose($enlace);
 }
 
 ?>

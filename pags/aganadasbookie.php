@@ -91,8 +91,8 @@
                echo('<th>Valor a pagar</th>');
                echo('</tr>');
            
-           $fecha1=strip_tags($_POST['fecha1']);
-           $fecha2=strip_tags($_POST['fecha2']);
+           $fecha1=limpiarcadenas($_POST['fecha1']);
+           $fecha2=limpiarcadenas($_POST['fecha2']);
             $fechat= acfecha($enlace,$idusuario);
                
                 if($fechat[2]==$idusuario){

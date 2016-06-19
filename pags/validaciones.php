@@ -33,6 +33,9 @@ function validarcedula($cedula,$enlace){
 function limpiarcadenas($cadena){
     $cadena=strip_tags($cadena);
     $cadena=strtoupper($cadena);
+    $cadena=htmlspecialchars($cadena);
+    $cadena=addslashes($cadena);
+    $cadena=trim($cadena);
     return $cadena;
 }
 function validarlogeo(){

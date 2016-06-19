@@ -1,7 +1,8 @@
 <?php
 require_once '../gestionDB.php';
+require_once '../validaciones.php';
 
-$fecha = strip_tags($_POST['fecha']);
+$fecha = limpiarcadenas($_POST['fecha']);
 $enlace = connectionDB();
 $partidos = partidos($enlace,$fecha);
  $res="<div class='fila'>
