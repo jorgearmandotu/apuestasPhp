@@ -35,7 +35,7 @@ function verificarLogin($user,$enl,$pass){
     $sql->execute();
     $sql->bind_result($contrasena,$tp,$idunica);
     if($sql->fetch()){
-        $sql->fetch();
+        //$sql->fetch();
         if(password_verify($pass, $contrasena)){
             session_start();
             $_SESSION['usuario']=$user;
@@ -70,7 +70,7 @@ function verificarpassword($enl,$id,$pass){
     $sql->bind_result($contrasena);
     
     if($sql->fetch()){
-        $sql->fetch();
+        //$sql->fetch();
         if(password_verify($pass,$contrasena)){
             return true;
         }else{
@@ -98,43 +98,50 @@ function ingresarPersona($nombre,$apellido,$cedula,$telefono,$email,$usuario,$pa
    //encripta la contraseña
     $contrasena = password_hash($password, PASSWORD_DEFAULT);
     
-    $sql = "
-    INSERT INTO persona VALUES('".$cedula."','".$nombre."','".$apellido."','".$telefono."','".$email."','".$tipo."','".$contrasena."','".$usuario."',NULL);";
-    //$enl->query($sql) or die("error al ingresar datos en DB");
-    if(!$enl->query($sql)){
+    if($sql = $enl->prepare("
+    INSERT INTO persona VALUES(?,?,?,?,?,?,?,?,NULL);")){
+    $sql->bind_param('ssssssss',$cedula,$nombre,$apellido,$telefono,$email,$tipo,$contrasena,$usuario);
+    if(!$sql->execute()){
         echo('<script type="text/javascript">alert("ocurrio un error buebe a intentarlo, si el problema persiste intenta en cerrar sesion e iniciarla de nuevo")</script>');
         exit();
     }
-    $sql = "SELECT ID FROM persona WHERE USUARIO='".$usuario."';";
-    $result = $enl->query($sql)or die("error al crear saldo de usuario");
-    if($row=$result->fetch_assoc()){
-        $idasesor= $row['ID'];
-        //echo('<script type="text/javascript">alert("'.$idasesor.'")</script>');
+    if($sql = $enl->prepare("SELECT ID FROM persona WHERE USUARIO=?;")){
+        $sql->bind_param('s',$usuario);
+        $sql->execute();
+        $sql->bind_result($idUser);
+    if($sql->fetch()){
+        //$sql->fetch();
+        
+        $idasesor= $idUser;
         $sql = "INSERT INTO saldos VALUES('".$idasesor."','0')";
         $enl->query($sql);
     }
-    
-}
+    }
+}}
 // valida si id de usuario ya existe
 function usuarios($user,$enl){
-    $sql = "SELECT USUARIO from persona WHERE USUARIO='".$user."'";
-    $result = $enl-> query($sql)or die("error al crear coneccion con DB");
-    if($row=$result->fetch_assoc()){
+    if($sql = $enl->prepare("SELECT USUARIO from persona WHERE USUARIO=?;")){
+    $sql->bind_param('s',$user);
+        $sql->execute();
+        $sql->bind_result($nuser);
+    if($sql->fetch()){
         return true;
     }else{
         return false;
     }
-}
+}}
 // valida la existencia de cedula
 function cedulas($ced,$enl){
-    $sql = "SELECT CC from persona WHERE CC='".$ced."'";
-    $result = $enl->query($sql)or die("error al crear coneccion con DB");
-    if($row=$result->fetch_assoc()){
+    if($sql = $enl->prepare("SELECT CC from persona WHERE CC=?")){
+        $sql->bind_param('s',$ced);
+        $sql->execute();
+        $sql->bind_result($cedpersona); 
+    if($sql->fetch()){
         return true;
     }else{
         return false;
     }
-}
+}}
 //busca exixstencia de equipo y retorna id
 
 function equipo($equipo, $enl){
@@ -167,23 +174,27 @@ function ingresoEquipos($nombre,$enl){
 //busca liga si existe retorna id de la liga recibe nombre
 function idliga($liga,$enl){
     $idliga=null;
-    $sql = "SELECT ID FROM ligas WHERE NOMBRE like '%".$liga."%'";
-    $result = $enl->query($sql) or die ("error al conectar con DB");
-    if($row=$result->fetch_assoc()){
-        $idliga= $row['ID'];
+    if($sql = $enl->prepare("SELECT ID FROM ligas WHERE NOMBRE = ?")){
+        $sql->bind_param('s',$liga);
+        $sql->execute();
+    $sql->bind_result($idlig);
+    if($sql->fetch()){
+        $idliga= $idlig;
     }
     return $idliga;
-}
+}}
 //recibe id de liga retorna nombre
 function nomLiga($id,$enl){
     $nom=null;
-    $sql = "SELECT NOMBRE FROM ligas WHERE ID='".$id."'";
-    $result = $enl->query($sql) or die ("error al conectar con DB nomliga");
-    if($row=$result->fetch_assoc()){
-        $nom = $row['NOMBRE'];
+    if($sql = $enl->prepare("SELECT NOMBRE FROM ligas WHERE ID=?;")){
+        $sql->bind_param('s',$id);
+        $sql->execute();
+        $sql->bind_result($nlig);
+    if($sql->fetch()){
+        $nom = $nlig;
     }
     return $nom;
-}
+}}
 //busca un partido y retorna id del mismo
 function idpartido($enl,$fechaPartido,$horaP,$idequipoA,$idequipoB,$idliga){
     $sql = "SELECT ID FROM partidos WHERE FECHA='".$fechaPartido."' AND EQUIPOA='".$idequipoA."' AND EQUIPOB = '".$idequipoB."' AND LIGA='".$idliga."';";

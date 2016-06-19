@@ -56,11 +56,11 @@ require_once('../validaciones.php');
                 //ingresar nueva contraseña
                 if(cambiarpassword($enlace,$passnueva,$id)){
                     connectionClose($enlace);
-                 echo '<script type="text/javascript">alert("lcontraseña cambiada exitosamente")</script>'; 
+                 echo '<script type="text/javascript">alert("Contraseña cambiada exitosamente")</script>'; 
                     
                 }else{
                     connectionClose($enlace);
-                    echo '<script type="text/javascript">alert("ocurrio un error vuelva a interntarlo")</script>';
+                    echo '<script type="text/javascript">alert("ocurrio un error vuelva a intentarlo")</script>';
                     
                 }
             }else{
