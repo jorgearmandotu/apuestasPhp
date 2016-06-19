@@ -6,12 +6,12 @@ $cuotas=null;
 validarAsesor();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {  
     if(isset($_POST['strapuesta'])){
-        $cuotas=$_POST["strapuesta"];
+        $cuotas=limpiarcadenas($_POST["strapuesta"]);
     }
     else{
         header('location: ../apuesta.php');
     }
-    $valorapuesta=$_POST["vlrapuesta"];
+    $valorapuesta=limpiarcadenas($_POST["vlrapuesta"]);
     $idusuario=$_SESSION['id'];
     $cuota = explode('-',$cuotas);
     $count = count($cuota);
@@ -33,6 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
           <title>continuar apuesta</title>  
            <script src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
+           <script src="../../js/gestionApuesta.js"></script>
            <link rel="stylesheet" href="../../css/normailze.min.css">
         <link rel="stylesheet" href="../../css/estilosform.css">
         <link rel="stylesheet" href="../../css/confirmapuesta.css">
@@ -60,7 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           <div id="contenido">
           <div id='center'>
              <?php
-            $boton ="<button type='submit'>confirmar apuesta</button>";
+            $boton ="<button type='submit' id='submit'>confirmar apuesta</button>";
             for ($i = 0; $i < $count-1; $i++) {
             $datos = explode(':',$cuota[$i]);
                 //creo cadena con idp, apuesta para utilicisacion de explode

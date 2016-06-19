@@ -5,9 +5,9 @@ require_once('../validaciones.php');
             header('location: ../../index.php');
         }
 
-    $passant=strip_tags($_POST['passanterior']);
-    $passnueva=strip_tags($_POST['passnueva']);
-    $passrpt=strip_tags($_POST['passrept']);
+    $passant=limpiarcadenas($_POST['passanterior']);
+    $passnueva=limpiarcadenas($_POST['passnueva']);
+    $passrpt=limpiarcadenas($_POST['passrept']);
     session_start();
     $id = $_SESSION['id'];
 ?>

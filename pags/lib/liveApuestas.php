@@ -1,8 +1,9 @@
 <?php
 require_once'../gestionDB.php';
+require_once'../validaciones.php';
 
-$valor = $_POST['datos'];
-$valorapuesta = $_POST['valorapuesta'];
+$valor = limpiarcadenas($_POST['datos']);
+$valorapuesta = limpiarcadenas($_POST['valorapuesta']);
 $nomPartido="";
 $ids ="";
 $res="";

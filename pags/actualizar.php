@@ -6,7 +6,7 @@ require_once('validaciones.php');
             header('location: ../index.php');
         }
 $enlace = connectionDB();
-                  $ganador=strip_tags($_POST['equipo']);
+                  $ganador=limpiarcadenas($_POST['equipo']);
                   $idp = $_REQUEST['partido'] ;
                   $equ = $_REQUEST['equipo'] ;
                   $equipos = equiposLigaPartido($enlace,$idp);

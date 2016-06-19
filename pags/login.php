@@ -1,9 +1,10 @@
 <?php
 require_once('gestionDB.php');
+require_once('validaciones.php');
 
-$idusuario = $_POST['usuario'];
+$idusuario = limpiarcadenas($_POST['usuario']);
 $usuario = strtoupper($idusuario);
-$pass = $_POST['password'];
+$pass = limpiarcadenas($_POST['password']);
 
 if(empty($usuario)||empty($pass)){
     header("location: ../index.php");

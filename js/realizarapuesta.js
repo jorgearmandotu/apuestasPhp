@@ -129,7 +129,8 @@ $(document).ready(function(){
 if(!Modernizr.inputtypes.date){
     $(document).ready(initDatepicker);
 };
-});
+        
+})
 
 function datosApuestas(arrcuotas){
     var dinfo="";

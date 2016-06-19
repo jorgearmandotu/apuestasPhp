@@ -2,10 +2,10 @@
 require_once '../gestionDB.php';
 require_once('../validaciones.php');
               validarAdmin();
-$idp=$_POST['id'];
-$local=$_POST['cuota1'];
-$visitante=$_POST['cuota2'];
-$empate=$_POST['cuotax'];
+$idp=limpiarcadenas($_POST['id']);
+$local=limpiarcadenas($_POST['cuota1']);
+$visitante=limpiarcadenas($_POST['cuota2']);
+$empate=limpiarcadenas($_POST['cuotax']);
 
 echo($idp." ".$local." ".$visitante." ".$empate);
 $enlace=connectionDB();

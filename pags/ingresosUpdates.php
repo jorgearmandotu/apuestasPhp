@@ -8,13 +8,13 @@ validarAdmin();
 function ingresarAsesor(){
     $nombre=limpiarcadenas($_POST['nombre']);
     $apellido=limpiarcadenas($_POST['apellido']);
-    $cedula=strip_tags($_POST['cedula']);
-    $telefono=strip_tags($_POST['telefono']);
-    $email=strip_tags($_POST['email']);
+    $cedula=limpiarcadenas($_POST['cedula']);
+    $telefono=limpiarcadenas($_POST['telefono']);
+    $email=limpiarcadenas($_POST['email']);
     $idUsuario = limpiarcadenas($_POST['usuario']);
-    $password=strip_tags($_POST['password']);
-    $passverificar=strip_tags($_POST['passwordverificacion']);
-    $tipo=strip_tags($_POST['tipo']);
+    $password=limpiarcadenas($_POST['password']);
+    $passverificar=limpiarcadenas($_POST['passwordverificacion']);
+    $tipo=limpiarcadenas($_POST['tipo']);
     
     $enlace=connectionDB();
     if($enlace!=null){

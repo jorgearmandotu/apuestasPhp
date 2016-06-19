@@ -2,16 +2,16 @@
 require_once('../gestionDB.php');
 require_once('../validaciones.php');
               
-    $nombreA=strip_tags($_POST['nombre']);
-    $cedulaA=strip_tags($_POST['cedula']);
-    $valorA=strip_tags($_POST['valor']);
-    $fechaPartido = strip_tags($_POST['fecha']);
-    $ligaP = strip_tags($_POST['liga']);
-    $partido = strip_tags($_POST['partido']);
-    $equipoA = strip_tags($_POST['equipoA']);
-    $equipoB = strip_tags($_POST['equipoB']);
-    $horaP = strip_tags($_POST['hora']);
-    $equipoApostado = strip_tags($_POST["equipoapuesta"]);
+    $nombreA=limpiarcadenas($_POST['nombre']);
+    $cedulaA=limpiarcadenas($_POST['cedula']);
+    $valorA=limpiarcadenas($_POST['valor']);
+    $fechaPartido = limpiarcadenas($_POST['fecha']);
+    $ligaP = limpiarcadenas($_POST['liga']);
+    $partido = limpiarcadenas($_POST['partido']);
+    $equipoA = limpiarcadenas($_POST['equipoA']);
+    $equipoB = limpiarcadenas($_POST['equipoB']);
+    $horaP = limpiarcadenas($_POST['hora']);
+    $equipoApostado = limpiarcadenas($_POST["equipoapuesta"]);
     
 
     function ingresarPartido($fechaPartido,$hora,$idequipoA,$idequipoB,$idliga){
