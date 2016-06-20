@@ -152,19 +152,22 @@ function equipo($equipo, $enl){
         $sql->bind_result($idequ);
     if($sql->fetch()){
         $idEquipo = $idequ;
-    }
+    }}
     return $idEquipo;
-}}
+}
 //recibe id de equipo y retorna nombre;
 function nomEquipo($id,$enl){
     $nom=null;
-    $sql = "SELECT NOMBRE FROM equipos WHERE ID='".$id."'";
-    $result = $enl->query($sql) or die ("error al conectar con DB nomEquip");
-    if($row=$result->fetch_assoc()){
-        $nom = $row['NOMBRE'];
-    }
+    if($sql = $enl->prepare("SELECT NOMBRE FROM equipos WHERE ID=?")){
+    $sql->bind_param('s',$id);
+        $sql_>execute();
+        $sql->bind_result($nequip);
+    if($sql->fetch()){
+        $nom = $nequip;
+    }}
     return $nom;
 }
+
 //ingresar equipos
 function ingresoEquipos($nombre,$enl){
     $sql = "INSERT INTO equipos VALUES('".$nombre."',NULL);";
@@ -182,9 +185,9 @@ function idliga($liga,$enl){
     $sql->bind_result($idlig);
     if($sql->fetch()){
         $idliga= $idlig;
-    }
+    }}
     return $idliga;
-}}
+}
 //recibe id de liga retorna nombre
 function nomLiga($id,$enl){
     $nom=null;
@@ -222,12 +225,14 @@ function ingresoLiga($liga, $enl){
 function ingresoPartido($fecha,$hora,$local,$visitante,$idliga,$cuota1,$cuota2,$cuotaX,$enl){
     $horadepartido = $fecha." ".$hora.":00";
 //    echo('<script type="text/javascript">alert("'.$horadepartido.'")</script>');
-    $sql = "INSERT INTO partidos VALUES('".$fecha."','".$horadepartido."','".$local."','".$visitante."','".$idliga."',NULL,'".$cuota1."','".$cuotaX."','".$cuota2."',NULL);";
-    if(!$enl->query($sql)){
+    if($sql = $enl->prepare( "INSERT INTO partidos VALUES(?,?,?,?,?,NULL,?,?,?,NULL);")){
+        $sql->bind_param('ssssssss',$fecha,$horadepartido,$local,$visitante,$idliga,$cuota1,$cuotaX,$cuota2);
+        
+    if(!$sql->execute()){
         echo('<script type="text/javascript">alert("ocurrio un error buebe a intentarlo, si el problema persiste intenta en cerrar sesion e iniciarla de nuevo")</script>');
         exit();
     }
-}
+}}
 //retorna un array de todas las ligas registrada
 function ligas($enl){
     $sql = 'SELECT NOMBRE FROM ligas ORDER BY NOMBRE;';
@@ -252,62 +257,66 @@ function equipos($enl){
     }
     return $arr;
 }
-
+//reorna iformacion de partidos
 function partidos($enl,$fecha){
-    $sql = "SELECT ID,EQUIPOA,EQUIPOB,LIGA,CUOTA1,CUOTAX,CUOTA2, DATE_FORMAT(HORA, '%T') AS HORAP FROM partidos WHERE FECHA='$fecha' ORDER BY HORA;";
-    $result = $enl->query($sql)or die('error al consulta DB');
+    if($sql = $enl->prepare("SELECT ID,EQUIPOA,EQUIPOB,LIGA,CUOTA1,CUOTAX,CUOTA2, DATE_FORMAT(HORA, '%T') AS HORAP FROM partidos WHERE FECHA=? ORDER BY HORA;")){
+    $sql->bind_param('s',$fecha);
+        $sql->execute();
+        $sql->bind_result($idpa,$equiA,$equiB,$lig,$cuo1,$cuox,$cuo2,$horp);
     $arr = array();
     $i=0;
-    while($row=$result->fetch_assoc()){
+    while($sql->fetch()){
         $l=0;
-        $arr[$i][$l]=$row['ID'];
+        $arr[$i][$l]=$idpa;
         $l++;
-        $arr[$i][$l]=$row['EQUIPOA'];
+        $arr[$i][$l]=$equiA;
         $l++;
-        $arr[$i][$l]=$row['EQUIPOB'];
+        $arr[$i][$l]=$equiB;
         $l++;
-        $arr[$i][$l]=$row['LIGA'];
+        $arr[$i][$l]=$lig;
         $l++;
-        $arr[$i][$l]=$row['HORAP'];
+        $arr[$i][$l]=$horp;
         $l++;
-        $arr[$i][$l]=$row['CUOTA1'];
+        $arr[$i][$l]=$cuo1;
         $l++;
-        $arr[$i][$l]=$row['CUOTAX'];
+        $arr[$i][$l]=$cuox;
         $l++;
-        $arr[$i][$l]=$row['CUOTA2'];
+        $arr[$i][$l]=$cuo2;
         $i++;
         
     }
     return $arr;
-}
-//sobreescribir metodo
+}}
+//sobreescribir metodo del anterior
 function partidoslig($enl,$fecha,$liga){
-    $sql = "SELECT ID,EQUIPOA,EQUIPOB,LIGA,CUOTA1,CUOTAX,CUOTA2, DATE_FORMAT(HORA, '%T') AS HORAP FROM partidos WHERE FECHA='$fecha' AND LIGA=".$liga." ORDER BY HORA;";
-    $result = $enl->query($sql)or die('error al consulta DB');
+    if($sql = $enl->prepare("SELECT ID,EQUIPOA,EQUIPOB,LIGA,CUOTA1,CUOTAX,CUOTA2, DATE_FORMAT(HORA, '%T') AS HORAP FROM partidos WHERE FECHA=? AND LIGA=? ORDER BY HORA;")){
+        $sql->bind_param('ss',$fecha,$liga);
+    $sql->execute();
+        $sql->bind_result($idpa,$equiA,$equiB,$lig,$cuo1,$cuox,$cuo2,$horp);
     $arr = array();
     $i=0;
-    while($row=$result->fetch_assoc()){
+    while($sql->fetch()){
         $l=0;
-        $arr[$i][$l]=$row['ID'];
+        $arr[$i][$l]=$idpa;
         $l++;
-        $arr[$i][$l]=$row['EQUIPOA'];
+        $arr[$i][$l]=$equiA;
         $l++;
-        $arr[$i][$l]=$row['EQUIPOB'];
+        $arr[$i][$l]=$equiB;
         $l++;
-        $arr[$i][$l]=$row['LIGA'];
+        $arr[$i][$l]=$lig;
         $l++;
-        $arr[$i][$l]=$row['HORAP'];
+        $arr[$i][$l]=$horp;
         $l++;
-        $arr[$i][$l]=$row['CUOTA1'];
+        $arr[$i][$l]=$cuo1;
         $l++;
-        $arr[$i][$l]=$row['CUOTAX'];
+        $arr[$i][$l]=$cuox;
         $l++;
-        $arr[$i][$l]=$row['CUOTA2'];
+        $arr[$i][$l]=$cuo2;
         $i++;
         
     }
     return $arr;
-}
+}}
 
 //retorna arreglo para armar nombre de partido con hora
 function nompartido($enl,$idp){
