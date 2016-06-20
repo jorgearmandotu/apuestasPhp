@@ -18,23 +18,25 @@ $idliga=0;
 echo 'es la id: '.$idApuesta.'<br>';
 echo $idpapuesta.'<br>'.$cuota.'<br>'.$valorA;
 $datos = explode('-idp-',$idpapuesta);
+$enlace = connectionDB();
+$saldo = saldo($enlace,$idusuario);
 for($i=1;$i<count($datos);$i++){
    $id=explode('-apuesta-',$datos[$i]);
     $idpartido=$id[0];
     $apuestaselec=$id[1];
     $cuotaapuesta=$id[2];
-    $enlace = connectionDB();
-    $saldo = saldo($enlace,$idusuario);
+    
+    
     echo 'id:'.$idpartido.'--apuesta'.$apuestaselec.'--cuota'.$cuotaapuesta.'<br>';
-   echo '<br>============================<br>'.$valora.'<br>'.$idusuario.'<br>'.$fecha.'<br>'.$idpartido.'<br>'.$apuestaselec.'<br>'.$idliga.'<br>'.$cuotaapuesta.'<br>'.$idApuesta.'<br>'.$saldo;
-    if(ingresoApuesta($enlace,$valorA,$idusuario,$fecha,$idpartido,$apuestaselec,$idliga,$cuotaapuesta,$idApuesta,$saldo))
+   echo '<br>============================<br>'.$valorA.'<br>'.$idusuario.'<br>'.$fecha.'<br>'.$idpartido.'<br>'.$apuestaselec.'<br>'.$idliga.'<br>'.$cuotaapuesta.'<br>'.$idApuesta.'<br>'.$saldo;
+   echo '<br />***********<br>este es el saldo'.$saldo.'<br /> este es el valor apostado'.$valorA.'<br />'; if(ingresoApuesta($enlace,$valorA,$idusuario,$fecha,$idpartido,$apuestaselec,$idliga,$cuotaapuesta,$idApuesta,$saldo))
     {
         header('location: ../apuesta.php');
     }else{
         echo'<h1>OCURRIO UN ERROR AL REALISAR LA APUESTA</h1><BR>
         <a href="../apuesta.php">Volver a intentar</a>';
     }
-    connectionClose($enlace);
+    
 }
-
+connectionClose($enlace);
 ?>
