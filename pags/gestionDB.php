@@ -471,24 +471,24 @@ function asesor($enl,$id){
     }
     return $ase;
 }}
+//sin preparar
 function acfecha($enl,$idu){
-    if($sql=$enl->prepare("SELECT  fechaA, fechaB, ID FROM fecha WHERE(ID=?);")){
-        $sql->bind_param('s',$idu);
-    $sql->bind_result($feA,$feB,$idfecha);
+    $sql="SELECT  fechaA, fechaB, ID FROM fecha WHERE(ID='".$idu."');";
+    $result= $enl->query($sql)or die("Error al consultar DB");
     $i=0;
     $ase = array();
     
         $ase[0]=NULL;
         $ase[1]=NULL;
         $ase[2]=0;
-    while($sql->fetch()){
-        $ase[0] = $feA;
-        $ase[1] = $feB;
-        $ase[2] = $idfecha;
+    while($row=$result->fetch_assoc()){
+        $ase[0] = $row['fechaA'];
+        $ase[1] = $row['fechaB'];
+        $ase[2] = $row['ID'];
         
     }
     return $ase;
-}}
+}
 
 
 function tpersona($enl){
