@@ -391,14 +391,16 @@ function ingresoApuesta($enl,$valor,$idAsesor,$fecha,$idPart,$EquiApost,$idLiga,
     }
 }
 function fechahoraPartido($enl,$id){
-    $sql="SELECT HORA FROM partidos WHERE ID='".$id."';";
-    $result= $enl->query($sql)or die("Error al consultar DB");
+    if($sql=$enl->prepare("SELECT HORA FROM partidos WHERE ID=?;")){
+        $sql->bind_param('s',$id);
+        $sql->execute();
+    $sql->bind_result($hour);
     $hora=0;
-    if($row=$result->fetch_assoc()){
-        $hora=$row['HORA'];
+    if($sql->fetch()){
+        $hora=$hour;
     }
     return $hora;
-}
+}}
 function listAsesores($enl){
     $sql= "SELECT NOMBRE,SALDO,IDASESOR FROM saldos JOIN persona WHERE(IDASESOR=ID AND (TIPO='ASESOR' OR TIPO='CLIENTE'));";
     $ase = array();
@@ -418,68 +420,75 @@ function listAsesores($enl){
 }
 //actualizar cuotas
 function actualizarcuotas($enl,$idp,$cuota1,$cuota2,$cuotax){
-    $sql="UPDATE partidos SET CUOTA1='".$cuota1."', CUOTA2='".$cuota2."', CUOTAX='".$cuotax."' WHERE ID='".$idp."'";
-    if($enl->query($sql)){
+    if($sql=$enl->prepare("UPDATE partidos SET CUOTA1=?, CUOTA2=?, CUOTAX=? WHERE ID=?")){
+        $sql->bind_param('ssss',$cuota1,$cuota2,$cuotax,$idp);
+    if($sql->execute()){
         return true;
     }else{
         return false;
     }
-}
+}}
+//retorna informacion de apuesta
 function apuestass($enl,$ida){
-    $sql= "SELECT DISTINCT ID,CUOTA,VALOR,IDASESOR,IDPARTIDO,APUESTA FROM apuestas WHERE(ID='".$ida."');";
+    if($sql= $enl->prepare("SELECT DISTINCT ID,CUOTA,VALOR,IDASESOR,IDPARTIDO,APUESTA FROM apuestas WHERE(ID=?);")){
+        $sql->bind_param('s',$ida);
+        $sql->execute();
     $ase = array();
-    $result = $enl->query($sql)or die('error al consulta DB');
+    $sql->bind_result($idap,$cuo,$vlra,$idas,$idpar,$apu);
     $i=0;
     //0,0 nombre 0,1 saldo
-    while($row=$result->fetch_assoc()){
+    while($sql->fetch()){
         $l=0;
-        $ase[$i][$l] = $row['ID'];
+        $ase[$i][$l] = $idap;
         $l++;
-        $ase[$i][$l] = $row['CUOTA'];
+        $ase[$i][$l] = $cuo;
         $l++;
-        $ase[$i][$l] = $row['VALOR'];
+        $ase[$i][$l] = $vlra;
          $l++;
-        $ase[$i][$l] = $row['IDASESOR'];
+        $ase[$i][$l] = $idas;
          $l++;
-        $ase[$i][$l] = $row['IDPARTIDO'];
+        $ase[$i][$l] = $idpar;
          $l++;
-        $ase[$i][$l] = $row['APUESTA'];
+        $ase[$i][$l] = $apu;
         $i++;
     }
     return $ase;
-}
-
+}}
+//retorna nombre de usuario
 function asesor($enl,$id){
-    $sql="SELECT NOMBRE FROM persona WHERE ID='".$id."';";
-    $result= $enl->query($sql)or die("Error al consultar DB");
+    if($sql=$enl->prepare("SELECT NOMBRE FROM persona WHERE ID=?;")){
+        $sql->bind_param('s',$id);
+        $sql->execute();
+    $sql->bind_result($nomA);
     $i=0;
     $ase=array();
     //0,0 nombre 0,1 saldo
-    while($row=$result->fetch_assoc()){
+    while($sql->fetch()){
         
-        $ase[$i] = $row['NOMBRE'];
+        $ase[$i] = $nomA;
        
         $i++;
     }
     return $ase;
-}
+}}
 function acfecha($enl,$idu){
-    $sql="SELECT  fechaA, fechaB, ID FROM fecha WHERE(ID='".$idu."');";
-    $result= $enl->query($sql)or die("Error al consultar DB");
+    if($sql=$enl->prepare("SELECT  fechaA, fechaB, ID FROM fecha WHERE(ID=?);")){
+        $sql->bind_param('s',$idu);
+    $sql->bind_result($feA,$feB,$idfecha);
     $i=0;
     $ase = array();
     
         $ase[0]=NULL;
         $ase[1]=NULL;
         $ase[2]=0;
-    while($row=$result->fetch_assoc()){
-        $ase[0] = $row['fechaA'];
-        $ase[1] = $row['fechaB'];
-        $ase[2] = $row['ID'];
+    while($sql->fetch()){
+        $ase[0] = $feA;
+        $ase[1] = $feB;
+        $ase[2] = $idfecha;
         
     }
     return $ase;
-}
+}}
 
 
 function tpersona($enl){
@@ -497,19 +506,21 @@ function tpersona($enl){
 }
 
 function idapuesta($enl,$fecha1,$fecha2){
-    $sql="SELECT  DISTINCT ID,VALOR,IDASESOR FROM apuestas WHERE(FECHA>='".$fecha1."' AND FECHA<='".$fecha2."');";
-    $result= $enl->query($sql)or die("Error al consultar DB");
+    if($sql=$enl->prepare("SELECT  DISTINCT ID,VALOR,IDASESOR FROM apuestas WHERE(FECHA>=? AND FECHA<=?);")){
+        $sql->bind_param('ss',$fecha1,$fecha2);
+        $sql->execute();
+    $sql->bind_result($idapu,$vlrapu,$idase);
     $i=0;
     $ase = array();
-    while($row=$result->fetch_assoc()){
-        $ase[$i][0] = $row['ID'];
-        $ase[$i][1] = $row['VALOR'];
-        $ase[$i][2] = $row['IDASESOR'];
+    while($sql->fetch()){
+        $ase[$i][0] = $idapu;
+        $ase[$i][1] = $vlrapu;
+        $ase[$i][2] = $idase;
         $i++;
         
     }
     return $ase;
-}
+}}
 
 
 ?>
