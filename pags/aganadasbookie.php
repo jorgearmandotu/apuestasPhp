@@ -50,7 +50,7 @@
     <center>
         
     <h2>Apuestas ganadas y perdidas por cada punto</h2>
-       <form method="post" id="apuesganada" action="aganadasbookie.php" method="post">
+       <form method="post" id="apuesganada" action="<?php echo limpiarcadenas($_SERVER["PHP_SELF"]);?>" method="post">
        
         <label>Fecha de inicio</label>
         <input type="date" name="fecha1" id="fecha1" required>

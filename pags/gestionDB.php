@@ -5,7 +5,7 @@ function connectionDB(){
     $DB_SERVER='localhost';
     $DB_NAME='apuestas';
     $DB_USER='root';
-    $DB_PASS='';
+    $DB_PASS='Jorge1990';
     
     $enlace = mysqli_connect($DB_SERVER,$DB_USER,$DB_PASS,$DB_NAME);
     if(!$enlace){
@@ -473,22 +473,25 @@ function asesor($enl,$id){
 }}
 //sin preparar
 function acfecha($enl,$idu){
-    $sql="SELECT  fechaA, fechaB, ID FROM fecha WHERE(ID='".$idu."');";
-    $result= $enl->query($sql)or die("Error al consultar DB");
+    if($sql= $enl->prepare("SELECT  fechaA, fechaB, ID FROM fecha WHERE(ID=?);")){
+        $sql->bind_param('s',$idu);
+        $sql->execute();
+    
+    $sql->bind_result($a,$b,$idfe);
     $i=0;
     $ase = array();
     
         $ase[0]=NULL;
         $ase[1]=NULL;
         $ase[2]=0;
-    while($row=$result->fetch_assoc()){
-        $ase[0] = $row['fechaA'];
-        $ase[1] = $row['fechaB'];
-        $ase[2] = $row['ID'];
+    while($sql->fetch()){
+        $ase[0] = $a;
+        $ase[1] = $b;
+        $ase[2] = $idfe;
         
     }
     return $ase;
-}
+}}
 
 
 function tpersona($enl){

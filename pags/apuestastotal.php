@@ -54,7 +54,7 @@
     <center>
         
     <h2>Apuestas totales de Bookiesport</h2>
-       <form method="post" id="apuestatotal" action="apuestastotal.php" method="post">
+       <form method="post" id="apuestatotal" action="<?php echo limpiarcadenas($_SERVER["PHP_SELF"]);?>" method="post">
         <label>Fecha de inicio</label>
         <input type="date" name="fecha1" id="fecha1" required>
            <label>Fecha Fin</label>

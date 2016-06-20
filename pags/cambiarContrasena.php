@@ -47,7 +47,7 @@
     <p>
         A continuación podra cambiar la contraseña para el usuario <strong><?php echo $user; ?></strong>
     </p>
-       <form method="post" id="formcontrasena" action="lib/updateContrasena.php">
+       <form method="post" id="formcontrasena" action="lib/updateContrasenaadmin.php">
         <ul>
             <li>
                 <label for="anterior">Ingrese contraseña anterior: </label>
