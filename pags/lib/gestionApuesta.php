@@ -104,6 +104,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           <li><label>cuota total: ".$cuotatotal."</label>
               <input type='hidden' value='".$cuotatotal."' name='cuotatotal'></li>
         <li>
+            <label>valor apostado: ".$valorapuesta."</label>
             <label>ganancia: ".$totalganancia."</label>
             <input type='hidden' value='".$valorapuesta."' name='valorapostado'>
 

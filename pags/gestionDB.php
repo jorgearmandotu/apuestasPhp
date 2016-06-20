@@ -146,13 +146,15 @@ function cedulas($ced,$enl){
 
 function equipo($equipo, $enl){
     $idEquipo = null;
-    $sql = "SELECT ID FROM equipos WHERE NOMBRE like '%".$equipo."%'";
-    $result = $enl->query($sql) or die("error al conectar con DB");
-    if($row=$result->fetch_assoc()){
-        $idEquipo = $row['ID'];
+    if($sql = $enl->prepare("SELECT ID FROM equipos WHERE NOMBRE=?;")){
+    $sql->bind_param('s',$equipo);
+        $sql->execute();
+        $sql->bind_result($idequ);
+    if($sql->fetch()){
+        $idEquipo = $idequ;
     }
     return $idEquipo;
-}
+}}
 //recibe id de equipo y retorna nombre;
 function nomEquipo($id,$enl){
     $nom=null;
@@ -197,14 +199,16 @@ function nomLiga($id,$enl){
 }}
 //busca un partido y retorna id del mismo
 function idpartido($enl,$fechaPartido,$horaP,$idequipoA,$idequipoB,$idliga){
-    $sql = "SELECT ID FROM partidos WHERE FECHA='".$fechaPartido."' AND EQUIPOA='".$idequipoA."' AND EQUIPOB = '".$idequipoB."' AND LIGA='".$idliga."';";
+    if($sql = $enl->prepare("SELECT ID FROM partidos WHERE FECHA=? AND EQUIPOA=? AND EQUIPOB = ? AND LIGA=?;")){
+        $sql->bind_param('ssss',$fechaPartido,$idequipoA,$idequipoB,$idliga);
     $id=null;
-    $result = $enl->query($sql)or die ("error al conectar con DB idPartidos");
-    if($row=$result->fetch_assoc()){
-        $id=$row['ID'];
+        $sql->execute();
+        $sql->bind_result($idpartido);
+    if($sql->fetch()){
+        $id=$idpartido;
     }
     return $id;
-}
+}}
 //ingreso de liga nueva recibe nombre
 function ingresoLiga($liga, $enl){
     echo('<script type="text/javascript">alert("'.$liga.'")</script>');
