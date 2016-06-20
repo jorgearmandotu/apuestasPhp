@@ -25,25 +25,31 @@
                      </li>
                      <li class="logout">
                          <a href="salir.php">Salir</a>
+                         
                      </li>
                      
                  </ul>
           </header>
+            <br>
+            <br>
+            <br>
+              <center>
+        <img src="../images/asesorres.png" height="100px" ></center>
+              <br>
         <div id="contenido">
+            <div id="bloque">
         <ul>
-        <li><a href='cambiarContrasena.php'>Cambiar contraseña</a><br></li>
-        <li><a href='apuesta.php'>apuestas</a><br></li>
-        <li><a href='apuestaspersona.php'>total apuestas</a><br></li>
-        <li><a href='ganadaspersona.php'>Apuestas Ganadas y perdidas</a><br></li>
+        <li><a href='cambiarContrasena.php'><img src ="../images/contrasena.png" height="80px"></a><br></li>
+        <li><a href='apuesta.php'><img src ="../images/realiza.png" height="80px"></a><br></li>
+        <li><a href='apuestaspersona.php'><img src ="../images/ganadasperdidas.png" height="80px"></a><br></li>
+        <li><a href='ganadaspersona.php'><img src ="../images/total.png" height="80px"></a><br></li>
         </ul>
+        </div>
         </div>
         <footer>
               <img src="../images/Bookiesport_Logo.png">
               <p>
-                  BOOKIESPORT<br>
-                  empresa dedicada a las apuestas
-                  visitanos en 
-                  tel:
+                 
                   
               </p>
           </footer>

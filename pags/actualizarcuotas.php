@@ -46,6 +46,8 @@
       <div id='center'>
           <ul>
               <li id="selecfecha">
+                  <br>
+                  <br>
                   <label>Seleccione una fecha: </label>
                   <input type="date" name="fecha" id="fecha" <?php
                 date_default_timezone_set("America/Bogota");

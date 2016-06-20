@@ -50,6 +50,7 @@ require_once 'gestionDB.php';
         <form method="post" action="lib/ingresarPartido.php" id="formularioPartido">
             <ul>
                 <li>
+                    <br>
                     <label>Equipo local: </label>
                     <input type="text" name="equipoA" required maxlength="29">
                 </li>

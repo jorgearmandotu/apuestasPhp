@@ -1,9 +1,13 @@
 html{
-    background-color: #363333;
+    background-image: url(../images/Montaje-01.png);
+      background-size: 100vw 100vh;
+    background-attachment: fixed;
+    margin: 0;
 }
 #cabecera{
+     border-top: 0.7em solid #58ACFA;
+    border-bottom: 0.7em solid #58ACFA;
     height: 7em;
-    border-bottom: 0.7em solid #000;
     background: rgba(182,227,245,1);
     background: -moz-linear-gradient(top, rgba(182,227,245,1) 0%, rgba(20,179,227,1) 17%, rgba(41,184,229,1) 50%, rgba(7,44,230,1) 100%);
     background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(182,227,245,1)), color-stop(17%, rgba(20,179,227,1)), color-stop(50%, rgba(41,184,229,1)), color-stop(100%, rgba(7,44,230,1)));
@@ -17,15 +21,18 @@ html{
     list-style: none;
 }
 #logo{
+   margin-left: auto;
+    margin-right: auto;
     background-image: url('../images/Bookiesport_Logo.png');
+    align-items: center;
     background-repeat: no-repeat;
-    background-position: center;
+    background-position:center;
     background-size: contain;
     width: 200px;
     height: 100px;
     float: left;
     position: absolute;
-    right: 50em;
+    right: 35em;
     margin: 0.5em;;
 }
 .logout{
@@ -52,10 +59,11 @@ html{
     color: #fff;
 }
 footer{
+    
     max-width: 100%;
     margin: 0 auto;
-     border-top: 0.7em solid #000;
-    border-bottom: 0.7em solid #000;
+     border-top: 0.7em solid #58ACFA;
+    border-bottom: 0.7em solid #58ACFA;
     margin-top: 1em;
     background: rgba(182,227,245,1);
     background: -moz-linear-gradient(top, rgba(182,227,245,1) 0%, rgba(20,179,227,1) 17%, rgba(41,184,229,1) 50%, rgba(7,44,230,1) 100%);
@@ -84,7 +92,7 @@ footer p{
     text-decoration: none;
 }
 #contenido ul li{
-    background: #ffbf00;
+    
     padding: 0.3em;
     text-align: center;
     margin: 1em;
@@ -96,4 +104,11 @@ footer p{
     text-decoration: none;
     color: rgb(12, 39, 172);
     font-weight: bold;
+}
+
+#bloque{
+    column-count: 3;
+    -webkit-column-count: 3;
+    -moz-column-count: 3;
+    -o-column-count: 3;
 }

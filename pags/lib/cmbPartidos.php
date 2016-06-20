@@ -33,12 +33,12 @@ for($i=0;$i<count($partidos);$i++){
            
             <form method='POST' id='miniformulario' action='lib/cuotas.php'>
         <div class='celda1'>
-        <input type='text' name='id' value='".$idP."' class='ids'>
+        <input type='text' name='id' value='".$idP."' class='ids' >
         
             <label>".$nomEquiA."_vs_".$nomEquiB." - ".$hora." </label>
         </div>
         <div class='celda2'>
-            <input type='number' step='any' class='cuotas' value='".$local."' name='cuota1' min='0'>
+            <input type='number' step='any' class='cuotas' value='".$local."' name='cuota1' min='0' >
         </div>
        <div class='celda3'>
             <input type='number' step='any' class='cuotas' value='".$empate."' name='cuotax' min='0'>

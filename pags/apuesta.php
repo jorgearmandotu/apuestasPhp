@@ -59,6 +59,7 @@ function crrearapuesta(){
           <div id='center'>
       <ul>
              <li>
+                 <br>
                  <label>Saldo Actual: </label><?php 
                   $enlace = connectionDB();
                   $saldo = saldo($enlace,$_SESSION['id']);

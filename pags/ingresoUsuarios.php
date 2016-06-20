@@ -41,6 +41,7 @@
               <form method="post" action="ingresosUpdates.php" id="formularioAsesor" onsubmit="return confirmar()">
                  <ul>
                     <li>
+                        <br>
                         <label for="nomb">Nombre: </label>
                         <input type="text" name='nombre' required maxlength="20" id="nomb">
                     </li>

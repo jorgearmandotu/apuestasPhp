@@ -1,0 +1,104 @@
+
+
+#center{
+    overflow: hidden;
+}
+form{
+    
+    width: 800px;
+}
+
+#center ul{
+    list-style: none;
+}
+#center label{
+    color: #ffbf00;
+    font-weight: bold;
+}
+#fecha{
+    border-radius: 1em;
+}
+#liga{
+    border-radius: 1em;
+}
+li{
+    padding: 0.5em;
+}
+#listpartidosantes{
+    overflow: hidden;
+    text-align: left;
+    border: 1px solid #789;
+    float: left;
+    width: auto;
+}
+#cantidadapuesta{
+    max-width: 500px;
+    overflow: hidden;
+    position: relative;
+    left: 2.5em;
+    float: none;
+    padding-bottom: 1.5em;
+}
+.fila{
+    width: auto;
+    margin: 0 auto;
+    overflow: hidden;
+    float: left;
+}
+.celda1{
+    width: 500px;
+    height: 30px;
+    float: left;
+    margin: 4px;
+    vertical-align: middle;
+}
+
+input{
+    border-radius: 1em;
+}
+.btn{
+    border-radius: 1em;
+    background: #ffbf00;
+    color: #000;
+    font-weight: bold;
+}
+#datosapuestas{
+    background-color: yellow;
+    position: fixed;
+    width: 200px;
+}
+button{
+    border-radius: 1em;
+    background: #ffbf00;
+    color: #000;
+    font-weight: bold;
+}
+#valorapuesta{
+    background: #fff;
+    width: 500px;
+    text-align: center;
+    padding: 1em;
+    float: left;
+    border: 2px solid #000;
+}
+#realizarapuestas{
+    background: #fff;
+    width: 500px;
+    text-align: center;
+    padding: 0em;
+    float: left;
+    border: 2px solid #fff;
+}
+#valor:focus,#fecha:focus{
+    background: #5edd80;
+}
+.celda2,.celda3,.celda4,.celda5{
+    float: left;
+    width: 50px;
+    height: 30px;
+    text-align: center;
+    margin: 4px;
+}
+.celda2{
+    
+}

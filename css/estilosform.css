@@ -1,9 +1,13 @@
 html{
-    background-color: #363333;
+     background-image: url(../images/fondopags.jpg);
+      background-size: 100vw 100vh;
+    background-attachment: fixed;
+    margin: 0;
 }
 #cabecera{
     height: 7em;
-    border-bottom: 0.7em solid #000;
+     border-top: 0.7em solid #58ACFA;
+    border-bottom: 0.7em solid #58ACFA;
     background: rgba(182,227,245,1);
     background: -moz-linear-gradient(top, rgba(182,227,245,1) 0%, rgba(20,179,227,1) 17%, rgba(41,184,229,1) 50%, rgba(7,44,230,1) 100%);
     background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(182,227,245,1)), color-stop(17%, rgba(20,179,227,1)), color-stop(50%, rgba(41,184,229,1)), color-stop(100%, rgba(7,44,230,1)));
@@ -25,7 +29,7 @@ html{
     height: 100px;
     float: left;
     position: absolute;
-    right: 50em;
+    right: 35em;
     margin: 0.5em;;
 }
 .logout{
@@ -63,8 +67,8 @@ html{
 footer{
     max-width: 100%;
     margin: 0 auto;
-    border-top: 0.7em solid #000;
-    border-bottom: 0.7em solid #000;
+     border-top: 0.7em solid #58ACFA;
+    border-bottom: 0.7em solid #58ACFA;
     margin-top: 1em;
     background: rgba(182,227,245,1);
     background: -moz-linear-gradient(top, rgba(182,227,245,1) 0%, rgba(20,179,227,1) 17%, rgba(41,184,229,1) 50%, rgba(7,44,230,1) 100%);
@@ -111,4 +115,10 @@ center form button{
 }
 center h2,p{
     color: #fff;
+}
+#bloque{
+    column-count: 2;
+    -webkit-column-count: 2;
+    -moz-column-count: 2;
+    -o-column-count: 2;
 }

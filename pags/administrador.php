@@ -21,7 +21,7 @@
     <body>
         <div id='contenedor'>
           <header id="cabecera">
-             <div id="logo">
+            <div id="logo">
                  
              </div>
                  <ul>
@@ -35,47 +35,51 @@
                  </ul>
           </header>
           <div id="contenido">
-        <h1>administradores</h1>
+              <br>
+              <center>
+        <img src="../images/Interface-02.png" height="100px" ></center>
+              <br>
+              <div id="bloque">
         <ul>
+            
             <li>
-                <a href="ingresoUsuarios.php">agregar usuarios</a>
+               <a href="ingresoUsuarios.php"><img src ="../images/agregar.png" height="80px"></a>
             </li>
             <li>
-                <a href="generarSaldo.php">Agregar saldo a asesores</a>
+                <a href="generarSaldo.php"><img src ="../images/saldo.png" height="80px"></a>
             </li>
             <li>
-                <a href="ingresoPartidos.php">Ingresar Partidos</a>
+                <a href="ingresoPartidos.php"><img src ="../images/ingresar.png" height="80px"></a>
+            </li>
+            <br>
+            <li>
+                <a href="actualizarcuotas.php"><img src ="../images/actualizarcuotas.png" height="80px"></a>
             </li>
             <li>
-                <a href="actualizarcuotas.php">actualizar cuotas de partidos</a>
+                <a href="cambiarContrasena.php"><img src ="../images/contrasena.png" height="80px"></a>
             </li>
             <li>
-                <a href="cambiarContrasena.php">cambiar contraseña</a>
+                <a href="apuestastotal.php"><img src ="../images/reportetotal.png" height="80px"></a>
             </li>
+            <br>
             <li>
-                <a href="apuestastotal.php">Reporte Total Apuestas</a>
+                <a href="aganadasbookie.php"><img src ="../images/reportepunto.png" height="80px"></a>
             </li>
             <li>
 
-                <a href="aganadasbookie.php">Reporte Apuestas ganadas por  punto</a>
+                <a href="actualizarganador.php"><img src ="../images/ganador.png" height="80px"></a>
             </li>
             <li>
 
-                <a href="actualizarganador.php">Ingresar ganador de un partido</a>
-            </li>
-            <li>
-
-                <a href="salir.php">cerrar sesion</a>
+                <a href="salir.php"><img src ="../images/cerrar.png" height="80px"></a>
             </li>
         </ul>
+                  </div>
             </div>
             <footer>
               <img src="../images/Bookiesport_Logo.png">
               <p>
-                  BOOKIESPORT<br>
-                  empresa dedicada a las apuestas
-                  visitanos en 
-                  tel:
+                  
                   
               </p>
           </footer>

@@ -1,0 +1,113 @@
+.celda6,.celda8 {float: inherit;
+width: 275px;
+    height: 30px;
+    background: rgba(0,0,255,0.3);
+    text-align:center;
+   
+    margin-top: 4px;
+border: 1px solid #FFF;}
+
+.celda7 {float: inherit;
+width: 150px;
+    height: 30px;
+    background: rgba(0,0,255,0.3);
+    text-align:center;
+   
+    margin-top: 4px;
+border: 1px solid #FFF;}
+
+.celda9 {float: inherit;
+width: 80px;
+    height: 30px;
+    background: rgba(0,0,255,0.3);
+    text-align:center;
+   
+    margin-top: 4px;
+border: 1px solid #FFF;}
+
+.celda6 label {
+    display: inline-block;
+    cursor: pointer;
+    color: #0E0E52;
+    position: relative;
+    padding: 5px 0px 5px 0px;
+    font-size: 1em;
+    border-radius: 5px;
+    -webkit-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease; }
+    
+    .celda6 label:hover {
+      background: rgba(255, 65, 54, 0.1); }
+    
+    
+  
+  .celda6 label:before {
+    border-radius: 3px; }
+  .celda6 input[type="checkbox"] {
+    display: none; }
+    .celda6 input[type="checkbox"]:checked + label:before {
+      display: none; }
+    .celda6 input[type="checkbox"]:checked + label {
+      background: #0E0E52;
+      color: #fff;
+      padding: 5px 15px; }
+
+.celda7 label {
+    display: inline-block;
+    cursor: pointer;
+    color: #0E0E52;
+    position: relative;
+    padding: 5px 0px 5px 0px;
+    font-size: 1em;
+    border-radius: 5px;
+    -webkit-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease; }
+    
+    .celda7 label:hover {
+      background: rgba(255, 65, 54, 0.1); }
+    
+    
+  
+.celda7 {float: left;}  
+.celda7 label:before {
+    border-radius: 3px; }
+  .celda7 input[type="checkbox"] {
+    display: none; }
+    .celda7 input[type="checkbox"]:checked + label:before {
+      display: none; }
+    .celda7 input[type="checkbox"]:checked + label {
+      background: #0E0E52;
+      color: #fff;
+      padding: 5px 15px; }
+
+
+.celda8 label {
+    display: inline-block;
+    cursor: pointer;
+    color: #0E0E52;
+    position: relative;
+    padding: 5px 0px 5px 0px;
+    font-size: 1em;
+    border-radius: 5px;
+    -webkit-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease; }
+    
+    .celda8 label:hover {
+      background: rgba(255, 65, 54, 0.1); }
+    
+    
+  
+.celda8 {float: left;}  
+.celda8 label:before {
+    border-radius: 3px; }
+  .celda8 input[type="checkbox"] {
+    display: none; }
+    .celda8 input[type="checkbox"]:checked + label:before {
+      display: none; }
+    .celda8 input[type="checkbox"]:checked + label {
+      background: #0E0E52;
+      color: #fff;
+      padding: 5px 15px; }
