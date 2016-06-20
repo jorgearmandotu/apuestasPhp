@@ -35,6 +35,8 @@ function crrearapuesta(){
           <script src="../js/realizarapuesta.js"></script>
            <link rel="stylesheet" href="../css/estilosform.css">
           <link rel="stylesheet" href="../css/apuesta.css">
+          <link rel="stylesheet" href="../css/apuesta1.css">
+          <link rel="stylesheet" href="../css/checkbox.css">
           </head>
       <body>
       <div id='contenedor'>
@@ -63,7 +65,7 @@ function crrearapuesta(){
                  <label>Saldo Actual: </label><?php 
                   $enlace = connectionDB();
                   $saldo = saldo($enlace,$_SESSION['id']);
-                  echo'<label>$ '.$saldo.'</label>';
+                  echo'<label>$ '.number_format($saldo, 2, ",", ".").'</label>';
                  date_default_timezone_set('America/Bogota');
                  $hora = new datetime();
                   ?>

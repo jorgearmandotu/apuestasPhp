@@ -39,10 +39,10 @@
         <div id="contenido">
             <div id="bloque">
         <ul>
-        <li><a href='cambiarContrasena.php'><img src ="../images/contrasena.png" height="80px"></a><br></li>
+        <li><a href='cambiarContrasenaasesor.php'><img src ="../images/contrasena.png" height="80px"></a><br></li>
         <li><a href='apuesta.php'><img src ="../images/realiza.png" height="80px"></a><br></li>
-        <li><a href='apuestaspersona.php'><img src ="../images/ganadasperdidas.png" height="80px"></a><br></li>
-        <li><a href='ganadaspersona.php'><img src ="../images/total.png" height="80px"></a><br></li>
+        <li><a href='ganadaspersona.php'><img src ="../images/ganadasperdidas.png" height="80px"></a><br></li>
+        <li><a href='apuestaspersona.php'><img src ="../images/total.png" height="80px"></a><br></li>
         </ul>
         </div>
         </div>

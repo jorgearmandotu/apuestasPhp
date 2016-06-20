@@ -5,7 +5,7 @@ width: 275px;
     text-align:center;
    
     margin-top: 4px;
-border: 1px solid #FFF;}
+}
 
 .celda7 {float: inherit;
 width: 150px;
@@ -14,7 +14,7 @@ width: 150px;
     text-align:center;
    
     margin-top: 4px;
-border: 1px solid #FFF;}
+}
 
 .celda9 {float: inherit;
 width: 80px;
@@ -23,12 +23,12 @@ width: 80px;
     text-align:center;
    
     margin-top: 4px;
-border: 1px solid #FFF;}
+}
 
 .celda6 label {
     display: inline-block;
     cursor: pointer;
-    color: #0E0E52;
+    color: #e5490f;
     position: relative;
     padding: 5px 0px 5px 0px;
     font-size: 1em;
@@ -49,14 +49,14 @@ border: 1px solid #FFF;}
     .celda6 input[type="checkbox"]:checked + label:before {
       display: none; }
     .celda6 input[type="checkbox"]:checked + label {
-      background: #0E0E52;
+      background: #e5490f;
       color: #fff;
       padding: 5px 15px; }
 
 .celda7 label {
     display: inline-block;
     cursor: pointer;
-    color: #0E0E52;
+    color: #e5490f;
     position: relative;
     padding: 5px 0px 5px 0px;
     font-size: 1em;
@@ -78,7 +78,7 @@ border: 1px solid #FFF;}
     .celda7 input[type="checkbox"]:checked + label:before {
       display: none; }
     .celda7 input[type="checkbox"]:checked + label {
-      background: #0E0E52;
+      background: #e5490f;
       color: #fff;
       padding: 5px 15px; }
 
@@ -86,7 +86,7 @@ border: 1px solid #FFF;}
 .celda8 label {
     display: inline-block;
     cursor: pointer;
-    color: #0E0E52;
+    color: #e5490f;
     position: relative;
     padding: 5px 0px 5px 0px;
     font-size: 1em;
@@ -108,6 +108,6 @@ border: 1px solid #FFF;}
     .celda8 input[type="checkbox"]:checked + label:before {
       display: none; }
     .celda8 input[type="checkbox"]:checked + label {
-      background: #0E0E52;
+      background: #e5490f;
       color: #fff;
       padding: 5px 15px; }

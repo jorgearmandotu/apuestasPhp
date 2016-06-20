@@ -34,6 +34,8 @@ for($i=1;$i<count($datos);$i++){
         header('location: ../apuesta.php');
     }else{
         echo'<h1>OCURRIO UN ERROR AL REALISAR LA APUESTA</h1><BR>
+        <br>
+        '.$valorA.'<br>'.$idusuario.'<br>'.$fecha.'<br>'.$idpartido.'<br>'.$apuestaselec.'<br>
         <a href="../apuesta.php">Volver a intentar</a>';
     }
     

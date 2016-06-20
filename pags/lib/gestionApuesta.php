@@ -54,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                          <a href="../salir.php">Salir</a>
                      </li>
                      <li id="salirico">
-                         <a href="asesor.php"><img src='../../images/Bookiesport_Inicio.png' alt="Inicio"></a>
+                         <a href="../asesor.php"><img src='../../images/Bookiesport_Inicio.png' alt="Inicio"></a>
                      </li>
                  </ul>
           </header>

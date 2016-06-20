@@ -32,6 +32,7 @@ for($l=0;$l<count($ids);$l++){
     $res.='<label>'.$nompartido.'</label><br />'.'cuota: '.$cuota[$l].' apuesta: '.$apuesta[$l].'<br><hr>';}
 }
 $total=$valorapuesta*$valcuota;
+$total=number_format($total, 2, ",", ".");
 $res.='<label>Ganancias: </label>'.$total.'<br><button type="button" id="apostar">apostar</button>';
 echo $res;
 //echo '<button type="button" id="apostar>apostar</button>';
