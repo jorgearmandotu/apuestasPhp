@@ -320,55 +320,68 @@ function partidoslig($enl,$fecha,$liga){
 
 //retorna arreglo para armar nombre de partido con hora
 function nompartido($enl,$idp){
-    $sql = "SELECT ID,EQUIPOA,EQUIPOB,LIGA,CUOTA1,CUOTAX,CUOTA2, DATE_FORMAT(HORA, '%T') AS HORAP FROM partidos WHERE ID='".$idp."';";
-    $result = $enl->query($sql)or die("error al conectar DB");
+    if($sql = $enl->prepare("SELECT ID,EQUIPOA,EQUIPOB,LIGA,CUOTA1,CUOTAX,CUOTA2, DATE_FORMAT(HORA, '%T') AS HORAP FROM partidos WHERE ID=?;")){
+        $sql->bind_param('s',$idp);
+        $sql->execute();
+    $sql->bind_result($idpa,$equiA,$equiB,$lig,$cuo1,$cuox,$cuo2,$horp);
     $partido="";
-    while($row=$result->fetch_assoc()){
-        $partido.=$row['EQUIPOA']."_vs_";
-        $partido.=$row['EQUIPOB']." - ";
-        $partido.=$row['HORAP'];
+    while($sql->fetch()){
+        $partido.=$equiA."_vs_";
+        $partido.=$equiB." - ";
+        $partido.=$horp;
     }
     return $partido;
-}
+}}
+//retorna partido y su ganador
 function equiposLigaPartido($enl,$idP){
-    $sql = "SELECT EQUIPOA,EQUIPOB,LIGA,DATE_FORMAT(HORA, '%T') AS HORAP, GANADOR FROM partidos WHERE ID='".$idP."'";
-    $result = $enl->query($sql)or die("error al conectar a DB combosapuestas");
+    if($sql = $enl->prepare("SELECT EQUIPOA,EQUIPOB,LIGA,DATE_FORMAT(HORA, '%T') AS HORAP, GANADOR FROM partidos WHERE ID=?")){
+    $sql->bind_param('s',$idP);
+        $sql->execute();
+        $sql->bind_result($equiA,$equiB,$lig,$horp,$ganad);
     $arr = array();
-    if($row=$result->fetch_assoc()){
-        $arr[0]=$row['EQUIPOA'];
-        $arr[1]=$row['EQUIPOB'];
-        $arr[2]=$row['LIGA'];
-        $arr[3]=$row['HORAP'];
-        $arr[4]=$row['GANADOR'];
+    if($sql->fetch()){
+        $arr[0]=$equiA;
+        $arr[1]=$equiB;
+        $arr[2]=$lig;
+        $arr[3]=$horp;
+        $arr[4]=$ganad;
     }
     return $arr;
-}
+}}
 //obtener saldo asesor
 function saldo($enl,$id){
-    $sql = "SELECT SALDO FROM saldos WHERE IDASESOR='".$id."'";
-    $result = $enl->query($sql)or die("error al conectar a DB saldos");
-    $saldo='100';
-    if($row=$result->fetch_assoc()){
-        $saldo=$row['SALDO'];
+    if($sql = $enl->prepare("SELECT SALDO FROM saldos WHERE IDASESOR=?")){
+        $sql->bind_param('s',$id);
+        $sql->execute();
+        $sql->bind_result($saldA);
+    $saldo='0';
+    if($sql->fetch()){
+        $saldo=$saldA;
     }
     return $saldo;
-}
+}}
+//ingresar apuesta
 function ingresoApuesta($enl,$valor,$idAsesor,$fecha,$idPart,$EquiApost,$idLiga,$cuota,$idapuesta,$saldoDisp){
     $enl->autocommit(false);
     $flag = true;
-    $sql = "INSERT INTO apuestas VALUES('".$valor."','".$idAsesor."','".$fecha."','".$idPart."','".$EquiApost."','".$idLiga."','".$cuota."','".$idapuesta."',NULL);";
+    if($sql = $enl->prepare("INSERT INTO apuestas VALUES(?,?,?,?,?,?,?,?,NULL);")){
+        $sql->bind_param('ssssssss',$valor,$idAsesor,$fecha,$idPart,$EquiApost,$idLiga,$cuota,$idapuesta);
+        
     $saldoDisp=$saldoDisp-$valor;
-    $sql2 = "UPDATE saldos SET SALDO='".$saldoDisp."' WHERE IDASESOR=".$idAsesor.";";
-    if(!$enl->query($sql)){
+   
+    if(!$sql->execute()){
    // if($enl->errno){
         $flag = false;
         echo("Error en transaccion ingreso");
-    }
-     if(!$enl->query($sql2)){
+    }}
+     if($sql2 = $enl->prepare("UPDATE saldos SET SALDO=? WHERE IDASESOR=?;")){
+         $sql2->bind_param('ss',$saldoDisp,$idAsesor);
+     
+     if(!$sql2->execute()){
     //if($enl->errno){
         $flag = false;
         echo("Error en transaccion actualizando");
-    }
+    }}
     if($flag){
         $enl->commit();
         return true;
