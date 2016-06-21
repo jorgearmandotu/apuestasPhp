@@ -97,7 +97,7 @@ function crrearapuesta(){
            <form method='POST' id='miniformulario' action='lib/gestionApuesta.php'>
            <div id="cantidadapuesta">
           <label for="valor">Cantidad a apostar $: </label>
-             <input tipe='number' step='any' name='valorapuesta' id='valor'>
+             <input type='number' step='any' name='valorapuesta' id='valor' pattern="[0-9]">
               </div>
           
       <div id="listpartidosantes">
