@@ -121,10 +121,15 @@ $(document).ready(function(){
             if(a==(e+'-')){
                 arrcuotas.splice(i,1);
                 var idp=e.split(':');
-                alert(idp);
-                idp=idp[1];
-                idp='#'+idp+'+a';
-                alert(idp);
+                if(idp[2]=='1'){
+                    idp=idp[1];
+                }else if(idp[2]=='X'){
+                    idp=idp[1]+'a';
+                }else{
+                    idp=idp[1]+'b';
+                }
+                
+                idp='#'+idp;
                 $(idp).prop('checked',false);
                 break;
             }
