@@ -49,7 +49,6 @@ for($i=0;$i<count($partidos);$i++){
         <div class='celda8'>
         <input type='checkbox' class='cuotas' value='".$visitante.":".$idP.":2'  name='cuota[]' id='".$idP."+b'>
         <label for='".$idP."+b'>".$nomEquiB."  ".$visitante."</label></input>
-        
         </div>
         
         

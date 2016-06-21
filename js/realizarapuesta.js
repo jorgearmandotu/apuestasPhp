@@ -114,6 +114,43 @@ $(document).ready(function(){
     
     })
     
+    $('#realizarapuestas').on('click','#eli',function(){
+        for(i in arrcuotas){
+            var a = arrcuotas[i];
+            var e = $(this).val();
+            if(a==(e+'-')){
+                arrcuotas.splice(i,1);
+                var idp=e.split(':');
+                alert(idp);
+                idp=idp[1];
+                idp='#'+idp+'+a';
+                alert(idp);
+                $(idp).prop('checked',false);
+                break;
+            }
+        }
+        datosap=datosApuestas(arrcuotas);
+        respuestas="";
+//       $('.cuotas:checked').each(function() {
+//          info = info+$(this).val()+"-";
+//                       });
+         var datos= {'datos' : datosap,
+                    'valorapuesta' : $('#valor').val()};
+        $.ajax({
+               data : datos,
+               url: '../pags/lib/liveApuestas.php',
+               type: 'post',
+               beforeSend: function(){
+                   $('#realizarapuestas').html('Cargando...')
+               },
+               success: function(response){
+                   respuestas=respuestas+response;
+                   
+                   $('#realizarapuestas').html(respuestas);
+               }
+           })
+    })
+    
     $('#valor').on('keyup',function(){
         var v=$(this).val();
         var c=$('#valcuot').val();//undefinid cuando aun no se ha a postado
