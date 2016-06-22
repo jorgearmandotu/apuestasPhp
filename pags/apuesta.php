@@ -33,8 +33,10 @@ function crrearapuesta(){
           <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
           <link rel="stylesheet" href="../css/normailze.min.css">
           <script src="../js/realizarapuesta.js"></script>
+          <script src="../js/sweetalert.min.js"></script>
            <link rel="stylesheet" href="../css/estilosform.css">
           <link rel="stylesheet" href="../css/apuesta.css">
+          <link rel="stylesheet" href="../css/sweetalert.css">
           <link rel="stylesheet" href="../css/apuesta1.css">
           <link rel="stylesheet" href="../css/checkbox.css">
           </head>

@@ -94,3 +94,11 @@ button{
 .celda2{
     
 }
+#eli{
+    background-color: #fff;
+    background-image: url(../images/equis.png);
+    background-size:contain;
+    width: 30px;
+    height: 20px;
+    border: 0px;
+}

@@ -54,9 +54,9 @@ $(document).ready(function(){
         saldo= parseFloat(saldo);
         valor = parseFloat(valor);
         if(valor>300000 || valor<5000){
-            alert('La apuesta minima es de $5000 y la maxima de $300000')
+            swal('La apuesta minima es de $5000 y la maxima de $300000')
         }else if(saldo < valor){
-            alert('Usted no posee saldo suficiente para realisar esta apuesta')
+            swal('Usted no posee saldo suficiente para realisar esta apuesta')
         }
         else{
             $('#strapuesta').val(datosap);
