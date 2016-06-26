@@ -73,7 +73,7 @@ require_once('../validaciones.php');
         }
         //header('location: ../cambiarContrasena.php');
         ?>
-<a href="../cambiarContrasena.php"><button type="button" id="enviar">Volver</button></a>
+<a href="../cambiarContrasenaasesor.php"><button type="button" id="enviar">Volver</button></a>
 </div>
          <footer>
               <img src="../../images/Bookiesport_Logo.png">
