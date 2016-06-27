@@ -1,0 +1,8 @@
+Los eventos que despues sean cancelados por cualquier motivo
+ya sea por orden publico seran decididos por decicion arbitaria.
+
+Los eventos aplazados seran considerados nulos a menos que sean 
+reprogranados para jugarse dentro de las sigueintes 24 horas.
+
+No se pueden realizar apuestas a menos de 5 minutos de iniciarse 
+un evento.

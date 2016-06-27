@@ -33,7 +33,7 @@ for($l=0;$l<count($ids);$l++){
 }
 $total=$valorapuesta*$valcuota;
 $total=number_format($total, 2, ",", ".");
-$res.='<input type="hidden" id=valcuot value="'.$valcuota.'"><label>Ganancias: </label><label id=gantotal>'.$total.'</label><br><button type="button" id="apostar">apostar</button>';
+$res.='<input type="hidden" id=valcuot value="'.$valcuota.'"><label>cuota total: '.$valcuota.'</label><br><label>Ganancias: </label><label id=gantotal>'.$total.'</label><br><button type="button" id="apostar">apostar</button>';
 echo $res;
 //echo '<button type="button" id="apostar>apostar</button>';
 ?>

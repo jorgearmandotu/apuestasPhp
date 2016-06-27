@@ -121,10 +121,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <li><a href='../apuesta.php'><button type='button'>volver</button></a></li></ul>";
     }
 }
+ 
 
 ?>
               </div>
           </div>
+           <a target="_blank" href="../recibo.php" class="btn btn-danger">Generar Recibo</a>
             <footer>
               <img src="../../images/Bookiesport_Logo.png">
               <p>

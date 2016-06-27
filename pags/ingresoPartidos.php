@@ -75,7 +75,7 @@ require_once 'gestionDB.php';
                     <label>Fecha partido: </label>
                     <input type="date" name="fecha" required>
                     <label>    Hora: </label>
-                    <input type="time" name="hora" required>
+                    <input type="time" name="hora" required id="hour">
                 </li>
                 <label>CUOTAS:</label>
                 <li>

@@ -13,6 +13,9 @@ $(document).ready(function() {
             type: 'POST',
             url:'consultas.php',
             data:$('#formularioApuesta').serialize(),
+              beforeSend: function(){
+                $('#partidos').html('<img src="../images/loading.gif" alt="cargando">');
+            },      
             success: function(data){
                 
                 $('#partidos').html(data);
@@ -49,6 +52,9 @@ $(document).ready(function() {
             type: 'POST',
             url:'consultas.php',
             data:$('#formularioApuesta').serialize(),
+            beforeSend: function(){
+                $('#partidos').html('<img src="../images/loading.gif" alt="cargando">');
+            },
             success: function(data){
                 $('#partidos').html(data);
             }

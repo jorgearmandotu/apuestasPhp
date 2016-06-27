@@ -11,12 +11,14 @@
        <title>cambiarContraseña</title>
        <link rel="stylesheet" href="../../css/normailze.min.css">
         <link rel="stylesheet" href="../../css/estilosform.css">
+        <link rel="stylesheet" href="../../css/sweetalert.css">
+        <script src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
+    <script src="../../js/sweetalert.min.js"></script>
    </head>
     <body>
      <div id='contenedor'>
           <header id="cabecera">
              <div id="logo">
-                 
              </div>
                  <ul id="cabecera">
                      <li class="logoutico">
@@ -48,7 +50,7 @@ require_once('../validaciones.php');
 
         <?php
         if($passnueva != $passrpt){
-            echo '<script type="text/javascript">alert("las contraseñas no coinciden")</script>';
+            echo '<script type="text/javascript">swal("las contraseñas no coinciden");</script>';
             
         }else{
             $enlace = connectionDB();
@@ -56,22 +58,22 @@ require_once('../validaciones.php');
                 //ingresar nueva contraseña
                 if(cambiarpassword($enlace,$passnueva,$id)){
                     connectionClose($enlace);
-                 echo '<script type="text/javascript">alert("Contraseña cambiada exitosamente")</script>'; 
+                 echo '<script type="text/javascript">swal("Contraseña cambiada exitosamente");</script>'; 
                     
                 }else{
                     connectionClose($enlace);
-                    echo '<script type="text/javascript">alert("ocurrio un error vuelva a intentarlo")</script>';
+                    echo '<script type="text/javascript">swal("ocurrio un error vuelva a intentarlo");</script>';
                     
                 }
             }else{
                 connectionClose($enlace);
-                echo '<script type="text/javascript">alert("la contraseña introducida no es la correcta")</script>';
+                echo '<script type="text/javascript">swal("la contraseña introducida no es la correcta");</script>';
                 
             }
         }
         //header('location: ../cambiarContrasena.php');
         ?>
-<a href="../cambiarContrasena.php"><button type="button" id="enviar">Volver</button></a>
+<a href="../cambiarContrasenaasesor.php"><button type="button" id="enviar">Volver</button></a>
 </div>
          <footer>
               <img src="../../images/Bookiesport_Logo.png">
@@ -85,5 +87,5 @@ require_once('../validaciones.php');
           </footer>
         </div>
     </body>
-    <script src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
+    
 </html>
