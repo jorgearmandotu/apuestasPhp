@@ -60,6 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           </header>
           <div id="contenido">
           <div id='center'>
+              <br>
              <?php
             $boton ="<button type='submit' id='submit'>confirmar apuesta</button>";
             for ($i = 0; $i < $count-1; $i++) {
@@ -97,6 +98,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 
     }
     $totalganancia=$cuotatotal*floatval($valorapuesta);
+    $totalganancia=number_format($totalganancia, 1, ",", ".");
     if(floatval($saldo)>=floatval($valorapuesta) and (floatval($valorapuesta)<300001 and floatval($valorapuesta)>=5000)){
     echo "<form method='post' action='realizarapuesta.php' id='formconfirmapuesta'>
           <ul>
@@ -105,7 +107,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               <input type='hidden' value='".$cuotatotal."' name='cuotatotal'></li>
         <li>
             <label>valor apostado: ".$valorapuesta."</label>
-            <label>ganancia: ".$totalganancia."</label>
+            <label>ganancia $: ".$totalganancia."</label>
             <input type='hidden' value='".$valorapuesta."' name='valorapostado'>
 
         </li>
@@ -119,10 +121,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <li><a href='../apuesta.php'><button type='button'>volver</button></a></li></ul>";
     }
 }
+ 
 
 ?>
               </div>
           </div>
+           <a target="_blank" href="../recibo.php" class="btn btn-danger">Generar Recibo</a>
             <footer>
               <img src="../../images/Bookiesport_Logo.png">
               <p>
