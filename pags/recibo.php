@@ -23,6 +23,8 @@
         $apostado=0.0;
         $enlace = connectionDB();
         $fecha = acfecha($enlace,$idusuario);
+        $i=0;
+$cuota=3;
         $apuesta=idapuesta($enlace,$fecha[0],$fecha[1]);
         $pagar = $cuota*$apuesta[$i][1];
                $apostado = $apuesta[$i][1]+$apostado;
