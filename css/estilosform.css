@@ -128,3 +128,9 @@ center h2,p{
 #hour{
     
 }
+button{
+    border-radius: 1em;
+    background: #ffbf00;
+    color: #000;
+    font-weight: bold;
+}
