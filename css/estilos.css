@@ -5,6 +5,7 @@ html{
     margin: 0;
 }
 #cabecera{
+    overflow: hidden;
      border-top: 0.7em solid #58ACFA;
     border-bottom: 0.7em solid #58ACFA;
     height: 7em;
@@ -30,10 +31,7 @@ html{
     background-size: contain;
     width: 200px;
     height: 100px;
-    float: left;
-    position: absolute;
-    right: 35em;
-    margin: 0.5em;;
+    margin: 0 auto;
 }
 .logout{
     
