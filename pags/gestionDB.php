@@ -326,9 +326,9 @@ function nompartido($enl,$idp){
     $sql->bind_result($idpa,$equiA,$equiB,$lig,$cuo1,$cuox,$cuo2,$horp);
     $partido="";
     while($sql->fetch()){
-        $partido.=$equiA."_vs_";
-        $partido.=$equiB." - ";
-        $partido.=$horp;
+        $partido.=$equiA." vs ";
+        $partido.=$equiB;//." - ";
+        //$partido.=$horp;
     }
     return $partido;
 }}
@@ -525,5 +525,14 @@ function idapuesta($enl,$fecha1,$fecha2){
     return $ase;
 }}
 
+function idligadepartido($enl,$idpartido){
+    $sql="select LIGA from partidos where ID=".$idpartido.";";
+    $result = $enl->query($sql)or die("Error al consultar DB liga de partido ");
+    $res="";
+    while($row=$result->fetch_assoc()){
+        $res=$row['LIGA'];
+    }
+    return $res;
+}
 
 ?>
