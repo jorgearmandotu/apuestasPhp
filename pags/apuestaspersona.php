@@ -1,4 +1,5 @@
-<html lang="es">
+<!DOCTYPE HTML>
+  <html lang="es">
    <head>
        <meta charset="utf-8">
        <meta name="language" content="ES">
@@ -12,7 +13,7 @@
           <script src="../js/jquery-ui.min.js"></script>
           <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
           <script src="../js/funciones.js"></script>
-       <title>cambiarContraseña</title>
+       <title>reporte</title>
        <!--<link rel="stylesheet" href="../css/normailze.min.css">-->
         <link rel="stylesheet" href="../css/tablas.css">
         <link rel="stylesheet" href="../css/botton.css">
@@ -23,7 +24,7 @@
              <div id="logo">
                  
              </div>
-                 <ul id="cabecera">
+                 <ul>
                      <li class="logoutico">
                        <a href="salir.php">
                            <img src="../images/Bookiesport_Usuario.png" alt="usuario"></a>

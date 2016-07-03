@@ -3,8 +3,6 @@
     require_once 'validaciones.php';
     validarAdmin();
     ?>
-
-
 <html lang="=es">
    <head>
        <meta charset="utf-8">

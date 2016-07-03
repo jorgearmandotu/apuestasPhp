@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
              </head>
              <body>
       <div id='contenedor'>
-          <header id="cabecera">
+          <header>
              <div id="logo">
                  
              </div>

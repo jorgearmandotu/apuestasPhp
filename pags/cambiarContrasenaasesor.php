@@ -18,7 +18,7 @@
              <div id="logo">
                  
              </div>
-                 <ul id="cabecera">
+                 <ul>
                      <li class="logoutico">
                        <a href="salir.php">
                            <img src="../images/Bookiesport_Usuario.png" alt="usuario"></a>
