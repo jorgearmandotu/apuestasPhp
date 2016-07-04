@@ -326,9 +326,9 @@ function nompartido($enl,$idp){
     $sql->bind_result($idpa,$equiA,$equiB,$lig,$cuo1,$cuox,$cuo2,$horp);
     $partido="";
     while($sql->fetch()){
-        $partido.=$equiA."_vs_";
-        $partido.=$equiB." - ";
-        $partido.=$horp;
+        $partido.=$equiA." vs ";
+        $partido.=$equiB;//." - ";
+        //$partido.=$horp;
     }
     return $partido;
 }}
@@ -402,14 +402,14 @@ function fechahoraPartido($enl,$id){
     return $hora;
 }}
 function listAsesores($enl){
-    $sql= "SELECT NOMBRE,SALDO,IDASESOR FROM saldos JOIN persona WHERE(IDASESOR=ID AND (TIPO='ASESOR' OR TIPO='CLIENTE'));";
+    $sql= "SELECT NOMBRE,SALDO,IDASESOR,APELLIDO FROM saldos JOIN persona WHERE(IDASESOR=ID AND (TIPO='ASESOR' OR TIPO='CLIENTE'));";
     $ase = array();
     $result = $enl->query($sql)or die('error al consulta DB');
     $i=0;
     //0,0 nombre 0,1 saldo
     while($row=$result->fetch_assoc()){
         $l=0;
-        $ase[$i][$l] = $row['NOMBRE'];
+        $ase[$i][$l] = $row['NOMBRE']." ".$row['APELLIDO'];
         $l++;
         $ase[$i][$l] = $row['SALDO'];
         $l++;
@@ -525,5 +525,14 @@ function idapuesta($enl,$fecha1,$fecha2){
     return $ase;
 }}
 
+function idligadepartido($enl,$idpartido){
+    $sql="select LIGA from partidos where ID=".$idpartido.";";
+    $result = $enl->query($sql)or die("Error al consultar DB liga de partido ");
+    $res="";
+    while($row=$result->fetch_assoc()){
+        $res=$row['LIGA'];
+    }
+    return $res;
+}
 
 ?>

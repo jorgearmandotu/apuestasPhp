@@ -29,7 +29,8 @@ $(document).ready(function(){
                 $('#listpartidos').html(data);
             }
         });
-        
+        //$miSelect.val($miSelect.children('option:first').val());
+        $('#liga').val($('#liga').children('option:first').val());
     });
     $('#liga').change(function(){
         $.ajax({

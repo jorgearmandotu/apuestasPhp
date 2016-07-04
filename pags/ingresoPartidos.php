@@ -32,7 +32,7 @@ require_once 'gestionDB.php';
              <div id="logo">
                  
              </div>
-                 <ul id="cabecera">
+                 <ul>
                      <li class="logoutico">
                        <a href="salir.php">
                            <img src="../images/Bookiesport_Usuario.png" alt="usuario"></a>
@@ -52,11 +52,11 @@ require_once 'gestionDB.php';
                 <li>
                     <br>
                     <label>Equipo local: </label>
-                    <input type="text" name="equipoA" required maxlength="29">
+                    <input type="text" name="equipoA" required maxlength="18">
                 </li>
                 <li>
                     <label>Eqipo visitante: </label>
-                    <input type="text" name="equipoB" required maxlength="29">
+                    <input type="text" name="equipoB" required maxlength="18">
                 </li>
                 <li>
                     <label>liga: </label>

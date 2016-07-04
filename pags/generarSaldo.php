@@ -8,7 +8,7 @@
         <meta name="keywords" content="sitio para hacer apuestas,bookiesport, apuestas de futbol, san juan de pasto apuestas"/>
         <meta name="author" content="Reon-Soluciones_Web"/>
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-       <title>asesor</title>
+       <title>agregar Saldo</title>
        <link rel="stylesheet" href="../css/normailze.min.css">
         <link rel="stylesheet" href="../css/estilosform.css">
         <link rel="stylesheet" href="../css/saldo.css">
@@ -19,7 +19,7 @@
              <div id="logo">
                  
              </div>
-                 <ul id="cabecera">
+                 <ul>
                      <li class="logoutico">
                        <a href="salir.php">
                            <img src="../images/Bookiesport_Usuario.png" alt="usuario"></a>
@@ -43,6 +43,7 @@
     <center>
     <table>
        <tr>
+       <th>Punto N.</th>
         <th>Asesor</th>
         <th>Saldo Actual</th>
         </tr>
@@ -52,7 +53,8 @@
         connectionClose($enlace);
         for($i=0;$i<count($ase);$i++){
             $l=0;
-            echo("<tr><td class='tdasesor'>".$ase[$i][$l]."</td>");
+            echo("<tr><td class='punto'>".$ase[$i][2]."</td>");
+            echo("<td class='tdasesor'>".$ase[$i][$l]."</td>");
             $l++;
             echo("<td class='tdsaldo'>".$ase[$i][$l]."</td></tr>");
            

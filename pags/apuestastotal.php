@@ -20,7 +20,7 @@
    </head>
     <body>
      <div id='contenedor'>
-          <header id="cabecera">
+          <header>
              <div id="logo">
                  
              </div>

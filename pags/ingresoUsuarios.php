@@ -12,7 +12,7 @@
         <meta name="keywords" content="sitio para hacer apuestas,bookiesport, apuestas de futbol, san juan de pasto apuestas"/>
         <meta name="author" content="Reon-Soluciones_Web"/>
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-          <title>agregarClientes</title>
+          <title>agregar Usuarios</title>
           <link rel="stylesheet" href="../css/normailze.min.css">
         <link rel="stylesheet" href="../css/estilosform.css">
       </head>
@@ -22,7 +22,7 @@
              <div id="logo">
                  
              </div>
-                 <ul id="cabecera">
+                 <ul>
                      <li class="logoutico">
                        <a href="salir.php">
                            <img src="../images/Bookiesport_Usuario.png" alt="usuario"></a>

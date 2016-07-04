@@ -5,7 +5,7 @@ html{
     margin: 0;
 }
 #login{
-    height: 7em;
+    
     border-top: 0.7em solid #58ACFA;
     border-bottom: 0.7em solid #58ACFA;
     background: rgba(182,227,245,1);
@@ -16,6 +16,7 @@ html{
     background: -ms-linear-gradient(top, rgba(182,227,245,1) 0%, rgba(20,179,227,1) 17%, rgba(41,184,229,1) 50%, rgba(7,44,230,1) 100%);
     background: linear-gradient(to bottom, rgba(182,227,245,1) 0%, rgba(20,179,227,1) 17%, rgba(41,184,229,1) 50%, rgba(7,44,230,1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b6e3f5', endColorstr='#072ce6', GradientType=0 );
+    overflow: hidden;
 }
 #login ul{
     font-family: arial, sans-serif;
@@ -57,10 +58,7 @@ html{
     background-size: contain;
     width: 200px;
     height: 100px;
-    float: left;
-    position: absolute;
-    right: 35em;
-    margin: 0.5em;;
+    margin: 0 auto;
 }
 /*banner*/
 #amazingslider-wrapper-1{

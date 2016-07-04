@@ -14,7 +14,7 @@
           <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
           <script src="../js/funciones.js"></script>
        <title>Apuestas Ganadas En cada punto</title>
-       <!--<link rel="stylesheet" href="../css/normailze.min.css">-->
+<!--       <link rel="stylesheet" href="../css/normailze.min.css">-->
         <link rel="stylesheet" href="../css/tablas.css">
         <link rel="stylesheet" href="../css/botton.css">
    </head>
@@ -24,7 +24,7 @@
              <div id="logo">
                  
              </div>
-                 <ul id="cabecera">
+                 <ul>
                      <li class="logoutico">
                        <a href="salir.php">
                            <img src="../images/Bookiesport_Usuario.png" alt="usuario"></a>

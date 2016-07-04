@@ -20,7 +20,7 @@
           <header id="cabecera">
              <div id="logo">
              </div>
-                 <ul id="cabecera">
+                 <ul>
                      <li class="logoutico">
                        <a href="../salir.php">
                            <img src="../../images/Bookiesport_Usuario.png" alt="usuario"></a>
@@ -50,7 +50,8 @@ require_once('../validaciones.php');
 
         <?php
         if($passnueva != $passrpt){
-            echo '<script type="text/javascript">swal("las contraseñas no coinciden");</script>';
+            echo '<script type="text/javascript">swal("las contraseñas no coinciden");</script>
+            <a href="../cambiarContrasenaasesor.php"><button type="button" id="enviar">Volver</button></a>';
             
         }else{
             $enlace = connectionDB();
@@ -58,22 +59,25 @@ require_once('../validaciones.php');
                 //ingresar nueva contraseña
                 if(cambiarpassword($enlace,$passnueva,$id)){
                     connectionClose($enlace);
-                 echo '<script type="text/javascript">swal("Contraseña cambiada exitosamente");</script>'; 
+                 echo '<script type="text/javascript">swal("Contraseña cambiada exitosamente");</script>
+                 <a href="../asesor.php"><button type="button" id="enviar">Inicio</button></a>'; 
                     
                 }else{
                     connectionClose($enlace);
-                    echo '<script type="text/javascript">swal("ocurrio un error vuelva a intentarlo");</script>';
+                    echo '<script type="text/javascript">swal("ocurrio un error vuelva a intentarlo");</script>
+                    <a href="../cambiarContrasenaasesor.php"><button type="button" id="enviar">Volver</button></a>';
                     
                 }
             }else{
                 connectionClose($enlace);
-                echo '<script type="text/javascript">swal("la contraseña introducida no es la correcta");</script>';
+                echo '<script type="text/javascript">swal("la contraseña introducida no es la correcta");</script>
+                    <a href="../cambiarContrasenaasesor.php"><button type="button" id="enviar">Volver</button></a>';
                 
             }
         }
         //header('location: ../cambiarContrasena.php');
         ?>
-<a href="../cambiarContrasenaasesor.php"><button type="button" id="enviar">Volver</button></a>
+
 </div>
          <footer>
               <img src="../../images/Bookiesport_Logo.png">
