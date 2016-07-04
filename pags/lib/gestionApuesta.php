@@ -126,7 +126,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
               </div>
           </div>
-           <a target="_blank" href="../recibo.php" class="btn btn-danger">Generar Recibo</a>
+           
             <footer>
               <img src="../../images/Bookiesport_Logo.png">
               <p>

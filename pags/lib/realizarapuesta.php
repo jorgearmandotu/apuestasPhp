@@ -10,8 +10,6 @@
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
          <title>Realizar apuestas</title>
           <script src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
-          <script src="../../js/modernizr-custom.js"></script>
-          <script src="../../js/jquery-ui.min.js"></script>
           <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
           <link rel="stylesheet" href="../../css/normailze.min.css">
           <script src="../../js/realizarapuesta.js"></script>

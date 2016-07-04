@@ -17,10 +17,29 @@ require_once('validaciones.php');
             $this->SetFont('Times', '', 12);
             $this->cell(80);
             $this->ln();
+            $this->ln(10);
             $this->cell(0,40,'Apuesta N : '.$idapuesta);
             $this->ln(20);
         }
-    }
+        function Footer()
+{
+    // Posición: a 1,5 cm del final
+    $this->SetY(-100);
+    // Arial italic 8
+    $this->SetFont('Arial','I',8);
+    // Número de página
+             
+    $this->Cell(0,10,'Los eventos que despues sean cancelados por cualquier motivo
+ya sea por orden publico seran decididos por decicion arbitaria.',0,0,'C');
+            $this-> ln(0);
+    $this->Cell(0,40,'Los eventos aplazados seran considerados nulos a menos que sean 
+reprogranados para jugarse dentro de las sigueintes 24 horas.',0,0,'C');
+            $this-> ln(0);
+    $this->Cell(0,70,'No se pueden realizar apuestas a menos de 5 minutos de iniciarse 
+un evento.',0,0,'C');
+}
+}
+    
     
     $enlace = connectionDB();
     $datos = apuestass($enlace,$idapuesta);
@@ -85,14 +104,8 @@ require_once('validaciones.php');
 
     }
  $pdf->ln();
-          $pdf->Cell(400,30,'Los eventos que despues sean cancelados por cualquier motivo
-ya sea por orden publico seran decididos por decicion arbitaria.',0); 
-         $pdf->ln();
-        $pdf->Cell(500,30,'Los eventos aplazados seran considerados nulos a menos que sean 
-reprogranados para jugarse dentro de las sigueintes 24 horas.',0); 
-         $pdf->ln();
-        $pdf->Cell(600,40,'No se pueden realizar apuestas a menos de 5 minutos de iniciarse 
-un evento.',0);
+         
+       
     connectionClose($enlace);
 
     
