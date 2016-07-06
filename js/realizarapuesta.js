@@ -163,6 +163,7 @@ $(document).ready(function(){
         if(c!=undefined){
             var r=v*c;
             r=parseFloat(r);
+            r=r.toFixed(2);
             r=formatNumber.new(r); // retorna "123.456.779,18"
             document.getElementById('gantotal').innerHTML =r;
         }

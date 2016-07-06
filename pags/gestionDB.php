@@ -334,10 +334,10 @@ function nompartido($enl,$idp){
 }}
 //retorna partido y su ganador
 function equiposLigaPartido($enl,$idP){
-    if($sql = $enl->prepare("SELECT EQUIPOA,EQUIPOB,LIGA,DATE_FORMAT(HORA, '%T') AS HORAP, GANADOR FROM partidos WHERE ID=?")){
+    if($sql = $enl->prepare("SELECT EQUIPOA,EQUIPOB,LIGA,DATE_FORMAT(HORA, '%T') AS HORAP, GANADOR, FECHA FROM partidos WHERE ID=?")){
     $sql->bind_param('s',$idP);
         $sql->execute();
-        $sql->bind_result($equiA,$equiB,$lig,$horp,$ganad);
+        $sql->bind_result($equiA,$equiB,$lig,$horp,$ganad,$fechap);
     $arr = array();
     if($sql->fetch()){
         $arr[0]=$equiA;
@@ -345,6 +345,7 @@ function equiposLigaPartido($enl,$idP){
         $arr[2]=$lig;
         $arr[3]=$horp;
         $arr[4]=$ganad;
+        $arr[5]=$fechap;
     }
     return $arr;
 }}
