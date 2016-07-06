@@ -136,5 +136,13 @@ button{
 }
 .centro{
     margin: 0 auto;
-    max-width: 300px;
+    max-width: 100%;
+    text-align: center;
+}
+.centro h1{
+    color: #fff;
+}
+.centro form{
+    margin: auto;
+    max-width: 100%;
 }

@@ -12,8 +12,8 @@ require_once('validaciones.php');
     class PDF extends FPDF{
         function header(){
             $idapuesta= limpiarcadenas($_POST['idapuesta']);
-            $this->SetMargins(40,60);
-            $this->image('../images/pdf.gif',250,18,100);
+            $this->SetMargins(5,10,5);
+            $this->image('../images/pdf.gif',45,15,80);
             $this->SetFont('Times', '', 9);
             $this->cell(80);
             $this->ln();
@@ -21,22 +21,20 @@ require_once('validaciones.php');
             $this->cell(0,50,'Apuesta N : '.$idapuesta);
             $this->ln(20);
         }
-        function Footer()
-{
-    // Posición: a 1,5 cm del final
-    $this->SetY(-100);
-    // Arial italic 8
-    $this->SetFont('Arial','I',7);
-    // Número de página
+        function Footer(){
+            // Posición: a 1,5 cm del final
+            $this->SetY(-150);
+            // Arial italic 8
+            $this->SetFont('Arial','I',7);
              
-    $this->Cell(0,10,'Los eventos que después de iniciados sean cancelados por cualquier razón, ya sea por orden público, climático, o cualquier otro motivo, nos acogeremos a la decisión de la terna arbitral para la definición de cualquier tipo de apuesta.',0,0,'C');
-            $this-> ln(0);
-    $this->Cell(0,40,'Los eventos aplazados serán considerados nulos a menos que sean reprogramados para ser jugados en un plazo no mayor a 24 horas con respecto al horario inicial del evento. En tales circunstancias donde un evento o eventos estén incluidos en una apuesta múltiple, la apuesta será definida en función del resto de eventos incluidos en la apuesta.',0,0,'C');
-            $this-> ln(0);
-    $this->Cell(0,70,'Cuando una apuesta se de por anulada se le reintegrara el monto apostado por el apostador.',0,0,'C');
-        $this-> ln(0);
-     $this->Cell(0,90,'Revise su ticket antes de salir del establecimiento, después no se aceptara reclamos.',0,0,'C');
-}
+            $this->MultiCell(210,10,utf8_decode('Los eventos que después de iniciados sean cancelados por cualquier razón, ya sea por orden público, climático, o cualquier otro motivo, nos acogeremos a la decisión de la terna arbitral para la definición de cualquier tipo de apuesta.'),0,'C',false);
+            
+            $this->MultiCell(210,10,utf8_decode('Los eventos aplazados serán considerados nulos a menos que sean reprogramados para ser jugados en un plazo no mayor a 24 horas con respecto al horario inicial del evento. En tales circunstancias donde un evento o eventos estén incluidos en una apuesta múltiple, la apuesta será definida en función del resto de eventos incluidos en la apuesta.'),0,'C',false);
+            
+            $this->MultiCell(210,10,utf8_decode('Cuando una apuesta se de por anulada se le reintegrara el monto apostado por el apostador.'),0,'C',false);
+            
+            $this->MultiCell(210,10,utf8_decode('Revise su ticket antes de salir del establecimiento, después no se aceptara reclamos.'),0,'C',false);
+        }
 }
     
     

@@ -73,7 +73,7 @@ for($i=1;$i<count($datos);$i++){
     if(!ingresoApuesta($enlace,$valorA,$idusuario,$fecha,$idpartido,$apuestaselec,$idliga,$cuotaapuesta,$idApuesta,$saldo))
     {
         $bandera=false;
-        echo'<h1 class="centro">OCURRIO UN ERROR AL REALISAR LA APUESTA</h1><BR>
+        echo'<h1>OCURRIO UN ERROR AL REALISAR LA APUESTA</h1><BR>
         '.$valorA.'<br>'.$idusuario.'<br>'.$fecha.'<br>'.$idpartido.'<br>'.$apuestaselec.'<br>
         <a href="../apuesta.php">Volver a intentar</a>';
     }
@@ -82,12 +82,12 @@ for($i=1;$i<count($datos);$i++){
 
 connectionClose($enlace);
 
-if($bandera){echo('<h1 class="centro"><font color="white">Apuesta Exitosa</h1><br>
+if($bandera){echo('<h1>Apuesta Exitosa</h1><br>
 <form action=../recibo.php method="post" target="_blank">
 <input hidden value='.$idApuesta.' name="idapuesta">
-<button type="submit" class="centro">Generar Recibo</button>
+<button type="submit">Generar Recibo</button>
 </form><br><br>
-<a href="../apuesta.php"><button type="button" class="centro">Volver</button></a>');
+<a href="../apuesta.php"><button type="button">Volver</button></a>');
            }
 ?>
           </div>
