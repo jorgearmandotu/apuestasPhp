@@ -10,15 +10,12 @@
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
          <title>Realizar apuestas</title>
           <script src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
-          <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
           <link rel="stylesheet" href="../../css/normailze.min.css">
-          <script src="../../js/realizarapuesta.js"></script>
           <script src="../../js/sweetalert.min.js"></script>
            <link rel="stylesheet" href="../../css/estilosform.css">
           <link rel="stylesheet" href="../../css/apuesta.css">
           <link rel="stylesheet" href="../../css/sweetalert.css">
-          <link rel="stylesheet" href="../../css/apuesta1.css">
-          <link rel="stylesheet" href="../../css/checkbox.css">
+       
           </head>
       <body>
       <div id='contenedor'>
@@ -39,6 +36,7 @@
                      </li>
                  </ul>
           </header>
+          <div class="centro">
 <?php
 require_once '../validaciones.php';
 require_once '../gestionDB.php';
@@ -75,7 +73,7 @@ for($i=1;$i<count($datos);$i++){
     if(!ingresoApuesta($enlace,$valorA,$idusuario,$fecha,$idpartido,$apuestaselec,$idliga,$cuotaapuesta,$idApuesta,$saldo))
     {
         $bandera=false;
-        echo'<h1>OCURRIO UN ERROR AL REALISAR LA APUESTA</h1><BR>
+        echo'<h1 class="centro">OCURRIO UN ERROR AL REALISAR LA APUESTA</h1><BR>
         '.$valorA.'<br>'.$idusuario.'<br>'.$fecha.'<br>'.$idpartido.'<br>'.$apuestaselec.'<br>
         <a href="../apuesta.php">Volver a intentar</a>';
     }
@@ -84,14 +82,15 @@ for($i=1;$i<count($datos);$i++){
 
 connectionClose($enlace);
 
-if($bandera){echo('<h1><center><font color="white">Apuesta Exitosa</center></h1><br>
+if($bandera){echo('<h1 class="centro"><font color="white">Apuesta Exitosa</h1><br>
 <form action=../recibo.php method="post" target="_blank">
 <input hidden value='.$idApuesta.' name="idapuesta">
-<center><button type="submit">Generar Recibo</button></center>
+<button type="submit" class="centro">Generar Recibo</button>
 </form><br><br>
-<center><a href="../apuesta.php"><button type="button">Volver</button></a></center>');
+<a href="../apuesta.php"><button type="button" class="centro">Volver</button></a>');
            }
 ?>
+          </div>
   <footer>
               <img src="../../images/Bookiesport_Logo.png">
               <p>

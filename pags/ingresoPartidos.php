@@ -52,11 +52,11 @@ require_once 'gestionDB.php';
                 <li>
                     <br>
                     <label>Equipo local: </label>
-                    <input type="text" name="equipoA" required maxlength="18">
+                    <input type="text" name="equipoA" required maxlength="25">
                 </li>
                 <li>
                     <label>Eqipo visitante: </label>
-                    <input type="text" name="equipoB" required maxlength="18">
+                    <input type="text" name="equipoB" required maxlength="25">
                 </li>
                 <li>
                     <label>liga: </label>

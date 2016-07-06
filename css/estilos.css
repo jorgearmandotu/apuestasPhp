@@ -110,3 +110,9 @@ footer p{
     -moz-column-count: 3;
     -o-column-count: 3;
 }
+#recibo{
+     column-count: 2;
+    -webkit-column-count: 2;
+    -moz-column-count: 2;
+    -o-column-count: 2;
+}

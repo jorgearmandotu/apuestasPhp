@@ -97,6 +97,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                }
                 
     }
+    $cuotatotal=round($cuotatotal,2);
     $totalganancia=$cuotatotal*floatval($valorapuesta);
     $totalganancia=number_format($totalganancia, 1, ",", ".");
     if(floatval($saldo)>=floatval($valorapuesta) and (floatval($valorapuesta)<300001 and floatval($valorapuesta)>=5000)){

@@ -18,7 +18,7 @@ require_once('validaciones.php');
             $this->cell(80);
             $this->ln();
             $this->ln(10);
-            $this->cell(0,40,'Apuesta N : '.$idapuesta);
+            $this->cell(0,50,'Apuesta N : '.$idapuesta);
             $this->ln(20);
         }
         function Footer()
@@ -68,7 +68,7 @@ un evento.',0,0,'C');
     $pdf->ln();
     $pdf->SetFont('Times', '', 12);
     $pdf->Cell(100,12,'Total Cuota:',0);
-    $pdf->cell(200,12,$cuota);
+    $pdf->cell(200,12,round($cuota,2));
     $pdf->ln();
     $pdf->Cell(100,12,'Valor Apostado $:',0);
     $pdf->Cell(200,12,$valora,0);
@@ -82,12 +82,14 @@ un evento.',0,0,'C');
     $pdf->Cell(50,12,'Cuotas',0);
     $pdf->SetFont('Times', '', 9);
     $enlace=connectionDB();
+    $neventos=0;
     for($i=0;$i<count($partido);$i++){
         //$Npart=nompartido($enlace,$partido[$i][0]);
         $apos = $partido[$i][1];
         $par = equiposLigaPartido($enlace,$partido[$i][0]);
         $Npart = $par[0].' vs '.$par[1];
         $Npart = utf8_decode($Npart);
+        $fechapartido = $par[5].' '.$par[3];
         if($apos=='1'){
             $apos=$par[0];
             $apos=utf8_decode($apos);
@@ -97,14 +99,16 @@ un evento.',0,0,'C');
         }else{$apos='EMPATE';}
         $pdf->ln();
         $pdf->Cell(200,12,$Npart);
+        $pdf->ln();
+        $pdf->cell(0,12,$fechapartido);
+        $pdf->ln();
         $pdf->Cell(150,12,$apos);
         $pdf->Cell(50,12,$partido[$i][2]);
-      
-        
-
+        $pdf->ln(20);
+        $neventos++;
     }
  $pdf->ln();
-         
+    $pdf->cell(0,12,'Eventos seleccionados: '.$neventos);
        
     connectionClose($enlace);
 
