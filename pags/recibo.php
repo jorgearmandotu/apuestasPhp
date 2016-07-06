@@ -14,7 +14,7 @@ require_once('validaciones.php');
             $idapuesta= limpiarcadenas($_POST['idapuesta']);
             $this->SetMargins(40,60);
             $this->image('../images/pdf.gif',250,18,100);
-            $this->SetFont('Times', '', 12);
+            $this->SetFont('Times', '', 9);
             $this->cell(80);
             $this->ln();
             $this->ln(10);
@@ -26,17 +26,16 @@ require_once('validaciones.php');
     // Posición: a 1,5 cm del final
     $this->SetY(-100);
     // Arial italic 8
-    $this->SetFont('Arial','I',8);
+    $this->SetFont('Arial','I',7);
     // Número de página
              
-    $this->Cell(0,10,'Los eventos que despues sean cancelados por cualquier motivo
-ya sea por orden publico seran decididos por decicion arbitaria.',0,0,'C');
+    $this->Cell(0,10,'Los eventos que después de iniciados sean cancelados por cualquier razón, ya sea por orden público, climático, o cualquier otro motivo, nos acogeremos a la decisión de la terna arbitral para la definición de cualquier tipo de apuesta.',0,0,'C');
             $this-> ln(0);
-    $this->Cell(0,40,'Los eventos aplazados seran considerados nulos a menos que sean 
-reprogranados para jugarse dentro de las sigueintes 24 horas.',0,0,'C');
+    $this->Cell(0,40,'Los eventos aplazados serán considerados nulos a menos que sean reprogramados para ser jugados en un plazo no mayor a 24 horas con respecto al horario inicial del evento. En tales circunstancias donde un evento o eventos estén incluidos en una apuesta múltiple, la apuesta será definida en función del resto de eventos incluidos en la apuesta.',0,0,'C');
             $this-> ln(0);
-    $this->Cell(0,70,'No se pueden realizar apuestas a menos de 5 minutos de iniciarse 
-un evento.',0,0,'C');
+    $this->Cell(0,70,'Cuando una apuesta se de por anulada se le reintegrara el monto apostado por el apostador.',0,0,'C');
+        $this-> ln(0);
+     $this->Cell(0,90,'Revise su ticket antes de salir del establecimiento, después no se aceptara reclamos.',0,0,'C');
 }
 }
     
@@ -64,22 +63,9 @@ un evento.',0,0,'C');
     date_default_timezone_set('America/Bogota');
     $pdf->Cell(0,12,'Fecha De Apuesta:    '.date('d-m-Y'),0);
     $pdf->ln();
-    $pdf->Cell(0,12,'Punto De Apuesta:   '.$idusuario);
-    $pdf->ln();
-    $pdf->SetFont('Times', '', 12);
-    $pdf->Cell(100,12,'Total Cuota:',0);
-    $pdf->cell(200,12,round($cuota,2));
-    $pdf->ln();
-    $pdf->Cell(100,12,'Valor Apostado $:',0);
-    $pdf->Cell(200,12,$valora,0);
-    $pdf->ln();
-    $pdf->Cell(100,12,'Valor A Pagar $:',0);
-    $pdf->Cell(200,12,$valP,0);
-    $pdf->ln(20);
-    $pdf->SetFont('Times', 'U', 12);
-    $pdf->Cell(200,12,'Partido',0);
-    $pdf->Cell(150,12,'Apuesta',0);
-    $pdf->Cell(50,12,'Cuotas',0);
+   
+    $pdf->SetFont('Times', 'U', 9);
+   
     $pdf->SetFont('Times', '', 9);
     $enlace=connectionDB();
     $neventos=0;
@@ -108,8 +94,21 @@ un evento.',0,0,'C');
         $neventos++;
     }
  $pdf->ln();
-    $pdf->cell(0,12,'Eventos seleccionados: '.$neventos);
-       
+    $pdf->cell(0,12,'Eventos seleccionados: '.$neventos); 
+  
+    $pdf->ln(30);
+    $pdf->SetFont('Times', '', 9);
+    $pdf->Cell(100,12,'Punto De Apuesta:   '.$idusuario);
+    $pdf->ln();
+    $pdf->Cell(100,12,'Total Cuota:',0);
+    $pdf->cell(200,12,round($cuota,2));
+    $pdf->ln();
+    $pdf->Cell(100,12,'Valor Apostado $:',0);
+    $pdf->Cell(200,12,$valora,0);
+    $pdf->ln();
+    $pdf->Cell(100,12,'Valor A Pagar $:',0);
+    $pdf->Cell(200,12,$valP,0);
+    $pdf->ln(20);
     connectionClose($enlace);
 
     
