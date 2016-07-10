@@ -52,6 +52,8 @@ $(document).ready(function() {
             data: $(this).serialize(),
             success: function(data){
                 $('#liga').html(data);
+                $('#equipoa').html("<option>seleccione equipo</option>");
+                $('#equipob').html("<option>seleccione equipo</option>");
             }
         })
     });
