@@ -49,19 +49,11 @@ require_once 'gestionDB.php';
     <center>
         <form method="post" action="lib/ingresarPartido.php" id="formularioPartido">
             <ul>
-                <li>
-                    <br>
-                    <label>Equipo local: </label>
-                    <input type="text" name="equipoA" required maxlength="25">
-                </li>
-                <li>
-                    <label>Eqipo visitante: </label>
-                    <input type="text" name="equipoB" required maxlength="25">
-                </li>
-                <li>
+               <li>
                     <label>liga: </label>
                     <select name="liga" id=liga>
 <!--                        se cargan con php-->
+                      <option>selecione liga</option>
                        <?php
                              $enlace = connectionDB();
                             $listLigas = ligas($enlace);
@@ -71,6 +63,20 @@ require_once 'gestionDB.php';
                         ?>
                     </select>
                 </li>
+                <li>
+                    <label>Equipo local: </label>
+                    <select name="equipoA" required>
+                    <?php
+                        $enlace = connectionDB();
+                        $listequipos = equipo($enlace,$liga);
+                    ?>
+                    </select>
+                </li>
+                <li>
+                    <label>Eqipo visitante: </label>
+                    <input type="text" name="equipoB" required maxlength="25">
+                </li>
+                
                 <li>
                     <label>Fecha partido: </label>
                     <input type="date" name="fecha" required>

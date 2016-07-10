@@ -240,17 +240,21 @@ function ligas($enl){
     return $arr;
 }
 //retorna listado de equipos
-function equipos($enl){
-    $sql='SELECT NOMBRE FROM equipos ORDER BY NOMBRE';
-    $result = $enl->query($sql)or die("error al cosultar DB");
-    $arr = array();
-    $i=0;
-    while($row=$result->fetch_assoc()){
-        $arr[$i]=$row['NOMBRE'];
-        $i++;
+function equipos($enl, $liga){
+    if($sql= $enl->prepare('SELECT NOMBRE FROM equipo where id_liga=? ORDER BY NOMBRE;')){
+        $sql->bind_param('s',$liga);
+        $sql->execute();
+        $sql->bind_result($nom);
+        $arr = array();
+        $i=0;
+        while($sql->fetch()){
+            $arr[$i]=$nom;
+            $i++;
+        }
+        return $arr;
     }
-    return $arr;
-}
+    
+    }
 //reorna iformacion de partidos
 function partidos($enl,$fecha){
     if($sql = $enl->prepare("SELECT ID,EQUIPOA,EQUIPOB,LIGA,CUOTA1,CUOTAX,CUOTA2, DATE_FORMAT(HORA, '%T') AS HORAP FROM partidos WHERE FECHA=? ORDER BY HORA;")){
