@@ -47,40 +47,53 @@ require_once 'gestionDB.php';
           </header>
           <div id="contenido">
     <center>
+        <div id=result></div>
         <form method="post" action="lib/ingresarPartido.php" id="formularioPartido">
             <ul>
+              <li>
+                  <label>pais: </label>
+                  <select name="pais" id='pais'>
+                     <option>selecione pais</option>
+                      <?php
+                      $enlace = connectionDB();
+                      $listpaises = paises($enlace);
+                      connectionClose($enlace);
+                      for($i=0;$i<count($listpaises);$i++){
+                          echo '<option>'.$listpaises[$i].'</option>';
+                      }
+                      ?>
+                  </select>
+              </li>
                <li>
                     <label>liga: </label>
                     <select name="liga" id=liga>
 <!--                        se cargan con php-->
                       <option>selecione liga</option>
-                       <?php
-                             $enlace = connectionDB();
-                            $listLigas = ligas($enlace);
-                            connectionClose($enlace);
-
-                           foreach($listLigas as $v){ echo('<option>'.$v.'</option>');}
-                        ?>
+                       
                     </select>
                 </li>
                 <li>
                     <label>Equipo local: </label>
-                    <select name="equipoA" required>
-                    <?php
-                        $enlace = connectionDB();
-                        $listequipos = equipo($enlace,$liga);
-                    ?>
+                    <select name="equipoA"  id="equipoa">
+                    <!--listado equipos-->
                     </select>
                 </li>
                 <li>
                     <label>Eqipo visitante: </label>
-                    <input type="text" name="equipoB" required maxlength="25">
+                    <select name="equipoB"  id="equipob">
+                    <!--listado equipos-->
+                    </select>
                 </li>
                 
                 <li>
                     <label>Fecha partido: </label>
-                    <input type="date" name="fecha" required>
-                    <label>    Hora: </label>
+                    <?php
+                        date_default_timezone_set("America/Bogota");
+                        $dActual= new datetime();
+                        $dActual = $dActual->format('Y-m-d');
+                    ?>
+                    <input type="date" name="fecha" required min="<?php echo $dActual; ?>">
+                    <label>Hora: </label>
                     <input type="time" name="hora" required id="hour">
                 </li>
                 <label>CUOTAS:</label>

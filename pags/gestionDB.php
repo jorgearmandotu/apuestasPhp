@@ -195,9 +195,10 @@ function nomLiga($id,$enl){
     return $nom;
 }}
 //busca un partido y retorna id del mismo
-function idpartido($enl,$fechaPartido,$horaP,$idequipoA,$idequipoB,$idliga){
-    if($sql = $enl->prepare("SELECT ID FROM partidos WHERE FECHA=? AND EQUIPOA=? AND EQUIPOB = ? AND LIGA=?;")){
-        $sql->bind_param('ssss',$fechaPartido,$idequipoA,$idequipoB,$idliga);
+function idpartido($enl,$horarioPartido,$idequipoA,$idequipoB){
+    if($sql = $enl->prepare("SELECT idpartido FROM partidos WHERE idpartido=?;")){
+        $var = $horarioPartido.'_'.$idequipoA.'_'.$idequipoB;
+        $sql->bind_param('s',$var);
     $id=null;
         $sql->execute();
         $sql->bind_result($idpartido);
@@ -216,39 +217,46 @@ function ingresoLiga($liga, $enl){
     }
 }
 //ingreso partido
-function ingresoPartido($fecha,$hora,$local,$visitante,$idliga,$cuota1,$cuota2,$cuotaX,$enl){
-    $horadepartido = $fecha." ".$hora.":00";
+function ingresoPartido($horario,$local,$visitante,$cuota1,$cuota2,$cuotaX,$enl){
+    //$horadepartido = $fecha." ".$hora.":00";
 //    echo('<script type="text/javascript">alert("'.$horadepartido.'")</script>');
-    if($sql = $enl->prepare( "INSERT INTO partidos VALUES(?,?,?,?,?,NULL,?,?,?,NULL);")){
-        $sql->bind_param('ssssssss',$fecha,$horadepartido,$local,$visitante,$idliga,$cuota1,$cuotaX,$cuota2);
+    if($sql = $enl->prepare( "INSERT INTO partidos VALUES(?,?,?,?,?,?,?,NULL);")){
+        $idpartido=$horario.'_'.$local.'_'.$visitante;
+        $sql->bind_param('sssssss',$idpartido,$local,$visitante,$horario,$cuota1,$cuota2,$cuotaX);
         
     if(!$sql->execute()){
-        echo('<script type="text/javascript">alert("ocurrio un error buebe a intentarlo, si el problema persiste intenta en cerrar sesion e iniciarla de nuevo")</script>');
+        /*echo('<script type="text/javascript">alert("ocurrio un error buebe a intentarlo, si el problema persiste intenta en cerrar sesion e iniciarla de nuevo")</script>');*/
+        return false;
         exit();
-    }
+    }else{return true;}
 }}
 //retorna un array de todas las ligas registrada
-function ligas($enl){
-    $sql = 'SELECT NOMBRE FROM ligas ORDER BY NOMBRE;';
-    $result = $enl->query($sql)or die('error al consutar BD');
-    $arr = array();
-    $i=0;
-    while($row=$result->fetch_assoc()){
-        $arr[$i]=$row['NOMBRE'];
-        $i++;
-    }
-    return $arr;
-}
-//retorna listado de equipos
-function equipos($enl, $liga){
-    if($sql= $enl->prepare('SELECT NOMBRE FROM equipo where id_liga=? ORDER BY NOMBRE;')){
-        $sql->bind_param('s',$liga);
+function ligas($enl,$pais){
+    if($sql = $enl->prepare('SELECT NOMBRE,idliga FROM ligas where pais=? ORDER BY NOMBRE;')){
+        $sql->bind_param('s',$pais);
         $sql->execute();
-        $sql->bind_result($nom);
+        $sql->bind_result($nom,$id);
         $arr = array();
         $i=0;
         while($sql->fetch()){
-            $arr[$i]=$nom;
+            $arr[$i][0]=$nom;
+            $arr[$i][1]=$id;
+            $i++;
+        }
+        return $arr;
+    }
+}
+//retorna listado de equipos
+function equipos($enl, $liga){
+    if($sql= $enl->prepare('SELECT NOMBRE,idequipo FROM equipo where id_liga=? ORDER BY NOMBRE;')){
+        $sql->bind_param('s',$liga);
+        $sql->execute();
+        $sql->bind_result($nom,$id);
+        $arr = array();
+        $i=0;
+        while($sql->fetch()){
+            $arr[$i][0]=$nom;
+            $arr[$i][1]=$id;
             $i++;
         }
         return $arr;
@@ -532,6 +540,18 @@ function idligadepartido($enl,$idpartido){
     $res="";
     while($row=$result->fetch_assoc()){
         $res=$row['LIGA'];
+    }
+    return $res;
+}
+//retorna listado de paises
+function paises($enl){
+    $sql = "select DISTINCT pais from ligas;";
+    $result = $enl->query($sql)or die('Error al consutar DB pais de liga');
+    $res='';
+    $i=0;
+    while($row=$result->fetch_assoc()){
+        $res[$i]=$row['pais'];
+        $i++;
     }
     return $res;
 }

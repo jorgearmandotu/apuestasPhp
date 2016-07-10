@@ -31,6 +31,30 @@ $(document).ready(function() {
         })
         return false;
     }); 
+    $('#liga').on('change',function(){
+       $.ajax({
+           type: 'POST',
+           url: '../pags/lib/listequipos.php',
+           data: $(this).serialize(),
+           success: function(data){
+               $('#equipoa').html(data);
+               $('#equipob').html(data);
+           }
+       }) 
+    });
+    
+    $('#pais').on('change',function(){
+        $('#equipoa').val('val0');
+        $('#equipob').val('val0');
+        $.ajax({
+            type: 'POST',
+            url: '../pags/lib/listequipos.php',
+            data: $(this).serialize(),
+            success: function(data){
+                $('#liga').html(data);
+            }
+        })
+    });
     
 });
 var initDatepicker = function() {
