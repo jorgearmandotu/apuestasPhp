@@ -3,7 +3,7 @@
 function connectionDB(){
 
     $DB_SERVER='localhost';
-    $DB_NAME='apuestas';
+    $DB_NAME='apuestasdb';
     $DB_USER='root';
     $DB_PASS='Jorge1990';
     
@@ -27,7 +27,7 @@ function connectionClose($enlace){
 //valida datos de usurio y redirecciona segun si es admin o asesor
 function verificarLogin($user,$enl,$pass){
     if($sql = $enl->prepare("
-    SELECT CONTRASENA,TIPO,ID from persona where USUARIO=?;
+    SELECT contrasena,administrador,cc from asesores where USUARIO=?;
     
     ")){
         
@@ -43,10 +43,10 @@ function verificarLogin($user,$enl,$pass){
             $_SESSION['id']=$idunica;
             
         
-            if($_SESSION['tipo']=='ADMINISTRADOR'){
+            if($_SESSION['tipo']=='1'){
                 echo("<script>alert('admin');</script>");
                 header("location: administrador.php");
-            }elseif($_SESSION['tipo']=='ASESOR' || $_SESSION['tipo']=='CLIENTE'){
+            }elseif($_SESSION['tipo']=='0'){
                 echo("<script>alert('asesor');</script>");
             header("location: asesor.php");
             }
@@ -93,34 +93,28 @@ function cambiarpassword($enl,$pass,$id){
 }
 }
 //ingresa nuevo personal
-function ingresarPersona($nombre,$apellido,$cedula,$telefono,$email,$usuario,$password,$tipo,$enl){
+function ingresarPersona($nombre,$apellido,$cedula,$telefono,$email,$usuario,$password,$tipo,$enl,$punto){
     
    //encripta la contraseña
     $contrasena = password_hash($password, PASSWORD_DEFAULT);
     
     if($sql = $enl->prepare("
-    INSERT INTO persona VALUES(?,?,?,?,?,?,?,?,NULL);")){
-    $sql->bind_param('ssssssss',$cedula,$nombre,$apellido,$telefono,$email,$tipo,$contrasena,$usuario);
+    INSERT INTO asesores VALUES(?,?,?,?,?,?,?,?,?,0);")){
+    $sql->bind_param('sssssssss',$cedula,$nombre,$apellido,$email,$telefono,$tipo,$usuario,$contrasena,$punto);
     if(!$sql->execute()){
         echo('<script type="text/javascript">alert("ocurrio un error buebe a intentarlo, si el problema persiste intenta en cerrar sesion e iniciarla de nuevo")</script>');
+        header('index.php');
         exit();
     }
-    if($sql = $enl->prepare("SELECT ID FROM persona WHERE USUARIO=?;")){
-        $sql->bind_param('s',$usuario);
-        $sql->execute();
-        $sql->bind_result($idUser);
-    if($sql->fetch()){
-        //$sql->fetch();
-        
-        $idasesor= $idUser;
-        $sql = "INSERT INTO saldos VALUES('".$idasesor."','0')";
-        $enl->query($sql);
+        return true;
     }
+    else{
+        return false;
     }
-}}
+}
 // valida si id de usuario ya existe
 function usuarios($user,$enl){
-    if($sql = $enl->prepare("SELECT USUARIO from persona WHERE USUARIO=?;")){
+    if($sql = $enl->prepare("SELECT USUARIO from asesores WHERE USUARIO=?;")){
     $sql->bind_param('s',$user);
         $sql->execute();
         $sql->bind_result($nuser);
@@ -132,7 +126,7 @@ function usuarios($user,$enl){
 }}
 // valida la existencia de cedula
 function cedulas($ced,$enl){
-    if($sql = $enl->prepare("SELECT CC from persona WHERE CC=?")){
+    if($sql = $enl->prepare("SELECT CC from asesores WHERE cc=?")){
         $sql->bind_param('s',$ced);
         $sql->execute();
         $sql->bind_result($cedpersona); 
@@ -403,7 +397,7 @@ function fechahoraPartido($enl,$id){
     return $hora;
 }}
 function listAsesores($enl){
-    $sql= "SELECT NOMBRE,SALDO,IDASESOR,APELLIDO FROM saldos JOIN persona WHERE(IDASESOR=ID AND (TIPO='ASESOR' OR TIPO='CLIENTE'));";
+    $sql= "SELECT NOMBRE,SALDO,cc,APELLIDO,punto FROM asesores WHERE(administrador=0);";
     $ase = array();
     $result = $enl->query($sql)or die('error al consulta DB');
     $i=0;
@@ -414,7 +408,9 @@ function listAsesores($enl){
         $l++;
         $ase[$i][$l] = $row['SALDO'];
         $l++;
-        $ase[$i][$l] = $row['IDASESOR'];
+        $ase[$i][$l] = $row['cc'];
+        $l++;
+        $ase[$i][$l] = $row['punto'];
         $i++;
     }
     return $ase;

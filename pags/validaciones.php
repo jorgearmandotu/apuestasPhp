@@ -2,7 +2,7 @@
 require_once('gestionDB.php');
     function validarAdmin(){
         session_start();
-    if ($_SESSION['tipo']!='ADMINISTRADOR') { 
+    if ($_SESSION['tipo']!='1') { 
         header('location: dennyAcces.html');
         exit;
     }
@@ -10,7 +10,7 @@ require_once('gestionDB.php');
 
     function validarAsesor(){
         session_start();
-    if (!$_SESSION['tipo']) { 
+    if ($_SESSION['tipo']!='0') { 
         header('location: dennyAcces.html');
         exit;
     }

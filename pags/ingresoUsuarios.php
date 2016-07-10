@@ -62,11 +62,8 @@
                         <input type="email" name="email" required maxlength="40" id="email">
                     </li>
                     <li>
-                       <label for="tipo">Tipo: </label>
-                        <select name="tipo" id="tipo">
-                            <option>ASESOR</option>
-                            <option>CLIENTE</option>
-                        </select>
+                       <label for="punto">punto: </label>
+                        <input type="text" maxlength="25" name="punto" id="punto" required>
                     </li>
                     <li>
                         <label for="usuario">ID Usuario: </label>

@@ -17,8 +17,8 @@ function ingresarAsesor(){
     $idUsuario = strtoupper($idUsuario);
     $password=limpiarcadenas($_POST['password']);
     $passverificar=limpiarcadenas($_POST['passwordverificacion']);
-    $tipo=limpiarcadenas($_POST['tipo']);
-    
+    $punto=limpiarcadenas($_POST['punto']);
+    $tipo='0';
     $enlace=connectionDB();
     if($enlace!=null){
         if(validaruser($idUsuario,$enlace)){
@@ -38,9 +38,13 @@ function ingresarAsesor(){
             exit();
         }
         else{
-            ingresarPersona($nombre,$apellido,$cedula,$telefono,$email,$idUsuario,$password,$tipo,$enlace);
-            ConnectionClose($enlace);
-            return true;
+            if(ingresarPersona($nombre,$apellido,$cedula,$telefono,$email,$idUsuario,$password,$tipo,$enlace,$punto)){
+                ConnectionClose($enlace);
+                return true;
+            }else{
+                ConnectionClose($enlace);
+                return false;
+            }
         }
         
     }else{echo ' <script type="text/javascript">alert("ocurrio un error buelbe a intentarlo")</script>';}
@@ -49,6 +53,8 @@ function ingresarAsesor(){
 
 if(ingresarAsesor()){
     echo ' <script type="text/javascript">alert("ingreso exitoso")</script>';
+}else{
+    echo ' <script type="text/javascript">alert("ocurrio un problema buelva a intentarlo")</script>';
 }
 
 ?>

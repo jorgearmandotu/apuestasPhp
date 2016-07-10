@@ -8,7 +8,7 @@ $saldo = limpiarcadenas($_POST['saldo']);
 echo '<script type="text/javascript">alert("Saldo agregado ocn exito '.$id.' id '.$saldo.' agregado")</script>';
 
 $saldoactual = 0;
-$sql='SELECT SALDO FROM saldos WHERE IDASESOR="'.$id.'";';
+$sql='SELECT SALDO FROM asesores WHERE cc="'.$id.'";';
 
 
 $enlace = connectionDB();
@@ -26,7 +26,7 @@ if($row = $result->fetch_assoc()){
     echo 'error en tansaccion saldos';
 }
 $saldoactual=$saldoactual+$saldo;
-$sql2='UPDATE saldos SET SALDO="'.$saldoactual.'" WHERE IDASESOR="'.$id.'";';
+$sql2='UPDATE asesores SET SALDO="'.$saldoactual.'" WHERE cc="'.$id.'";';
 if(!$enlace->query($sql2)){
     $flag = false;
     echo 'error en tansaccion saldos';

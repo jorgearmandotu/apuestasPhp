@@ -43,7 +43,8 @@
     <center>
     <table>
        <tr>
-       <th>Punto N.</th>
+       <th>Punto</th>
+       <th>CC</th>
         <th>Asesor</th>
         <th>Saldo Actual</th>
         </tr>
@@ -53,7 +54,8 @@
         connectionClose($enlace);
         for($i=0;$i<count($ase);$i++){
             $l=0;
-            echo("<tr><td class='punto'>".$ase[$i][2]."</td>");
+            echo("<tr><td class='punto'>".$ase[$i][3]."</td>");
+            echo("<td class='tdasesor'>".$ase[$i][2]."</td>");
             echo("<td class='tdasesor'>".$ase[$i][$l]."</td>");
             $l++;
             echo("<td class='tdsaldo'>".$ase[$i][$l]."</td></tr>");
