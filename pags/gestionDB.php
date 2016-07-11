@@ -64,7 +64,7 @@ function verificarLogin($user,$enl,$pass){
 //verificar password
 function verificarpassword($enl,$id,$pass){
     
-    if($sql= $enl->prepare("SELECT CONTRASENA from persona WHERE ID=?;")){
+    if($sql= $enl->prepare("SELECT CONTRASENA from asesores WHERE cc=?;")){
     $sql->bind_param('s',$id);
     $sql->execute();
     $sql->bind_result($contrasena);
@@ -83,7 +83,7 @@ function verificarpassword($enl,$id,$pass){
 function cambiarpassword($enl,$pass,$id){
     $pass = password_hash($pass, PASSWORD_DEFAULT);
     
-    if($sql= $enl->prepare("UPDATE persona SET CONTRASENA=? WHERE ID=?;")){
+    if($sql= $enl->prepare("UPDATE asesores SET CONTRASENA=? WHERE cc=?;")){
         $sql->bind_param('ss',$pass,$id);
     if($sql->execute()){
         return true;
@@ -151,10 +151,10 @@ function equipo($equipo, $enl){
 }
 //recibe id de equipo y retorna nombre;
 function nomEquipo($id,$enl){
-    $nom=null;
-    if($sql = $enl->prepare("SELECT NOMBRE FROM equipos WHERE ID=?")){
+    $nom='arizona';
+    if($sql = $enl->prepare("SELECT nombre FROM equipo WHERE idequipo=?")){
     $sql->bind_param('s',$id);
-        $sql_>execute();
+        $sql->execute();
         $sql->bind_result($nequip);
     if($sql->fetch()){
         $nom = $nequip;
@@ -265,10 +265,12 @@ function equipos($enl, $liga){
     }
 //reorna iformacion de partidos
 function partidos($enl,$fecha){
-    if($sql = $enl->prepare("SELECT ID,EQUIPOA,EQUIPOB,LIGA,CUOTA1,CUOTAX,CUOTA2, DATE_FORMAT(HORA, '%T') AS HORAP FROM partidos WHERE FECHA=? ORDER BY HORA;")){
+    if($sql = $enl->prepare("SELECT idpartido,equipoa,equipob,cuota1,cuotax,cuota2, DATE_FORMAT(horario, '%T') AS HORAP FROM partidos WHERE horario LIKE ? ORDER BY horario;
+")){
+        $fecha=$fecha.'%';
     $sql->bind_param('s',$fecha);
         $sql->execute();
-        $sql->bind_result($idpa,$equiA,$equiB,$lig,$cuo1,$cuox,$cuo2,$horp);
+        $sql->bind_result($idpa,$equiA,$equiB,$cuo1,$cuox,$cuo2,$horp);
     $arr = array();
     $i=0;
     while($sql->fetch()){
@@ -279,8 +281,8 @@ function partidos($enl,$fecha){
         $l++;
         $arr[$i][$l]=$equiB;
         $l++;
-        $arr[$i][$l]=$lig;
-        $l++;
+//        $arr[$i][$l]=$equiB;//anterior liga
+//        $l++;
         $arr[$i][$l]=$horp;
         $l++;
         $arr[$i][$l]=$cuo1;
@@ -340,15 +342,14 @@ function nompartido($enl,$idp){
 }}
 //retorna partido y su ganador
 function equiposLigaPartido($enl,$idP){
-    if($sql = $enl->prepare("SELECT EQUIPOA,EQUIPOB,LIGA,DATE_FORMAT(HORA, '%T') AS HORAP, GANADOR, FECHA FROM partidos WHERE ID=?")){
+    if($sql = $enl->prepare("SELECT equipoa,equipob,DATE_FORMAT(horario, '%T') AS HORAP, resultado, horario FROM partidos WHERE idpartido=?")){
     $sql->bind_param('s',$idP);
         $sql->execute();
-        $sql->bind_result($equiA,$equiB,$lig,$horp,$ganad,$fechap);
+        $sql->bind_result($equiA,$equiB,$horp,$ganad,$fechap);
     $arr = array();
     if($sql->fetch()){
         $arr[0]=$equiA;
         $arr[1]=$equiB;
-        $arr[2]=$lig;
         $arr[3]=$horp;
         $arr[4]=$ganad;
         $arr[5]=$fechap;
@@ -429,7 +430,7 @@ function listAsesores($enl){
 }
 //actualizar cuotas
 function actualizarcuotas($enl,$idp,$cuota1,$cuota2,$cuotax){
-    if($sql=$enl->prepare("UPDATE partidos SET CUOTA1=?, CUOTA2=?, CUOTAX=? WHERE ID=?")){
+    if($sql=$enl->prepare("UPDATE partidos SET cuota1=?, cuota2=?, cuotax=? WHERE idpartido=?")){
         $sql->bind_param('ssss',$cuota1,$cuota2,$cuotax,$idp);
     if($sql->execute()){
         return true;

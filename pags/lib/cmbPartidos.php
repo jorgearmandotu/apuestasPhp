@@ -22,12 +22,11 @@ for($i=0;$i<count($partidos);$i++){
     $idP=$partidos[$i][0];
     $nomEquiA=$partidos[$i][1];
     $nomEquiB=$partidos[$i][2];
-    $nomLiga=$partidos[$i][3];
-    $hora=$partidos[$i][4];
-    $local=$partidos[$i][5];
-    $empate=$partidos[$i][6];
-    $visitante=$partidos[$i][7];
-    $nomLiga = nomLiga($nomLiga,$enlace);
+    $hora=$partidos[$i][3];
+    $local=$partidos[$i][4];
+    $empate=$partidos[$i][5];
+    $visitante=$partidos[$i][6];
+    //$nomLiga = nomLiga($nomLiga,$enlace);
         
         $res.="<div class='fila'>
            

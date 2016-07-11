@@ -15,9 +15,10 @@ $fecha=strip_tags($_POST['fecha']);
     for($i=0;$i<count($partidos);$i++) {
         $idP=$partidos[$i][0];
         $nomEquiA=$partidos[$i][1];
+        $nomEquiA=nomEquipo($nomEquiA,$enlace);
         $nomEquiB=$partidos[$i][2];
-        $nomLiga=$partidos[$i][3];
-        $hora=$partidos[$i][4];
+        $nomEquiB=nomEquipo($nomEquiB,$enlace);
+        $hora=$partidos[$i][3];
         
         
         $res.="<option value='".$idP."'>".$nomEquiA." VS ".$nomEquiB." - ".$hora."</option>";

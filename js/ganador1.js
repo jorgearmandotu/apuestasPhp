@@ -10,6 +10,7 @@ $(document).ready(function() {
    
         
     $('#fecha').change(function(){
+        $('#equipo').html('<option>seleccione equipo</option>');
                 $.ajax({
             type: 'POST',
             url:'llenarganador.php',
