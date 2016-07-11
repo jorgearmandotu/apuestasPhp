@@ -60,6 +60,7 @@ $datos = explode('-idp-',$idpapuesta);
 $enlace = connectionDB();
 $saldo = saldo($enlace,$idusuario);
 $bandera=true;
+              $enlace->autocommit(false);
 for($i=1;$i<count($datos);$i++){
    $id=explode('-apuesta-',$datos[$i]);
     $idpartido=$id[0];
@@ -80,15 +81,20 @@ for($i=1;$i<count($datos);$i++){
     
 }
 
-connectionClose($enlace);
 
-if($bandera){echo('<h1>Apuesta Exitosa</h1><br>
+
+if($bandera){
+    $enlace->commit();
+    echo('<h1>Apuesta Exitosa</h1><br>
 <form action=../recibo.php method="post" target="_blank">
 <input hidden value='.$idApuesta.' name="idapuesta">
 <button type="submit">Generar Recibo</button>
 </form><br><br>
 <a href="../apuesta.php"><button type="button">Volver</button></a>');
-           }
+           }else{
+    $enlace->rollBack();
+}
+              connectionClose($enlace);
 ?>
           </div>
   <footer>

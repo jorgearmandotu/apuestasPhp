@@ -374,7 +374,7 @@ function saldo($enl,$id){
 }}
 //ingresar apuesta
 function ingresoApuesta($enl,$valor,$idAsesor,$fecha,$idPart,$EquiApost,$cuota,$idapuesta,$saldoDisp){
-    $enl->autocommit(false);
+    //$enl->autocommit(false);
     $flag = true;
     if($sql = $enl->prepare("INSERT INTO apuestas VALUES(?,?,?,?);")){
         $sql->bind_param('ssss',$idapuesta,$fecha,$idAsesor,$valor);
@@ -402,10 +402,10 @@ function ingresoApuesta($enl,$valor,$idAsesor,$fecha,$idPart,$EquiApost,$cuota,$
         }
     }
     if($flag){
-        $enl->commit();
+        //$enl->commit();
         return true;
     }else{
-        $enl->rollBack();
+        //$enl->rollBack();
         return false;
     }
 }
