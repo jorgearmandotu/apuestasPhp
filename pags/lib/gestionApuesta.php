@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     $valorapuesta=limpiarcadenas($_POST["vlrapuesta"]);
     $idusuario=$_SESSION['id'];
-    $cuota = explode('-',$cuotas);
+    $cuota = explode('*',$cuotas);
     $count = count($cuota);
     $cuotatotal=1;
     $totalganancia=0;
@@ -61,17 +61,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           <div id="contenido">
           <div id='center'>
               <br>
+              
              <?php
             $boton ="<button type='submit' id='submit'>confirmar apuesta</button>";
             for ($i = 0; $i < $count-1; $i++) {
-            $datos = explode(':',$cuota[$i]);
+            $datos = explode('%',$cuota[$i]);
                 //creo cadena con idp, apuesta para utilicisacion de explode
             $partidosids.='-idp-'.$datos[1].'-apuesta-'.$datos[2].'-apuesta-'.$datos[0];
                 
                 //valido hora obtengo nombre de partido
                 $enlace = connectionDB();
                 $horapartido = fechahoraPartido($enlace,$datos[1]);
-                $nompart = nompartido($enlace,$datos[1]);
+                $Dpart = infopartido($enlace,$datos[1]);
+                $eqa= nomEquipo($Dpart[0],$enlace);
+                $eqb= nomEquipo($Dpart[1],$enlace);
+                $nompart= $eqa.' vs '.$eqb;
                 connectionClose($enlace);
                 
                 date_default_timezone_set("America/Bogota");

@@ -327,24 +327,23 @@ function partidoslig($enl,$fecha,$liga){
 }}
 
 //retorna arreglo para armar nombre de partido con horario
-function nompartido($enl,$idp){
-    $partido = array();
+function infopartido($enl,$idp){
+    $partido = null;
     //if($sql = $enl->prepare("SELECT idpartido,EQUIPOA,EQUIPOB,CUOTA1,CUOTAX,CUOTA2, DATE_FORMAT(horario, '%T') AS HORAP FROM partidos WHERE idpartido=?;")){
-    if($sql = $enl->prepare("SELECT idpartido,EQUIPOA,EQUIPOB,CUOTA1,CUOTAX,CUOTA2,horario FROM partidos WHERE idpartido=?;")){
+    if($sql = $enl->prepare("SELECT idpartido,equipoa,equipob,CUOTA1,CUOTAX,CUOTA2,horario FROM partidos WHERE idpartido=?;")){
         $sql->bind_param('s',$idp);
         $sql->execute();
     $sql->bind_result($idpa,$equiA,$equiB,$cuo1,$cuox,$cuo2,$horp);
-    $partido="";
+    $partido=array();
     while($sql->fetch()){
         $partido[0]=$equiA;
         $partido[1]=$equiB;
         $partido[2]=$horp;//." - ";
         //$partido.=$horp;
     }
-        $partido=$idp;
     return $partido;
 }
-return $partido;}
+}
 //retorna partido y su ganador
 function equiposLigaPartido($enl,$idP){
     if($sql = $enl->prepare("SELECT equipoa,equipob,DATE_FORMAT(horario, '%T') AS HORAP, resultado, horario FROM partidos WHERE idpartido=?")){
@@ -374,11 +373,11 @@ function saldo($enl,$id){
     return $saldo;
 }}
 //ingresar apuesta
-function ingresoApuesta($enl,$valor,$idAsesor,$fecha,$idPart,$EquiApost,$idLiga,$cuota,$idapuesta,$saldoDisp){
+function ingresoApuesta($enl,$valor,$idAsesor,$fecha,$idPart,$EquiApost,$cuota,$idapuesta,$saldoDisp){
     $enl->autocommit(false);
     $flag = true;
-    if($sql = $enl->prepare("INSERT INTO apuestas VALUES(?,?,?,?,?,?,?,?,NULL);")){
-        $sql->bind_param('ssssssss',$valor,$idAsesor,$fecha,$idPart,$EquiApost,$idLiga,$cuota,$idapuesta);
+    if($sql = $enl->prepare("INSERT INTO apuestas VALUES(?,?,?,?);")){
+        $sql->bind_param('ssss',$idapuesta,$fecha,$idAsesor,$valor);
         
     $saldoDisp=$saldoDisp-$valor;
    
@@ -387,7 +386,7 @@ function ingresoApuesta($enl,$valor,$idAsesor,$fecha,$idPart,$EquiApost,$idLiga,
         $flag = false;
         echo("Error en transaccion ingreso");
     }}
-     if($sql2 = $enl->prepare("UPDATE saldos SET SALDO=? WHERE IDASESOR=?;")){
+     if($sql2 = $enl->prepare("UPDATE asesores SET SALDO=? WHERE cc=?;")){
          $sql2->bind_param('ss',$saldoDisp,$idAsesor);
      
      if(!$sql2->execute()){
@@ -395,6 +394,13 @@ function ingresoApuesta($enl,$valor,$idAsesor,$fecha,$idPart,$EquiApost,$idLiga,
         $flag = false;
         echo("Error en transaccion actualizando");
     }}
+    if($sql3= $enl->prepare("INSERT INTO partido_apuesta VALUES(?,?,?,?);")){
+        $sql3->bind_param('ssss',$idPart,$idapuesta,$EquiApost,$cuota);
+        if(!$sql3->execute()){
+            $flag=false;
+            echo'Error en transaccion partido_apuesta';
+        }
+    }
     if($flag){
         $enl->commit();
         return true;
@@ -404,7 +410,7 @@ function ingresoApuesta($enl,$valor,$idAsesor,$fecha,$idPart,$EquiApost,$idLiga,
     }
 }
 function fechahoraPartido($enl,$id){
-    if($sql=$enl->prepare("SELECT HORA FROM partidos WHERE ID=?;")){
+    if($sql=$enl->prepare("SELECT horario FROM partidos WHERE idpartido=?;")){
         $sql->bind_param('s',$id);
         $sql->execute();
     $sql->bind_result($hour);

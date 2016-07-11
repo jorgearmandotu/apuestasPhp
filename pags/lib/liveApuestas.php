@@ -4,9 +4,8 @@ require_once'../validaciones.php';
 
 $valor = limpiarcadenas($_POST['datos']);
 $valorapuesta = limpiarcadenas($_POST['valorapuesta']);
-$nomPartido="";
+$nompartido="";
 $ids ="";
-$nompartido="perez";
 $res=$valor."<br>".$valorapuesta.'<br>';
 $valcuota=1;
 $partidos= explode('*',$valor);
@@ -19,14 +18,18 @@ for($i = 0;$i<count($partidos)-1;$i++){
 for($l=0;$l<count($ids);$l++){
     $enlace=connectionDB();
     if(isset($ids[$l])){
-    $nompartido= nompartido($enlace,$ids[$l]);//cargar datos de partido con el cual generar nombre y y jorario par avaliar los dato
-    $horapartido = fechahorapartido($enlace,$ids[$l]);
-    connectionClose($enlace);
+        $infopartido = infopartido($enlace,$ids[$l]);//cargar datos de partido con el cual generar nombre y y jorario par avaliar los dato
+        $nomequA = nomEquipo($infopartido[0],$enlace);
+        $nomequB = nomEquipo($infopartido[1],$enlace);
+        $horarioP = $infopartido[2];
+        $nompartido = $nomequA.' vs '.$nomequB.'<br>'.$horarioP;
+        //$horapartido = fechahorapartido($enlace,$ids[$l]);
+        connectionClose($enlace);
         date_default_timezone_set("America/Bogota");
         $dActual= new datetime();
-        $d = new datetime($horapartido);
+        $d = new datetime($horarioP);
         $d->modify('-1 minutes');
-    if($dActual<$d){//verificar esta hora
+    if($dActual>$d){//verificar esta hora
         $nompartido='<label>partido iniciado</label>';
     }
     $valcuota = $valcuota*floatval($cuota[$l]);
