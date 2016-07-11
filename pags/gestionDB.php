@@ -326,20 +326,25 @@ function partidoslig($enl,$fecha,$liga){
     return $arr;
 }}
 
-//retorna arreglo para armar nombre de partido con hora
+//retorna arreglo para armar nombre de partido con horario
 function nompartido($enl,$idp){
-    if($sql = $enl->prepare("SELECT ID,EQUIPOA,EQUIPOB,LIGA,CUOTA1,CUOTAX,CUOTA2, DATE_FORMAT(HORA, '%T') AS HORAP FROM partidos WHERE ID=?;")){
+    $partido = array();
+    //if($sql = $enl->prepare("SELECT idpartido,EQUIPOA,EQUIPOB,CUOTA1,CUOTAX,CUOTA2, DATE_FORMAT(horario, '%T') AS HORAP FROM partidos WHERE idpartido=?;")){
+    if($sql = $enl->prepare("SELECT idpartido,EQUIPOA,EQUIPOB,CUOTA1,CUOTAX,CUOTA2,horario FROM partidos WHERE idpartido=?;")){
         $sql->bind_param('s',$idp);
         $sql->execute();
-    $sql->bind_result($idpa,$equiA,$equiB,$lig,$cuo1,$cuox,$cuo2,$horp);
+    $sql->bind_result($idpa,$equiA,$equiB,$cuo1,$cuox,$cuo2,$horp);
     $partido="";
     while($sql->fetch()){
-        $partido.=$equiA." vs ";
-        $partido.=$equiB;//." - ";
+        $partido[0]=$equiA;
+        $partido[1]=$equiB;
+        $partido[2]=$horp;//." - ";
         //$partido.=$horp;
     }
+        $partido=$idp;
     return $partido;
-}}
+}
+return $partido;}
 //retorna partido y su ganador
 function equiposLigaPartido($enl,$idP){
     if($sql = $enl->prepare("SELECT equipoa,equipob,DATE_FORMAT(horario, '%T') AS HORAP, resultado, horario FROM partidos WHERE idpartido=?")){

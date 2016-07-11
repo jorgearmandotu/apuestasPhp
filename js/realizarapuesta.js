@@ -18,6 +18,7 @@ $(document).ready(function(){
     }
     cargarptdos();
     $('#fecha').change(function(){
+        $('#pais').val('val1');
         $.ajax({
             type:'POST',
             url:'lib/partidosapuesta.php',
@@ -83,12 +84,12 @@ $(document).ready(function(){
         var apuestaval=$('#valor').val();
         if( $(this).is(':checked') ) {
         // Hacer algo si el checkbox ha sido seleccionado
-            info = $(this).val()+'-';
+            info = $(this).val()+'*';
             arrcuotas.push(info);
             cuota=1;
             for(i in arrcuotas){
                 var temp= arrcuotas[i];
-                var cuotas=temp.split(':');
+                var cuotas=temp.split('%');
                 cuota = parseFloat(cuotas[0])*cuota;
             }
             //cuota= cuota*$('#valor').val();
@@ -98,7 +99,7 @@ $(document).ready(function(){
         for(i in arrcuotas){
             var a = arrcuotas[i];
             var e = $(this).val();
-            if(a==(e+'-')){
+            if(a==(e+'*')){
                 arrcuotas.splice(i,1);
                 break;
             }
@@ -131,7 +132,7 @@ $(document).ready(function(){
         for(i in arrcuotas){
             var a = arrcuotas[i];
             var e = $(this).val();
-            if(a==(e+'-')){
+            if(a==(e+'*')){
                 arrcuotas.splice(i,1);
                 var idp=e.split(':');
                 if(idp[2]=='1'){

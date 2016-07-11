@@ -42,18 +42,18 @@ for($i=0;$i<count($partidos)-1;$i++){
          <label>".$hora." </label>
         </div>
         <div class='celda6'>
-        <input type='checkbox' class='cuotas' value='".$local.":".$idP.":1' name='cuota[]' id='".$idP."'>
+        <input type='checkbox' class='cuotas' value='".$local."%".$idP."%1' name='cuota[]' id='".$idP."'>
             
 				<label for='".$idP."'>".$nomEquiA."  ".$local."</label></input>
        
        </div>
        <div class='celda7'>
-            <input type='checkbox' class='cuotas' value='".$empate.":".$idP.":X' name='cuota[]' id='".$idP."a'>
+            <input type='checkbox' class='cuotas' value='".$empate."%".$idP."%X' name='cuota[]' id='".$idP."a'>
             <label for='".$idP."a'>Empate  ".$empate."</label></input>
         </div>
         
         <div class='celda8'>
-        <input type='checkbox' class='cuotas' value='".$visitante.":".$idP.":2'  name='cuota[]' id='".$idP."b'>
+        <input type='checkbox' class='cuotas' value='".$visitante."%".$idP."%2'  name='cuota[]' id='".$idP."b'>
         <label for='".$idP."b'>".$nomEquiB."  ".$visitante."</label></input>
         
         </div>
@@ -88,18 +88,18 @@ for($i=0;$i<count($partidos);$i++){
          <label>".$hora." </label>
         </div>
         <div class='celda6'>
-        <input type='checkbox' class='cuotas' value='".$local.":".$idP.":1' name='cuota[]' id='".$idP."'>
+        <input type='checkbox' class='cuotas' value='".$local."%".$idP."%1' name='cuota[]' id='".$idP."'>
             
 				<label for='".$idP."'>".$nomEquiA."  ".$local."</label></input>
        
        </div>
        <div class='celda7'>
-            <input type='checkbox' class='cuotas' value='".$empate.":".$idP.":X' name='cuota[]' id='".$idP."a'>
+            <input type='checkbox' class='cuotas' value='".$empate."%".$idP."%X' name='cuota[]' id='".$idP."a'>
             <label for='".$idP."a'>Empate  ".$empate."</label></input>
         </div>
         
         <div class='celda8'>
-        <input type='checkbox' class='cuotas' value='".$visitante.":".$idP.":2'  name='cuota[]' id='".$idP."b'>
+        <input type='checkbox' class='cuotas' value='".$visitante."%".$idP."%2'  name='cuota[]' id='".$idP."b'>
         <label for='".$idP."b'>".$nomEquiB."  ".$visitante."</label></input>
         
         </div>
