@@ -32,6 +32,18 @@ $(document).ready(function(){
         //$miSelect.val($miSelect.children('option:first').val());
         $('#liga').val($('#liga').children('option:first').val());
     });
+    
+    $('#pais').on('change',function(){
+        $.ajax({
+            type: 'POST',
+            url: '../pags/lib/listequipos.php',
+            data: $(this).serialize(),
+            success: function(data){
+                $('#liga').html(data);
+            }
+        })
+    });
+    
     $('#liga').change(function(){
         $.ajax({
             type:'post',

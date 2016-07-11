@@ -230,7 +230,7 @@ function ingresoPartido($horario,$local,$visitante,$cuota1,$cuota2,$cuotaX,$enl)
         exit();
     }else{return true;}
 }}
-//retorna un array de todas las ligas registrada
+//retorna un array de todas las ligas registrada filtradas por pais
 function ligas($enl,$pais){
     if($sql = $enl->prepare('SELECT NOMBRE,idliga FROM ligas where pais=? ORDER BY NOMBRE;')){
         $sql->bind_param('s',$pais);
@@ -358,7 +358,7 @@ function equiposLigaPartido($enl,$idP){
 }}
 //obtener saldo asesor
 function saldo($enl,$id){
-    if($sql = $enl->prepare("SELECT SALDO FROM saldos WHERE IDASESOR=?")){
+    if($sql = $enl->prepare("SELECT SALDO FROM asesores WHERE cc=?")){
         $sql->bind_param('s',$id);
         $sql->execute();
         $sql->bind_result($saldA);

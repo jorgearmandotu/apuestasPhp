@@ -15,6 +15,9 @@ form{
     color: #ffbf00;
     font-weight: bold;
 }
+select{
+    border-radius: 1em;
+}
 #fecha{
     border-radius: 1em;
 }

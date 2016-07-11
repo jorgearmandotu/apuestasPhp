@@ -82,24 +82,31 @@ function crrearapuesta(){
                 ?>>
                  
               </li>
+              <li>
+                  <label for="pais">seleccione pais</label>
+                  <select name="pais" id="pais">
+                      <option>pais</option>
+                      <?php
+                      $enlace = connectionDB();
+                      $listpaises = paises($enlace);
+                      connectionClose($enlace);
+                      for($i=0;$i<count($listpaises);$i++){
+                          echo '<option>'.$listpaises[$i].'</option>';
+                      }
+                      ?>
+                  </select>
+              </li>
               <li id="selectliga">
                   <label for="liga">seleccione liga</label>
                   <select name="liga" id="liga">
-                      <option>Todas</option>
-                      <?php
-                      $ligas=ligas($enlace);
-                      connectionClose($enlace);
-                      for($i=0;$i<count($ligas);$i++){
-                          echo'<option>'.$ligas[$i].'</option>';
-                      }
-                      ?>
+                      <option>seleccione liga</option>
                   </select>
               </li>
           </ul>
            <form method='POST' id='miniformulario' action='lib/gestionApuesta.php'>
            <div id="cantidadapuesta">
           <label for="valor">Cantidad a apostar $: </label>
-             <input type='number' step='any' name='valorapuesta' id='valor' pattern="[0-9]">
+             <input type='number' step='100' name='valorapuesta' id='valor' pattern="[0-9]" min="5000" max="300000" maxlength="6">
               </div>
           
       <div id="listpartidosantes">

@@ -20,13 +20,15 @@ $partidos = partidoslig($enlace,$fecha,$liga);
 for($i=0;$i<count($partidos);$i++){
     $idP=$partidos[$i][0];
     $nomEquiA=$partidos[$i][1];
+    $nomEquiA = nomEquipo($nomEquiA,$enlace);
     $nomEquiB=$partidos[$i][2];
-    $nomLiga=$partidos[$i][3];
-    $hora=$partidos[$i][4];
-    $local=$partidos[$i][5];
-    $empate=$partidos[$i][6];
-    $visitante=$partidos[$i][7];
-    $nomLiga = nomLiga($nomLiga,$enlace);
+    $nomEquiB = nomEquipo($nomEquiB,$enlace);
+    //$nomLiga=$partidos[$i][3];
+    $hora=$partidos[$i][3];
+    $local=$partidos[$i][4];
+    $empate=$partidos[$i][5];
+    $visitante=$partidos[$i][6];
+    //$nomLiga = nomLiga($nomLiga,$enlace);
     
         
 //    la siguiente cadena crea los botones y el formulario q se reenvia a la misma paguina en viando los datos cuando se ha seleccionado halgo el botn apostar y los inputs con la id del partido y el valor de la cuota seleccionada no deben ser visibles se hace con css
@@ -64,13 +66,15 @@ $partidos = partidos($enlace,$fecha);
 for($i=0;$i<count($partidos);$i++){
     $idP=$partidos[$i][0];
     $nomEquiA=$partidos[$i][1];
+    $nomEquiA = nomEquipo($nomEquiA,$enlace);
     $nomEquiB=$partidos[$i][2];
-    $nomLiga=$partidos[$i][3];
-    $hora=$partidos[$i][4];
-    $local=$partidos[$i][5];
-    $empate=$partidos[$i][6];
-    $visitante=$partidos[$i][7];
-    $nomLiga = nomLiga($nomLiga,$enlace);
+    $nomEquiB = nomEquipo($nomEquiB,$enlace);
+    //$nomLiga=$partidos[$i][3];
+    $hora=$partidos[$i][3];
+    $local=$partidos[$i][4];
+    $empate=$partidos[$i][5];
+    $visitante=$partidos[$i][6];
+    //$nomLiga = nomLiga($nomLiga,$enlace);
     
         
 //    la siguiente cadena crea los botones y el formulario q se reenvia a la misma paguina en viando los datos cuando se ha seleccionado halgo el botn apostar y los inputs con la id del partido y el valor de la cuota seleccionada no deben ser visibles se hace con css
