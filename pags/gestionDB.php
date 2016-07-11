@@ -151,7 +151,7 @@ function equipo($equipo, $enl){
 }
 //recibe id de equipo y retorna nombre;
 function nomEquipo($id,$enl){
-    $nom='arizona';
+    $nom='';
     if($sql = $enl->prepare("SELECT nombre FROM equipo WHERE idequipo=?")){
     $sql->bind_param('s',$id);
         $sql->execute();
@@ -297,7 +297,8 @@ function partidos($enl,$fecha){
 }}
 //sobreescribir metodo del anterior
 function partidoslig($enl,$fecha,$liga){
-    if($sql = $enl->prepare("SELECT ID,EQUIPOA,EQUIPOB,LIGA,CUOTA1,CUOTAX,CUOTA2, DATE_FORMAT(HORA, '%T') AS HORAP FROM partidos WHERE FECHA=? AND LIGA=? ORDER BY HORA;")){
+    if($sql = $enl->prepare("SELECT idpartido,equipoa,equipob,id_liga,CUOTA1,CUOTAX,CUOTA2, DATE_FORMAT(horario, '%T') AS HORAP FROM partidos join equipo WHERE idequipo=equipoa and horario like ? AND id_liga=? ORDER BY horario;")){
+        $fecha=$fecha.'%';
         $sql->bind_param('ss',$fecha,$liga);
     $sql->execute();
         $sql->bind_result($idpa,$equiA,$equiB,$lig,$cuo1,$cuox,$cuo2,$horp);
@@ -311,8 +312,6 @@ function partidoslig($enl,$fecha,$liga){
         $l++;
         $arr[$i][$l]=$equiB;
         $l++;
-        $arr[$i][$l]=$lig;
-        $l++;
         $arr[$i][$l]=$horp;
         $l++;
         $arr[$i][$l]=$cuo1;
@@ -321,6 +320,7 @@ function partidoslig($enl,$fecha,$liga){
         $l++;
         $arr[$i][$l]=$cuo2;
         $i++;
+        $arr[$i][$l]=$lig;
         
     }
     return $arr;
