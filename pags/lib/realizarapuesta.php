@@ -60,7 +60,7 @@ $datos = explode('-idp-',$idpapuesta);
 $enlace = connectionDB();
 $saldo = saldo($enlace,$idusuario);
 $bandera=true;
-              $enlace->autocommit(false);
+$enlace->autocommit(false);
 for($i=1;$i<count($datos);$i++){
    $id=explode('-apuesta-',$datos[$i]);
     $idpartido=$id[0];
@@ -94,7 +94,7 @@ if($bandera){
            }else{
     $enlace->rollBack();
 }
-              connectionClose($enlace);
+connectionClose($enlace);
 ?>
           </div>
   <footer>
