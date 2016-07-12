@@ -144,12 +144,10 @@ $(document).ready(function(){
                 }
                 
                 idp='#'+idp;
-                alert(idp);
                 var idcheck = idp.split(' ');
                 var idch2 = idcheck[1].split(':');
-                var idcheckbox = idcheck[0]+'_'+idch2[0]+'.'+idch2[1]+'.'+idch2[2];
-                alert(idcheckbox);
-                $('#a2016-07-11_15.00.00_3_7').prop('checked',false);
+                var idcheckbox = idcheck[0]+'_'+idch2[0]+'-'+idch2[1]+'-'+idch2[2];
+                $(idcheckbox).prop('checked',false);
                 break;
             }
         }

@@ -377,9 +377,7 @@ function ingresoApuesta($enl,$idAsesor,$fecha,$idapuesta,$valor){
     //$enl->autocommit(false);
     $flag = true;
     if($sql = $enl->prepare("INSERT INTO apuestas VALUES(?,?,?,?);")){
-        $sql->bind_param('ssss',$idapuesta,$fecha,$idAsesor,$valor);
-        echo $idapuesta.'--'.$fecha.'--'.$idAsesor.'--'.$valor.'<br>';
-    
+        $sql->bind_param('ssss',$idapuesta,$fecha,$idAsesor,$valor);    
    
     if(!$sql->execute()){
    // if($enl->errno){
