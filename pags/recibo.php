@@ -73,7 +73,7 @@ require_once('validaciones.php');
     $fecha=$fecha->format('d-m-Y');
     $pdf->Cell(0,12,'Fecha De Apuesta:    '.$fecha,0);
     $pdf->ln();
-    $pdf->Cell(0,14,'punto:    '.$punto,0);
+    $pdf->Cell(0,14,'Punto:    '.$punto,0);
     $pdf->ln();
     $pdf->SetFont('Times', 'U', 15);//subrayado
    

@@ -11,6 +11,7 @@
 }
 #selecfecha label{
     color: #ffbf00;
+    text-shadow: 0 0 3px #000;
 }
 
 #center ul{
@@ -53,6 +54,7 @@
 }
 .fila label{
     color: #ffbf00;
+    text-shadow: 0 0 3px #000;
     font-weight: bold;
 }
     

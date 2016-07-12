@@ -96,6 +96,7 @@ center form ul{
 }
 center label{
     color: #ffbf00;
+    text-shadow: 0 0 3px #000;
 }
 center form ul li{
     margin: 1em;
@@ -105,6 +106,7 @@ center form ul li label{
     font-weight: bold;
     font-size: 1em;
     color: #ffbf00;
+    text-shadow: 0 0 3px #000;
 }
 center form input,center form select{
     border-radius: .5em;

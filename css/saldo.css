@@ -9,6 +9,7 @@ table th,tr{
 }
 table th{
     color: #ffbf00;
+    text-shadow: 0 0 3px #000;
     text-align: center;
 }
 table td{
@@ -26,5 +27,6 @@ center button{
 }
 center label{
     color: #ffbf00;
+    text-shadow: 0 0 3px #000;
     font-family: sans-serif;
 }

@@ -13,6 +13,7 @@ form{
 }
 #center label{
     color: #ffbf00;
+    text-shadow: 0 0 3px #000;
     font-weight: bold;
 }
 select{

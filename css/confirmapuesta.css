@@ -4,6 +4,7 @@
 #center ul{
     list-style: none;
     color: #ffbf00;
+    text-shadow: 0 0 3px #000;
     font-weight: bold;
     font-size: 12pt;
     border-bottom: 2px solid #fff;
