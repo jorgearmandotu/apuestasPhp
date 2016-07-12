@@ -6,14 +6,18 @@ require_once('../validaciones.php');
 $fecha = strip_tags($_POST['fecha']);
 if(isset($_POST['liga'])){//filtra
     $liga = limpiarcadenas($_POST['liga']);
-
+   date_default_timezone_set("America/Bogota");
+    $dActual= new datetime();
+    $dActual->modify('-1 minutes');
+    $dActual = date('Y-m-d H:i:s');
+    
 $enlace = connectionDB();
     if($liga!='Todas'){
         //$liga = idliga($liga,$enlace);
-$partidos = partidoslig($enlace,$fecha,$liga);
+$partidos = partidoslig($enlace,$fecha,$liga,$dActual);
         
     }else{
-        $partidos = partidos($enlace,$fecha);
+        $partidos = partidos($enlace,$fecha,$dActual);
     }
 
  $res="";
@@ -67,7 +71,12 @@ for($i=0;$i<count($partidos)-1;$i++){
 connectionClose($enlace);
 }else{//carga todo
    $enlace = connectionDB();
-$partidos = partidos($enlace,$fecha);
+    date_default_timezone_set("America/Bogota");
+    $dActual= new datetime();
+    $dActual->modify('-1 minutes');
+    $dActual = date('Y-m-d H:i:s');
+    
+$partidos = partidos($enlace,$fecha,$dActual);
  $res="";
 
 for($i=0;$i<count($partidos);$i++){

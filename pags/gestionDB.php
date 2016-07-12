@@ -264,11 +264,11 @@ function equipos($enl, $liga){
     
     }
 //reorna iformacion de partidos
-function partidos($enl,$fecha){
-    if($sql = $enl->prepare("SELECT idpartido,equipoa,equipob,cuota1,cuotax,cuota2, DATE_FORMAT(horario, '%T') AS HORAP FROM partidos WHERE horario LIKE ? ORDER BY horario;
+function partidos($enl,$fecha,$horA){
+    if($sql = $enl->prepare("SELECT idpartido,equipoa,equipob,cuota1,cuotax,cuota2, DATE_FORMAT(horario, '%T') AS HORAP FROM partidos WHERE horario LIKE ? AND horario >?  ORDER BY horario;
 ")){
         $fecha=$fecha.'%';
-    $sql->bind_param('s',$fecha);
+    $sql->bind_param('ss',$fecha,$horA);
         $sql->execute();
         $sql->bind_result($idpa,$equiA,$equiB,$cuo1,$cuox,$cuo2,$horp);
     $arr = array();
@@ -296,10 +296,10 @@ function partidos($enl,$fecha){
     return $arr;
 }}
 //sobreescribir metodo del anterior
-function partidoslig($enl,$fecha,$liga){
-    if($sql = $enl->prepare("SELECT idpartido,equipoa,equipob,id_liga,CUOTA1,CUOTAX,CUOTA2, DATE_FORMAT(horario, '%T') AS HORAP FROM partidos join equipo WHERE idequipo=equipoa and horario like ? AND id_liga=? ORDER BY horario;")){
+function partidoslig($enl,$fecha,$liga,$horA){
+    if($sql = $enl->prepare("SELECT idpartido,equipoa,equipob,id_liga,CUOTA1,CUOTAX,CUOTA2, DATE_FORMAT(horario, '%T') AS HORAP FROM partidos join equipo WHERE idequipo=equipoa and horario like ? AND id_liga=? AND horario >? ORDER BY horario;")){
         $fecha=$fecha.'%';
-        $sql->bind_param('ss',$fecha,$liga);
+        $sql->bind_param('sss',$fecha,$liga,$horA);
     $sql->execute();
         $sql->bind_result($idpa,$equiA,$equiB,$lig,$cuo1,$cuox,$cuo2,$horp);
     $arr = array();

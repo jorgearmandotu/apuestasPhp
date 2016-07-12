@@ -4,7 +4,8 @@ require_once '../validaciones.php';
 
 $fecha = limpiarcadenas($_POST['fecha']);
 $enlace = connectionDB();
-$partidos = partidos($enlace,$fecha);
+$horas = $fecha.' 00.00.00';
+$partidos = partidos($enlace,$fecha,$horas);
  $res="<div class='fila'>
                 <div class='celda1' id='encabezado'>
                     <label>partido - hora </label></div>
