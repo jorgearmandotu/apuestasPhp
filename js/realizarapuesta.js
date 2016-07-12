@@ -134,17 +134,22 @@ $(document).ready(function(){
             var e = $(this).val();
             if(a==(e+'*')){
                 arrcuotas.splice(i,1);
-                var idp=e.split(':');
+                var idp=e.split('%');
                 if(idp[2]=='1'){
-                    idp=idp[1];
+                    idp='a'+idp[1];
                 }else if(idp[2]=='X'){
-                    idp=idp[1]+'a';
+                    idp='b'+idp[1];
                 }else{
-                    idp=idp[1]+'b';
+                    idp='c'+idp[1];
                 }
                 
                 idp='#'+idp;
-                $(idp).prop('checked',false);
+                alert(idp);
+                var idcheck = idp.split(' ');
+                var idch2 = idcheck[1].split(':');
+                var idcheckbox = idcheck[0]+'_'+idch2[0]+'.'+idch2[1]+'.'+idch2[2];
+                alert(idcheckbox);
+                $('#a2016-07-11_15.00.00_3_7').prop('checked',false);
                 break;
             }
         }

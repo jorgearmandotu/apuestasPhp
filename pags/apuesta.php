@@ -140,7 +140,7 @@ function crrearapuesta(){
 <!--                  <button type='button' id='apostar'>apostar</button>-->
             </div>
           </div>
-
+<div id="eliminar"></div>
           </div>
               <footer>
               <img src="../images/Bookiesport_Logo.png">

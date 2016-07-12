@@ -69,6 +69,9 @@ $partidos = partidos($enlace,$fecha);
 
 for($i=0;$i<count($partidos);$i++){
     $idP=$partidos[$i][0];
+    $ididp=explode(' ',$idP);
+    $idp2=explode(':',$ididp[1]);
+    $idpid=$ididp[0].'_'.$idp2[0].'.'.$idp2[1].'.'.$idp2[2];
     $nomEquiA=$partidos[$i][1];
     $nomEquiA = nomEquipo($nomEquiA,$enlace);
     $nomEquiB=$partidos[$i][2];
@@ -88,19 +91,19 @@ for($i=0;$i<count($partidos);$i++){
          <label>".$hora." </label>
         </div>
         <div class='celda6'>
-        <input type='checkbox' class='cuotas' value='".$local."%".$idP."%1' name='cuota[]' id='".$idP."'>
+        <input type='checkbox' class='cuotas' value='".$local."%".$idP."%1' name='cuota[]' id='a".$idpid."'>
             
-				<label for='".$idP."'>".$nomEquiA."  ".$local."</label></input>
+				<label for='a".$idpid."'>".$idpid."  ".$local."</label></input>
        
        </div>
        <div class='celda7'>
-            <input type='checkbox' class='cuotas' value='".$empate."%".$idP."%X' name='cuota[]' id='".$idP."a'>
-            <label for='".$idP."a'>Empate  ".$empate."</label></input>
+            <input type='checkbox' class='cuotas' value='".$empate."%".$idP."%X' name='cuota[]' id='b".$idpid."'>
+            <label for='b".$idpid."a'>Empate  ".$empate."</label></input>
         </div>
         
         <div class='celda8'>
-        <input type='checkbox' class='cuotas' value='".$visitante."%".$idP."%2'  name='cuota[]' id='".$idP."b'>
-        <label for='".$idP."b'>".$nomEquiB."  ".$visitante."</label></input>
+        <input type='checkbox' class='cuotas' value='".$visitante."%".$idP."%2'  name='cuota[]' id='c".$idpid."'>
+        <label for='c".$idpid."b'>".$nomEquiB."  ".$visitante."</label></input>
         
         </div>
         
