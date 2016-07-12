@@ -372,21 +372,32 @@ function saldo($enl,$id){
     }
     return $saldo;
 }}
-//ingresar apuesta
-function ingresoApuesta($enl,$valor,$idAsesor,$fecha,$idPart,$EquiApost,$cuota,$idapuesta,$saldoDisp){
+//las siguientes 3 funciones ingresan apuesta
+function ingresoApuesta($enl,$idAsesor,$fecha,$idapuesta,$valor){
     //$enl->autocommit(false);
     $flag = true;
     if($sql = $enl->prepare("INSERT INTO apuestas VALUES(?,?,?,?);")){
         $sql->bind_param('ssss',$idapuesta,$fecha,$idAsesor,$valor);
-        
-    $saldoDisp=$saldoDisp-$valor;
+        echo $idapuesta.'--'.$fecha.'--'.$idAsesor.'--'.$valor.'<br>';
+    
    
     if(!$sql->execute()){
    // if($enl->errno){
         $flag = false;
-        echo("Error en transaccion ingreso");
+        echo("Error en transaccion ingreso apuesta");
     }}
-     if($sql2 = $enl->prepare("UPDATE asesores SET SALDO=? WHERE cc=?;")){
+    if($flag){
+        //$enl->commit();
+        return true;
+    }else{
+        //$enl->rollBack();
+        return false;
+    }
+}
+function apuestasaldo($enl,$saldoDisp,$idAsesor,$valor){
+    $flag = true;
+    if($sql2 = $enl->prepare("UPDATE asesores SET SALDO=? WHERE cc=?;")){
+        $saldoDisp=$saldoDisp-$valor;
          $sql2->bind_param('ss',$saldoDisp,$idAsesor);
      
      if(!$sql2->execute()){
@@ -394,6 +405,16 @@ function ingresoApuesta($enl,$valor,$idAsesor,$fecha,$idPart,$EquiApost,$cuota,$
         $flag = false;
         echo("Error en transaccion actualizando");
     }}
+    if($flag){
+        //$enl->commit();
+        return true;
+    }else{
+        //$enl->rollBack();
+        return false;
+    }
+}
+function insertpartido_apuesta($enl,$idPart,$idapuesta,$EquiApost,$cuota){
+    $flag = true;
     if($sql3= $enl->prepare("INSERT INTO partido_apuesta VALUES(?,?,?,?);")){
         $sql3->bind_param('ssss',$idPart,$idapuesta,$EquiApost,$cuota);
         if(!$sql3->execute()){
@@ -409,6 +430,9 @@ function ingresoApuesta($enl,$valor,$idAsesor,$fecha,$idPart,$EquiApost,$cuota,$
         return false;
     }
 }
+
+
+
 function fechahoraPartido($enl,$id){
     if($sql=$enl->prepare("SELECT horario FROM partidos WHERE idpartido=?;")){
         $sql->bind_param('s',$id);

@@ -61,6 +61,15 @@ $enlace = connectionDB();
 $saldo = saldo($enlace,$idusuario);
 $bandera=true;
 $enlace->autocommit(false);
+              
+if(!ingresoApuesta($enlace,$idusuario,$fecha,$idApuesta,$valorA))
+    {
+        $bandera=false;
+        echo'<h1>OCURRIO UN ERROR AL REALISAR LA APUESTA</h1><BR>
+        <a href="../apuesta.php">Volver a intentar</a>';
+    exit();
+    }
+              
 for($i=1;$i<count($datos);$i++){
    $id=explode('-apuesta-',$datos[$i]);
     $idpartido=$id[0];
@@ -71,16 +80,19 @@ for($i=1;$i<count($datos);$i++){
    /* echo 'id:'.$idpartido.'--apuesta'.$apuestaselec.'--cuota'.$cuotaapuesta.'<br>';
    echo '<br>============================<br>'.$valorA.'<br>'.$idusuario.'<br>'.$fecha.'<br>'.$idpartido.'<br>'.$apuestaselec.'<br>'.$idliga.'<br>'.$cuotaapuesta.'<br>'.$idApuesta.'<br>'.$saldo;
    echo '<br />***********<br>este es el saldo'.$saldo.'<br /> este es el valor apostado'.$valorA.'<br />';*/
-    if(!ingresoApuesta($enlace,$valorA,$idusuario,$fecha,$idpartido,$apuestaselec,$cuotaapuesta,$idApuesta,$saldo))
-    {
+    
+    if(!insertpartido_apuesta($enlace,$idpartido,$idApuesta,$apuestaselec,$cuotaapuesta)){
         $bandera=false;
-        echo'<h1>OCURRIO UN ERROR AL REALISAR LA APUESTA</h1><BR>
-        '.$valorA.'<br>'.$idusuario.'<br>'.$fecha.'<br>'.$idpartido.'<br>'.$apuestaselec.'<br>
-        <a href="../apuesta.php">Volver a intentar</a>';
+        echo'<h1>OCURRIO UN ERROR AL REALISAR LA APUESTA</h1><BR><a href="../apuesta.php">Volver a intentar</a>';
+        exit();
     }
     
 }
-
+if(!apuestasaldo($enlace,$saldo,$idusuario,$valorA)){
+    $bandera=false;
+    echo'<h1>OCURRIO UN ERROR AL REALISAR LA APUESTA</h1><BR><a href="../apuesta.php">Volver a intentar</a>';
+        exit();
+}
 
 
 if($bandera){
