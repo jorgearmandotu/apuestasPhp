@@ -9,7 +9,7 @@ if(isset($_POST['liga'])){//filtra
    date_default_timezone_set("America/Bogota");
     $dActual= new datetime();
     $dActual->modify('-1 minutes');
-    $dActual = date('Y-m-d H:i:s');
+    $dActual = $dActual->format('Y-m-d H:i:s');
     
 $enlace = connectionDB();
     if($liga!='Todas'){
@@ -74,7 +74,7 @@ connectionClose($enlace);
     date_default_timezone_set("America/Bogota");
     $dActual= new datetime();
     $dActual->modify('-1 minutes');
-    $dActual = date('Y-m-d H:i:s');
+    $dActual = $dActual->format('Y-m-d H:i:s');
     
 $partidos = partidos($enlace,$fecha,$dActual);
  $res="";

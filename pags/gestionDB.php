@@ -354,9 +354,9 @@ function equiposLigaPartido($enl,$idP){
     if($sql->fetch()){
         $arr[0]=$equiA;
         $arr[1]=$equiB;
-        $arr[3]=$horp;
-        $arr[4]=$ganad;
-        $arr[5]=$fechap;
+        $arr[2]=$horp;
+        $arr[3]=$ganad;
+        $arr[4]=$fechap;
     }
     return $arr;
 }}
@@ -471,32 +471,58 @@ function actualizarcuotas($enl,$idp,$cuota1,$cuota2,$cuotax){
         return false;
     }
 }}
-//retorna informacion de apuesta
+//las siguiente 3 funciones retornan informacion de apuesta
 function apuestass($enl,$ida){
-    if($sql= $enl->prepare("SELECT DISTINCT ID,CUOTA,VALOR,IDASESOR,IDPARTIDO,APUESTA FROM apuestas WHERE(ID=?);")){
+    if($sql= $enl->prepare("SELECT DISTINCT idapuesta,valor,id_asesor,fecha FROM apuestas WHERE(idapuesta=?);")){
         $sql->bind_param('s',$ida);
         $sql->execute();
     $ase = array();
-    $sql->bind_result($idap,$cuo,$vlra,$idas,$idpar,$apu);
+    $sql->bind_result($idap,$vlra,$idas,$fechaApu);
     $i=0;
-    //0,0 nombre 0,1 saldo
     while($sql->fetch()){
         $l=0;
-        $ase[$i][$l] = $idap;
+        $ase[$l] = $idap;
         $l++;
-        $ase[$i][$l] = $cuo;
-        $l++;
-        $ase[$i][$l] = $vlra;
+        $ase[$l] = $vlra;
          $l++;
-        $ase[$i][$l] = $idas;
+        $ase[$l] = $idas;
          $l++;
-        $ase[$i][$l] = $idpar;
-         $l++;
-        $ase[$i][$l] = $apu;
+        $ase[$l] = $fechaApu;
         $i++;
     }
     return $ase;
 }}
+function idpartidosApostados($enl,$ida){
+    if($sql = $enl->prepare("select id_partido,apuesta,cuota from partido_apuesta where id_apuesta=?")){
+        $sql->bind_param('s',$ida);
+        $sql->execute();
+        $res = array();
+        $sql->bind_result($idpartido,$apuesta,$cuotaA);
+        $i=0;
+        while($sql->fetch()){
+            $l=0;
+            $res[$i][$l] = $idpartido;
+            $l++;
+            $res[$i][$l] = $apuesta;
+            $l++;
+            $res[$i][$l] = $cuotaA;
+            $i++;
+        }
+        return $res;
+    }
+}
+function nompunto($enl,$ida){
+    if($sql = $enl->prepare("select punto from asesores where cc=?")){
+        $sql->bind_param('s',$ida);
+        $sql->execute();
+        $sql->bind_result($punto);
+        while($sql->fetch()){
+            $res=$punto;
+        }
+        return $res;
+    }
+}
+
 //retorna nombre de usuario
 function asesor($enl,$id){
     if($sql=$enl->prepare("SELECT NOMBRE FROM persona WHERE ID=?;")){
