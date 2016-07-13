@@ -163,11 +163,30 @@ function nomEquipo($id,$enl){
 }
 
 //ingresar equipos
-function ingresoEquipos($nombre,$enl){
-    $sql = "INSERT INTO equipos VALUES('".$nombre."',NULL);";
-    if(!$enl->query($sql)){
-        echo('<script type="text/javascript">alert("ocurrio un error buebe a intentarlo, si el problema persiste intenta en cerrar sesion e iniciarla de nuevo")</script>');
-        exit();
+function ingresoEquipos($nombre,$idliga,$enl){
+    $sql = "SELECT MAX(idequipo) FROM equipo";
+    if($enl->query($sql)){
+        $id=$enl->query($sql)or die('error al consultar DB');
+        $res='';
+        while($row=$id->fetch_assoc()){
+        $res=$row['MAX(idequipo)'];
+        }
+        $id=$res+1;
+        
+        if($sql2 = $enl->prepare('INSERT INTO equipo VALUES(?,?,?);')){
+            $sql2->bind_param('isi',$id,$nombre,$idliga);
+            if($sql2->execute()){
+                
+                return true;
+            }
+            else{
+                
+                return false;
+            }
+        }
+    }else{
+        
+        return false;
     }
 }
 //busca liga si existe retorna id de la liga recibe nombre
@@ -208,12 +227,30 @@ function idpartido($enl,$horarioPartido,$idequipoA,$idequipoB){
     return $id;
 }}
 //ingreso de liga nueva recibe nombre
-function ingresoLiga($liga, $enl){
-    echo('<script type="text/javascript">alert("'.$liga.'")</script>');
-    $sql = "INSERT INTO ligas VALUES('".$liga."',NULL);";
-    if(!$enl->query($sql)){
-        echo('<script type="text/javascript">alert("ocurrio un error buebe a intentarlo, si el problema persiste intenta en cerrar sesion e iniciarla de nuevo")</script>');
-        exit();
+function ingresoLiga($liga,$pais,$enl){
+    $sql = "SELECT MAX(idliga) FROM ligas";
+    if($enl->query($sql)){
+        $id=$enl->query($sql)or die('error al consultar DB');
+        $res='';
+        while($row=$id->fetch_assoc()){
+        $res=$row['MAX(idliga)'];
+        }
+        $id=$res+1;
+        
+        if($sql2 = $enl->prepare('INSERT INTO ligas VALUES(?,?,?);')){
+            $sql2->bind_param('iss',$id,$liga,$pais);
+            if($sql2->execute()){
+                
+                return true;
+            }
+            else{
+                
+                return false;
+            }
+        }
+    }else{
+        
+        return false;
     }
 }
 //ingreso partido
@@ -615,5 +652,28 @@ function paises($enl){
     }
     return $res;
 }
-
+function verificarequipo($nom,$id,$enlace){
+    if($sql=$enlace->prepare("select idequipo from equipo where nombre=? and id_liga=?;")){
+        $sql->bind_param('si',$nom,$id);
+        $sql->execute();
+        $sql->bind_result($idequipo);
+        while($sql->fetch()){
+            return true;
+            exit();
+        }
+        return false;
+    }
+}
+function verificarliga($nom,$pais,$enlace){
+    if($sql=$enlace->prepare("select idliga from ligas where nombre=? and pais=?;")){
+        $sql->bind_param('si',$nom,$pais);
+        $sql->execute();
+        $sql->bind_result($idliga);
+        while($sql->fetch()){
+            return true;
+            exit();
+        }
+        return false;
+    }
+}
 ?>

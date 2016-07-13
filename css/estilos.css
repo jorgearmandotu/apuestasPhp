@@ -116,3 +116,19 @@ footer p{
     -moz-column-count: 2;
     -o-column-count: 2;
 }
+.btnmenu{
+    background-color: #051d33;
+    width: 200px;
+    height: 80px;
+    vertical-align: middle;
+    border-radius: 10px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+}
+.btnmenu p{
+    color: #fff;
+    margin: 0 auto
+}

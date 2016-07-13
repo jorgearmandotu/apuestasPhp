@@ -71,6 +71,16 @@
 
                 <a href="salir.php"><img src ="../images/cerrar.png" height="80px"></a>
             </li>
+            <li><a href="eliminarasesores.php">
+               <div class='btnmenu'>
+                   <p>eliminar usuarios</p>
+                </div></a>
+            </li>
+            <li><a href="gestion_ligas_equipos.php">
+               <div class='btnmenu'>
+                   <p>agregar ligas y equipos</p>
+                </div></a>
+            </li>
         </ul>
                   </div>
             </div>

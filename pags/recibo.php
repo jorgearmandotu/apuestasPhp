@@ -59,11 +59,11 @@ require_once('validaciones.php');
     
             $pdf->SetMargins(5,10,5);
             $pdf->image('../images/pdf.gif',250,15,100);
-            $pdf->SetFont('Times', '', 15);
+            $pdf->SetFont('Times', '', 25);
             $pdf->cell(20);
             $pdf->ln();
             $pdf->ln(10);
-            $pdf->cell(0,80,'Apuesta N : '.$idapuesta);
+            $pdf->cell(0,80,'Apuesta N : '.$idapuesta,0);
             $pdf->ln(25);
     
     $pdf-> ln(30);
@@ -71,13 +71,13 @@ require_once('validaciones.php');
     
     $fecha = new datetime($fecha);
     $fecha=$fecha->format('d-m-Y');
-    $pdf->Cell(0,12,'Fecha De Apuesta:    '.$fecha,0);
+    $pdf->Cell(0,25,'Fecha De Apuesta:    '.$fecha,0);
+    $pdf->ln(28);
+    $pdf->Cell(0,25,'Punto:    '.$punto,0);
     $pdf->ln();
-    $pdf->Cell(0,14,'Punto:    '.$punto,0);
-    $pdf->ln();
-    $pdf->SetFont('Times', 'U', 15);//subrayado
+    //$pdf->SetFont('Times', 'U', 15);//subrayado
    
-    $pdf->SetFont('Times', '', 18);
+    $pdf->SetFont('Times', '', 28);
     $enlace=connectionDB();
     $neventos=0;
     for($i=0;$i<count($partidos);$i++){
@@ -98,12 +98,12 @@ require_once('validaciones.php');
             $apos=utf8_decode($equib);
         }else{$apos='EMPATE';}
         $pdf->ln();
-        $pdf->Cell(0,15,$Npart);
+        $pdf->Cell(0,25,$Npart,0);
         $pdf->ln();
-        $pdf->cell(0,15,$fechapartido);
+        $pdf->cell(0,25,$fechapartido);
         $pdf->ln();
-        $pdf->Cell(240,15,$apos);
-        $pdf->Cell(50,15,$partidos[$i][2]);
+        $pdf->Cell(240,25,$apos);
+        $pdf->Cell(50,25,$partidos[$i][2]);
         $pdf->ln(20);
         $neventos++;
         $cuota*=$partidos[$i][2];
@@ -112,32 +112,32 @@ require_once('validaciones.php');
     $valP = number_format($valP,2,",",".");
     $valora = number_format($valora, 2, ",", ".");
  $pdf->ln();
-    $pdf->cell(0,15,'Eventos seleccionados: '.$neventos); 
+    $pdf->cell(0,25,'Eventos seleccionados: '.$neventos); 
   
-    $pdf->ln(30);
-    $pdf->SetFont('Times', '', 15);
+    $pdf->ln();
+    $pdf->SetFont('Times', '', 25);
     //$pdf->Cell(150,15,'Punto De Apuesta:          '.$idusuario);
     $pdf->ln();
-    $pdf->Cell(150,15,'Total Cuota:',0);
-    $pdf->cell(200,15,round($cuota,2));
+    $pdf->Cell(150,25,'Total Cuota:',0);
+    $pdf->cell(200,25,round($cuota,2));
     $pdf->ln();
-    $pdf->Cell(150,15,'Valor Apostado $:',0);
-    $pdf->Cell(200,15,$valora,0);
+    $pdf->Cell(250,25,'Valor Apostado $:',0);
+    $pdf->Cell(200,25,$valora,0);
     $pdf->ln();
-    $pdf->Cell(150,15,'Valor A Pagar $:',0);
-    $pdf->Cell(200,15,$valP,0);
+    $pdf->Cell(250,25,'Valor A Pagar $:',0);
+    $pdf->Cell(200,25,$valP,0);
     $pdf->ln(20);
     connectionClose($enlace);
     
-    $pdf->SetFont('Arial','I',10);
+    $pdf->SetFont('Arial','I',18);
              $pdf->ln(30);
-            $pdf->MultiCell(0,12,utf8_decode('Los eventos que después de iniciados sean cancelados por cualquier razón, ya sea por orden público, climático, o cualquier otro motivo, nos acogeremos a la decisión de la terna arbitral para la definición de cualquier tipo de apuesta.'),0,'C',false);
+            $pdf->MultiCell(0,18,utf8_decode('Los eventos que después de iniciados sean cancelados por cualquier razón, ya sea por orden público, climático, o cualquier otro motivo, nos acogeremos a la decisión de la terna arbitral para la definición de cualquier tipo de apuesta.'),0,'C',false);
             
-            $pdf->MultiCell(0,12,utf8_decode('Los eventos aplazados serán considerados nulos a menos que sean reprogramados para ser jugados en un plazo no mayor a 24 horas con respecto al horario inicial del evento. En tales circunstancias donde un evento o eventos estén incluidos en una apuesta múltiple, la apuesta será definida en función del resto de eventos incluidos en la apuesta.'),0,'C',false);
+            $pdf->MultiCell(0,18,utf8_decode('Los eventos aplazados serán considerados nulos a menos que sean reprogramados para ser jugados en un plazo no mayor a 24 horas con respecto al horario inicial del evento. En tales circunstancias donde un evento o eventos estén incluidos en una apuesta múltiple, la apuesta será definida en función del resto de eventos incluidos en la apuesta.'),0,'C',false);
             
-            $pdf->MultiCell(0,12,utf8_decode('Cuando una apuesta se de por anulada se le reintegrara el monto apostado por el apostador.'),0,'C',false);
+            $pdf->MultiCell(0,18,utf8_decode('Cuando una apuesta se de por anulada se le reintegrara el monto apostado por el apostador.'),0,'C',false);
             
-            $pdf->MultiCell(0,12,utf8_decode('Revise su ticket antes de salir del establecimiento, después no se aceptara reclamos.'),0,'C',false);
+            $pdf->MultiCell(0,18,utf8_decode('Revise su ticket antes de salir del establecimiento, después no se aceptara reclamos.'),0,'C',false);
     
     $pdf->Output();
   

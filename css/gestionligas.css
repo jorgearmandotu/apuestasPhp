@@ -1,0 +1,12 @@
+fieldset{
+    border-radius: 20px;
+    border-color: #fff;
+    max-width: 8em;
+    padding: 1em;
+    margin: 1em;
+}
+legend{
+    color: #fff;
+    font-size: 16pt;
+    text-shadow: 0 0 3px #000;
+}
