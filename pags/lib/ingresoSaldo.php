@@ -26,16 +26,22 @@ if($row = $result->fetch_assoc()){
     echo 'error en tansaccion saldos';
 }
 $saldoactual=$saldoactual+$saldo;
-$sql2='UPDATE asesores SET SALDO="'.$saldoactual.'" WHERE cc="'.$id.'";';
-if(!$enlace->query($sql2)){
-    $flag = false;
-    echo 'error en tansaccion saldos';
-}
-if($flag){
-    $enlace->commit();
+if($saldoactual>-1){
+    $sql2='UPDATE asesores SET SALDO="'.$saldoactual.'" WHERE cc="'.$id.'";';
+    if(!$enlace->query($sql2)){
+        $flag = false;
+        echo 'error en tansaccion saldos';
+    }
+    if($flag){
+        $enlace->commit();
+    }else{
+        $enlace->rollBack();
+    }
+    
 }else{
     $enlace->rollBack();
 }
+
 connectionClose($enlace);
 header('location: ../generarSaldo.php')
 ?>
