@@ -25,6 +25,7 @@ require_once 'gestionDB.php';
        <title>ingresar partidos</title>
        <link rel="stylesheet" href="../css/normailze.min.css">
         <link rel="stylesheet" href="../css/estilosform.css">
+        <link rel="stylesheet" href="../css/saldo.css">
    </head>
     <body>
     <div id='contenedor'>
@@ -47,7 +48,40 @@ require_once 'gestionDB.php';
           </header>
           <div id="contenido">
     <center>
-        
+       
+    <table>
+       <tr>
+       <th>Punto</th>
+       <th>CC</th>
+        <th>Asesor</th>
+        <th>Saldo Actual</th>
+        </tr>
+        <?php
+        $enlace= connectionDB();
+        $ase = listAsesores($enlace);
+        connectionClose($enlace);
+        for($i=0;$i<count($ase);$i++){
+            $l=0;
+            echo("<tr><td class='punto'>".$ase[$i][3]."</td>");
+            echo("<td class='tdasesor'>".$ase[$i][2]."</td>");
+            echo("<td class='tdasesor'>".$ase[$i][$l]."</td>");
+            $l++;
+            echo("<td class='tdsaldo'>".$ase[$i][$l]."</td></tr>");
+           
+        }
+        ?>
+        </table>
+        <form  method="POST" action="lib/eliminarasesor.php" >
+        <select id='asesores' name='asesores'>
+            <?php
+        echo'<option value="seleccion">Seleccione asesor</option>';
+            for($i=0;$i<count($ase);$i++){
+                echo('<option value="'.$ase[$i][2].'">'.$ase[$i][0].'</option>');
+            }
+            ?>
+        </select>
+        <button type="submit">Eliminar</button>
+        </form>
     </center>
         </div>
         <footer>

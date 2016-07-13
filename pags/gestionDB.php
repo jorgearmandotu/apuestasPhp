@@ -480,7 +480,7 @@ function fechahoraPartido($enl,$id){
     return $hora;
 }}
 function listAsesores($enl){
-    $sql= "SELECT NOMBRE,SALDO,cc,APELLIDO,punto FROM asesores WHERE(administrador=0);";
+    $sql= "SELECT NOMBRE,SALDO,cc,APELLIDO,punto FROM asesores WHERE(administrador=0 AND cc NOT LIKE 'retiro-%' );";
     $ase = array();
     $result = $enl->query($sql)or die('error al consulta DB');
     $i=0;
@@ -562,18 +562,14 @@ function nompunto($enl,$ida){
 
 //retorna nombre de usuario
 function asesor($enl,$id){
-    if($sql=$enl->prepare("SELECT NOMBRE FROM persona WHERE ID=?;")){
+    if($sql=$enl->prepare("SELECT usuario FROM asesores WHERE cc=?;")){
         $sql->bind_param('s',$id);
         $sql->execute();
-    $sql->bind_result($nomA);
-    $i=0;
-    $ase=array();
+    $sql->bind_result($user);
+    $ase='';
     //0,0 nombre 0,1 saldo
     while($sql->fetch()){
-        
-        $ase[$i] = $nomA;
-       
-        $i++;
+        $ase = $user;
     }
     return $ase;
 }}
@@ -674,6 +670,12 @@ function verificarliga($nom,$pais,$enlace){
             exit();
         }
         return false;
+    }
+}
+function eliminarasesor($enl,$id,$idmod,$pasw,$saldo,$user){
+    if($sql=$enl->prepare("update asesores set cc=?, contrasena=?, saldo=?, usuario=? where cc=?")){
+        $sql->bind_param('sssss',$idmod,$pasw,$saldo,$user,$id);
+        $sql->execute();
     }
 }
 ?>
