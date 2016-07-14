@@ -90,6 +90,8 @@
                    $idasesor=$apuestas[$i][2];
                    $asesor = asesor($enlace,$idasesor);
                    $fecha = $apuestas[$i][3];
+                   $fecha= new datetime($fecha);
+                   $fecha = $fecha->format('Y-m-d');
                    $valor = $apuestas[$i][1];
                    $datosapuesta = idpartidosApostados($enlace,$idapuesta);
                    $cantPartidos = count($datosapuesta);
