@@ -61,7 +61,7 @@
             </li>
             <br>
             <li>
-                <a href="aganadasbookie.php"><img src ="../images/reportepunto.png" height="80px"></a>
+                <a href="apuestasganadasbookie.php"><img src ="../images/reportepunto.png" height="80px"></a>
             </li>
             <li>
 

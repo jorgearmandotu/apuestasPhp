@@ -480,7 +480,7 @@ function fechahoraPartido($enl,$id){
     return $hora;
 }}
 function listAsesores($enl){
-    $sql= "SELECT NOMBRE,SALDO,cc,APELLIDO,punto FROM asesores WHERE(administrador=0 AND cc NOT LIKE 'retiro-%' );";
+    $sql= "SELECT NOMBRE,SALDO,cc,APELLIDO,punto,usuario FROM asesores WHERE(administrador=0 AND cc NOT LIKE 'retiro-%' );";
     $ase = array();
     $result = $enl->query($sql)or die('error al consulta DB');
     $i=0;
@@ -494,6 +494,8 @@ function listAsesores($enl){
         $ase[$i][$l] = $row['cc'];
         $l++;
         $ase[$i][$l] = $row['punto'];
+        $l++;
+        $ase[$i][$l]= $row['usuario'];
         $i++;
     }
     return $ase;
@@ -611,7 +613,7 @@ function tpersona($enl){
 }
 
 function listapuesta($enl,$fecha1,$fecha2){
-    if($sql=$enl->prepare("SELECT idapuesta,valor,id_asesor,fecha FROM apuestas WHERE(FECHA>=? AND FECHA<=?);")){
+    if($sql=$enl->prepare("SELECT idapuesta,valor,id_asesor,fecha FROM apuestas WHERE(FECHA>=? AND FECHA<=?) order by id_asesor;")){
         $sql->bind_param('ss',$fecha1,$fecha2);
         $sql->execute();
     $sql->bind_result($idapu,$vlrapu,$idase,$fecha);
@@ -624,6 +626,22 @@ function listapuesta($enl,$fecha1,$fecha2){
         $ase[$i][3] = $fecha;//fecha
         $i++;
         
+    }
+    return $ase;
+}}
+//retorna apuestas echas por asesor entre 2 fechas
+function listapuestasAsesor($enl,$idAsesor,$fecha1,$fecha2){
+    if($sql=$enl->prepare("SELECT idapuesta,valor,fecha FROM apuestas WHERE(FECHA>=? AND FECHA<=?) AND id_asesor=? order by fecha;")){
+        $sql->bind_param('sss',$fecha1,$fecha2,$idAsesor);
+        $sql->execute();
+    $sql->bind_result($idapu,$vlrapu,$fecha);
+    $i=0;
+    $ase = array();
+    while($sql->fetch()){
+        $ase[$i][0] = $idapu;//id apuesta
+        $ase[$i][1] = $vlrapu;//valor
+        $ase[$i][2] = $fecha;//fecha apuesta
+        $i++;
     }
     return $ase;
 }}

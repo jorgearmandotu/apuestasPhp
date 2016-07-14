@@ -132,3 +132,15 @@ center h2,p{
     text-align: center;
     align-content: center;
 }
+.perdio{
+    background-color: #e80d0d;
+}
+.gano{
+    background-color: #089829;
+}
+.asesor{
+    column-span: 2;
+}
+.punto{
+    column-span: 3;
+}

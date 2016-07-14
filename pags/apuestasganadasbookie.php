@@ -1,3 +1,4 @@
+
 <!DOCTYPE HTML>
 <html lang="es">
    <head>
@@ -8,23 +9,23 @@
         <meta name="keywords" content="sitio para hacer apuestas,bookiesport, apuestas de futbol, san juan de pasto apuestas"/>
         <meta name="author" content="Reon-Soluciones_Web"/>
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-       <title>apuestas totales</title>
        <script src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
         <script src="../js/modernizr-custom.js"></script>
           <script src="../js/jquery-ui.min.js"></script>
           <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
           <script src="../js/funciones.js"></script>
+       <title>Apuestas Ganadas En cada punto</title>
        <link rel="stylesheet" href="../css/normailze.min.css">
         <link rel="stylesheet" href="../css/tablas.css">
         <link rel="stylesheet" href="../css/botton.css">
    </head>
     <body>
      <div id='contenedor'>
-          <header>
+          <header id="cabecera">
              <div id="logo">
                  
              </div>
-                 <ul id="cabecera">
+                 <ul>
                      <li class="logoutico">
                        <a href="salir.php">
                            <img src="../images/Bookiesport_Usuario.png" alt="usuario"></a>
@@ -41,50 +42,67 @@
     <?php
         require_once('gestionDB.php');
         require_once('validaciones.php');
-        if(!validarsession()){
-            header('location: ../index.php');
-        }
+        validarAdmin();
+        
         $idusuario=$_SESSION['id'];
         $user = $_SESSION['usuario'];
-              
     ?>
     <center>
         
-    <h2>Apuestas totales de Bookiesport</h2>
-       <form method="post" id="apuestatotal" action="<?php echo limpiarcadenas($_SERVER["PHP_SELF"]);?>" method="post">
-        <label>Fecha de inicio</label>
+    <h2>Apuestas ganadas y perdidas por cada punto</h2>
+       <form method="post" id="apuesganada" action="<?php echo limpiarcadenas($_SERVER["PHP_SELF"]);?>" method="post">
+       
+        <label>Fecha de inicio: </label>
         <input type="date" name="fecha1" id="fecha1" required>
-           <label>Fecha Fin</label>
-        <input type="date" name="fecha2" id="fecha2"  required >
+           <label>Fecha Fin: </label>
+        <input type="date" name="fecha2" id="fecha2" required>
         <button type="submit" id="button1">Buscar</button>
-        <a class="enlaceboton" href="pdf_apuestastotal.php" target="_blank">Exportar a PDF</a>
+          
+        <a class="enlaceboton" href="pdf_aganadasbookie.php" target="_blank" id="pdf2">Exportar a PDF</a>
         <br>
         <br>
-           <input type="hidden" name="conta">
+        <input type="hidden" name="conta">
+       
         <?php
-           $consulta=false;
-           if(isset($_POST['fecha1'])and isset($_POST['fecha2'])){
-               $fechaA=limpiarcadenas($_POST['fecha1']);
-               $fechaB=limpiarcadenas($_POST['fecha2']);
-               $consulta=true;
+           $consulta = false;
+           if(isset($_POST['fecha1']) and isset($_POST['fecha2'])){
+               $consulta = true;
            }
-           
            if($consulta){
-               echo('<table id="tabla">');
-               echo('<tr>');
-               echo('<th>Numero referencia</th>');//idapuesta-
-               echo('<th>Eventos</th>');//cantidad de pártidos-
-               echo('<th>Asesor</th>');//quien realiso la apuesta-
-               echo('<th>Fecha Apueta</th>');//fecha apuesta-
-               echo('<th>Valor Apostado</th>');//valor apostado-
-               echo('<th>Ganancia Potencial</th>');//posible ganancia-
-               //echo('<th>fecha evento</th>');//fecha ultimo evento si es mas de 1 partido
-               echo('<th>Estado</th>');//gano,perdio,enproceso
-               echo('</tr>');
-               
+               $fechaA = limpiarcadenas($_POST['fecha1']);
+               $fechaB = limpiarcadenas($_POST['fecha2']);
+            
                $enlace = connectionDB();
+               $asesores = listAsesores($enlace);
+               echo'<table id="tabla">';
+               for($i=0;$i<count($asesores);$i++){
+                   //$i,0=nombre ya pellido $i,1=saldo, $i,2=cc, $i,3=punto, $i,4=usuario,
+                   $idAsesor=$asesores[$i][2];
+                   echo'<tr><th class="asesor">Asesor: '.$asesores[$i][4].'</th><th class="punto"> Punto: '.$asesores[$i][3].'</th></tr>';
+                   echo'<tr><th>Id Apuesta</th>
+                   <th>Valor Apostado</th>
+                   <th>Fecha Apuesta</th>
+                   <th>Posible Ganancia</th>
+                   <th>Estado</th>
+                   </tr>';
+                   $apuestas = listapuestasAsesor($enlace,$idAsesor,$fechaA,$fechaB);
+                   for($l=0;$l<count($apuestas);$l++){
+                       //$l,1=idapuesta, $l,2=valor, $l3=fechaapuesta
+                       $idapuesta = $apuestas[$l][0];
+                       $valorpuesta = $apuestas[$l][1];
+                       $fechaapuesta = $apuestas[$l][2];
+                       echo'<tr><td>'.$idapuesta.'</td>';
+                       echo'<td>'.$valorpuesta.'</td>';
+                       echo'<td>'.$fechaapuesta.'</td>';
+                       echo'<td>ganacia</td>';
+                       echo'<td>estado</td></tr>';
+                   }
+                   
+               }
+               connectionClose($enlace);
+               echo'</table>';
                $apuestas = listapuesta($enlace,$fechaA,$fechaB);
-               for($i=0;$i<count($apuestas);$i++){
+               /*for($i=0;$i<count($apuestas);$i++){
                    //i,0=idapuesta, i.1=valor, i,2=idasesor, i,3=fecha apuesta
                    $idapuesta=$apuestas[$i][0];
                    $idasesor=$apuestas[$i][2];
@@ -98,6 +116,15 @@
                    $cuotat=1;
                    $estado='determinar';
                    $estado;
+                echo('<table id="tabla">');
+               echo('<tr>');
+               echo('<th>Numero referencia</th>');
+               echo('<th>Cuota</th>');
+               echo('<th>Valor Apostado</th>');
+               echo('<th>Asesor</th>');
+               echo('<th>Valor a pagar</th>');
+               echo('</tr>');
+            
                    for($l=0;$l<count($datosapuesta);$l++){
                         //l,0=idpartido, l,1=apuesta, l,2=cuota
                        $cuotat*=$datosapuesta[$l][2];
@@ -115,20 +142,12 @@
                        }
                    }
                    $Pgananacia=$cuotat*$valor;
-                   echo'<tr>
-                   <td class="celdas">'.$idapuesta.'</td>
-                   <td class="celdas">'.$cantPartidos.'</td>
-                   <td class="celdas">'.$asesor.'</td>
-                   <td class="celdas">'.$fecha.'</td>
-                   <td class="celdas">'.$valor.'</td>
-                   <td class="celdas">'.$Pgananacia.'</td>
-                   <td class="celdas">'.$estado.'</td>';
-               }
-               
-               echo '</table>';
+                   echo '</table>';
+           }*/
            }
            ?>
         </form>
+        
         </center>
          </div>
          <footer>
