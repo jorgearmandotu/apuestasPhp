@@ -610,17 +610,18 @@ function tpersona($enl){
     return $ase;
 }
 
-function idapuesta($enl,$fecha1,$fecha2){
-    if($sql=$enl->prepare("SELECT  DISTINCT ID,VALOR,IDASESOR FROM apuestas WHERE(FECHA>=? AND FECHA<=?);")){
+function listapuesta($enl,$fecha1,$fecha2){
+    if($sql=$enl->prepare("SELECT idapuesta,valor,id_asesor,fecha FROM apuestas WHERE(FECHA>=? AND FECHA<=?);")){
         $sql->bind_param('ss',$fecha1,$fecha2);
         $sql->execute();
-    $sql->bind_result($idapu,$vlrapu,$idase);
+    $sql->bind_result($idapu,$vlrapu,$idase,$fecha);
     $i=0;
     $ase = array();
     while($sql->fetch()){
-        $ase[$i][0] = $idapu;
-        $ase[$i][1] = $vlrapu;
-        $ase[$i][2] = $idase;
+        $ase[$i][0] = $idapu;//id
+        $ase[$i][1] = $vlrapu;//valor
+        $ase[$i][2] = $idase;//asesor
+        $ase[$i][3] = $fecha;//fecha
         $i++;
         
     }
@@ -677,5 +678,14 @@ function eliminarasesor($enl,$id,$idmod,$pasw,$saldo,$user){
         $sql->bind_param('sssss',$idmod,$pasw,$saldo,$user,$id);
         $sql->execute();
     }
+}
+function resultadopartido($enlace,$idpart){
+    $sql = "select resultado from partidos where idpartido='".$idpart."';";
+    $result = $enlace->query($sql)or die('error al consultar db');
+    $res = 'false';
+    while($row=$result->fetch_assoc()){
+        $res=$row['resultado'];
+    }
+    return $res;
 }
 ?>

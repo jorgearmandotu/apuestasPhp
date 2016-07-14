@@ -112,3 +112,19 @@ center form button{
 center h2,p{
     color: black;
 }
+#tabla{
+    padding: 4;
+    border: 2px solid #000;
+    border-spacing: 3;
+    border-collapse: 3;
+}
+#tabla th{
+    border:  1px solid #000;
+    padding: 10px;
+}
+#tabla tr{
+    border:  1px solid #000;
+}
+#tabla td{
+    border:  1px solid #000;
+}

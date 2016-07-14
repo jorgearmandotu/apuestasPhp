@@ -14,7 +14,7 @@
           <script src="../js/jquery-ui.min.js"></script>
           <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
           <script src="../js/funciones.js"></script>
-       <!--<link rel="stylesheet" href="../css/normailze.min.css">-->
+       <link rel="stylesheet" href="../css/normailze.min.css">
         <link rel="stylesheet" href="../css/tablas.css">
         <link rel="stylesheet" href="../css/botton.css">
    </head>
@@ -36,9 +36,6 @@
                          <a href="administrador.php"><img src='../images/Bookiesport_Inicio.png' alt="Inicio"></a>
                      </li>
                  </ul>
-              <?php
-              $i=0;
-              ?>
           </header>
           <div id="contenido">
     <?php
@@ -65,69 +62,69 @@
         <br>
            <input type="hidden" name="conta">
         <?php
-           if ($_POST){
-//Incrementamos el valor
-               $i++;
-               $conta = $_POST["conta"] + 1;
-           }
-           else{
-//Valor inicial
-            $i=0;   
-               $conta = 1;
+           $consulta=false;
+           if(isset($_POST['fecha1'])and isset($_POST['fecha2'])){
+               $fechaA=limpiarcadenas($_POST['fecha1']);
+               $fechaB=limpiarcadenas($_POST['fecha2']);
+               $consulta=true;
            }
            
-           if($i!=0){
-           echo('<table cellspacing="3" CELLPADDING="4" border="3">');
+           if($consulta){
+               echo('<table id="tabla">');
                echo('<tr>');
-               echo('<th>Numero referencia</th>');
-               echo('<th>Cuota</th>');
-               echo('<th>Valor Apostado</th>');
-               echo('<th>Asesor</th>');
-               echo('<th>Valor a pagar</th>');
+               echo('<th>Numero referencia</th>');//idapuesta-
+               echo('<th>Eventos</th>');//cantidad de pártidos-
+               echo('<th>Asesor</th>');//quien realiso la apuesta-
+               echo('<th>Fecha Apueta</th>');//fecha apuesta-
+               echo('<th>Valor Apostado</th>');//valor apostado-
+               echo('<th>Ganancia Potencial</th>');//posible ganancia-
+               //echo('<th>fecha evento</th>');//fecha ultimo evento si es mas de 1 partido
+               echo('<th>Estado</th>');//gano,perdio,enproceso
                echo('</tr>');
-           $enlace = connectionDB();
-           
-           $fecha1=limpiarcadenas($_POST['fecha1']);
-           $fecha2=limpiarcadenas($_POST['fecha2']);
                
-               $fechat= acfecha($enlace,$idusuario);
-            
-                if($fechat[2]==$idusuario){
-                    mysqli_query($enlace,"UPDATE fecha set fechaA='$fecha1', fechaB='$fecha2' where ID='$idusuario'")
-                    or die("error actualise  la paginaaa");
-                }else{mysqli_query($enlace,"INSERT INTO fecha VALUES ('".$fecha1."','".$fecha2."','".$idusuario."')")
-                    or die("error actualise  la pagina");}
-          
-           //$apuestaid = idapuesta(enlace);
-            $apostado =0.0;
-           $apuesta=idapuesta($enlace,$fecha1,$fecha2);
-           for($i=0;$i<count($apuesta);$i++) {
-               $cuota = 1.0;
-               
-               $apuesta1=apuestass($enlace,$apuesta[$i][0]);
-               for($j=0;$j<count($apuesta1);$j++) {
-                   $cuota=$apuesta1[$j][1]*$cuota;
+               $enlace = connectionDB();
+               $apuestas = listapuesta($enlace,$fechaA,$fechaB);
+               for($i=0;$i<count($apuestas);$i++){
+                   //i,0=idapuesta, i.1=valor, i,2=idasesor, i,3=fecha apuesta
+                   $idapuesta=$apuestas[$i][0];
+                   $idasesor=$apuestas[$i][2];
+                   $asesor = asesor($enlace,$idasesor);
+                   $fecha = $apuestas[$i][3];
+                   $valor = $apuestas[$i][1];
+                   $datosapuesta = idpartidosApostados($enlace,$idapuesta);
+                   $cantPartidos = count($datosapuesta);
+                   $cuotat=1;
+                   $estado='determinar';
+                   $estado;
+                   for($l=0;$l<count($datosapuesta);$l++){
+                        //l,0=idpartido, l,1=apuesta, l,2=cuota
+                       $cuotat*=$datosapuesta[$l][2];
+                       $resultado = resultadopartido($enlace,$datosapuesta[$l][0]);
+                       if($resultado!=''){
+                           if($resultado!=$datosapuesta[$l][1] and $estado!='Por Determinar'){
+                               $estado=$datosapuesta[$l][1];
+                           }else{
+                               if($estado!='perdio' and $estado!='Por Determinar'){
+                                   $estado=$resultado;
+                               }
+                           }
+                       }else{
+                         $estado='Por Determinar';  
+                       }
+                   }
+                   $Pgananacia=$cuotat*$valor;
+                   echo'<tr>
+                   <td>'.$idapuesta.'</td>
+                   <td>'.$cantPartidos.'</td>
+                   <td>'.$asesor.'</td>
+                   <td>'.$fecha.'</td>
+                   <td>'.$valor.'</td>
+                   <td>'.$Pgananacia.'</td>
+                   <td>'.$estado.'</td>';
                }
-               $pagar = $cuota*$apuesta[$i][1];
-               $apostado = $apuesta[$i][1]+$apostado;
-           echo('<tr>');
-               echo('<td>'.$apuesta[$i][0].'</th>');
-               echo('<td>'.$cuota.'</td>');
-               echo('<td>'.$apuesta[$i][1].'</td>');
-               $persona = asesor($enlace,$apuesta[$i][2]);
-               echo('<td>'.$persona[0].'</td>');
-               echo('<td>'.$pagar.'</td>');
-               echo('</tr>');
-           }//cierra for i
-        
-               echo('</table>');
-               echo('<h3>Valor total apostado '.$apostado.'</h3>');
                
-               connectionClose($enlace);
-           }//cierra if
-           
-           
-           
+               echo '</table>';
+           }
            ?>
         </form>
         </center>
