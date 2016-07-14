@@ -102,10 +102,10 @@
                        $resultado = resultadopartido($enlace,$datosapuesta[$l][0]);
                        if($resultado!=''){
                            if($resultado!=$datosapuesta[$l][1] and $estado!='Por Determinar'){
-                               $estado=$datosapuesta[$l][1];
+                               $estado='perdio';
                            }else{
                                if($estado!='perdio' and $estado!='Por Determinar'){
-                                   $estado=$resultado;
+                                   $estado='gano';
                                }
                            }
                        }else{
@@ -114,13 +114,13 @@
                    }
                    $Pgananacia=$cuotat*$valor;
                    echo'<tr>
-                   <td>'.$idapuesta.'</td>
-                   <td>'.$cantPartidos.'</td>
-                   <td>'.$asesor.'</td>
-                   <td>'.$fecha.'</td>
-                   <td>'.$valor.'</td>
-                   <td>'.$Pgananacia.'</td>
-                   <td>'.$estado.'</td>';
+                   <td class="celdas">'.$idapuesta.'</td>
+                   <td class="celdas">'.$cantPartidos.'</td>
+                   <td class="celdas">'.$asesor.'</td>
+                   <td class="celdas">'.$fecha.'</td>
+                   <td class="celdas">'.$valor.'</td>
+                   <td class="celdas">'.$Pgananacia.'</td>
+                   <td class="celdas">'.$estado.'</td>';
                }
                
                echo '</table>';
