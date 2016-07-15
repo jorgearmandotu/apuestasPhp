@@ -12,9 +12,10 @@
         <script src="../js/modernizr-custom.js"></script>
           <script src="../js/jquery-ui.min.js"></script>
           <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<!--          <script src="../js/funciones.js"></script>-->
           <script src="../js/funciones.js"></script>
        <title>reporte</title>
-       <!--<link rel="stylesheet" href="../css/normailze.min.css">-->
+       <link rel="stylesheet" href="../css/normailze.min.css">
         <link rel="stylesheet" href="../css/tablas.css">
         <link rel="stylesheet" href="../css/botton.css">
    </head>
@@ -62,65 +63,64 @@
         <br>
         <br>
            <input type="hidden" name="conta">
-        <?php
-           $i=0;
-           if ($_POST){
-               //Incrementamos el valor
-               $i++;
-               $conta = $_POST["conta"] + 1;
+           <?php
+           $consulta = false;
+           if(isset($_POST['fecha1']) and isset($_POST['fecha2'])){
+               $consulta = true;
            }
-           else{
-               //Valor inicial
-            $i=0;   
-               $conta = 1;
-           }
-           
-           if($i!=0){
-            echo('<table cellspacing="3" CELLPADDING="4" border="3">');
-               echo('<tr>');
-               echo('<th>Numero referencia</th>');
-               echo('<th>Cuota</th>');
-               echo('<th>Valor Apostado</th>');
-               echo('<th>Asesor</th>');
-               echo('<th>Valor a pagar</th>');
-               echo('</tr>');
-           $enlace = connectionDB();
-           $fecha1=limpiarcadenas($_POST['fecha1']);
-           $fecha2=limpiarcadenas($_POST['fecha2']);
-           $fechat= acfecha($enlace,$idusuario);
-            
-                if($fechat[2]==$idusuario){
-                    mysqli_query($enlace,"UPDATE fecha set fechaA='$fecha1', fechaB='$fecha2' where ID='$idusuario'")
-                    or die("error actualise  la paginaaa");
-                }else{mysqli_query($enlace,"INSERT INTO fecha VALUES ('".$fecha1."','".$fecha2."','".$idusuario."')")
-                    or die("error actualise  la pagina");}
-           $apostado =0.0;
-           $apuesta=idapuesta($enlace,$fecha1,$fecha2);
-           for($i=0;$i<count($apuesta);$i++) {
-            if($apuesta[$i][2]==$idusuario){
-           $cuota = 1.0;
+           if($consulta){
+               $fechaA = limpiarcadenas($_POST['fecha1']);
+               $fechaB = limpiarcadenas($_POST['fecha2']);
                
-               $apuesta1=apuestass($enlace,$apuesta[$i][0]);
-               for($j=0;$j<count($apuesta1);$j++) {
-                   $cuota=$apuesta1[$j][1]*$cuota;
+               echo'<table id="tabla">';
+               echo'<tr><th>Id Apuesta</th>
+                   <th>Valor Apostado</th>
+                   <th>Eventos</th>
+                   <th>Fecha Apuesta</th>
+                   <th>Ganancia Potencial</th>
+                   <th>Estado</th>
+                   </tr>';
+            
+               $enlace = connectionDB();
+               $apuestas = listapuestasAsesor($enlace,$idusuario,$fechaA,$fechaB);
+               for($l=0;$l<count($apuestas);$l++){
+                   //$l,1=idapuesta, $l,2=valor, $l3=fechaapuesta
+                    $idapuesta = $apuestas[$l][0];
+                    $valorpuesta = $apuestas[$l][1];
+                    $fechaapuesta = $apuestas[$l][2];
+                   $fechaapuesta= new datetime($fechaapuesta);
+                   $fechaapuesta = $fechaapuesta->format('Y-m-d');
+                   $datosapuesta = idpartidosApostados($enlace,$idapuesta);
+                    $cuotat = 1;$estado='determinar';
+                   for($k=0;$k<count($datosapuesta);$k++){
+                        $cuotat*=$datosapuesta[$k][2];
+                        $resultado = resultadopartido($enlace,$datosapuesta[$k][0]);
+                        $cantidadeventos = count($datosapuesta);
+                        
+                        if($resultado!=''){
+                            if($resultado!=$datosapuesta[$k][1] and $estado!='Por Determinar'){
+                                $estado='<label class="perdio">perdio</label>';
+                            }else{
+                                if($estado!='<label class="perdio">perdio</label>' and $estado!='Por Determinar'){
+                                    $estado='<label class="gano">gano</label>';
+                                }
+                            }
+                        }else{
+                            $estado='Por Determinar'; 
+                        }
+                           
+                    }
+                   $Pgananacia=$cuotat*$valorpuesta;
+                   echo'<tr><td>'.$idapuesta.'</td>';
+                    echo'<td>'.$valorpuesta.'</td>';
+                    echo'<td>'.$cantidadeventos.'</td>';
+                    echo'<td>'.$fechaapuesta.'</td>';
+                    echo'<td>'.$Pgananacia.'</td>';
+                    echo'<td>'.$estado.'</td></tr>';
                }
-               $pagar = $cuota*$apuesta[$i][1];
-               $apostado = $apuesta[$i][1]+$apostado;
-           echo('<tr>');
-               echo('<td>'.$apuesta[$i][0].'</th>');
-               echo('<td>'.$cuota.'</td>');
-               echo('<td>'.$apuesta[$i][1].'</td>');
-               $persona = asesor($enlace,$apuesta[$i][2]);
-               echo('<td>'.$persona[0].'</td>');
-               echo('<td>'.$pagar.'</td>');
-               echo('</tr>');
-            }
+               connectionClose($enlace);
+               echo'</table>';
            }
-               echo('</table>');
-               echo('<h3>Valor total apostado '.$apostado.'</h3>');
-           
-           connectionClose($enlace);
-           }//sierra if
            ?>
         </form>
         </center>

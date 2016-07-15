@@ -550,11 +550,26 @@ function idpartidosApostados($enl,$ida){
         return $res;
     }
 }
+function idasesordeapuesta($enl,$idapuesta){
+    if($sql=$enl->prepare("select id_asesor,fecha,valor from apuestas where idapuesta=?")){
+        $sql->bind_param('s',$idapuesta);
+        $sql->execute();
+        $res = array();
+        $sql->bind_result($idasesor,$fecha,$valor);
+        while($sql->fetch()){
+            $res[0] = $idasesor;
+            $res[1] = $fecha;
+            $res[2] = $valor;
+        }
+        return $res;
+    }
+}
 function nompunto($enl,$ida){
     if($sql = $enl->prepare("select punto from asesores where cc=?")){
         $sql->bind_param('s',$ida);
         $sql->execute();
         $sql->bind_result($punto);
+        $res="";
         while($sql->fetch()){
             $res=$punto;
         }

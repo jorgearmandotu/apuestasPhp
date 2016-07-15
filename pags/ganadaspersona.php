@@ -14,7 +14,7 @@
           <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
           <script src="../js/funciones.js"></script>
        <title>Apuestas Ganadas En cada punto</title>
-<!--       <link rel="stylesheet" href="../css/normailze.min.css">-->
+       <link rel="stylesheet" href="../css/normailze.min.css">
         <link rel="stylesheet" href="../css/tablas.css">
         <link rel="stylesheet" href="../css/botton.css">
    </head>
@@ -60,116 +60,73 @@
         <br>
         <br>
         <?php
-           $i=0;
-           if ($_POST){
-//Incrementamos el valor
-               $i++;
+        $consulta = false;
+           if(isset($_POST['fecha1']) and isset($_POST['fecha2'])){
+               $consulta = true;
+           }
+           if($consulta){
+               $fechaA = limpiarcadenas($_POST['fecha1']);
+               $fechaB = limpiarcadenas($_POST['fecha2']);
+                $enlace = connectionDB();
+               
+               echo'<table id="tabla">';
+                echo'<tr><th>Id Apuesta</th>
+                    <th>Valor Apostado</th>
+                    <th>Eventos</th>
+                    <th>Fecha Apuesta</th>
+                    <th>Posible Ganancia</th>
+                    <th>Estado</th>
+                    </tr>';
+               
+               $apuestas = listapuestasAsesor($enlace,$idusuario,$fechaA,$fechaB);
+               for($l=0;$l<count($apuestas);$l++){
+                  //$l,1=idapuesta, $l,2=valor, $l3=fechaapuesta
+                    $idapuesta = $apuestas[$l][0];
+                    $valorpuesta = $apuestas[$l][1];
+                    $fechaapuesta = $apuestas[$l][2];
+                   $fechaapuesta= new datetime($fechaapuesta);
+                   $fechaapuesta = $fechaapuesta->format('Y-m-d');
+                   $datosapuesta = idpartidosApostados($enlace,$idapuesta);
+                    $cuotat = 1; 
+                   $cantidadeventos = count($datosapuesta);
+                   $terminado = false;
+                   $estado='determinar';
+                   for($k=0;$k<count($datosapuesta);$k++){
+                       //k,0=idpartido, k,1=apuesta, k,2=cuota
+                        $cuotat*=$datosapuesta[$k][2];
+                        $resultado = resultadopartido($enlace,$datosapuesta[$k][0]);
+                        
+                        if($resultado!=''){
+                            if($resultado!=$datosapuesta[$k][1] and $estado!='Por Determinar'){
+                                $estado='<label class="perdio">perdio</label>';
+                                $terminado = true;
+                            }else{
+                                if($estado!='<label class="perdio">perdio</label>' and $estado!='Por Determinar'){
+                                    $estado='<label class="gano">gano</label>';
+                                    $terminado = true;
+                                }
+                            }
+                        }else{
+                            $estado='Por Determinar'; 
+                            $terminado=false;
+                        }
+                           
+                    }
+                   $Pgananacia=$cuotat*$valorpuesta;
+                    if($terminado){
+                       
+                        echo'<tr><td>'.$idapuesta.'</td>';
+                       echo'<td>'.$valorpuesta.'</td>';
+                       echo'<td>'.$cantidadeventos.'</td>';
+                       echo'<td>'.$fechaapuesta.'</td>';
+                       echo'<td>'.$Pgananacia.'</td>';
+                       echo'<td>'.$estado.'</td></tr>';
+                    }
                }
-           else{
-//Valor inicial
-            $i=0;   
-               
+               connectionClose($enlace);
+               echo'</table>';
            }
-           
-           $enlace = connectionDB();
-           $personaa=tpersona($enlace);
-           if($i!=0){
-           for($j=0;$j<count($personaa);$j++) {
-               if($personaa[$j][1]==$idusuario){
-               echo('<h3>Puesto de control '.$personaa[$j][0].'</h3>');
-           
-           echo('<table cellspacing="3" CELLPADDING="4" border="3">');
-               echo('<tr>');
-               echo('<th>Numero referencia</th>');
-               echo('<th>Cuota</th>');
-               echo('<th>Valor Apostado</th>');
-               echo('<th>Asesor</th>');
-               echo('<th>Valor a pagar</th>');
-               echo('</tr>');
-           
-           $fecha1=limpiarcadenas($_POST['fecha1']);
-           $fecha2=limpiarcadenas($_POST['fecha2']);
-            $fechat= acfecha($enlace,$idusuario);
-               
-                if($fechat[2]==$idusuario){
-                    mysqli_query($enlace,"UPDATE fecha set fechaA='$fecha1', fechaB='$fecha2' where ID='$idusuario'")
-                    or die("error actualise  la paginaaa");
-                }else{mysqli_query($enlace,"INSERT INTO fecha VALUES ('".$fecha1."','".$fecha2."','".$idusuario."')")
-                    or die("error actualise  la pagina");}
-            
-           
-           $apuesta=idapuesta($enlace,$fecha1,$fecha2);
-            $apostado=0.0;
-            $ganadot=0.0;
-            $ganado=0.0;
-           for($i=0;$i<count($apuesta);$i++) {
-               $cuota = 1.0;
-               $band = 0;
-               $bandd = 0;
-               $apuesta1=apuestass($enlace,$apuesta[$i][0]);
-               $bandp = NULL;
-               for($k=0;$k<count($apuesta1);$k++) {
-                   $cuota=$apuesta1[$k][1]*$cuota;
-                   $partido=equiposLigaPartido($enlace,$apuesta1[$k][4]);
-                   $bandp=$apuesta1[$k][3];
-                   if($apuesta1[$k][5]!=$partido[4] and $apuesta1[$k][3]==$personaa[$j][1]){
-                      $band=1;
-                       if($partido[4]==NULL){$bandd=2;}
-                   }
-                   
-               }
-               $pagar = $cuota*$apuesta[$i][1];
-               
-               
-               
-               if($band==0 and $bandp==$personaa[$j][1]){
-                   $apostado = $apuesta[$i][1]+$apostado;
-                   $ganadot = $pagar+$ganadot;
-                   $ganado = $pagar+$ganado;
-                   echo('<tr bgcolor="green">');
-               
-                   echo('<td>'.$apuesta[$i][0].'</th>');
-                   echo('<td>'.$cuota.'</td>');
-                   echo('<td>'.$apuesta[$i][1].'</td>');
-                   $persona = asesor($enlace,$apuesta[$i][2]);
-                   echo('<td>'.$persona[0].'</td>');
-                   echo('<td>'.$pagar.'</td>');
-                   echo('</tr>');
-               }
-               if($band==1 and $bandp==$personaa[$j][1] and $bandd==0){
-                   $apostado = $apuesta[$i][1]+$apostado;
-                   $ganadot = $pagar+$ganadot;
-                   
-                   echo('<tr bgcolor="red">');
-               
-                   echo('<td>'.$apuesta[$i][0].'</th>');
-                   echo('<td>'.$cuota.'</td>');
-                   echo('<td>'.$apuesta[$i][1].'</td>');
-                   $persona = asesor($enlace,$apuesta[$i][2]);
-                   echo('<td>'.$persona[0].'</td>');
-                   echo('<td>'.$pagar.'</td>');
-                   echo('</tr>');
-               }
-               
-           }
-                echo('<tr>');
-                echo('<td>Valor total apostado: </td>');
-                echo('<td colspan="2">'.$apostado.'</td>');
-                echo('</tr>');
-                echo('<tr>');
-                echo('<td>Valor a pagar total: </td>');
-                echo('<td colspan="2">'.$ganadot.'</td>');
-                echo('</tr>');
-                echo('<tr>');
-                echo('<td>Valor a pagar ganado: </td>');
-                echo('<td colspan="2">'.$ganado.'</td>');
-                echo('</tr>');
-               echo('</table>');
-           }
-           }
-           }
-           connectionClose($enlace);
-           ?>
+        ?>
         </form>
         </center>
          </div>

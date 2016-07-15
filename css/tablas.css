@@ -141,8 +141,66 @@ center h2,p{
 .asesor{
     column-span: 2;
     background-color: #ffbf00;
+    text-align: left;
 }
 .punto{
     column-span: 3;
     background-color: #ffbf00;
+    align-content: flex-start;
+    text-align: left;
+    align-content: flex-start;
+}
+#opaco{
+    display: inherit;
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    z-index:1001;
+    -moz-opacity: 0.8;
+    opacity:.80;
+    filter: alpha(opacity=80);
+}
+#ventana{
+    display: inherit;
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    width: 50%;
+    height: 50%;
+    z-index:1002;
+    overflow: auto;
+    background-color: aliceblue;
+}
+legend{
+    font-size: 16pt;
+}
+.detalles{
+    padding: 5;
+    border: 2px solid #000;
+    border-spacing: 3;
+    border-collapse: 3;
+    text-align: center;
+    margin: 10px
+}
+.detalles th{
+    border:  1px solid #000;
+    padding: 10px;
+    text-align: center;
+}
+.detalles tr{
+    border:  1px solid #000;
+}
+.detalles td{
+    border:  1px solid #000;
+    text-align: center;
+    align-content: center;
+}
+.submitdetalles{
+    border: 0;
+}
+.submitdetalles:hover{
+    color: #0e1dd3;
 }

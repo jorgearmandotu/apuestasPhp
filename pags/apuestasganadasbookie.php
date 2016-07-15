@@ -20,6 +20,8 @@
         <link rel="stylesheet" href="../css/botton.css">
    </head>
     <body>
+       
+        
      <div id='contenedor'>
           <header id="cabecera">
              <div id="logo">
@@ -62,7 +64,7 @@
         <br>
         <br>
         <input type="hidden" name="conta">
-       
+       </form>
         <?php
            $consulta = false;
            if(isset($_POST['fecha1']) and isset($_POST['fecha2'])){
@@ -77,6 +79,15 @@
                echo'<table id="tabla">';
                for($i=0;$i<count($asesores);$i++){
                    //$i,0=nombre ya pellido $i,1=saldo, $i,2=cc, $i,3=punto, $i,4=usuario,
+                   echo'<tr><th class="asesor" colspan="3">Asesor: '.$asesores[$i][4].'</th><th class="punto" colspan="3"> Punto: '.$asesores[$i][3].'</th></tr>';
+                   echo'<tr><th>Id Apuesta</th>
+                   <th>Valor Apostado</th>
+                   <th>Eventos</th>
+                   <th>Fecha Apuesta</th>
+                   <th>Posible Ganancia</th>
+                   <th>Estado</th>
+                   </tr>';
+                    
                    $idAsesor=$asesores[$i][2];
                    
                    $apuestas = listapuestasAsesor($enlace,$idAsesor,$fechaA,$fechaB);
@@ -85,15 +96,18 @@
                        $idapuesta = $apuestas[$l][0];
                        $valorpuesta = $apuestas[$l][1];
                        $fechaapuesta = $apuestas[$l][2];
-                       
+                       $fechaapuesta= new datetime($fechaapuesta);
+                        $fechaapuesta = $fechaapuesta->format('Y-m-d');
                        $datosapuesta = idpartidosApostados($enlace,$idapuesta);
                        $cuotat = 1;
                        $terminado = false;
+                       $estado='';
+                   
                        for($k=0;$k<count($datosapuesta);$k++){
                            $cuotat*=$datosapuesta[$k][2];
                            $resultado = resultadopartido($enlace,$datosapuesta[$k][0]);
+                           $cantidadeventos = count($datosapuesta);
                            
-                           $estado='';
                            if($resultado!=''){
                                 if($resultado!=$datosapuesta[$k][1] and $estado!='Por Determinar'){
                                     $estado='<label class="perdio">perdio</label>';
@@ -112,15 +126,10 @@
                        }
                        $Pgananacia=$cuotat*$valorpuesta;
                        if($terminado){
-                           echo'<tr><th class="asesor">Asesor: '.$asesores[$i][4].'</th><th class="punto"> Punto: '.$asesores[$i][3].'</th></tr>';
-                   echo'<tr><th>Id Apuesta</th>
-                   <th>Valor Apostado</th>
-                   <th>Fecha Apuesta</th>
-                   <th>Posible Ganancia</th>
-                   <th>Estado</th>
-                   </tr>';
-                        echo'<tr><td>'.$idapuesta.'</td>';
+                           
+                        echo'<tr><td><form method="post" action="lib/detalles.php" target="_blanck"><input type="hidden" name="detalles" value="'.$idapuesta.'"> <input type="submit" class="submitdetalles" value="'.$idapuesta.'"></form></td>';
                        echo'<td>'.$valorpuesta.'</td>';
+                       echo'<td>'.$cantidadeventos.'</td>';
                        echo'<td>'.$fechaapuesta.'</td>';
                        echo'<td>'.$Pgananacia.'</td>';
                        echo'<td>'.$estado.'</td></tr>';
@@ -132,7 +141,6 @@
                echo'</table>';
            }
            ?>
-        </form>
         
         </center>
          </div>
@@ -148,6 +156,4 @@
           </footer>
         </div>
     </body>
-    
-    <script src="../js/contrasenas.js"></script>
 </html>
