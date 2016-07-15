@@ -628,7 +628,8 @@ function listapuesta($enl,$fecha1,$fecha2){
         
     }
     return $ase;
-}}
+}
+}
 //retorna apuestas echas por asesor entre 2 fechas
 function listapuestasAsesor($enl,$idAsesor,$fecha1,$fecha2){
     if($sql=$enl->prepare("SELECT idapuesta,valor,fecha FROM apuestas WHERE(FECHA>=? AND FECHA<=?) AND id_asesor=? order by fecha;")){

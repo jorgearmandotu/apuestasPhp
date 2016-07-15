@@ -57,4 +57,15 @@ if(isset($_POST['nequipo']) and isset($_POST['ligaselec'])){
     }
 }
 
+if(isset($_POST['listpaises'])){
+    $enlace = connectionDB();
+    $listpaises = paises($enlace);
+    connectionClose($enlace);
+    $res = "<option>selecione pais</option>";
+    for($i=0;$i<count($listpaises);$i++){
+    $res.= '<option>'.$listpaises[$i].'</option>';
+    }
+    echo $res;
+    }
+
 ?>

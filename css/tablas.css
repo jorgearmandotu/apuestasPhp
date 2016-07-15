@@ -140,7 +140,9 @@ center h2,p{
 }
 .asesor{
     column-span: 2;
+    background-color: #ffbf00;
 }
 .punto{
     column-span: 3;
+    background-color: #ffbf00;
 }

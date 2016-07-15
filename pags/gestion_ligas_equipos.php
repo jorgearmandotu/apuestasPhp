@@ -77,15 +77,8 @@ require_once 'gestionDB.php';
                 <li>
                   <label>pais: </label>
                   <select name="pais" id='pais' required>
-                     <option>selecione pais</option>
-                      <?php
-                      $enlace = connectionDB();
-                      $listpaises = paises($enlace);
-                      connectionClose($enlace);
-                      for($i=0;$i<count($listpaises);$i++){
-                          echo '<option>'.$listpaises[$i].'</option>';
-                      }
-                      ?>
+                     
+                      
                   </select>
               </li>
                 <li>

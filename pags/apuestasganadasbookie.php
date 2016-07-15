@@ -78,72 +78,58 @@
                for($i=0;$i<count($asesores);$i++){
                    //$i,0=nombre ya pellido $i,1=saldo, $i,2=cc, $i,3=punto, $i,4=usuario,
                    $idAsesor=$asesores[$i][2];
-                   echo'<tr><th class="asesor">Asesor: '.$asesores[$i][4].'</th><th class="punto"> Punto: '.$asesores[$i][3].'</th></tr>';
-                   echo'<tr><th>Id Apuesta</th>
-                   <th>Valor Apostado</th>
-                   <th>Fecha Apuesta</th>
-                   <th>Posible Ganancia</th>
-                   <th>Estado</th>
-                   </tr>';
+                   
                    $apuestas = listapuestasAsesor($enlace,$idAsesor,$fechaA,$fechaB);
                    for($l=0;$l<count($apuestas);$l++){
                        //$l,1=idapuesta, $l,2=valor, $l3=fechaapuesta
                        $idapuesta = $apuestas[$l][0];
                        $valorpuesta = $apuestas[$l][1];
                        $fechaapuesta = $apuestas[$l][2];
-                       echo'<tr><td>'.$idapuesta.'</td>';
+                       
+                       $datosapuesta = idpartidosApostados($enlace,$idapuesta);
+                       $cuotat = 1;
+                       $terminado = false;
+                       for($k=0;$k<count($datosapuesta);$k++){
+                           $cuotat*=$datosapuesta[$k][2];
+                           $resultado = resultadopartido($enlace,$datosapuesta[$k][0]);
+                           
+                           $estado='';
+                           if($resultado!=''){
+                                if($resultado!=$datosapuesta[$k][1] and $estado!='Por Determinar'){
+                                    $estado='<label class="perdio">perdio</label>';
+                                    $terminado = true;
+                                }else{
+                                    if($estado!='<label class="perdio">perdio</label>' and $estado!='Por Determinar'){
+                                        $estado='<label class="gano">gano</label>';
+                                        $terminado = true;
+                                    }
+                                }
+                            }else{
+                                $estado='Por Determinar'; 
+                               $terminado=false;
+                            }
+                           
+                       }
+                       $Pgananacia=$cuotat*$valorpuesta;
+                       if($terminado){
+                           echo'<tr><th class="asesor">Asesor: '.$asesores[$i][4].'</th><th class="punto"> Punto: '.$asesores[$i][3].'</th></tr>';
+                   echo'<tr><th>Id Apuesta</th>
+                   <th>Valor Apostado</th>
+                   <th>Fecha Apuesta</th>
+                   <th>Posible Ganancia</th>
+                   <th>Estado</th>
+                   </tr>';
+                        echo'<tr><td>'.$idapuesta.'</td>';
                        echo'<td>'.$valorpuesta.'</td>';
                        echo'<td>'.$fechaapuesta.'</td>';
-                       echo'<td>ganacia</td>';
-                       echo'<td>estado</td></tr>';
+                       echo'<td>'.$Pgananacia.'</td>';
+                       echo'<td>'.$estado.'</td></tr>';
+                           }
                    }
                    
                }
                connectionClose($enlace);
                echo'</table>';
-               $apuestas = listapuesta($enlace,$fechaA,$fechaB);
-               /*for($i=0;$i<count($apuestas);$i++){
-                   //i,0=idapuesta, i.1=valor, i,2=idasesor, i,3=fecha apuesta
-                   $idapuesta=$apuestas[$i][0];
-                   $idasesor=$apuestas[$i][2];
-                   $asesor = asesor($enlace,$idasesor);
-                   $fecha = $apuestas[$i][3];
-                   $fecha= new datetime($fecha);
-                   $fecha = $fecha->format('Y-m-d');
-                   $valor = $apuestas[$i][1];
-                   $datosapuesta = idpartidosApostados($enlace,$idapuesta);
-                   $cantPartidos = count($datosapuesta);
-                   $cuotat=1;
-                   $estado='determinar';
-                   $estado;
-                echo('<table id="tabla">');
-               echo('<tr>');
-               echo('<th>Numero referencia</th>');
-               echo('<th>Cuota</th>');
-               echo('<th>Valor Apostado</th>');
-               echo('<th>Asesor</th>');
-               echo('<th>Valor a pagar</th>');
-               echo('</tr>');
-            
-                   for($l=0;$l<count($datosapuesta);$l++){
-                        //l,0=idpartido, l,1=apuesta, l,2=cuota
-                       $cuotat*=$datosapuesta[$l][2];
-                       $resultado = resultadopartido($enlace,$datosapuesta[$l][0]);
-                       if($resultado!=''){
-                           if($resultado!=$datosapuesta[$l][1] and $estado!='Por Determinar'){
-                               $estado='<label class="perdio">perdio</label>';
-                           }else{
-                               if($estado!='perdio' and $estado!='Por Determinar'){
-                                   $estado='<label class="gano">gano</label>';
-                               }
-                           }
-                       }else{
-                         $estado='Por Determinar';  
-                       }
-                   }
-                   $Pgananacia=$cuotat*$valor;
-                   echo '</table>';
-           }*/
            }
            ?>
         </form>

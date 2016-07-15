@@ -1,4 +1,17 @@
 $(document).ready(function(){
+    function paises(){
+        var listPa = 'listadoPaises';
+        var datos= {'listpaises' : listPa};
+        $.ajax({
+            type: 'POST',
+            url : 'lib/gestionligas.php',
+            data: datos,
+            success: function(data){
+                $('#pais').html(data);
+            }
+        })
+    }
+    paises();
     $('#pais').on('change',function(){
         $.ajax({
             type: 'POST',
@@ -31,6 +44,7 @@ $(document).ready(function(){
             success: function(data){
                 $('#respuesta').html(data);
                 document.getElementById("ligaform").reset();
+                paises();
             }
         })
         evento.preventDefault();

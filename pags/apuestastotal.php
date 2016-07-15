@@ -106,7 +106,7 @@
                            if($resultado!=$datosapuesta[$l][1] and $estado!='Por Determinar'){
                                $estado='<label class="perdio">perdio</label>';
                            }else{
-                               if($estado!='perdio' and $estado!='Por Determinar'){
+                               if($estado!='<label class="perdio">perdio</label>' and $estado!='Por Determinar'){
                                    $estado='<label class="gano">gano</label>';
                                }
                            }
