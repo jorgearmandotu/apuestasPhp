@@ -56,8 +56,7 @@
            <label>Fecha Fin</label>
         <input type="date" name="fecha2" id="fecha2" required>
         <button type="submit" id="button1">Buscar</button>
-        <a class="enlaceboton" href="pdf_ganadaspersona.php" target="_blank" id="pdf2">Exportar a PDF</a>
-        </form>
+        
         <?php
         $consulta = false;
            if(isset($_POST['fecha1']) and isset($_POST['fecha2'])){
@@ -67,6 +66,9 @@
                $fechaA = limpiarcadenas($_POST['fecha1']);
                $fechaB = limpiarcadenas($_POST['fecha2']);
                 $enlace = connectionDB();
+               
+               echo'<a class="enlaceboton" href="pdf_ganadaspersona.php?fecha1='.$fechaA.'&fecha2='.$fechaB.'" target="_blank" id="pdf2">Exportar a PDF</a>
+        </form>';
                
                echo'<table id="tabla">';
                 echo'<tr><th>Id Apuesta</th>

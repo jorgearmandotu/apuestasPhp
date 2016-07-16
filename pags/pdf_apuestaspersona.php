@@ -15,41 +15,54 @@
         $fpdf->Cell(10,10,'Todas mis apuestas');
                $fpdf->Ln(20);
                $fpdf->SetFont('Arial','B',10,8);
-               $fpdf->Cell(50,10,'Numero de referencia',1);
-               $fpdf->Cell(40,10,'Cuota',1);
-               $fpdf->Cell(40,10,'Valor apostado',1);
-               $fpdf->Cell(40,10,'Asesor',1);
-               $fpdf->Cell(50,10,'Valor a pagar',1);
-               
-           $apostado = 0.0;   
-           $enlace = connectionDB();
-           $fecha = acfecha($enlace,$idusuario);
-           $apuesta=idapuesta($enlace,$fecha[0],$fecha[1]);
-           for($i=0;$i<count($apuesta);$i++) {
-               if($apuesta[$i][2]==$idusuario){
-           $cuota = 1.0;
-               
-               $apuesta1=apuestass($enlace,$apuesta[$i][0]);
-               for($j=0;$j<count($apuesta1);$j++) {
-                   $cuota=$apuesta1[$j][1]*$cuota;
+               $fpdf->Cell(50,10,'Id Apuesta',1);
+               $fpdf->Cell(40,10,'Vlr Apostado',1);
+               $fpdf->Cell(40,10,'Eventos',1);
+               $fpdf->Cell(40,10,'Fecha',1);
+               $fpdf->Cell(50,10,'Ganancia',1);
+               $fpdf->Cell(50,10,'Estado',1);
+        $fechaA = limpiarcadenas($_GET['fecha1']);
+        $fechaB = limpiarcadenas($_GET['fecha2']);
+            
+               $enlace = connectionDB();
+               $apuestas = listapuestasAsesor($enlace,$idusuario,$fechaA,$fechaB);
+               for($l=0;$l<count($apuestas);$l++){
+                   //$l,1=idapuesta, $l,2=valor, $l3=fechaapuesta
+                    $idapuesta = $apuestas[$l][0];
+                    $valorpuesta = $apuestas[$l][1];
+                    $fechaapuesta = $apuestas[$l][2];
+                   $fechaapuesta= new datetime($fechaapuesta);
+                   $fechaapuesta = $fechaapuesta->format('Y-m-d');
+                   $datosapuesta = idpartidosApostados($enlace,$idapuesta);
+                    $cuotat = 1;$estado='determinar';
+                   for($k=0;$k<count($datosapuesta);$k++){
+                        $cuotat*=$datosapuesta[$k][2];
+                        $resultado = resultadopartido($enlace,$datosapuesta[$k][0]);
+                        $cantidadeventos = count($datosapuesta);
+                        
+                        if($resultado!=''){
+                            if($resultado!=$datosapuesta[$k][1] and $estado!='Por Determinar'){
+                                $estado='perdio';
+                            }else{
+                                if($estado!='perdio' and $estado!='Por Determinar'){
+                                    $estado='gano';
+                                }
+                            }
+                        }else{
+                            $estado='Por Determinar'; 
+                        }
+                           
+                    }
+                   $Pgananacia=$cuotat*$valorpuesta;
+                   $fpdf->ln();
+                   $fpdf->Cell(50,10,$idapuesta,1);
+               $fpdf->Cell(40,10,$valorpuesta,1);
+               $fpdf->Cell(40,10,$cantidadeventos,1);
+               $fpdf->Cell(40,10,$fechaapuesta,1);
+               $fpdf->Cell(50,10,$Pgananacia,1);
+               $fpdf->Cell(50,10,$estado,1);
                }
-               $pagar = $cuota*$apuesta[$i][1];
-               $apostado = $apuesta[$i][1]+$apostado;
-           $fpdf->Ln();
-               $fpdf->Cell(50,10,$apuesta[$i][0],1);
-               $fpdf->Cell(40,10,$cuota,1);
-               $fpdf->Cell(40,10,$apuesta[$i][1],1);
-               $persona = asesor($enlace,$apuesta[$i][2]);
-               $fpdf->Cell(40,10,$persona[0],1);
-               
-               $fpdf->Cell(50,10,$pagar,1);
-               }
-               
-           }
-            $fpdf->Ln();  
-                $fpdf->SetFont('Arial','B',11,8);
-               $fpdf->Cell(50,10,'Total apostado '.$apostado,0);
-               
+            connectionClose($enlace);   
             $fpdf->Output();
-           connectionClose($enlace);
+           
            ?>

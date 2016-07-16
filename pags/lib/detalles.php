@@ -66,7 +66,9 @@
                   $enlace = connectionDB();
                   $datosapuesta = idasesordeapuesta($enlace,$idapuesta);
                   $idasesor = $datosapuesta[0];
-                  $asesor = asesor($enlace,$idasesor);
+                  $usuario = asesor($enlace,$idasesor);
+                  $nomasesor = nomAsesor($enlace,$idasesor);
+                  $asesor = $nomasesor[0].' '.$nomasesor[1];
                   $fecha = $datosapuesta[1];
                   $valor = $datosapuesta[2];
                   $punto = nompunto($enlace,$idasesor);

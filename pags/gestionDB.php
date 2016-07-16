@@ -409,6 +409,20 @@ function saldo($enl,$id){
     }
     return $saldo;
 }}
+//retorna el nombre de asesor
+function nomAsesor($enl,$id){
+    if($sql = $enl->prepare("select nombre, apellido from asesores where cc=?")){
+        $sql->bind_param('s',$id);
+        $sql->execute();
+        $sql->bind_result($nom,$apell);
+        $res='';
+    }
+    if($sql->fetch()){
+        $res[0] = $nom;
+        $res[1] = $apell;
+    }
+    return $res;
+}
 //las siguientes 3 funciones ingresan apuesta
 function ingresoApuesta($enl,$idAsesor,$fecha,$idapuesta,$valor){
     //$enl->autocommit(false);

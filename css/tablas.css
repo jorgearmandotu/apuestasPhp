@@ -118,6 +118,7 @@ center h2,p{
     border-spacing: 3;
     border-collapse: 3;
     text-align: center;
+    border-radius: 5px;
 }
 #tabla th{
     border:  1px solid #000;
@@ -132,7 +133,7 @@ center h2,p{
     border:  1px solid #000;
     text-align: center;
     align-content: center;
-    
+    padding: 5px;
 }
 .perdio{
     background-color: #e80d0d;
@@ -186,6 +187,7 @@ legend{
     border-collapse: 3;
     text-align: center;
     margin: 10px;
+    border-radius: 10px;
 }
 .detalles th{
     border:  1px solid #000;
@@ -199,6 +201,7 @@ legend{
     border:  1px solid #000;
     text-align: center;
     align-content: center;
+    padding: 5;
 }
 .submitdetalles{
     border: 0;
