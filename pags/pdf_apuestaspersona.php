@@ -1,6 +1,7 @@
 <?php
         require_once('../fpdf/fpdf.php');
         require_once('gestionDB.php');
+        require_once('validaciones.php');
         session_start();
         $idusuario=$_SESSION['id'];
         $user = $_SESSION['usuario'];
@@ -15,12 +16,14 @@
         $fpdf->Cell(10,10,'Todas mis apuestas');
                $fpdf->Ln(20);
                $fpdf->SetFont('Arial','B',10,8);
-               $fpdf->Cell(50,10,'Id Apuesta',1);
-               $fpdf->Cell(40,10,'Vlr Apostado',1);
-               $fpdf->Cell(40,10,'Eventos',1);
-               $fpdf->Cell(40,10,'Fecha',1);
-               $fpdf->Cell(50,10,'Ganancia',1);
-               $fpdf->Cell(50,10,'Estado',1);
+               $fpdf->Cell(65,10,'Id Apuesta',1);
+               $fpdf->Cell(32,10,'Vlr Apostado',1);
+               $fpdf->Cell(18,10,'Eventos',1);
+               $fpdf->Cell(24,10,'Fecha',1);
+               $fpdf->Cell(36,10,'Ganancia',1);
+               $fpdf->Cell(35,10,'Estado',1);
+        
+
         $fechaA = limpiarcadenas($_GET['fecha1']);
         $fechaB = limpiarcadenas($_GET['fecha2']);
             
@@ -55,12 +58,12 @@
                     }
                    $Pgananacia=$cuotat*$valorpuesta;
                    $fpdf->ln();
-                   $fpdf->Cell(50,10,$idapuesta,1);
-               $fpdf->Cell(40,10,$valorpuesta,1);
-               $fpdf->Cell(40,10,$cantidadeventos,1);
-               $fpdf->Cell(40,10,$fechaapuesta,1);
-               $fpdf->Cell(50,10,$Pgananacia,1);
-               $fpdf->Cell(50,10,$estado,1);
+                   $fpdf->Cell(65,10,$idapuesta,1);
+               $fpdf->Cell(32,10,$valorpuesta,1);
+               $fpdf->Cell(18,10,$cantidadeventos,1);
+               $fpdf->Cell(24,10,$fechaapuesta,1);
+               $fpdf->Cell(36,10,$Pgananacia,1);
+               $fpdf->Cell(35,10,$estado,1);
                }
             connectionClose($enlace);   
             $fpdf->Output();
