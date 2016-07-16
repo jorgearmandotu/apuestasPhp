@@ -15,18 +15,17 @@ $fechaB = limpiarcadenas($_GET['fecha2']);
         $fpdf->Cell(260,10,'BOOKIESPORT',0,0,'C');
         $fpdf->Ln(10);
         $fpdf->SetFont('Arial','B',18); 
-        $fpdf->Cell(10,10,'Apuestas Totales de BOOKIESPORT');
+        $fpdf->Cell(10,10,'Apuestas Totales');
                $fpdf->Ln(20);
-               $fpdf->SetFont('Arial','B',10,8);
-               $fpdf->Cell(50,10,'Numero de referencia',1);
-               $fpdf->Cell(40,10,'Eventos',1);
-               $fpdf->Cell(40,10,'Asesor',1);
-               $fpdf->Cell(40,10,'Fecha',1);
-               $fpdf->Cell(50,10,'Apuesta',1);
-               $fpdf->Cell(50,10,'Ganancia Potencial',1);
-               $fpdf->Cell(50,10,'Estado',1);
-               //$fpdf->Cell(50,10,$fechaA,1);
-               //$fpdf->Cell(50,10,$fechaB,1);
+               $fpdf->SetFont('Arial','B',10);
+               $fpdf->Cell(65,10,'Numero de referencia',1);
+               $fpdf->Cell(18,10,'Eventos',1);
+               $fpdf->Cell(67,10,'Asesor',1);
+               $fpdf->Cell(24,10,'Fecha',1);
+               $fpdf->Cell(32,10,'Apuesta',1);
+               $fpdf->Cell(36,10,'Ganancia',1);
+               $fpdf->Cell(35,10,'Estado',1);
+               $fpdf->SetFont('Times','',10);
 
         $enlace = connectionDB();
                $apuestas = listapuesta($enlace,$fechaA,$fechaB);
@@ -50,10 +49,10 @@ $fechaB = limpiarcadenas($_GET['fecha2']);
                        $resultado = resultadopartido($enlace,$datosapuesta[$l][0]);
                        if($resultado!=''){
                            if($resultado!=$datosapuesta[$l][1] and $estado!='Por Determinar'){
-                               $estado='<label class="perdio">perdio</label>';
+                               $estado='perdio';
                            }else{
-                               if($estado!='<label class="perdio">perdio</label>' and $estado!='Por Determinar'){
-                                   $estado='<label class="gano">gano</label>';
+                               if($estado!='perdio' and $estado!='Por Determinar'){
+                                   $estado='gano';
                                }
                            }
                        }else{
@@ -62,44 +61,15 @@ $fechaB = limpiarcadenas($_GET['fecha2']);
                    }
                    $Pgananacia=$cuotat*$valor;
                    $fpdf->ln();
-                   $fpdf->cell(0,10,$idapuesta,1);
-                  /* <td class="celdas">'.$idapuesta.'</td>
-                   <td class="celdas">'.$cantPartidos.'</td>
-                   <td class="celdas">'.$asesor.'</td>
-                   <td class="celdas">'.$fecha.'</td>
-                   <td class="celdas">'.$valor.'</td>
-                   <td class="celdas">'.$Pgananacia.'</td>
-                   <td class="celdas">'.$estado.'</td>';
+                   $fpdf->cell(65,10,$idapuesta,1);
+                   $fpdf->cell(18,10,$cantPartidos,1);
+                   $fpdf->cell(67,10,$asesor,1);
+                   $fpdf->cell(24,10,$fecha,1);
+                   $fpdf->cell(32,10,$valor,1);
+                   $fpdf->cell(36,10,$Pgananacia,1);
+                   $fpdf->cell(35,10,$estado,1);
                }
-               
-                '</table>';
-               
-           /*$apostado = 0.0;   
-           $enlace = connectionDB();
-           $fecha = acfecha($enlace,$idusuario);
-           $apuesta=idapuesta($enlace,$fecha[0],$fecha[1]);
-           for($i=0;$i<count($apuesta);$i++) {
-            $cuota = 1.0;
-               
-               $apuesta1=apuestass($enlace,$apuesta[$i][0]);
-               for($j=0;$j<count($apuesta1);$j++) {
-                   $cuota=$apuesta1[$j][1]*$cuota;
-               }
-               $pagar = $cuota*$apuesta[$i][1];
-               $apostado = $apuesta[$i][1]+$apostado;
-           $fpdf->Ln();
-               $fpdf->Cell(50,10,$apuesta[$i][0],1);
-               $fpdf->Cell(40,10,$cuota,1);
-               $fpdf->Cell(40,10,$apuesta[$i][1],1);
-               $persona = asesor($enlace,$apuesta[$i][2]);
-               $fpdf->Cell(40,10,$persona[0],1);
-               
-               $fpdf->Cell(50,10,$pagar,1);
-               }
-                $fpdf->Ln();  
-                $fpdf->SetFont('Arial','B',11,8);
-               $fpdf->Cell(50,10,'Total apostado '.$apostado,0);*/
-               
+               connectionClose($enlace);
             $fpdf->Output();
-           //connectionClose($enlace);
+           
            ?>

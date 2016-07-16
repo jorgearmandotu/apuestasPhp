@@ -59,12 +59,9 @@
            <label>Fecha Fin: </label>
         <input type="date" name="fecha2" id="fecha2" required>
         <button type="submit" id="button1">Buscar</button>
-          
-        <a class="enlaceboton" href="pdf_aganadasbookie.php" target="_blank" id="pdf2">Exportar a PDF</a>
-        <br>
-        <br>
+        
         <input type="hidden" name="conta">
-       </form>
+       
         <?php
            $consulta = false;
            if(isset($_POST['fecha1']) and isset($_POST['fecha2'])){
@@ -73,6 +70,8 @@
            if($consulta){
                $fechaA = limpiarcadenas($_POST['fecha1']);
                $fechaB = limpiarcadenas($_POST['fecha2']);
+               echo'<a class="enlaceboton" href="pdf_ganadasbookie.php?fecha1='.$fechaA.'&fecha2='.$fechaB.' " target="_blank">Exportar a PDF</a></form>';
+               
             
                $enlace = connectionDB();
                $asesores = listAsesores($enlace);
@@ -139,6 +138,8 @@
                }
                connectionClose($enlace);
                echo'</table>';
+           }else{
+               echo'</form>';
            }
            ?>
         

@@ -9,31 +9,7 @@ require_once('validaciones.php');
     
     
      class PDF extends FPDF{
-        /*function header(){
-            $idapuesta= limpiarcadenas($_POST['idapuesta']);
-            $this->SetMargins(5,10,5);
-            $this->image('../images/pdf.gif',150,15,100);
-            $this->SetFont('Times', '', 15);
-            $this->cell(20);
-            $this->ln();
-            $this->ln(10);
-            $this->cell(0,80,'Apuesta N : '.$idapuesta);
-            $this->ln(25);
-        }*/
-        /*function Footer(){
-            // Posición: a 1,5 cm del final
-            $this->SetY(-150);
-            // Arial italic 8
-            $this->SetFont('Arial','I',10);
-             
-            $this->MultiCell(0,12,utf8_decode('Los eventos que después de iniciados sean cancelados por cualquier razón, ya sea por orden público, climático, o cualquier otro motivo, nos acogeremos a la decisión de la terna arbitral para la definición de cualquier tipo de apuesta.'),0,'C',false);
-            
-            $this->MultiCell(0,12,utf8_decode('Los eventos aplazados serán considerados nulos a menos que sean reprogramados para ser jugados en un plazo no mayor a 24 horas con respecto al horario inicial del evento. En tales circunstancias donde un evento o eventos estén incluidos en una apuesta múltiple, la apuesta será definida en función del resto de eventos incluidos en la apuesta.'),0,'C',false);
-            
-            $this->MultiCell(0,12,utf8_decode('Cuando una apuesta se de por anulada se le reintegrara el monto apostado por el apostador.'),0,'C',false);
-            
-            $this->MultiCell(0,12,utf8_decode('Revise su ticket antes de salir del establecimiento, después no se aceptara reclamos.'),0,'C',false);
-        }*/
+        
 }
     
     
