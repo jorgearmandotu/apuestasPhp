@@ -1,10 +1,13 @@
  <?php
         require_once('../fpdf/fpdf.php');
         require_once('gestionDB.php');
+        require_once('validaciones.php');
         session_start();
         $idusuario=$_SESSION['id'];
         $user = $_SESSION['usuario'];
 
+$fechaA = limpiarcadenas($_GET['fecha1']);
+$fechaB = limpiarcadenas($_GET['fecha2']);
         $fpdf = new FPDF('L');
         $fpdf-> AddPage();
         $fpdf->SetFont('Arial','B',22); 
@@ -16,12 +19,62 @@
                $fpdf->Ln(20);
                $fpdf->SetFont('Arial','B',10,8);
                $fpdf->Cell(50,10,'Numero de referencia',1);
-               $fpdf->Cell(40,10,'Cuota',1);
-               $fpdf->Cell(40,10,'Valor apostado',1);
+               $fpdf->Cell(40,10,'Eventos',1);
                $fpdf->Cell(40,10,'Asesor',1);
-               $fpdf->Cell(50,10,'Valor a pagar',1);
+               $fpdf->Cell(40,10,'Fecha',1);
+               $fpdf->Cell(50,10,'Apuesta',1);
+               $fpdf->Cell(50,10,'Ganancia Potencial',1);
+               $fpdf->Cell(50,10,'Estado',1);
+               //$fpdf->Cell(50,10,$fechaA,1);
+               //$fpdf->Cell(50,10,$fechaB,1);
+
+        $enlace = connectionDB();
+               $apuestas = listapuesta($enlace,$fechaA,$fechaB);
+               for($i=0;$i<count($apuestas);$i++){
+                   //i,0=idapuesta, i.1=valor, i,2=idasesor, i,3=fecha apuesta
+                   $idapuesta=$apuestas[$i][0];
+                   $idasesor=$apuestas[$i][2];
+                   $asesor = asesor($enlace,$idasesor);
+                   $fecha = $apuestas[$i][3];
+                   $fecha= new datetime($fecha);
+                   $fecha = $fecha->format('Y-m-d');
+                   $valor = $apuestas[$i][1];
+                   $datosapuesta = idpartidosApostados($enlace,$idapuesta);
+                   $cantPartidos = count($datosapuesta);
+                   $cuotat=1;
+                   $estado='determinar';
+                   $estado;
+                   for($l=0;$l<count($datosapuesta);$l++){
+                        //l,0=idpartido, l,1=apuesta, l,2=cuota
+                       $cuotat*=$datosapuesta[$l][2];
+                       $resultado = resultadopartido($enlace,$datosapuesta[$l][0]);
+                       if($resultado!=''){
+                           if($resultado!=$datosapuesta[$l][1] and $estado!='Por Determinar'){
+                               $estado='<label class="perdio">perdio</label>';
+                           }else{
+                               if($estado!='<label class="perdio">perdio</label>' and $estado!='Por Determinar'){
+                                   $estado='<label class="gano">gano</label>';
+                               }
+                           }
+                       }else{
+                         $estado='Por Determinar';  
+                       }
+                   }
+                   $Pgananacia=$cuotat*$valor;
+                   $fpdf->ln();
+                   $fpdf->cell(0,10,$idapuesta,1);
+                  /* <td class="celdas">'.$idapuesta.'</td>
+                   <td class="celdas">'.$cantPartidos.'</td>
+                   <td class="celdas">'.$asesor.'</td>
+                   <td class="celdas">'.$fecha.'</td>
+                   <td class="celdas">'.$valor.'</td>
+                   <td class="celdas">'.$Pgananacia.'</td>
+                   <td class="celdas">'.$estado.'</td>';
+               }
                
-           $apostado = 0.0;   
+                '</table>';
+               
+           /*$apostado = 0.0;   
            $enlace = connectionDB();
            $fecha = acfecha($enlace,$idusuario);
            $apuesta=idapuesta($enlace,$fecha[0],$fecha[1]);
@@ -45,8 +98,8 @@
                }
                 $fpdf->Ln();  
                 $fpdf->SetFont('Arial','B',11,8);
-               $fpdf->Cell(50,10,'Total apostado '.$apostado,0);
+               $fpdf->Cell(50,10,'Total apostado '.$apostado,0);*/
                
             $fpdf->Output();
-           connectionClose($enlace);
+           //connectionClose($enlace);
            ?>

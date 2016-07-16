@@ -57,10 +57,7 @@
            <label>Fecha Fin</label>
         <input type="date" name="fecha2" id="fecha2"  required >
         <button type="submit" id="button1">Buscar</button>
-        <a class="enlaceboton" href="pdf_apuestastotal.php" target="_blank">Exportar a PDF</a>
-        <br>
-        <br>
-           <input type="hidden" name="conta">
+        
         <?php
            $consulta=false;
            if(isset($_POST['fecha1'])and isset($_POST['fecha2'])){
@@ -68,8 +65,10 @@
                $fechaB=limpiarcadenas($_POST['fecha2']);
                $consulta=true;
            }
-           
            if($consulta){
+               
+               echo'<a class="enlaceboton" href="pdf_apuestastotal.php?fecha1='.$fechaA.'&fecha2='.$fechaB.' " target="_blank">Exportar a PDF</a>';
+               
                echo('<table id="tabla">');
                echo('<tr>');
                echo('<th>Numero referencia</th>');//idapuesta-

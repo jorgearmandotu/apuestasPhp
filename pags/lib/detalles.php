@@ -46,13 +46,13 @@
              <table class="detalles">
                         <legend>Detalles De Apuesta</legend>
                     <tr>
-                    <td>partidos</td>
-                    <td>liga</td>
-                    <td>pais-liga</td>
-                    <td>apuesta</td>
-                    <td>cuota</td>
-                    <td>resultado partido</td>
-                    <td>estado</td>
+                    <th>partidos</th>
+                    <th>liga</th>
+                    <th>pais-liga</th>
+                    <th>apuesta</th>
+                    <th>cuota</th>
+                    <th>resultado partido</th>
+                    <th>estado</th>
                     </tr>
                     
               <?php
@@ -75,22 +75,33 @@
                   $eventos = count($partidos);
                   
                   for($i=0;$i<$eventos;$i++){
+                      //0=id partido 1= apuesta 2= cuotaapo
                       $cuotat*=$partidos[$i][2];
                       $resultado = resultadopartido($enlace,$partidos[$i][0]);
                       $estado="determinar";
+                      $infopartido = infopartido($enlace,$partidos[$i][0]);
+                      //0=equipo1 1=equipo2, 2=horapartido
+                      $nomequiA = nomEquipo($infopartido[0],$enlace);
+                      $nomequiB = nomEquipo($infopartido[1],$enlace);
+                      $nompartido=$nomequiA.' vs '.$nomequiB;
+                      $idliga = ligadeequipo($enlace,$infopartido[0]);
+                      $datosliga = nompaisliga($enlace,$idliga);
+                      //0=mpais 1=nombre
+                      $paisLig = $datosliga[0];
+                      $nomliga = $datosliga[1];
                        if($resultado!=$partidos[$i][1]){
-                           $estado='gano';
+                           $estado='<label class="perdio">perdio</label>';
                        }else if($resultado==$partidos[$i][1]){
-                           $estado='perdio';
+                           $estado='<label class="gano">gano</label>';
                        }
                      echo'<tr>
-                     <td></td>
-                     <td></td>
-                     <td></td>
+                     <td>'.$nompartido.'</td>
+                     <td>'.$nomliga.'</td>
+                     <td>'.$paisLig.'</td>
                      <td>'.$partidos[$i][1].'</td>
                      <td>'.$partidos[$i][2].'</td>
                      <td>'.$resultado.'</td>
-                     <td></td>
+                     <td>'.$estado.'</td>
                      </tr>';
                       
                       
@@ -100,13 +111,13 @@
                  </table>
                  <table class="detalles">
                 <tr>
-                    <td>Id</td>
-                    <td>asesor</td>
-                    <td>punto</td>
-                    <td>eventos</td>
-                    <td>apuesta</td>
-                    <td>cuota</td>
-                    <td>ganacia</td>
+                    <th>Id</th>
+                    <th>asesor</th>
+                    <th>punto</th>
+                    <th>eventos</th>
+                    <th>apuesta</th>
+                    <th>cuota</th>
+                    <th>ganacia</th>
                 </tr>
                 
                     <?php

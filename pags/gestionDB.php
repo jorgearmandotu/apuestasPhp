@@ -722,4 +722,24 @@ function resultadopartido($enlace,$idpart){
     }
     return $res;
 }
+function ligadeequipo($enl,$idequipo){
+    $sql = "select id_liga from equipo where idequipo='".$idequipo."';";
+    $result = $enl->query($sql) or die("error consultando db");
+    $res = "";
+    while($row=$result->fetch_assoc()){
+        $res=$row['id_liga'];
+    }
+    return $res;
+}
+//retorna nombre y pais de liga
+function nompaisliga($enl,$idliga){
+    $sql = "select pais, nombre from ligas where idliga='".$idliga."';";
+    $result = $enl->query($sql)or die('error al consultar db');
+    $res = '';
+    while($row=$result->fetch_assoc()){
+        $res[0]=$row['pais'];
+        $res[1]=$row['nombre'];
+    }
+    return $res;
+}
 ?>

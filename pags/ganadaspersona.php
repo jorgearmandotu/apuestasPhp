@@ -57,8 +57,7 @@
         <input type="date" name="fecha2" id="fecha2" required>
         <button type="submit" id="button1">Buscar</button>
         <a class="enlaceboton" href="pdf_ganadaspersona.php" target="_blank" id="pdf2">Exportar a PDF</a>
-        <br>
-        <br>
+        </form>
         <?php
         $consulta = false;
            if(isset($_POST['fecha1']) and isset($_POST['fecha2'])){
@@ -115,7 +114,7 @@
                    $Pgananacia=$cuotat*$valorpuesta;
                     if($terminado){
                        
-                        echo'<tr><td>'.$idapuesta.'</td>';
+                        echo'<tr><td><form method="post" action="lib/detalles.php" target="_blanck"><input type="hidden" name="detalles" value="'.$idapuesta.'"> <input type="submit" class="submitdetalles" value="'.$idapuesta.'"></form></td>';
                        echo'<td>'.$valorpuesta.'</td>';
                        echo'<td>'.$cantidadeventos.'</td>';
                        echo'<td>'.$fechaapuesta.'</td>';
@@ -127,7 +126,7 @@
                echo'</table>';
            }
         ?>
-        </form>
+        
         </center>
          </div>
          <footer>
