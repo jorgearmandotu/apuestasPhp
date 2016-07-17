@@ -145,7 +145,7 @@
               
               ?>
               
-            
+            <input name="button" type="button" onclick="window.close();" value="Cerrar" /> 
         </div>
         <div id="opaco"></div>
           
