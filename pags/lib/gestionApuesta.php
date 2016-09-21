@@ -47,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
              </div>
                  <ul>
                      <li class="logoutico">
-                       <a href="salir.php">
+                       <a href="../salir.php">
                            <img src="../../images/Bookiesport_Usuario.png" alt="usuario"></a>
                      </li>
                      <li class="logout">

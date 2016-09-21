@@ -4,8 +4,8 @@ function connectionDB(){
 
     $DB_SERVER='localhost';
     $DB_NAME='apuestasdb';
-    $DB_USER='root';
-    $DB_PASS='Jorge1990';
+    $DB_USER='user';
+    $DB_PASS='1234';
     
     $enlace = mysqli_connect($DB_SERVER,$DB_USER,$DB_PASS,$DB_NAME);
     if(!$enlace){

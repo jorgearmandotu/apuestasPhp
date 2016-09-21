@@ -1,0 +1,39 @@
+#printdiv p {
+  color: #fff;
+}
+#printdiv pre {
+  color: #fff;
+}
+
+h1{
+  color: #ffbf00;
+}
+
+@media print{
+  header {
+    display: none;
+  }
+  h1{
+    display: none;
+  }
+  input {
+    display: none;
+  }
+  button {
+    display: none;
+  }
+  footer {
+    display: none;
+  }
+  #printdiv{
+    display: inherit;
+  }
+  #printdiv p{
+    color: #000;
+   
+  }
+  #printdiv pre{
+    color: #000;
+    
+  }
+}
